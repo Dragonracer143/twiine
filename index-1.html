@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <title></title>
+    <style>
+      body {
+        font-family: "Inter";
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+      }
+      .Screen_1 {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background-image: url(screen_1.png);
+        background-repeat: no-repeat;
+        background-position: bottom;
+        background-size: 100%;
+      }
+      .Screen_1 .inner {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+      }
+      .Screen_1 .inner .content h1 {
+        font-size: 60px;
+        text-align: center;
+        color: #000000;
+        font-weight: 300;
+        margin: 0px;
+      }
+
+      .Screen_1 .inner .content p {
+        font-style: normal;
+        font-size: 30px;
+        text-align: center;
+        color: #7c7c7c;
+        margin-top: 25px;
+      }
+      .Screen_1 form {
+        display: flex;
+        flex-direction: column;
+      }
+      .Screen_1 .form {
+        max-width: 800px;
+        margin: auto;
+        width: 100%;
+      }
+      .Screen_1 .form label {
+        font-weight: 300;
+        font-size: 32px;
+        margin-bottom: 8px;
+      }
+      .Screen_1 .form input.City,
+       .Screen_1 .form select.City {
+        background: #ffffff;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 14px;
+        font-size: 20px;
+        padding: 20px 20px;
+      }
+      .Screen_1 .form select.City {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        background-image: url("Polygon.png");
+        background-repeat: no-repeat;
+        background-position-x: 751px;
+        background-position-y: 21px;
+        background-size: 28px;
+      }
+      .Screen_1 .form input#City {
+        margin-bottom: 3rem;
+      }
+      .Screen_1 .form button {
+        border: none;
+      }
+      .Screen_1 .form button {
+        border: none;
+        position: absolute;
+        bottom: 35px;
+        right: 74px;
+        background: transparent;
+      }
+      .Screen_1 .form button img {
+        width: 130px;
+      }
+      button {
+    cursor: pointer;
+}
+    </style>
+  </head>
+  <body>
+    <!-- Screen-1  -->
+    <div class="Screen_1">
+      <div class="inner">
+        <div class="content">
+          <h1>1. What city do you want to explore?</h1>
+          <p>
+            We need a location to curate the best possible spots around you.
+          </p>
+        </div>
+        <div class="form">
+          <form>
+            <label for="City">City</label>
+            <input
+              class="City"
+              type="text"
+              id="City"
+              placeholder="Irvine"
+              name="City"
+            />
+            <label for="State">State</label>
+            <select class="City" name="cars" id="State">
+              <option value="volvo">California</option>
+              <option value="saab">California</option>
+              <option value="saab">California</option>
+            </select>
+            <button type="button"><img src="Arrow_button.png" /></button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

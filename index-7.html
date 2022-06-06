@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <title></title>
+    <style>
+      body {
+        font-family: "Inter";
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+      }
+      .Screen_7 {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        /* background-image: url(screen_1.png);   */
+        background-repeat: no-repeat;
+        background-position: bottom;
+        background-size: 100%;
+      }
+      .Screen_7 .inner {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        margin-top: 8rem !important;
+        width: 1291px;
+        margin: auto;
+      }
+      .Screen_7 .inner .content h1 {
+        font-size: 60px;
+        text-align: center;
+        color: #000000;
+        font-weight: 300;
+        margin: 0px;
+      }
+
+      .Screen_7 .inner .content p {
+        font-style: normal;
+        font-size: 30px;
+        text-align: center;
+        color: #7c7c7c;
+        margin-top: 25px;
+      }
+
+      .Screen_7 .form {
+        margin-top: 4rem !important;
+        max-width: 750px;
+        margin: auto;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 50px;
+      }
+      .Screen_7 .form button {
+        width: 42%;
+        background: #ffffff;
+        box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+        border-radius: 14px;
+        padding: 15px;
+        font-size: 25px;
+      }
+      .submit_btn {
+        border: none;
+        position: absolute;
+        bottom: 35px;
+        right: 74px;
+        background: transparent;
+        width: 220px !important;
+        background: #000000 !important;
+        border-radius: 14px;
+        color: #fff;
+      }
+      button {
+    cursor: pointer;
+}
+    </style>
+  </head>
+  <body>
+    <!-- Screen-1  -->
+    <div class="Screen_7">
+      <div class="inner">
+        <div class="content">
+          <h1>7. Do you want to visit a popular spot or a hidden gem?</h1>
+          <p>Sometimes exploring lowkey spots are fun</p>
+        </div>
+        <form class="form">
+          <button type="button">Popular</button>
+          <button type="button">Hidden Gem</button>
+          <button class="submit_btn" type="button">Submit</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

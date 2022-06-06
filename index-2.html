@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <title></title>
+    <style>
+      body {
+        font-family: "Inter";
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+      }
+      .Screen_2 {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        /* background-image: url(screen_1.png); */
+        background-repeat: no-repeat;
+        background-position: bottom;
+        background-size: 100%;
+      }
+      .Screen_2 .inner {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+      }
+      .Screen_2 .inner .content h1 {
+        font-size: 60px;
+        text-align: center;
+        color: #000000;
+        font-weight: 300;
+        margin: 0px;
+      }
+
+      .Screen_2 form {
+        display: flex;
+        flex-direction: column;
+      }
+      .Screen_2 .form {
+        max-width: 800px;
+        margin: auto;
+        width: 100%;
+      }
+      .Screen_2 .form .distance {
+        font-weight: 500;
+        font-size: 38px;
+        text-align: center;
+        margin-top: 4.2rem;
+      }
+      .Screen_2 .form .arrow_btn {
+        border: none;
+      }
+      .Screen_2 .form .arrow_btn {
+        border: none;
+        position: absolute;
+        bottom: 35px;
+        right: 74px;
+        background: transparent;
+      }
+      .Screen_2 .form .arrow_btn img {
+        width: 130px;
+      }
+      .Screen_2 .form button.radio_btn {
+        background: #ffffff;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 14px;
+        width: 500px;
+        margin: auto;
+        padding: 20px;
+        margin-bottom: 20px;
+        font-size: 25px;
+      }
+      button {
+    cursor: pointer;
+}
+    </style>
+  </head>
+  <body>
+    <!-- Screen-2  -->
+    <div class="Screen_2">
+      <div class="inner">
+        <div class="content">
+          <h1>2. How far are you willing to travel from _city_?</h1>
+        </div>
+        <div class="form">
+          <p class="distance">Distance</p>
+          <form>
+            <button class="radio_btn" type="button">0-10 Miles</button>
+            <button class="radio_btn" type="button">11-20 Miles</button>
+            <button class="radio_btn" type="button">21-30 Miles</button>
+            <button class="radio_btn" type="button">40+ Miles</button>
+
+            <button class="arrow_btn" type="button">
+              <img src="Arrow_button.png" />
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
