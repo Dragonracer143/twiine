@@ -1,0 +1,826 @@
+
+body {
+  font-family: "Inter";
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+/* Home */
+
+.Background_color {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.Background_color .inner {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.Background_color .inner .content h1 {
+  font-size: 75px;
+  text-align: center;
+  color: #000000;
+  font-weight: 300;
+  margin: 0px;
+}
+.Background_color .inner .content h1 img {
+  margin-left: -12px;
+  margin-bottom: -3px;
+}
+.Background_color .inner .content p {
+  font-style: normal;
+  font-size: 20px;
+  text-align: center;
+  color: #7c7c7c;
+}
+.lets_do_it {
+  max-width: 1180px;
+  margin: auto;
+  width: 100%;
+}
+.lets_do_it p {
+  font-weight: 500;
+  font-size: 40px;
+  color: #000000;
+  margin-bottom: 30px;
+}
+.lets_do_it ul {
+  list-style: decimal;
+}
+.lets_do_it ul li {
+  font-weight: 300;
+  font-size: 22px;
+  padding-bottom: 22px;
+}
+.button_letsdoit {
+  text-align: center;
+}
+.button_letsdoit button {
+  background: #eb5757;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 13px;
+  font-weight: 300;
+  font-size: 24px;
+  text-align: center;
+  color: #ffffff;
+  padding: 30px 60px;
+  border: none;
+  margin-top: 1rem;
+}
+button {
+cursor: pointer;
+}
+
+
+/* ScreenOne */
+
+.Screen_1 {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-image: url("../public/img/screen_1.png");
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: 100%;
+}
+.Screen_1 .inner {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.Screen_1 .inner .content h1 {
+  font-size: 60px;
+  text-align: center;
+  color: #000000;
+  font-weight: 300;
+  margin: 0px;
+}
+
+.Screen_1 .inner .content p {
+  font-style: normal;
+  font-size: 30px;
+  text-align: center;
+  color: #7c7c7c;
+  margin-top: 25px;
+}
+.Screen_1 form {
+  display: flex;
+  flex-direction: column;
+}
+.Screen_1 .form {
+  max-width: 800px;
+  margin: auto;
+  width: 100%;
+}
+.Screen_1 .form label {
+  font-weight: 300;
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+.Screen_1 .form input.City,
+ .Screen_1 .form select.City {
+  background: #ffffff;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 14px;
+  font-size: 20px;
+  padding: 20px 20px;
+}
+.Screen_1 .form select.City {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url("../public/img/Polygon.png");
+  background-repeat: no-repeat;
+  background-position-x: 751px;
+  background-position-y: 21px;
+  background-size: 28px;
+}
+.Screen_1 .form input#City {
+  margin-bottom: 3rem;
+}
+.Screen_1 .form button {
+  border: none;
+}
+.Screen_1 .form button {
+  border: none;
+  position: absolute;
+  bottom: 35px;
+  right: 74px;
+  background: transparent;
+}
+.Screen_1 .form button img {
+  width: 130px;
+}
+button {
+cursor: pointer;
+}
+
+
+/* ScreenTwo */
+
+
+      .Screen_2 {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        /* background-image: url(screen_1.png); */
+        background-repeat: no-repeat;
+        background-position: bottom;
+        background-size: 100%;
+      }
+      .Screen_2 .inner {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+      }
+      .Screen_2 .inner .content h1 {
+        font-size: 60px;
+        text-align: center;
+        color: #000000;
+        font-weight: 300;
+        margin: 0px;
+      }
+
+      .Screen_2 form {
+        display: flex;
+        flex-direction: column;
+      }
+      .Screen_2 .form {
+        max-width: 800px;
+        margin: auto;
+        width: 100%;
+      }
+      .Screen_2 .form .distance {
+        font-weight: 500;
+        font-size: 38px;
+        text-align: center;
+        margin-top: 4.2rem;
+      }
+      .Screen_2 .form .arrow_btn {
+        border: none;
+      }
+      .Screen_2 .form .arrow_btn {
+        border: none;
+        position: absolute;
+        bottom: 35px;
+        right: 74px;
+        background: transparent;
+      }
+      .Screen_2 .form .arrow_btn img {
+        width: 130px;
+      }
+      .Screen_2 .form button.radio_btn {
+        background: #ffffff;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 14px;
+        width: 500px;
+        margin: auto;
+        padding: 20px;
+        margin-bottom: 20px;
+        font-size: 25px;
+      }
+      button {
+    cursor: pointer;
+}
+    
+
+/* ScreenThree */
+
+
+      .Screen_3 {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        /* background-image: url(screen_1.png);   */
+        background-repeat: no-repeat;
+        background-position: bottom;
+        background-size: 100%;
+      }
+      .Screen_3 .inner {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        margin-top: -14rem;
+      }
+      .Screen_3 .inner .content h1 {
+        font-size: 60px;
+        text-align: center;
+        color: #000000;
+        font-weight: 300;
+        margin: 0px;
+      }
+
+      .Screen_3 .inner .content p {
+        font-style: normal;
+        font-size: 30px;
+        text-align: center;
+        color: #7c7c7c;
+        margin-top: 25px;
+      }
+
+      .Screen_3 .form {
+        margin-top: 5rem !important;
+        max-width: 750px;
+        margin: auto;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 50px;
+      }
+      .Screen_3 .form button {
+        width: 42%;
+        background: #FFFFFF;
+        box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+        border-radius: 14px;
+        padding: 20px;
+      }
+      button {
+    cursor: pointer;
+}
+    
+
+/* ScreenFour */
+
+
+
+.Screen_4 {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* background-image: url(screen_1.png);   */
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: 100%;
+}
+.Screen_4 .inner {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: -8rem;
+}
+.Screen_4 .inner .content h1 {
+  font-size: 60px;
+  text-align: center;
+  color: #000000;
+  font-weight: 300;
+  margin: 0px;
+}
+
+.Screen_4 .inner .content p {
+  font-style: normal;
+  font-size: 30px;
+  text-align: center;
+  color: #7c7c7c;
+  margin-top: 25px;
+}
+.Screen_4 .Activity_Choice {
+  text-align: center;
+}
+.Screen_4 .Activity_Choice p{
+  font-weight: 500;
+  font-size: 38px;
+  text-align: center;
+  margin-top: 2.3rem;
+}
+.Screen_4 .Activity_choice_dropdown{
+  background: #ffffff;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 14px;
+  font-size: 20px;
+  padding: 20px 20px;
+  width: 500px;
+
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url("../public/img/Polygon.png");
+  background-repeat: no-repeat;
+  background-position-x: 450px;
+  background-position-y: 20px;
+  background-size: 28px;
+  text-align: center;
+}
+.Screen_4 .form button {
+  border: none;
+}
+.Screen_4 .form button {
+  border: none;
+  position: absolute;
+  bottom: 35px;
+  right: 74px;
+  background: transparent;
+}
+.Screen_4 .form button img {
+  width: 130px;
+}
+button {
+cursor: pointer;
+}
+
+
+/* ScreenFour-Two */
+
+
+      .Screen_4 {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        /* background-image: url(screen_1.png);   */
+        background-repeat: no-repeat;
+        background-position: bottom;
+        background-size: 100%;
+      }
+      .Screen_4 .inner {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        margin-top: -8rem;
+      }
+      .Screen_4 .inner .content h1 {
+        font-size: 60px;
+        text-align: center;
+        color: #000000;
+        font-weight: 300;
+        margin: 0px;
+      }
+
+      .Screen_4 .inner .content p {
+        font-style: normal;
+        font-size: 30px;
+        text-align: center;
+        color: #7c7c7c;
+        margin-top: 25px;
+      }
+      .Screen_4 .Food_Choice {
+        text-align: center;
+      }
+      .Screen_4 .Food_Choice p{
+        font-weight: 500;
+        font-size: 38px;
+        text-align: center;
+        margin-top: 2.3rem;
+      }
+      .Screen_4 .Food_Choice_dropdown{
+        background: #ffffff;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 14px;
+        font-size: 20px;
+        padding: 20px 20px;
+        width: 500px;
+
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        background-image: url("../public/img/Polygon.png");
+        background-repeat: no-repeat;
+        background-position-x: 450px;
+        background-position-y: 20px;
+        background-size: 28px;
+        text-align: center;
+      }
+      .Screen_4 .form button {
+        border: none;
+      }
+      .Screen_4 .form button {
+        border: none;
+        position: absolute;
+        bottom: 35px;
+        right: 74px;
+        background: transparent;
+      }
+      .Screen_4 .form button img {
+        width: 130px;
+      }
+      button {
+    cursor: pointer;
+}
+
+
+/* ScreenFive */
+
+
+
+      .Screen_5 {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        /* background-image: url(screen_1.png); */
+        background-repeat: no-repeat;
+        background-position: bottom;
+        background-size: 100%;
+      }
+      .Screen_5 .inner {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+      }
+      .Screen_5 .inner .content h1 {
+        font-size: 60px;
+        text-align: center;
+        color: #000000;
+        font-weight: 300;
+        margin: 0px;
+      }
+      .Screen_5 .inner .content p {
+        font-style: normal;
+        font-size: 30px;
+        text-align: center;
+        color: #7c7c7c;
+        margin-top: 25px;
+      }
+
+      .Screen_5 form {
+        display: flex;
+        flex-direction: column;
+      }
+      .Screen_5 .form {
+        max-width: 800px;
+        margin: auto;
+        width: 100%;
+      }
+      .Screen_5 .form .Your_Budget {
+        font-weight: 500;
+        font-size: 38px;
+        text-align: center;
+        margin-top: 0;
+      }
+      .Screen_5 .form .arrow_btn {
+        border: none;
+      }
+      .Screen_5 .form .arrow_btn {
+        border: none;
+        position: absolute;
+        bottom: 35px;
+        right: 74px;
+        background: transparent;
+      }
+      .Screen_5 .form .arrow_btn img {
+        width: 130px;
+      }
+      .Screen_5 .form button.radio_btn {
+        background: #ffffff;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 14px;
+        width: 500px;
+        margin: auto;
+        padding: 20px;
+        margin-bottom: 20px;
+        font-size: 25px;
+        color: #BDBDBD;
+      }
+      button {
+    cursor: pointer;
+}
+
+
+/* ScreenSix */
+
+
+
+      .Screen_6 {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        /* background-image: url("../public/img/Screen_6.png"); */
+        background-repeat: no-repeat;
+        background-position: bottom;
+        background-size: 100%;
+      }
+      .Screen_6 .inner {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+      }
+      .Screen_6 .inner .content h1 {
+        font-size: 60px;
+        text-align: center;
+        color: #000000;
+        font-weight: 300;
+        margin: 0px;
+      }
+
+      .Screen_6 .inner .content p {
+        font-style: normal;
+        font-size: 30px;
+        text-align: center;
+        color: #7c7c7c;
+        margin-top: 25px;
+        margin-bottom: 3.5rem;
+      }
+      .Screen_6 form {
+        display: flex;
+        flex-direction: column;
+      }
+      .Screen_6 .form {
+        max-width: 800px;
+        margin: auto;
+        width: 100%;
+      }
+      .Screen_6 .form label {
+        font-weight: 300;
+        font-size: 32px;
+        margin-bottom: 8px;
+        font-weight: 500;
+        font-size: 35px;
+        line-height: 54px;
+        text-align: center;
+        color: #000000;
+        margin-top: 2rem;
+      }
+      .Screen_6 .form input.City,
+       .Screen_6 .form select.City {
+        background: #ffffff;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 14px;
+        font-size: 20px;
+        padding: 20px 20px;
+      }
+      .Screen_6 .form select.City {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        background-image: url("../public/img/Polygon.png");
+        background-repeat: no-repeat;
+        background-position-x: 751px;
+        background-position-y: 21px;
+        background-size: 28px;
+        text-align: center;
+      }
+      .Screen_6 .form input#City {
+        margin-bottom: 3rem;
+      }
+      .Screen_6 .form button {
+        border: none;
+      }
+      .Screen_6 .form button {
+        border: none;
+        position: absolute;
+        bottom: 35px;
+        right: 74px;
+        background: transparent;
+      }
+      .Screen_6 .form button img {
+        width: 130px;
+      }
+      button {
+    cursor: pointer;
+}
+   
+
+/* ScreenSeven */
+
+
+      .Screen_7 {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        /* background-image: url(screen_1.png);   */
+        background-repeat: no-repeat;
+        background-position: bottom;
+        background-size: 100%;
+      }
+      .Screen_7 .inner {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        margin-top: 8rem !important;
+        width: 1291px;
+        margin: auto;
+      }
+      .Screen_7 .inner .content h1 {
+        font-size: 60px;
+        text-align: center;
+        color: #000000;
+        font-weight: 300;
+        margin: 0px;
+      }
+
+      .Screen_7 .inner .content p {
+        font-style: normal;
+        font-size: 30px;
+        text-align: center;
+        color: #7c7c7c;
+        margin-top: 25px;
+      }
+
+      .Screen_7 .form {
+        margin-top: 4rem !important;
+        max-width: 750px;
+        margin: auto;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 50px;
+      }
+      .Screen_7 .form button {
+        width: 42%;
+        background: #ffffff;
+        box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+        border-radius: 14px;
+        padding: 15px;
+        font-size: 25px;
+      }
+      .submit_btn {
+        border: none;
+        position: absolute;
+        bottom: 35px;
+        right: 74px;
+        background: transparent;
+        width: 220px !important;
+        background: #000000 !important;
+        border-radius: 14px;
+        color: #fff;
+      }
+      button {
+    cursor: pointer;
+}
+   
+
+/* Result */
+
+.result {
+  padding-top: 3rem;
+}
+.result .inner .content h1 {
+  font-size: 60px;
+  text-align: center;
+  color: #000000;
+  font-weight: 300;
+  margin: 0px;
+}
+.result .inner .content h1 img {
+  margin-right: 6px;
+  margin-bottom: -3px;
+  width: 194px;
+}
+.cartt {
+  background: #ffffff;
+  border: 3px solid #eb5757;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 14px;
+  padding: 20px;
+  margin: 20px;
+}
+.column1 {
+  float: left;
+  width: 30%;
+  text-align: center;
+}
+.column2 {
+  width: 64%;
+  padding-left: 60px;
+}
+.cart .column2 .title h1 {
+  font-weight: 500;
+  margin-bottom: 0px;
+}
+  .title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 5rem;  
+}   
+.title h1 {
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 91px;
+  text-align: center;
+  color: #000000;
+  margin: 0;
+}
+
+.column1 img {
+  width: 250px;
+}
+.visit_help_page {
+  margin-top: -8px;
+}
+.visit_help_page p {
+  font-weight: 400;
+  font-size: 28px;
+  color: #000000;
+  margin: 10px;
+  padding: 0;
+  margin: 0;
+}
+button.Visit_btn {
+  background: #eb5757;
+  border-radius: 14px;
+  border: none;
+  color: #fff;
+  padding: 14px 33px;
+}
+button.exit_btn {
+  position: absolute;
+  right: 47px;
+  top: 47px;
+  background: #000000;
+  border-radius: 14px;
+  color: #fff;
+  font-size: 20px;
+  padding: 13px 66px;
+}
+  button {
+  cursor: pointer;
+  }
+  p.fire_content {
+  font-size: 34px;
+  text-align: center;
+  font-weight: 700;
+  margin: 0;
+  text-align:right
+  }
+  .yes_no p {
+  font-weight: 700;
+  font-size: 29px;
+  line-height: 54px;
+  text-align: center;
+  margin-bottom: 0;
+  }
+  .yes_no {
+  text-align: center;
+  }
+  button.yes_no_btn1 {
+  background: #27AE60;
+  border-radius: 14px;
+  border: none;
+  padding: 10px 100px;
+  font-size: 24px;
+  color: #fff;
+  }
+  button.yes_no_btn2 {
+  background: #EB5757;
+  border-radius: 14px;
+  border: none;
+  padding: 10px 100px;
+  font-size: 24px;
+  color: #fff;
+  }
+  .cartt .row {
+    display: flex;
+}
+  .dollor{
+  color: #828282;
+  font-size: 30px;
+  margin-top: 18px;
+  font-style: italic; 
+  }
+  .yes_no .buttons {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+  }
