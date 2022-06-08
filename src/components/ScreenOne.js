@@ -13,7 +13,7 @@ const ScreenOne = (props) => {
         <div className="content">
           <h1>1. What city do you want to explore?</h1>
           <p>
-            We need a location to curate the best possible spots around you.
+            We need a location to curate the best possible spots around you..
           </p>
         </div>
         <div className="form">
