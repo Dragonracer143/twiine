@@ -39,7 +39,6 @@ const Result = (props) => {
         </div>
       </div>
       <button onClick={handleClick} className="exit_btn" type="button">Exit</button>
-      {/* <button className="recommend_btn" type="button">Not satisfied? <br/> Get 3 more recommendations here!</button> */}
     </div>
     </>
   )

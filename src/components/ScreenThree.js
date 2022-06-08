@@ -18,8 +18,8 @@ const ScreenThree = (props) => {
         </p>
       </div>
       <form className="form">
-        <button onClick={handleClick} type="button">YES</button>
-        <button onClick={Click} type="button">NO</button>
+        <button onClick={handleClick} type="button">Yes</button>
+        <button onClick={Click} type="button">No</button>
       </form>
     </div>
   </div>

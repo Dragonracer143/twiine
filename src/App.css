@@ -6,6 +6,10 @@ body {
   padding: 0;
 }
 
+button{
+  font-family: 'Inter';
+  cursor: pointer;
+}
 /* Home */
 
 .Background_color {
@@ -13,6 +17,10 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  background-image: url("../public/img/home_bg.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%;
 }
 .Background_color .inner {
   display: flex;
@@ -32,9 +40,11 @@ body {
 }
 .Background_color .inner .content p {
   font-style: normal;
-  font-size: 20px;
+  font-size: 24px;
   text-align: center;
   color: #7c7c7c;
+  margin-top: 15px;
+  font-weight: 300;
 }
 .lets_do_it {
   max-width: 1180px;
@@ -70,9 +80,6 @@ body {
   border: none;
   margin-top: 1rem;
 }
-button {
-cursor: pointer;
-}
 
 
 /* ScreenOne */
@@ -82,7 +89,7 @@ cursor: pointer;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-image: url("../public/img/screen_1.png");
+  background-image: url("../public/img/screenone_bg.png");
   background-repeat: no-repeat;
   background-position: bottom;
   background-size: 100%;
@@ -106,15 +113,17 @@ cursor: pointer;
   text-align: center;
   color: #7c7c7c;
   margin-top: 25px;
+  font-weight: 300;
 }
 .Screen_1 form {
   display: flex;
   flex-direction: column;
 }
 .Screen_1 .form {
-  max-width: 800px;
+  max-width: 670px;
   margin: auto;
   width: 100%;
+  margin-top: 10px;
 }
 .Screen_1 .form label {
   font-weight: 300;
@@ -125,9 +134,13 @@ cursor: pointer;
  .Screen_1 .form select.City {
   background: #ffffff;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 14px;
-  font-size: 20px;
+  border-radius: 19px;
   padding: 20px 20px;
+  border: 1px solid #EB5757;
+  margin-bottom: 3rem;
+  font-size: 28px;
+  font-weight: 300;
+  font-family: 'Inter';
 }
 .Screen_1 .form select.City {
   -webkit-appearance: none;
@@ -138,6 +151,11 @@ cursor: pointer;
   background-position-x: 751px;
   background-position-y: 21px;
   background-size: 28px;
+  color: #7c7c7c;
+  cursor: pointer;
+}
+.Screen_1 select#State:focus {
+  color: #000 !important;
 }
 .Screen_1 .form input#City {
   margin-bottom: 3rem;
@@ -155,9 +173,6 @@ cursor: pointer;
 .Screen_1 .form button img {
   width: 130px;
 }
-button {
-cursor: pointer;
-}
 
 
 /* ScreenTwo */
@@ -168,7 +183,7 @@ cursor: pointer;
         display: flex;
         flex-direction: column;
         justify-content: center;
-        /* background-image: url(screen_1.png); */
+        background-image: url("../public/img/screentwo_bg.png");
         background-repeat: no-repeat;
         background-position: bottom;
         background-size: 100%;
@@ -200,6 +215,7 @@ cursor: pointer;
         font-size: 38px;
         text-align: center;
         margin-top: 4.2rem;
+        margin-bottom: 20px;
       }
       .Screen_2 .form .arrow_btn {
         border: none;
@@ -217,16 +233,20 @@ cursor: pointer;
       .Screen_2 .form button.radio_btn {
         background: #ffffff;
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-        border-radius: 14px;
-        width: 500px;
+        border-radius: 19px;
+        width: 470px;
         margin: auto;
-        padding: 20px;
+        padding: 15px;
         margin-bottom: 20px;
-        font-size: 25px;
+        border: 1px solid #EB5757;
+        font-size: 28px;
+        font-weight: 300;
+        font-family: 'Inter';
       }
-      button {
-    cursor: pointer;
-}
+      .Screen_2 button.radio_btn:focus, .Screen_2 button.radio_btn:hover {
+        background-color: rgb(235,87,87) !important;
+        color: white;
+    }
     
 
 /* ScreenThree */
@@ -237,7 +257,7 @@ cursor: pointer;
         display: flex;
         flex-direction: column;
         justify-content: center;
-        /* background-image: url(screen_1.png);   */
+        background-image: url("../public/img/screenthree_bg.png");  
         background-repeat: no-repeat;
         background-position: bottom;
         background-size: 100%;
@@ -246,7 +266,7 @@ cursor: pointer;
         display: flex;
         justify-content: center;
         flex-direction: column;
-        margin-top: -14rem;
+        margin-top: -13rem;
       }
       .Screen_3 .inner .content h1 {
         font-size: 60px;
@@ -262,28 +282,35 @@ cursor: pointer;
         text-align: center;
         color: #7c7c7c;
         margin-top: 25px;
+        font-weight: 300;
       }
 
       .Screen_3 .form {
-        margin-top: 5rem !important;
-        max-width: 750px;
+        margin-top: 5.5rem !important;
+        max-width: 970px;
         margin: auto;
         width: 100%;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        gap: 50px;
       }
       .Screen_3 .form button {
-        width: 42%;
+        width: 44%;
         background: #FFFFFF;
         box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
-        border-radius: 14px;
-        padding: 20px;
+        border-radius: 19px;
+        padding: 18px;
+        border: 1px solid #EB5757;
+        font-size: 20px;
+        font-weight: 300;
+        font-family: 'Inter';
+        text-transform: capitalize;
       }
-      button {
-    cursor: pointer;
-}
+
+      .Screen_3 .form button:hover {
+        background-color: rgb(235,87,87) !important;
+        color: white;
+    }
     
 
 /* ScreenFour */
@@ -295,7 +322,7 @@ cursor: pointer;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /* background-image: url(screen_1.png);   */
+  background-image: url("../public/img/screenfour_yes_bg.png");  
   background-repeat: no-repeat;
   background-position: bottom;
   background-size: 100%;
@@ -320,6 +347,7 @@ cursor: pointer;
   text-align: center;
   color: #7c7c7c;
   margin-top: 25px;
+  font-weight: 300;
 }
 .Screen_4 .Activity_Choice {
   text-align: center;
@@ -333,10 +361,14 @@ cursor: pointer;
 .Screen_4 .Activity_choice_dropdown{
   background: #ffffff;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 14px;
+  border-radius: 19px;
   font-size: 20px;
   padding: 20px 20px;
   width: 500px;
+  border: 1px solid #EB5757;
+  margin-bottom: 3rem;
+  font-weight: 300;
+  font-family: 'Inter';
 
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -361,31 +393,28 @@ cursor: pointer;
 .Screen_4 .form button img {
   width: 130px;
 }
-button {
-cursor: pointer;
-}
 
 
 /* ScreenFour-Two */
 
 
-      .Screen_4 {
+      .Screen_4_two {
         height: 100vh;
         display: flex;
         flex-direction: column;
         justify-content: center;
-        /* background-image: url(screen_1.png);   */
+        background-image: url("../public/img/screenfour_no_bg.png");  
         background-repeat: no-repeat;
         background-position: bottom;
         background-size: 100%;
       }
-      .Screen_4 .inner {
+      .Screen_4_two .inner {
         display: flex;
         justify-content: center;
         flex-direction: column;
         margin-top: -8rem;
       }
-      .Screen_4 .inner .content h1 {
+      .Screen_4_two .inner .content h1 {
         font-size: 60px;
         text-align: center;
         color: #000000;
@@ -393,29 +422,34 @@ cursor: pointer;
         margin: 0px;
       }
 
-      .Screen_4 .inner .content p {
+      .Screen_4_two .inner .content p {
         font-style: normal;
         font-size: 30px;
         text-align: center;
         color: #7c7c7c;
         margin-top: 25px;
+        font-weight: 300;
       }
-      .Screen_4 .Food_Choice {
+      .Screen_4_two .Food_Choice {
         text-align: center;
       }
-      .Screen_4 .Food_Choice p{
+      .Screen_4_two .Food_Choice p{
         font-weight: 500;
         font-size: 38px;
         text-align: center;
         margin-top: 2.3rem;
       }
-      .Screen_4 .Food_Choice_dropdown{
+      .Screen_4_two .Food_Choice_dropdown{
         background: #ffffff;
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-        border-radius: 14px;
+        border-radius: 19px;
         font-size: 20px;
         padding: 20px 20px;
         width: 500px;
+        border: 1px solid #EB5757;
+        font-size: 28px;
+        font-weight: 300;
+        font-family: 'Inter';
 
         -webkit-appearance: none;
         -moz-appearance: none;
@@ -427,22 +461,19 @@ cursor: pointer;
         background-size: 28px;
         text-align: center;
       }
-      .Screen_4 .form button {
+      .Screen_4_two .form button {
         border: none;
       }
-      .Screen_4 .form button {
+      .Screen_4_two .form button {
         border: none;
         position: absolute;
         bottom: 35px;
         right: 74px;
         background: transparent;
       }
-      .Screen_4 .form button img {
+      .Screen_4_two .form button img {
         width: 130px;
       }
-      button {
-    cursor: pointer;
-}
 
 
 /* ScreenFive */
@@ -454,7 +485,7 @@ cursor: pointer;
         display: flex;
         flex-direction: column;
         justify-content: center;
-        /* background-image: url(screen_1.png); */
+        background-image: url("../public/img/screenfive_bg.png");
         background-repeat: no-repeat;
         background-position: bottom;
         background-size: 100%;
@@ -477,6 +508,7 @@ cursor: pointer;
         text-align: center;
         color: #7c7c7c;
         margin-top: 25px;
+        font-weight: 300;
       }
 
       .Screen_5 form {
@@ -510,18 +542,21 @@ cursor: pointer;
       .Screen_5 .form button.radio_btn {
         background: #ffffff;
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-        border-radius: 14px;
+        border-radius: 19px;
         width: 500px;
         margin: auto;
-        padding: 20px;
+        padding: 15px;
         margin-bottom: 20px;
-        font-size: 25px;
         color: #BDBDBD;
+        border: 1px solid #EB5757;
+        font-size: 28px;
+        font-weight: 300;
+        font-family: 'Inter';
       }
-      button {
-    cursor: pointer;
-}
-
+      .Screen_5 button.radio_btn:focus, .Screen_5 button.radio_btn:hover {
+        background-color: rgb(235,87,87) !important;
+        color: white;
+    }
 
 /* ScreenSix */
 
@@ -532,7 +567,7 @@ cursor: pointer;
         display: flex;
         flex-direction: column;
         justify-content: center;
-        /* background-image: url("../public/img/Screen_6.png"); */
+        background-image: url("../public/img/screensix_bg.png");
         background-repeat: no-repeat;
         background-position: bottom;
         background-size: 100%;
@@ -557,13 +592,14 @@ cursor: pointer;
         color: #7c7c7c;
         margin-top: 25px;
         margin-bottom: 3.5rem;
+        font-weight: 300;
       }
       .Screen_6 form {
         display: flex;
         flex-direction: column;
       }
       .Screen_6 .form {
-        max-width: 800px;
+        max-width: 570px;
         margin: auto;
         width: 100%;
       }
@@ -582,9 +618,9 @@ cursor: pointer;
        .Screen_6 .form select.City {
         background: #ffffff;
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-        border-radius: 14px;
+        border-radius: 19px;
         font-size: 20px;
-        padding: 20px 20px;
+        padding: 15px 15px;
       }
       .Screen_6 .form select.City {
         -webkit-appearance: none;
@@ -592,10 +628,14 @@ cursor: pointer;
         appearance: none;
         background-image: url("../public/img/Polygon.png");
         background-repeat: no-repeat;
-        background-position-x: 751px;
+        background-position-x: 520px;
         background-position-y: 21px;
         background-size: 28px;
         text-align: center;
+        border: 1px solid #EB5757;
+        font-size: 28px;
+        font-weight: 300;
+        font-family: 'Inter';
       }
       .Screen_6 .form input#City {
         margin-bottom: 3rem;
@@ -613,9 +653,6 @@ cursor: pointer;
       .Screen_6 .form button img {
         width: 130px;
       }
-      button {
-    cursor: pointer;
-}
    
 
 /* ScreenSeven */
@@ -626,7 +663,7 @@ cursor: pointer;
         display: flex;
         flex-direction: column;
         justify-content: center;
-        /* background-image: url(screen_1.png);   */
+        background-image: url("../public/img/screenseven_bg.png");
         background-repeat: no-repeat;
         background-position: bottom;
         background-size: 100%;
@@ -653,6 +690,7 @@ cursor: pointer;
         text-align: center;
         color: #7c7c7c;
         margin-top: 25px;
+        font-weight: 300;
       }
 
       .Screen_7 .form {
@@ -669,10 +707,17 @@ cursor: pointer;
         width: 42%;
         background: #ffffff;
         box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
-        border-radius: 14px;
+        border-radius: 19px;
         padding: 15px;
         font-size: 25px;
+        border: 1px solid #EB5757;
+        font-weight: 300;
+        font-family: 'Inter';
       }
+      .Screen_7 .form button:focus, .Screen_7 .form button:hover {
+        background-color: rgb(235,87,87) !important;
+        color: white;
+    }
       .submit_btn {
         border: none;
         position: absolute;
@@ -681,18 +726,19 @@ cursor: pointer;
         background: transparent;
         width: 220px !important;
         background: #000000 !important;
-        border-radius: 14px;
+        border-radius: 19px;
         color: #fff;
       }
-      button {
-    cursor: pointer;
-}
    
 
 /* Result */
 
 .result {
   padding-top: 3rem;
+  background-image: url("../public/img/results_bg.png");
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: 100%;
 }
 .result .inner .content h1 {
   font-size: 60px;
@@ -710,7 +756,7 @@ cursor: pointer;
   background: #ffffff;
   border: 3px solid #eb5757;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 14px;
+  border-radius: 19px;
   padding: 20px;
   margin: 20px;
 }
@@ -758,7 +804,7 @@ cursor: pointer;
 }
 button.Visit_btn {
   background: #eb5757;
-  border-radius: 14px;
+  border-radius: 19px;
   border: none;
   color: #fff;
   padding: 14px 33px;
@@ -768,14 +814,11 @@ button.exit_btn {
   right: 47px;
   top: 47px;
   background: #000000;
-  border-radius: 14px;
+  border-radius: 19px;
   color: #fff;
   font-size: 20px;
   padding: 13px 66px;
 }
-  button {
-  cursor: pointer;
-  }
   p.fire_content {
   font-size: 34px;
   text-align: center;
@@ -795,7 +838,7 @@ button.exit_btn {
   }
   button.yes_no_btn1 {
   background: #27AE60;
-  border-radius: 14px;
+  border-radius: 19px;
   border: none;
   padding: 10px 100px;
   font-size: 24px;
@@ -803,7 +846,7 @@ button.exit_btn {
   }
   button.yes_no_btn2 {
   background: #EB5757;
-  border-radius: 14px;
+  border-radius: 19px;
   border: none;
   padding: 10px 100px;
   font-size: 24px;

@@ -5,7 +5,7 @@ const ScreenFourTwo = (props) => {
         props.setProcess(props.process + 1)
       }
   return (
-    <div className="Screen_4">
+    <div className="Screen_4_two">
       <div className="inner">
         <div className="content">
           <h1>4. What kind of food do you like?</h1>
