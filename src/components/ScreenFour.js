@@ -1,9 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
+import data from "./Activity.json"
 
 const ScreenFour = (props) => {
-    const handleClick = (e) => {
+ 
+ const handleClick = (e) => {
         props.setProcess(props.process + 2)
       }
+
+
+     const activityType= (e)=>{
+      const value= e.target.value;
+      props.setActivity(value);
+     };
+
+console.log("act:", props.activity)
+
+
   return (
     <div className="Screen_4">
     <div className="inner">
@@ -16,12 +28,18 @@ const ScreenFour = (props) => {
       <div className="Activity_Choice">
       <p>Activity Choice </p>
       <form className="form">
-        <select className="Activity_choice_dropdown" name="cars" id="State">
-          <option value="volvo">Activity Choice</option>
-          <option value="saab">Activity Choice</option>
-          <option value="saab">Activity Choice</option>
+        <select
+         className="Activity_choice_dropdown" 
+         name="Activity" 
+         id="Activity"
+         value={props?.activity}
+         onChange={(e) => activityType(e)}
+         >
+          {data?.map((ele)=>
+          <option >{ele?.activity}</option>    
+          )}
         </select>
-        <button onClick={handleClick} type="button"><img src="./img/Arrow_button.png" /></button>
+        <button onClick={handleClick} type="button"><img src="./img/Arrow_button.png" alt="" /></button>
       </form>
     </div>
     </div>
@@ -29,4 +47,4 @@ const ScreenFour = (props) => {
   )
 }
 
-export default ScreenFour
+export default ScreenFour;

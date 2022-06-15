@@ -1,12 +1,30 @@
 import React from 'react'
 
 const ScreenThree = (props) => {
-    const handleClick = (e) => {
+
+
+    const handleClick = (value) => {
+      props.setHungry(value);
+        props.setProcess(props.process + 2);
+      }
+  console.log("hunger:", props.hungry)
+
+
+
+    const Click = (value) => {
+      props.setHungry(value);
         props.setProcess(props.process + 1)
       }
-      const Click = (e) => {
-        props.setProcess(props.process + 2)
-      }
+
+
+      const yes= [
+        {value:"Yes"}
+      ] 
+
+      const no= [
+        {value:"No"}
+      ] 
+
   return (
     <div className="Screen_3">
     <div className="inner">
@@ -18,12 +36,27 @@ const ScreenThree = (props) => {
         </p>
       </div>
       <form className="form">
-        <button onClick={handleClick} type="button">Yes</button>
-        <button onClick={Click} type="button">No</button>
+
+        {yes?.map((ele)=>
+        <button 
+        onClick={(e) => handleClick(ele.value)} 
+        type="button"
+        >{ele.value}
+        </button>
+        )}
+        
+        {no?.map((ele)=>
+        <button 
+        onClick={(e) => Click(ele.value)} 
+        type="button"
+       >{ele.value}
+       </button>
+        )}
+        
       </form>
     </div>
   </div>
   )
 }
 
-export default ScreenThree
+export default ScreenThree;

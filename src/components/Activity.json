@@ -1,0 +1,42 @@
+[
+  {
+      "id": 1,
+    "activity": "Restaurants"
+  },
+  {
+    "id": 2,
+    "activity": "Food"
+  },
+  {
+    "id": 3,
+    "activity": "Nightlife"
+  },
+  {
+    "id": 4,
+    "activity": "Active Life"
+  },
+  {
+    "id": 5,
+    "activity": "RestauraArts & Entertainmentnts"
+  },
+  {
+    "id": 6,
+    "activity": "Event Planning & Services"
+  },
+  {
+    "id": 7,
+    "activity": "Hotels & Travel"
+  },
+  {
+    "id": 8,
+    "activity": "Health & Medical"
+  },
+  {
+    "id": 9,
+    "activity": "Shopping"
+  },
+  {
+    "id": 10,
+    "activity": "Education"
+  }
+]

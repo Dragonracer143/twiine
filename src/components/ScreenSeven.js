@@ -1,9 +1,25 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 const ScreenSeven = (props) => {
-    const handleClick = (e) => {
-        props.setProcess(props.process + 1)
-      }
+
+  const [recommendation, setRecommendation] = useState({
+    "city": props.city?props.city:'',
+    "hungry": props.hungry?props.hungry:'',
+    "foodtype": props.food?props.food:'',
+    "activity": props.activity?props.activity:'',
+    "budget": props.budget?props.budget:'',
+    "vibe1": props.pref1.vibe1?props.pref1.vibe1:'',
+    "vibe2": props.pref2.vibe2?props.pref2.vibe2:''
+  });
+
+
+  const handleClick = (e) => {
+    props.setProcess(props.process + 1)
+    props.setCollectedData({ ...recommendation })
+  }
+
+
+
   return (
     <div className="Screen_7">
       <div className="inner">
@@ -21,4 +37,4 @@ const ScreenSeven = (props) => {
   )
 }
 
-export default ScreenSeven
+export default ScreenSeven;
