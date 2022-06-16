@@ -1938,6 +1938,9 @@ button.exit_btn {
     flex-direction: column;
   }
   .viewAgainbtn{
-    
+
+  }
+  .loaderClass{
+    float: right;
   }
   

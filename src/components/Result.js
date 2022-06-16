@@ -1,5 +1,6 @@
 import React from 'react'
 import { customFilterDataApi } from '../Shared/Services'
+import loader from './../img/loader.webp'
 import {
   BrowserRouter as Router,
   Route,
@@ -13,15 +14,16 @@ const Result = (props) => {
   const [filteredData, setFilteredData] = React.useState([])
   const [tempFilteredData, setTempFilteredData] = React.useState([])
   const [clickedBtnIndexes, setClickedBtnIndexes] = React.useState([])
+  const [loaderState, setLoaderState] = React.useState(true)
   const [i, setI] = React.useState(0)
   const handleClick = (e) => {
     props.setProcess(props.process - 9)
   }
-  const popularIncrement = (id,index) => {
+  const popularIncrement = (id, index) => {
     increasePopularityApi(id)
       .then(function (response) {
         console.log(response.data);
-        setClickedBtnIndexes((old)=>{
+        setClickedBtnIndexes((old) => {
           old.push(index)
           return [...old]
         })
@@ -37,6 +39,7 @@ const Result = (props) => {
       .then(function (response) {
         console.log(response.data);
         setFilteredData([...response.data])
+        setLoaderState(false)
         setTempFilteredData([...response.data])
       })
       .catch(function (error) {
@@ -53,8 +56,8 @@ const Result = (props) => {
 
           {filteredData.length > 0 ?
             <>
-              {filteredData.slice(i,i+3).map((item, index) => {
-              // {filteredData.map((item, index) => {
+              {filteredData.slice(i, i + 3).map((item, index) => {
+                // {filteredData.map((item, index) => {
                 return <>
                   <div key={index} className="cartt">
                     <p className="fire_content">{index === 0 && 'Highly Recommended'}</p>
@@ -75,31 +78,31 @@ const Result = (props) => {
                         <div className="yes_no">
                           <p>Do you like this recommendation?</p>
                           <div className="buttons">
-                            {  
-                              clickedBtnIndexes.indexOf(index)<0?
-                              <>
-                                <button className="yes_no_btn1"
-                                  onClick={()=>{
-                                    popularIncrement(item._id,index)
-                                  }}
+                            {
+                              clickedBtnIndexes.indexOf(index) < 0 ?
+                                <>
+                                  <button className="yes_no_btn1"
+                                    onClick={() => {
+                                      popularIncrement(item._id, index)
+                                    }}
                                   >Yes</button>
-                              </>
-                              :
-                              <>
-                                <button className="yes_no_btn1"
+                                </>
+                                :
+                                <>
+                                  <button className="yes_no_btn1"
                                   >Yes</button>
-                              </>
+                                </>
                             }
                             <button className="yes_no_btn2"
                               onClick={() => {
-                                setI((old)=>{
-                                  let nexti=old-1
-                                  if(nexti<0){
-                                    nexti= old
+                                setI((old) => {
+                                  let nexti = old - 1
+                                  if (nexti < 0) {
+                                    nexti = old
                                   }
-                                  return nexti 
+                                  return nexti
                                 })
-                                let indexValue=filteredData.indexOf(item)
+                                let indexValue = filteredData.indexOf(item)
                                 console.log(indexValue)
                                 setFilteredData((old) => {
                                   old.splice(indexValue, 1)
@@ -115,29 +118,46 @@ const Result = (props) => {
 
                 </>
               })}
-              {filteredData.length > 4 ?<button className="Visit_btn"
-            onClick={()=>{
-              setI((old)=>{
-                let nexti=old+3
-                if(nexti>=filteredData.length){
-                  nexti= old
-                  alert("no more data")
-                }
-                return nexti
-       
-               })
-            }}
-            >get 3 More Result</button>
-            :''}
+              {filteredData.length > 4 ? <button className="Visit_btn"
+                onClick={() => {
+                  setI((old) => {
+                    let nexti = old + 3
+                    if (nexti >= filteredData.length) {
+                      nexti = old
+                      alert("no more data")
+                    }
+                    return nexti
+
+                  })
+                }}
+              >get 3 More Result</button>
+                : ''}
             </>
             :
             <>
-             <center className="noRecommendations"> No recommendation
-              <button className='Visit_btn viewAgainbtn'
-                onClick={() => {
-                  setFilteredData([...tempFilteredData])
-                }}
-              >View Again</button>
+              <center className="noRecommendations"
+              style={{"display":loaderState?"block":"flex"}}
+              >
+                {loaderState ?
+                  <>
+                  <img  src={loader}/>
+                  </>
+                  :
+                  <>
+                    <h3>No recommendation</h3>
+                    {tempFilteredData.length>0 &&
+                      <>
+                        <button className='Visit_btn viewAgainbtn'
+                          onClick={() => {
+                            setFilteredData([...tempFilteredData])
+                          }}
+                        >View Again</button>
+                      </>
+                    }
+                  </>
+                }
+
+
               </center>
             </>}
 

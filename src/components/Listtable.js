@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import ListingForm from './ListingForm';
 import { confirm } from "react-confirm-box";
 import { getAllDetailsApi } from '../Shared/Services';
+import loader from './../img/loader.webp'
 
 const Listtable = () => {
   const [formSwitch, setformSwitch] = useState(true);
+  const [loaderState, setLoaderState] = useState(true)
   const [dataToShow, setDataToShow] = useState([])
   const options = {
     labels: {
@@ -26,11 +28,12 @@ const Listtable = () => {
       .then((res) => {
         console.log(res.data)
         setDataToShow([...res.data])
+        setLoaderState(false)
       })
       .catch((e) => {
         console.log(e)
       })
-  },[])
+  }, [])
   return (
     <>
       <div className="listing-table">
@@ -54,7 +57,7 @@ const Listtable = () => {
             <div className="table-responsive">
               <table className="table">
                 <tbody>
-                
+
                   <tr>
                     {/* <th scope="row">1</th> */}
                     <td>
@@ -73,15 +76,15 @@ const Listtable = () => {
                       <b> </b>
                     </td>
                   </tr>
-                  {dataToShow.length>0 ? dataToShow.map((item, index) => {
+                  {dataToShow.length > 0 ? dataToShow.map((item, index) => {
                     return <tr key={index}>
                       <td>
                         {/* <img src="./img/icons8-user-48.png" height={"40px"} /> */}
-                        {item.businessName?item.businessName:'N/A'}
+                        {item.businessName ? item.businessName : 'N/A'}
                       </td>
-                      <td>{item.city?item.city:'N/A'}</td>
-                      <td>{item.state?item.state:'N/A'}</td>
-                      <td>{item.popularCount?item.popularCount:0}</td>
+                      <td>{item.city ? item.city : 'N/A'}</td>
+                      <td>{item.state ? item.state : 'N/A'}</td>
+                      <td>{item.popularCount ? item.popularCount : 0}</td>
                       <td>
                         <div className="btn-group">
                           <a href="#" className="icon view-icon">
@@ -105,8 +108,20 @@ const Listtable = () => {
                     </tr>
                   })
 
-                    : <center>No Data</center>}
-                
+                    : <center className='loaderClass'>
+                      {loaderState ?
+                        <>
+                          <img src={loader}/>
+                        </>
+                        :
+                        <>
+                         No Data
+                        </>
+                      }
+                     
+
+                    </center>}
+
 
 
                 </tbody>
