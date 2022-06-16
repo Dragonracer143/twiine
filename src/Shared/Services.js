@@ -1,5 +1,6 @@
 import axios from "axios";
-const baseUrl = 'http://localhost:8000/'
+const baseUrl = 'http://192.168.1.37:8000/'
+// const baseUrl = 'http://localhost:8000/'
 
 export const createRecordApi = (dataObject) => {
 
@@ -47,7 +48,21 @@ export const customFilterDataApi = (objectForFilter) => {
 
 }
 
-export const importApi =()=>{
-console.log("/")
+export const increasePopularityApi=(id)=>{
+    var data = JSON.stringify({
+        "id": id
+      });
+      
+      var config = {
+        method: 'post',
+        url: baseUrl+'increasePopularity',
+        headers: { 
+          'Content-Type': 'application/json'
+        },
+        data : data
+      };
+      
+      return axios(config)
+      
 }
 

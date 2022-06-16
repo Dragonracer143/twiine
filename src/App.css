@@ -758,7 +758,11 @@ button{
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 19px;
   padding: 20px;
-  margin: 20%;
+  margin: 40px;
+}
+
+.cartt2InnerDiv {
+  display: flex;
 }
 .column1 {
   float: left;
@@ -796,7 +800,7 @@ button{
 }
 .visit_help_page p {
   font-weight: 400;
-  font-size: 28px;
+  font-size: 20px;
   color: #000000;
   margin: 10px;
   padding: 0;
@@ -808,6 +812,9 @@ button.Visit_btn {
   border: none;
   color: #fff;
   padding: 14px 33px;
+}
+.nameHeading{
+  max-width: 70%;
 }
 button.exit_btn {
   position: absolute;
@@ -1922,5 +1929,15 @@ button.exit_btn {
       padding: 20px 16px;
       width: 100%;
     }
+  }
+
+  .noRecommendations{
+    margin-top: 10%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .viewAgainbtn{
+    
   }
   

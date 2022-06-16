@@ -67,6 +67,9 @@ const Listtable = () => {
                       <b>State</b>
                     </td>
                     <td>
+                      <b>Popularity Count</b>
+                    </td>
+                    <td>
                       <b> </b>
                     </td>
                   </tr>
@@ -78,6 +81,7 @@ const Listtable = () => {
                       </td>
                       <td>{item.city?item.city:'N/A'}</td>
                       <td>{item.state?item.state:'N/A'}</td>
+                      <td>{item.popularCount?item.popularCount:0}</td>
                       <td>
                         <div className="btn-group">
                           <a href="#" className="icon view-icon">
