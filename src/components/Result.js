@@ -60,7 +60,7 @@ const Result = (props) => {
                 // {filteredData.map((item, index) => {
                 return <>
                   <div key={index} className="cartt">
-                    <p className="fire_content">{index === 0 && 'Highly Recommended'}</p>
+                    <p className="fire_content">{index === 0 && ' Highly Recommended'}</p>
                     <div className="cartt2InnerDiv">
                       <div className="column1">
                         <img src={item.image1} alt="" />
@@ -115,7 +115,6 @@ const Result = (props) => {
                       </div>
                     </div>
                   </div>
-
                 </>
               })}
               {filteredData.length > 4 ? <button className="Visit_btn"
@@ -156,8 +155,6 @@ const Result = (props) => {
                     }
                   </>
                 }
-
-
               </center>
             </>}
 
