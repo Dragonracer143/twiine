@@ -33,16 +33,21 @@ export const getAllDetailsApi = () => {
 }
 
 export const customFilterDataApi = (objectForFilter) => {
+    console.log(objectForFilter.city.name)
     var axios = require('axios');
     var config = {
       method: 'get',
-    //   url: baseUrl+`customFilterData?cityName=${objectForFilter.city.name}&hungry=${objectForFilter.hungry}`,
-      url: baseUrl+`customFilterData?cityName=Los Angeles&hungry=yes&vibe1=Fun&vibe2=Energetic&foodtype=Fusion&budget=30&activity=Nightlife`,
+      url: baseUrl+`customFilterData?cityName=${objectForFilter.city}&hungry=${objectForFilter.hungry}&vibe1=${objectForFilter.vibe1}&vibe2=${objectForFilter.vibe2}`,
+    //   url: baseUrl+`customFilterData?cityName=Los Angeles&hungry=yes&vibe1=Fun&vibe2=Energetic&foodtype=Fusion&budget=30&activity=Nightlife`,
       headers: { }
     };
     
     return axios(config)
 
 
+}
+
+export const importApi =()=>{
+console.log("/")
 }
 

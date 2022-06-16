@@ -23,16 +23,19 @@ const ListingForm = () => {
   ]
   const [dataObject, setDataObject] = useState({
     yelpURL: '',
-    bussiness_name: '',
-    street_address: '',
+    bussinesNname: '',
+    streetAddress: '',
     city: '',
-    zip_code: '',
+    zipCode: '',
     state: '',
     price: '',
-    foodOptions: '',
-    activityType: '',
-    resturant_or_activite: 'Restaurant',
-    popularOrHidden: 'Popular',
+    vibe1:'',
+    vibe2:'',
+    vibe3:'',
+    typeOfRestaurant: '',
+    typeofActivity: '',
+    resturantOrActivity: 'Restaurant',
+    popularOrhiddenGem: 'Popular',
     image1: '',
     image2: '',
     image3: '',
@@ -51,12 +54,10 @@ const ListingForm = () => {
 
   const handleSubmit = () => {
     let data = dataObject
-    let vibes = []
-    for (let x of selected) {
-      vibes.push(x.value)
+    for (let i=0; i<=3;i++) {
+      data['vibe'+i] = selected[i].value
     }
-    data['vibe'] = vibes
-    console.log(data)
+    // console.log(data)
     createRecordApi(data)
       .then(function (response) {
         console.log(JSON.stringify(response.data));
@@ -162,9 +163,9 @@ const ListingForm = () => {
                 id="text"
                 placeholder="Business"
                 name="text"
-                value={dataObject.bussiness_name && dataObject.bussiness_name}
+                value={dataObject.bussinessNname && dataObject.bussinessNname}
                 onChange={(e) => {
-                  changeInputField('bussiness_name', e.target.value)
+                  changeInputField('bussinessNname', e.target.value)
                 }}
               />
             </div>
@@ -176,9 +177,9 @@ const ListingForm = () => {
                 id="text"
                 placeholder="Address"
                 name="text"
-                value={dataObject.street_address && dataObject.bussinstreet_addressess_name}
+                value={dataObject.streetAddress && dataObject.streetAddress}
                 onChange={(e) => {
-                  changeInputField('street_address', e.target.value)
+                  changeInputField('streetAddress', e.target.value)
                 }}
               />
             </div>
@@ -215,9 +216,9 @@ const ListingForm = () => {
                 min={1}
                 max={5}
                 type="number"
-                value={dataObject.zip_code && dataObject.zip_code}
+                value={dataObject.zipCode && dataObject.zipCode}
                 onChange={(e) => {
-                  changeInputField('zip_code', e.target.value)
+                  changeInputField('zipCode', e.target.value)
                 }}
               />
             </div>
@@ -227,11 +228,11 @@ const ListingForm = () => {
               <label className="switch">
                 <input type="checkbox"
                   onClick={() => {
-                    if (dataObject.resturant_or_activite === 'Restaurant') {
-                      changeInputField('resturant_or_activite', 'Activity')
+                    if (dataObject.resturantOrActivity === 'Restaurant') {
+                      changeInputField('resturantOrActivity', 'Activity')
                     }
                     else {
-                      changeInputField('resturant_or_activite', 'Restaurant')
+                      changeInputField('resturantOrActivity', 'Restaurant')
                     }
 
                   }}
@@ -271,9 +272,9 @@ const ListingForm = () => {
             </div>
             <div className="mb-3">
               <label htmlFor="food">Food Options</label>
-              <select name="food" id="food" className="form-control" value={food}
+              <select name="food" id="food" className="form-control" 
                 onChange={(e) => {
-                  changeInputField('foodOption', e.target.value)
+                  changeInputField('typeOfRestaurant', e.target.value)
                 }}
               >
                 <option value="American">American</option>
@@ -298,7 +299,7 @@ const ListingForm = () => {
               <label htmlFor="Activity">Activity Type</label>
               <select name="Activity" id="Activity" className="form-control"
                 onChange={(e) => {
-                  changeInputField('activityType', e.target.value)
+                  changeInputField('typeofActivity', e.target.value)
                 }}
               >
                 <option value="Low Energy">Low Energy</option>
@@ -315,11 +316,11 @@ const ListingForm = () => {
               <label className="switch">
                 <input type="checkbox"
                   onClick={() => {
-                    if (dataObject.popularOrHidden === 'Popular') {
-                      changeInputField('popularOrHidden', 'Hidden')
+                    if (dataObject.popularOrhiddenGem === 'Popular') {
+                      changeInputField('popularOrhiddenGem', 'Hidden')
                     }
                     else {
-                      changeInputField('popularOrHidden', 'Popular')
+                      changeInputField('popularOrhiddenGem', 'Popular')
                     }
 
                   }}

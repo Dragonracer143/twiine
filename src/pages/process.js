@@ -15,7 +15,7 @@ const Process = () => {
   const [process, setProcess] = useState(0);
   const [collectedData, setCollectedData] = useState({})
 
-  const [city, setCity] = useState();
+  const [city, setCity] = useState('Los Angeles');
   const [foods, setFoods] = useState();
   const [activity, setActivity] = useState();
   const [budget, setBudget] = useState();

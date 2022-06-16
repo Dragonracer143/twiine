@@ -73,8 +73,8 @@ const Listtable = () => {
                   {dataToShow.length>0 ? dataToShow.map((item, index) => {
                     return <tr key={index}>
                       <td>
-                        <img src="./img/icons8-user-48.png" height={"40px"} />
-                        {item.bussiness_name?item.bussiness_name:'N/A'}
+                        {/* <img src="./img/icons8-user-48.png" height={"40px"} /> */}
+                        {item.businessName?item.businessName:'N/A'}
                       </td>
                       <td>{item.city?item.city:'N/A'}</td>
                       <td>{item.state?item.state:'N/A'}</td>

@@ -1,5 +1,11 @@
 import React from 'react'
 import { customFilterDataApi } from '../Shared/Services'
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Routes,
+} from "react-router-dom";
 
 const Result = (props) => {
   const [filteredData, setFilteredData] = React.useState([])
@@ -30,23 +36,24 @@ const Result = (props) => {
 
           {filteredData.length > 0 ?
           <>
-            {filteredData.slice(i*4,(i*4)+3).map((item, index) => {
+            {/* {filteredData.slice(i*4,(i*4)+3).map((item, index) => { */}
+            {filteredData.map((item, index) => {
              return <>
                 <div key={index} className="cartt">
                   <p className="fire_content">{index===0&&'Highly Recommended'}</p>
                   <div className="row">
                     <div className="column1">
-                      <img src="./img/cart.png" alt="" />
+                      <img src={item.image1} alt="" />
                     </div>
                     <div className="column2">
                       <div className="title">
-                        <h1>{item.bussiness_name}</h1><button className="Visit_btn">Visit Yelp Page</button>
+                        <h1>{item.bussiness_name}</h1><a href={item.yelpURL}><button className="Visit_btn">Visit Yelp Page</button></a>
 
                       </div>
                       <div className="visit_help_page">
                         <p>{item.city}</p>
                       </div>
-                      <p className='dollor'>{item.price}
+                      <p className='dollor'>{item.price?item.price:''}
                       </p>
                       <div className="yes_no">
                         <p>Do you like this recommendation?</p>

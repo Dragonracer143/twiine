@@ -5,19 +5,19 @@ const ScreenOne = (props) => {
 
 
   const handleClick = (e) => {
+    if(!props.city){
+      alert("Select city")
+      return
+    }
     props.setProcess(props.process + 1);
   };
 
   const cityName = (e) => {
-    const value = e.target.value;
-    props.setCity(() => ({
-      name: value,
-    }));
+    props.setCity(e.target.value)
   };
-  
-  console.log("city:", props?.city?.name)
-
-
+React.useEffect(()=>{
+  console.log(props.city)
+},[props.city])  
   return (
     <>
       <div className="Screen_1">
@@ -41,11 +41,10 @@ const ScreenOne = (props) => {
                 id="City"
                 placeholder="Enter city name"
                 name="City"
-                alue={props?.city}
                 onChange={(e) => cityName(e)}
                 > 
                 {data.cities?.map((ele)=>
-                <option>{ele}</option>
+                <option value={ele}>{ele}</option>
                 )}        
                   </select>
               <button onClick={handleClick} type="button">
