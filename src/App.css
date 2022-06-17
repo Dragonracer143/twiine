@@ -672,9 +672,9 @@ button{
         display: flex;
         justify-content: center;
         flex-direction: column;
-        margin-top: 8rem !important;
+        margin-top: 0;
         width: 1291px;
-        margin: auto;
+        margin: unset;
       }
       .Screen_7 .inner .content h1 {
         font-size: 60px;
@@ -2070,7 +2070,7 @@ button.yes_no_btn1, button.yes_no_btn2  {
   background: #27AE60;
   border-radius: 19px;
   border: none;
-  padding: 15px 40px;
+  padding: 15px 50px;
   font-size: 16px;
   color: #fff;
 }
