@@ -20,7 +20,7 @@ button{
   background-image: url("../public/img/home_bg.png");
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 100%;
+  background-size: cover;
 }
 .Background_color .inner {
   display: flex;
@@ -92,7 +92,7 @@ button{
   background-image: url("../public/img/screenone_bg.png");
   background-repeat: no-repeat;
   background-position: bottom;
-  background-size: 100%;
+  background-size: cover;
 }
 .Screen_1 .inner {
   display: flex;
@@ -148,9 +148,9 @@ button{
   appearance: none;
   background-image: url("../public/img/Polygon.png");
   background-repeat: no-repeat;
-  background-position-x: 751px;
-  background-position-y: 21px;
-  background-size: 28px;
+  background-position-x: 630px;
+  background-position-y: center;
+  background-size: 21px;
   color: #7c7c7c;
   cursor: pointer;
 }
@@ -186,7 +186,7 @@ button{
         background-image: url("../public/img/screentwo_bg.png");
         background-repeat: no-repeat;
         background-position: bottom;
-        background-size: 100%;
+        background-size: cover;
       }
       .Screen_2 .inner {
         display: flex;
@@ -260,7 +260,7 @@ button{
         background-image: url("../public/img/screenthree_bg.png");  
         background-repeat: no-repeat;
         background-position: bottom;
-        background-size: 100%;
+        background-size: cover;
       }
       .Screen_3 .inner {
         display: flex;
@@ -325,7 +325,7 @@ button{
   background-image: url("../public/img/screenfour_yes_bg.png");  
   background-repeat: no-repeat;
   background-position: bottom;
-  background-size: 100%;
+  background-size: cover;
 }
 .Screen_4 .inner {
   display: flex;
@@ -376,7 +376,7 @@ button{
   background-image: url("../public/img/Polygon.png");
   background-repeat: no-repeat;
   background-position-x: 450px;
-  background-position-y: 20px;
+  background-position-y: center;
   background-size: 28px;
   text-align: center;
 }
@@ -406,7 +406,7 @@ button{
         background-image: url("../public/img/screenfour_no_bg.png");  
         background-repeat: no-repeat;
         background-position: bottom;
-        background-size: 100%;
+        background-size: cover;
       }
       .Screen_4_two .inner {
         display: flex;
@@ -457,7 +457,7 @@ button{
         background-image: url("../public/img/Polygon.png");
         background-repeat: no-repeat;
         background-position-x: 450px;
-        background-position-y: 20px;
+        background-position-y: center;
         background-size: 28px;
         text-align: center;
       }
@@ -488,7 +488,7 @@ button{
         background-image: url("../public/img/screenfive_bg.png");
         background-repeat: no-repeat;
         background-position: bottom;
-        background-size: 100%;
+        background-size: cover;
       }
       .Screen_5 .inner {
         display: flex;
@@ -570,7 +570,7 @@ button{
         background-image: url("../public/img/screensix_bg.png");
         background-repeat: no-repeat;
         background-position: bottom;
-        background-size: 100%;
+        background-size: cover;
       }
       .Screen_6 .inner {
         display: flex;
@@ -629,7 +629,7 @@ button{
         background-image: url("../public/img/Polygon.png");
         background-repeat: no-repeat;
         background-position-x: 520px;
-        background-position-y: 21px;
+        background-position-y: center;
         background-size: 28px;
         text-align: center;
         border: 1px solid #f87179;
@@ -666,7 +666,7 @@ button{
         background-image: url("../public/img/screenseven_bg.png");
         background-repeat: no-repeat;
         background-position: bottom;
-        background-size: 100%;
+        background-size: cover;
       }
       .Screen_7 .inner {
         display: flex;
@@ -738,7 +738,7 @@ button{
   background-image: url("../public/img/results_bg.png");
   background-repeat: no-repeat;
   background-position: bottom;
-  background-size: 100%;
+  background-size: cover;
 }
 .result .inner .content h1 {
   font-size: 60px;
@@ -1943,4 +1943,188 @@ button.exit_btn {
   .loaderClass{
     float: right;
   }
-  
+  .result .result_loader{
+    width: 150px;
+  }
+
+  @media screen and (max-width:996px){
+    body h1{
+      font-size: 28px !important;
+    }
+    body h2{
+      font-size: 20px !important;
+    }
+    body p{
+      font-size: 16px !important;
+  }
+    body form label {
+      font-size: 18px !important;
+    }
+    .Background_color, .Screen_1, .Screen_2, .Screen_3, .Screen_4, .Screen_4_two, .Screen_5, .Screen_6, .Screen_7 {
+      padding: 30px 20px;
+  }
+    .Background_color .inner .content h1 img {
+      margin-bottom: 10px;
+      width: 89px;
+      margin-left: -5px;
+  }
+  .lets_do_it p {
+    margin-bottom: 15px;
+}
+  .lets_do_it ul li {
+    font-size: 16px;
+}
+.button_letsdoit button {
+  font-size: 20px;
+  padding: 20px 40px;
+  margin-top: 0rem;
+}
+.Screen_1 .form select.City {
+  background-position-x: 299px;
+  background-size: 16px;
+  font-size: 16px;
+  padding: 15px;
+  margin-bottom: 2rem;
+}
+.Screen_1 .form button img, .Screen_2 .form .arrow_btn img, .Screen_4_two .form button img, .Screen_4 .form button img, .Screen_5 .form .arrow_btn img, .Screen_6 .form button img {
+  width: 82px;
+}
+.Screen_1 .form button, .Screen_2 .form .arrow_btn, .Screen_4_two .form button, .Screen_4 .form button, .Screen_5 .form .arrow_btn, .Screen_6 .form button {
+  right: 10px;
+}
+.Screen_2 .form .distance {
+  margin-top: 2.2rem;
+}
+.Screen_2 .form button.radio_btn {
+  width: 100%;
+  font-size: 16px;
+} 
+.Screen_3 .form {
+  margin-top: 2.5rem !important;
+}
+.Screen_3 .inner {
+  margin-top: 0rem;
+}   
+.Screen_4_two .inner {
+  margin-top: 0;
+}
+.Screen_3 .form button {
+  padding: 15px;
+  font-size: 16px;
+}
+.Screen_4_two .Food_Choice p {
+  margin-top: 1.3rem;
+}
+.Screen_4_two .Food_Choice_dropdown {
+  padding: 15px;
+  width: 100%;
+  font-size: 16px;
+  background-position-x: 308px;
+  background-position-y: center;
+  background-size: 16px;
+}
+.Screen_4 .inner {
+  margin-top: 0rem;
+}
+.Screen_4 .Activity_Choice p {
+  margin-top: 1.3rem;
+}
+.Screen_4 .Activity_choice_dropdown {
+  padding: 15px;
+  width: 100%;
+  margin-bottom: 0rem;
+  background-position-x: 307px;
+  background-size: 16px;
+}
+.Screen_5 .form button.radio_btn {
+  width: 100%;
+  padding: 15px;
+  font-size: 16px;
+}
+.Screen_6 .inner .content p {
+  margin-bottom: 0;
+}
+.Screen_6 .form label {
+  margin-top: 1rem;
+}
+.Screen_6 .form select.City {
+  background-position-x: 305px;
+  background-size: 16px;
+  font-size: 16px;
+}
+.Screen_7 .inner {
+  width: 100%;
+}
+.Screen_7 .form button {
+  padding: 15px;
+  font-size: 16px;
+}
+.Screen_7 .form {
+  margin-top: 2rem !important;
+}
+button.submit_btn{
+  width: 82px;
+  right: 10px;
+}
+button.yes_no_btn1, button.yes_no_btn2  {
+  background: #27AE60;
+  border-radius: 19px;
+  border: none;
+  padding: 15px 40px;
+  font-size: 16px;
+  color: #fff;
+}
+.cartt {
+  margin: 20px;
+}
+.cartt2InnerDiv {
+  flex-direction: column;
+}
+.cartt2InnerDiv .column1, .cartt2InnerDiv .column1 img, .cartt2InnerDiv .column2 {
+  width: 100%;
+}
+p.fire_content {
+  margin-bottom: 8px;
+}
+.cartt2InnerDiv .column2 {
+  padding-left: 0px;
+}
+.cartt2InnerDiv .column2 .title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 0;
+  margin-top: 1rem;
+}
+.cartt2InnerDiv .column2 .nameHeading {
+  max-width: 57%;
+}
+button.Visit_btn {
+  padding: 10px 17px;
+  font-size: 14px;
+}
+.result {
+  padding-top: 5rem;
+  position: relative;
+  padding-bottom: 3rem;
+}
+.result .inner .content h1 img {
+  margin-right: 6px;
+  margin-bottom: 10px;
+  width: 113px;
+}
+.result button.exit_btn {
+  right: 15px;
+  top: 13px;
+  font-size: 16px;
+  padding: 12px 45px;
+}
+button.Visit_btn.more_result_btn {
+  position: absolute;
+  bottom: 10px;
+  right: 22px;
+}
+.result .result_loader{
+  width: 50px;
+}
+  }

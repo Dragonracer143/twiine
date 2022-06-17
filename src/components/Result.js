@@ -117,7 +117,7 @@ const Result = (props) => {
                   </div>
                 </>
               })}
-              {filteredData.length > 4 ? <button className="Visit_btn"
+              {filteredData.length > 4 ? <button className="Visit_btn more_result_btn"
                 onClick={() => {
                   setI((old) => {
                     let nexti = old + 3
@@ -139,7 +139,7 @@ const Result = (props) => {
               >
                 {loaderState ?
                   <>
-                  <img  src={loader}/>
+                  <img className='result_loader'  src={loader}/>
                   </>
                   :
                   <>
