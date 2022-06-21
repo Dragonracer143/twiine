@@ -5,6 +5,10 @@ body {
   margin: 0;
   padding: 0;
 }
+.disabled{
+  opacity: .6;
+  cursor: not-allowed !important;
+}
 
 button{
   font-family: 'Inter';
@@ -2127,4 +2131,6 @@ button.Visit_btn.more_result_btn {
 .result .result_loader{
   width: 50px;
 }
+
+
   }

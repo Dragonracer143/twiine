@@ -19,18 +19,20 @@ const Result = (props) => {
   const handleClick = (e) => {
     props.setProcess(props.process - 9)
   }
-  const popularIncrement = (id, index) => {
-    increasePopularityApi(id)
-      .then(function (response) {
-        console.log(response.data);
-        setClickedBtnIndexes((old) => {
-          old.push(index)
-          return [...old]
-        })
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+  const popularIncrement = (id) => {
+    console.log(id)
+
+    // increasePopularityApi(id)
+    //   .then(function (response) {
+    //     console.log(response.data);
+    setClickedBtnIndexes((old) => {
+      old.push(id)
+      return [...old]
+    })
+    //   })
+    //   .catch(function (error) {
+    //     console.log(error);
+    //   });
   }
 
   React.useEffect(() => {
@@ -46,6 +48,7 @@ const Result = (props) => {
         console.log(error);
       });
   }, [])
+
   return (
     <>
       <div className="result">
@@ -79,11 +82,11 @@ const Result = (props) => {
                           <p>Do you like this recommendation?</p>
                           <div className="buttons">
                             {
-                              clickedBtnIndexes.indexOf(index) < 0 ?
+                              clickedBtnIndexes.indexOf(item._id) < 0 ?
                                 <>
                                   <button className="yes_no_btn1"
                                     onClick={() => {
-                                      popularIncrement(item._id, index)
+                                      popularIncrement(item._id)
                                     }}
                                   >Yes</button>
                                 </>
@@ -93,23 +96,33 @@ const Result = (props) => {
                                   >Yes</button>
                                 </>
                             }
-                            <button className="yes_no_btn2"
-                              onClick={() => {
-                                setI((old) => {
-                                  let nexti = old - 1
-                                  if (nexti < 0) {
-                                    nexti = old
-                                  }
-                                  return nexti
-                                })
-                                let indexValue = filteredData.indexOf(item)
-                                console.log(indexValue)
-                                setFilteredData((old) => {
-                                  old.splice(indexValue, 1)
-                                  return [...old]
-                                })
-                              }}
-                            >No</button>
+                            {clickedBtnIndexes.indexOf(item._id) < 0 ?
+                              <>
+                                <button className="yes_no_btn2"
+                                  onClick={() => {
+                                    setI((old) => {
+                                      let nexti = old - 1
+                                      if (nexti < 0) {
+                                        nexti = old
+                                      }
+                                      return nexti
+                                    })
+                                    let indexValue = filteredData.indexOf(item)
+                                    console.log(indexValue)
+                                    setFilteredData((old) => {
+                                      old.splice(indexValue, 1)
+                                      return [...old]
+                                    })
+                                  }}
+                                >No</button>
+                              </> :
+                              <>
+                                <button className="yes_no_btn2 disabled"
+
+                                >No</button>
+                              </>
+                            }
+
                           </div>
                         </div>
                       </div>
@@ -117,7 +130,7 @@ const Result = (props) => {
                   </div>
                 </>
               })}
-              {filteredData.length > 4 ? <button className="Visit_btn more_result_btn"
+              {filteredData.length > 3 ? <button className="Visit_btn more_result_btn"
                 onClick={() => {
                   setI((old) => {
                     let nexti = old + 3
@@ -135,16 +148,16 @@ const Result = (props) => {
             :
             <>
               <center className="noRecommendations"
-              style={{"display":loaderState?"block":"flex"}}
+                style={{ "display": loaderState ? "block" : "flex" }}
               >
                 {loaderState ?
                   <>
-                  <img className='result_loader'  src={loader}/>
+                    <img className='result_loader' src={loader} />
                   </>
                   :
                   <>
                     <h3>No recommendation</h3>
-                    {tempFilteredData.length>0 &&
+                    {tempFilteredData.length > 0 &&
                       <>
                         <button className='Visit_btn viewAgainbtn'
                           onClick={() => {
