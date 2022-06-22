@@ -4,11 +4,17 @@ import Listtable from "./Listtable";
 import logo from "../logo.png";
 import restaurant from "../restaurant.png";
 
+
 function Dashboard() {
   const [open, setopen] = useState();
+  const [token, setToken] = useState(0)
   function openSidebar() {
     setopen((prevState) => !prevState);
   }
+
+  React.useEffect(()=>{
+   
+  })
   return (
     <>
       <div className="main-body">

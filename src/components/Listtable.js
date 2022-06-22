@@ -3,8 +3,11 @@ import ListingForm from './ListingForm';
 import { confirm } from "react-confirm-box";
 import { getAllDetailsApi } from '../Shared/Services';
 import loader from './../img/loader.webp'
+import { useNavigate } from "react-router-dom";
+
 
 const Listtable = () => {
+  let navigate = useNavigate()
   const [formSwitch, setformSwitch] = useState(true);
   const [loaderState, setLoaderState] = useState(true)
   const [dataToShow, setDataToShow] = useState([])
@@ -24,15 +27,22 @@ const Listtable = () => {
   }
 
   React.useEffect(() => {
-    getAllDetailsApi()
-      .then((res) => {
-        console.log(res.data)
-        setDataToShow([...res.data])
-        setLoaderState(false)
-      })
-      .catch((e) => {
-        console.log(e)
-      })
+    let ac_token = localStorage.getItem('access_token')
+    if (!ac_token) {
+      navigate('/admin')
+    } else {
+      getAllDetailsApi(ac_token)
+        .then((res) => {
+          // console.log(res.data)
+          setDataToShow([...res.data])
+          setLoaderState(false)
+        })
+        .catch((e) => {
+          console.log(e)
+          navigate('/admin')
+        })
+    }
+
   }, [])
   return (
     <>
@@ -41,7 +51,7 @@ const Listtable = () => {
           <div className="table-head pb-4 d-flex justify-content-end">
             {/* <h3>{formSwitch ? "Listing Table" : "Post Form"}</h3> */}
             <a
-              href='javascript:void("0");'
+              href='#'
               className="btn bg-red text-white"
               onClick={addform}
             >
@@ -70,7 +80,10 @@ const Listtable = () => {
                       <b>State</b>
                     </td>
                     <td>
-                      <b>Popularity Count</b>
+                      <b>Intersted</b>
+                    </td>
+                    <td>
+                      <b>Not Intersted</b>
                     </td>
                     <td>
                       <b> </b>
@@ -85,6 +98,7 @@ const Listtable = () => {
                       <td>{item.city ? item.city : 'N/A'}</td>
                       <td>{item.state ? item.state : 'N/A'}</td>
                       <td>{item.popularCount ? item.popularCount : 0}</td>
+                      <td>{item.notIntersted ? item.notIntersted : 0}</td>
                       <td>
                         <div className="btn-group">
                           <a href="#" className="icon view-icon">
@@ -108,19 +122,19 @@ const Listtable = () => {
                     </tr>
                   })
 
-                    : <center className='loaderClass'>
+                    : <span className='loaderClass'>
                       {loaderState ?
                         <>
-                          <img src={loader}/>
+                          <img src={loader} />
                         </>
                         :
                         <>
-                         No Data
+                          No Data
                         </>
                       }
-                     
 
-                    </center>}
+
+                    </span>}
 
 
 

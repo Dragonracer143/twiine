@@ -8,7 +8,7 @@ import {
   Routes,
 } from "react-router-dom";
 
-import { increasePopularityApi } from '../Shared/Services';
+import { increasePopularityApi,notInterstedApi } from '../Shared/Services';
 
 const Result = (props) => {
   const [filteredData, setFilteredData] = React.useState([])
@@ -20,19 +20,29 @@ const Result = (props) => {
     props.setProcess(props.process - 9)
   }
   const popularIncrement = (id) => {
-    console.log(id)
+    // console.log(id)
+    increasePopularityApi(id)
+      .then(function (response) {
+        // console.log(response.data);
+        setClickedBtnIndexes((old) => {
+          old.push(id)
+          return [...old]
+        })
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
 
-    // increasePopularityApi(id)
-    //   .then(function (response) {
-    //     console.log(response.data);
-    setClickedBtnIndexes((old) => {
-      old.push(id)
-      return [...old]
+  const notInterstedIncrement=(id)=>{
+    notInterstedApi(id)
+    .then(function (response) {
+      console.log(response.data);
     })
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error);
-    //   });
+    .catch(function (error) {
+      console.log(error);
+    });
+
   }
 
   React.useEffect(() => {
@@ -81,25 +91,26 @@ const Result = (props) => {
                         <div className="yes_no">
                           <p>Do you like this recommendation?</p>
                           <div className="buttons">
-                            {
+                            {/* {
                               clickedBtnIndexes.indexOf(item._id) < 0 ?
-                                <>
-                                  <button className="yes_no_btn1"
-                                    onClick={() => {
-                                      popularIncrement(item._id)
-                                    }}
-                                  >Yes</button>
-                                </>
+                                <> */}
+                            <button className="yes_no_btn1"
+                              onClick={() => {
+                                popularIncrement(item._id)
+                              }}
+                            >Yes</button>
+                            {/* </>
                                 :
                                 <>
                                   <button className="yes_no_btn1"
                                   >Yes</button>
                                 </>
-                            }
+                            } */}
                             {clickedBtnIndexes.indexOf(item._id) < 0 ?
                               <>
                                 <button className="yes_no_btn2"
                                   onClick={() => {
+                                    notInterstedIncrement(item._id)
                                     setI((old) => {
                                       let nexti = old - 1
                                       if (nexti < 0) {
@@ -108,7 +119,7 @@ const Result = (props) => {
                                       return nexti
                                     })
                                     let indexValue = filteredData.indexOf(item)
-                                    console.log(indexValue)
+                                    // console.log(indexValue) 
                                     setFilteredData((old) => {
                                       old.splice(indexValue, 1)
                                       return [...old]

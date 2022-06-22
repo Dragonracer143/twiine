@@ -9,6 +9,7 @@ import ReactDOM from 'react-dom';
 import ListingForm from "./components/ListingForm";
 import Process from "./pages/process";
 import Dashboard from "./components/Dashboard";
+import AdminLogin from "./components/AdminLogin";
 function App() {
   return (
     <>
@@ -17,6 +18,7 @@ function App() {
           <Route path="/" element={<Process/>} />
           <Route path="/form-listing" element={<ListingForm/>} />
           <Route path="/dashboard" element={<Dashboard/>} />
+          <Route path="/admin" element={<AdminLogin/>} />
         </Routes>
       </Router>
     </>

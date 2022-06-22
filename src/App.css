@@ -10,6 +10,12 @@ body {
   cursor: not-allowed !important;
 }
 
+.adminLoginDiv{
+  width: 30%;
+  margin-left: 33%;
+  margin-top: 3%;
+}
+
 button{
   font-family: 'Inter';
   cursor: pointer;
