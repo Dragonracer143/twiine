@@ -337,11 +337,21 @@ button{
   background-position: bottom;
   background-size: cover;
 }
+.activityChoice{
+  margin-top: none !important;
+}
 .Screen_4 .inner {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  margin-top: -8rem;
+  /* margin-top: -8rem; */
+}
+
+.showSpanMaster {
+  display: flex;
+  flex-direction: column;
+  /* width: 32%; */
+  margin-left: 34%;
 }
 .Screen_4 .inner .content h1 {
   font-size: 60px;
@@ -390,8 +400,115 @@ button{
   background-size: 28px;
   text-align: center;
 }
+.Screen_4 .showSpan:focus{
+  background-color: rgb(235,87,87) !important;
+  color: white;
+}
+.Screen_4 .showSpan:hover{
+  background-color: rgb(235,87,87) !important;
+  color: white;
+}
+.Screen_4  .selected{
+  background-color: rgb(235,87,87) !important;
+  color: white;
+}
+.Screen_4 .showSpan{
+  background: #ffffff;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 19px;
+  font-size: 20px;
+  padding: 20px 20px;
+  width: 500px;
+  border: 1px solid #f87179;
+  margin-bottom: 3rem;
+  font-weight: 300;
+  font-family: 'Inter';
+
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  /* background-image: url("../public/img/Polygon.png"); */
+  background-repeat: no-repeat;
+  background-position-x: 450px;
+  background-position-y: center;
+  background-size: 28px;
+  text-align: center;
+}
+.Screen_4 .showSpanSelected{
+  background:  rgb(235,87,87) ;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 19px;
+  font-size: 20px;
+  padding: 20px 20px;
+  width: 500px;
+  border: 1px solid #f87179;
+  margin-bottom: 3rem;
+  font-weight: 300;
+  font-family: 'Inter';
+color: #ffffff;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  /* background-image: url("../public/img/Polygon.png"); */
+  background-repeat: no-repeat;
+  background-position-x: 450px;
+  background-position-y: center;
+  background-size: 28px;
+  text-align: center;
+}
+.activityDescDiv{
+  position: absolute;
+  background: #ffffff;
+  box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+  border-radius: 19px;
+  font-size: 20px;
+  padding: 20px 20px;
+  width: 500px;
+  border: 1px solid #f87179;
+  margin-bottom: 3rem;
+  font-weight: 300;
+  font-family: 'Inter';
+  appearance: none;
+  /* background-image: url(../public/img/Polygon.png); */
+  background-repeat: no-repeat;
+  background-position-x: 450px;
+  background-position-y: center;
+  background-size: 28px;
+  text-align: center;
+  top: 50%;
+}
+
+.activityDescDiv .activityDescDivHeading{
+  font-size: 30px;
+  color: #ee7e7e;
+  font-weight: 500;
+}
+.activityDescDivKeys .heading{
+  font-size: 22px;
+    font-weight: 500;
+}
+.activityDescDivKeys .desc{
+    font-weight: 400;
+}
+
+.activityDescDivKeys{
+  display: flex;
+    flex-direction: column;
+    /* justify-content: left; */
+    text-align: left;
+}
 .Screen_4 .form button {
   border: none;
+}
+.Screen_4  button {
+  border: none;
+  position: absolute;
+  bottom: 35px;
+  right: 74px;
+  background: transparent;
+}
+.Screen_4  button img {
+  width: 130px;
 }
 .Screen_4 .form button {
   border: none;
@@ -2144,4 +2261,119 @@ button.Visit_btn.more_result_btn {
   .post-form button,  .post-form button:hover,   .post-form button:focus {
     background: #000 !important;
     border-color: #000 !important;
+}
+
+@media only screen and (max-device-width: 480px) {
+  /* styles for mobile browsers smaller than 480px; (iPhone) */
+  .Screen_4 .showSpan:focus{
+    background-color: rgb(235,87,87) !important;
+    color: white;
+  }
+  .Screen_4 .showSpan:hover{
+    background-color: rgb(235,87,87) !important;
+    color: white;
+  }
+  .Screen_4  .selected{
+    background-color: rgb(235,87,87) !important;
+    color: white;
+  }
+  .Screen_4 .showSpan{
+    background: #ffffff;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 19px;
+    font-size: 20px;
+    padding: 20px 20px;
+    width: 100%;
+    border: 1px solid #f87179;
+    margin-bottom: 3rem;
+    font-weight: 300;
+    font-family: 'Inter';
+  
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    /* background-image: url("../public/img/Polygon.png"); */
+    background-repeat: no-repeat;
+    background-position-x: 450px;
+    background-position-y: center;
+    background-size: 28px;
+    text-align: center;
+  }
+  .Screen_4 .showSpanSelected{
+    background:  rgb(235,87,87) ;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 19px;
+    font-size: 20px;
+    padding: 20px 20px;
+    width: 100%;
+    border: 1px solid #f87179;
+    margin-bottom: 3rem;
+    font-weight: 300;
+    font-family: 'Inter';
+  color: #ffffff;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    /* background-image: url("../public/img/Polygon.png"); */
+    background-repeat: no-repeat;
+    background-position-x: 450px;
+    background-position-y: center;
+    background-size: 28px;
+    text-align: center;
+  }
+  .activityDescDiv{
+    position: inherit;
+    background: #ffffff;
+    box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+    border-radius: 19px;
+    font-size: 20px;
+    padding: 20px 20px;
+    width: 100%;
+    border: 1px solid #f87179;
+    margin-bottom: 3rem;
+    font-weight: 300;
+    font-family: 'Inter';
+    appearance: none;
+    /* background-image: url(../public/img/Polygon.png); */
+    background-repeat: no-repeat;
+    background-position-x: 450px;
+    background-position-y: center;
+    background-size: 28px;
+    text-align: center;
+    top: 50%;
+  }
+  
+  .activityDescDiv .activityDescDivHeading{
+    font-size: 30px;
+    color: #ee7e7e;
+    font-weight: 500;
+  }
+  .activityDescDivKeys .heading{
+    font-size: 22px;
+      font-weight: 500;
+  }
+  .activityDescDivKeys .desc{
+      font-weight: 400;
+  }
+  
+  .activityDescDivKeys{
+    display: flex;
+      flex-direction: column;
+      /* justify-content: left; */
+      text-align: left;
+  }
+  .showSpanMaster {
+    display: flex;
+    flex-direction: column;
+    /* width: 32%; */
+    margin-left: 0%;
+  }
+  .Screen_4 button {
+    border: none;
+    position: absolute;
+    right: 23px;
+    top: 116%;
+    background: transparent;
+}
+
 }
