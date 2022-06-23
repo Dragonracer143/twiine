@@ -24,12 +24,9 @@ console.log("act:", props.activity)
 
   return (
     <div className="Screen_4">
-    <div className="inner activityChoice">
+    <div className="inner">
       <div className="content">
         <h1>4. What kind of activities would you like to do?</h1>
-        <p>
-          We need an activity preference to recommend the best possible spots around you.
-        </p>
       </div>
       <div className="Activity_Choice">
       <p>Energy-Level Choice </p>

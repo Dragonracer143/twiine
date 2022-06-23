@@ -344,7 +344,7 @@ button{
   display: flex;
   justify-content: center;
   flex-direction: column;
-  /* margin-top: -8rem; */
+  margin-top: 5rem;
 }
 
 .showSpanMaster {
@@ -354,11 +354,11 @@ button{
   margin-left: 34%;
 }
 .Screen_4 .inner .content h1 {
-  font-size: 60px;
-  text-align: center;
-  color: #000000;
-  font-weight: 300;
-  margin: 0px;
+  font-size: 46px;
+    text-align: center;
+    color: #000000;
+    font-weight: 300;
+    margin: 0px;;
 }
 
 .Screen_4 .inner .content p {
@@ -463,7 +463,7 @@ color: #ffffff;
   border-radius: 19px;
   font-size: 20px;
   padding: 20px 20px;
-  width: 500px;
+  width: 400px;
   border: 1px solid #f87179;
   margin-bottom: 3rem;
   font-weight: 300;
@@ -475,20 +475,22 @@ color: #ffffff;
   background-position-y: center;
   background-size: 28px;
   text-align: center;
-  top: 50%;
+  top: 56%;
 }
 
 .activityDescDiv .activityDescDivHeading{
-  font-size: 30px;
+  font-size: 25px;
   color: #ee7e7e;
   font-weight: 500;
 }
 .activityDescDivKeys .heading{
-  font-size: 22px;
+  font-size: 15px;
     font-weight: 500;
 }
 .activityDescDivKeys .desc{
-    font-weight: 400;
+  font-weight: 300;
+  font-size: 15px;
+
 }
 
 .activityDescDivKeys{
