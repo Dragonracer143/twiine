@@ -1,6 +1,6 @@
 import axios from "axios";
-const baseUrl = 'https://agile-plateau-96207.herokuapp.com/'
-// const baseUrl = 'http://localhost:8000/'
+// const baseUrl = 'https://agile-plateau-96207.herokuapp.com/'
+const baseUrl = 'http://localhost:8000/'
 // const baseUrl = 'http://192.168.1.37:8000/'
 
 
@@ -27,20 +27,20 @@ export const getAllDetailsApi = (token) => {
   var data = JSON.stringify({
     "ac_token": token
   });
-  
+
   var config = {
     method: 'post',
-    url: baseUrl+'getAlldetails',
-    headers: { 
+    url: baseUrl + 'getAlldetails',
+    headers: {
       'Content-Type': 'application/json'
     },
-    data : data
+    data: data
   };
-  
+
   return axios(config)
-  
-  
-    
+
+
+
 }
 
 export const customFilterDataApi = (objectForFilter) => {
@@ -58,10 +58,10 @@ export const customFilterDataApi = (objectForFilter) => {
 
 }
 
-export const increasePopularityApi = (id,setcount) => {
+export const increasePopularityApi = (id, setcount) => {
   var data = JSON.stringify({
     "id": id,
-    "setcount":setcount
+    "setcount": setcount
 
   });
 
@@ -94,21 +94,61 @@ export const adminLoginApi = (userObject) => {
 
 }
 
-export const notInterstedApi=(id)=>{
+export const notInterstedApi = (id) => {
   var data = JSON.stringify({
     "id": id
   });
-  
+
   var config = {
     method: 'post',
-    url: baseUrl+'notIntersted',
-    headers: { 
+    url: baseUrl + 'notIntersted',
+    headers: {
       'Content-Type': 'application/json'
     },
-    data : data
+    data: data
   };
-  
+
   return axios(config)
-  
+
+}
+
+export const getDetailByIdApi = (id, ac_token) => {
+  var data = JSON.stringify({
+    "id": id,
+    "ac_token": ac_token
+  });
+
+  var config = {
+    method: 'post',
+    url: baseUrl + 'getdetail',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    data: data
+  };
+
+  return axios(config)
+
+
+}
+
+export const updateDetailApi = (id,ac_token,dataObject) => {
+  var data = JSON.stringify({
+    "id": id,
+    "data": dataObject,
+    "ac_token": ac_token
+  });
+
+  var config = {
+    method: 'post',
+    url: baseUrl+'updateDetails',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    data: data
+  };
+
+  return axios(config)
+    
 }
 

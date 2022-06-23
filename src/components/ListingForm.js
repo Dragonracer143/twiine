@@ -2,11 +2,23 @@ import React, { useState } from "react";
 import axios from "axios";
 import { createRecordApi } from './../Shared/Services'
 import { MultiSelect } from "react-multi-select-component";
+import { getDetailByIdApi, updateDetailApi } from './../Shared/Services'
+import { useNavigate, Link } from "react-router-dom";
+
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  useParams,
+} from "react-router-dom";
 
 const ListingForm = () => {
+  let navigate = useNavigate()
+  const paramsObject = useParams()
   const [yelpURL, setYelpURL] = useState(null)
   const [food, setFood] = useState(null)
   const [selected, setSelected] = useState([]);
+  const [updateSelected, setUpdateSelected] = useState([])
   const vibeOptions = [
     { label: "Chill", value: "Chill" },
     { label: "Adventure", value: "Adventure" },
@@ -23,15 +35,15 @@ const ListingForm = () => {
   ]
   const [dataObject, setDataObject] = useState({
     yelpURL: '',
-    bussinesNname: '',
+    businessName: '',
     streetAddress: '',
     city: '',
     zipCode: '',
     state: '',
     price: '',
-    vibe1:'',
-    vibe2:'',
-    vibe3:'',
+    vibe1: '',
+    vibe2: '',
+    vibe3: '',
     typeOfRestaurant: '',
     typeofActivity: '',
     resturantOrActivity: 'Restaurant',
@@ -42,8 +54,39 @@ const ListingForm = () => {
     image4: '',
   })
 
+  const [updateDataObject, setUpdateDataObject] = useState({
+    yelpURL: '',
+    businessName: '',
+    streetAddress: '',
+    city: '',
+    zipCode: '',
+    state: '',
+    price: '',
+    vibe1: '',
+    vibe2: '',
+    vibe3: '',
+    typeOfRestaurant: '',
+    typeofActivity: '',
+    resturantOrActivity: 'Restaurant',
+    popularOrhiddenGem: 'Popular',
+    image1: '',
+    image2: '',
+    image3: '',
+    image4: '',
+  })
+
+  const [updateMode, setUpdateMode] = useState(false)
+
+
   const changeInputField = (objectKey, value) => {
     setDataObject((old) => {
+      old[objectKey] = value
+      return { ...old }
+    })
+  }
+
+  const changeUpdateInputField = (objectKey, value) => {
+    setUpdateDataObject((old) => {
       old[objectKey] = value
       return { ...old }
     })
@@ -54,8 +97,8 @@ const ListingForm = () => {
 
   const handleSubmit = () => {
     let data = dataObject
-    for (let i=0; i<=3;i++) {
-      data['vibe'+i] = selected[i].value
+    for (let i = 0; i <= 3; i++) {
+      data['vibe' + i] = selected[i].value
     }
     // console.log(data)
     createRecordApi(data)
@@ -144,9 +187,55 @@ const ListingForm = () => {
     "Fullerton"
   ];
 
-  React.useEffect(()=>{
-    console.log(dataObject)
-  },[dataObject])
+  const updateDetail = () => {
+    let data = updateDataObject
+    if (updateSelected.length) {
+      for (let i = 0; i <= 3; i++) {
+        data['vibe' + i] = updateSelected[i].value
+      }
+    }
+    let ac_token = localStorage.getItem('access_token')
+    updateDetailApi(updateDataObject._id,ac_token,updateDataObject)
+      .then(function (response) {
+        alert(response.data.message)
+        console.log(JSON.stringify(response.data));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+  }
+
+  React.useEffect(() => {
+    let ac_token = localStorage.getItem('access_token')
+    if (!ac_token) {
+      navigate('/admin')
+    } else {
+      let id = paramsObject.id.split(':')[1]
+      // console.log(id)
+      if (id) {
+        getDetailByIdApi(id, ac_token)
+          .then(function (response) {
+            console.log(response.data);
+            setUpdateDataObject({ ...response.data.result })
+            setUpdateMode(true)
+          })
+          .catch(function (error) {
+            alert("Somwthing went wrong")
+            navigate('/dashboard')
+            console.log(error)
+          });
+      } else {
+        navigate('/dashboard')
+      }
+
+
+    }
+
+  }, [])
+  React.useEffect(() => {
+    console.log(updateSelected)
+  }, [updateSelected])
 
   return (
     <>
@@ -163,9 +252,13 @@ const ListingForm = () => {
                 id="text"
                 placeholder="Business"
                 name="text"
-                value={dataObject.bussinessNname && dataObject.bussinessNname}
+                value={updateMode ? updateDataObject.businessName && updateDataObject.businessName : dataObject.businessName && dataObject.businessName}
                 onChange={(e) => {
-                  changeInputField('bussinessNname', e.target.value)
+                  if(updateMode){
+                  changeUpdateInputField('businessName', e.target.value)
+                  }else{
+                    changeInputField('businessName', e.target.value)
+                  }
                 }}
               />
             </div>
@@ -177,9 +270,13 @@ const ListingForm = () => {
                 id="text"
                 placeholder="Address"
                 name="text"
-                value={dataObject.streetAddress && dataObject.streetAddress}
+                value={updateMode ? updateDataObject.streetAddress && updateDataObject.streetAddress : dataObject.streetAddress && dataObject.streetAddress}
                 onChange={(e) => {
-                  changeInputField('streetAddress', e.target.value)
+                  if (updateMode) {
+                    changeUpdateInputField('streetAddress', e.target.value)
+                  } else {
+                    changeInputField('streetAddress', e.target.value)
+                  }
                 }}
               />
             </div>
@@ -187,7 +284,11 @@ const ListingForm = () => {
               <label htmlFor="states"> Select State</label>
               <select name="states" id="states" className="form-control"
                 onChange={(e) => {
-                  changeInputField('state', e.target.value)
+                  if (updateMode) {
+                    changeUpdateInputField('state', e.target.value)
+                  } else {
+                    changeInputField('state', e.target.value)
+                  }
                 }}
               >
                 <option value="Alabama">Choose State</option>
@@ -198,7 +299,11 @@ const ListingForm = () => {
               <label htmlFor="cities"> Select City</label>
               <select name="cities" id="cities" className="form-control"
                 onChange={(e) => {
-                  changeInputField('city', e.target.value)
+                  if (updateMode) {
+                    changeUpdateInputField('city', e.target.value)
+                  } else {
+                    changeInputField('city', e.target.value)
+                  }
                 }}
               >
                 <option>choose city</option>
@@ -216,9 +321,13 @@ const ListingForm = () => {
                 min={1}
                 max={5}
                 type="number"
-                value={dataObject.zipCode && dataObject.zipCode}
+                value={updateMode ? updateDataObject.zipCode && updateDataObject.zipCode : dataObject.zipCode && dataObject.zipCode}
                 onChange={(e) => {
-                  changeInputField('zipCode', e.target.value)
+                  if (updateMode) {
+                    changeUpdateInputField('zipCode', e.target.value)
+                  } else {
+                    changeInputField('zipCode', e.target.value)
+                  }
                 }}
               />
             </div>
@@ -226,13 +335,23 @@ const ListingForm = () => {
             <div className="mb-4">
               <span>Restaurant</span>
               <label className="switch">
-                <input type="checkbox"
+                <input type="checkbox" checked={updateMode ? updateDataObject.resturantOrActivity === "Activity" : ''}
                   onClick={() => {
-                    if (dataObject.resturantOrActivity === 'Restaurant') {
-                      changeInputField('resturantOrActivity', 'Activity')
-                    }
-                    else {
-                      changeInputField('resturantOrActivity', 'Restaurant')
+                    if (updateMode) {
+                      if (updateDataObject.resturantOrActivity === 'Restaurant') {
+                        changeUpdateInputField('resturantOrActivity', 'Activity')
+                      }
+                      else {
+                        changeUpdateInputField('resturantOrActivity', 'Restaurant')
+                      }
+                    } else {
+
+                      if (dataObject.resturantOrActivity === 'Restaurant') {
+                        changeInputField('resturantOrActivity', 'Activity')
+                      }
+                      else {
+                        changeInputField('resturantOrActivity', 'Restaurant')
+                      }
                     }
 
                   }}
@@ -246,7 +365,11 @@ const ListingForm = () => {
               <label htmlFor="price">Price</label>
               <select name="price" id="price" className="form-control"
                 onChange={(e) => {
-                  changeInputField('price', e.target.value)
+                  if (updateMode) {
+                    changeUpdateInputField('price', e.target.value)
+                  } else {
+                    changeInputField('price', e.target.value)
+                  }
                 }}
               >
                 <option value="jQuery10">$</option>
@@ -264,17 +387,25 @@ const ListingForm = () => {
                 id="text"
                 placeholder="URL"
                 name="text"
-                value={dataObject.yelpURL && dataObject.yelpURL}
+                value={updateMode ? updateDataObject.yelpURL && updateDataObject.yelpURL : dataObject.yelpURL && dataObject.yelpURL}
                 onChange={(e) => {
-                  changeInputField('yelpURL', e.target.value)
+                  if (updateMode) {
+                    changeUpdateInputField('yelpURL', e.target.value)
+                  } else {
+                    changeInputField('yelpURL', e.target.value)
+                  }
                 }}
               />
             </div>
             <div className="mb-3">
               <label htmlFor="food">Food Options</label>
-              <select name="food" id="food" className="form-control" 
+              <select name="food" id="food" className="form-control"
                 onChange={(e) => {
-                  changeInputField('typeOfRestaurant', e.target.value)
+                  if (updateMode) {
+                    changeUpdateInputField('typeOfRestaurant', e.target.value)
+                  } else {
+                    changeInputField('typeOfRestaurant', e.target.value)
+                  }
                 }}
               >
                 <option value="American">American</option>
@@ -299,7 +430,11 @@ const ListingForm = () => {
               <label htmlFor="Activity">Activity Type</label>
               <select name="Activity" id="Activity" className="form-control"
                 onChange={(e) => {
-                  changeInputField('typeofActivity', e.target.value)
+                  if (updateMode) {
+                    changeUpdateInputField('typeofActivity', e.target.value)
+                  } else {
+                    changeInputField('typeofActivity', e.target.value)
+                  }
                 }}
               >
                 <option value="Low Energy">Low Energy</option>
@@ -314,14 +449,24 @@ const ListingForm = () => {
             <div className="mb-4">
               <span>Popular</span>
               <label className="switch">
-                <input type="checkbox"
+                <input type="checkbox" checked={updateMode ? updateDataObject.popularOrhiddenGem === "Hidden" : ''}
                   onClick={() => {
-                    if (dataObject.popularOrhiddenGem === 'Popular') {
-                      changeInputField('popularOrhiddenGem', 'Hidden')
+                    if (updateMode) {
+                      if (updateDataObject.popularOrhiddenGem === 'Popular') {
+                        changeUpdateInputField('popularOrhiddenGem', 'Hidden')
+                      }
+                      else {
+                        changeUpdateInputField('popularOrhiddenGem', 'Popular')
+                      }
+                    } else {
+                      if (dataObject.popularOrhiddenGem === 'Popular') {
+                        changeInputField('popularOrhiddenGem', 'Hidden')
+                      }
+                      else {
+                        changeInputField('popularOrhiddenGem', 'Popular')
+                      }
                     }
-                    else {
-                      changeInputField('popularOrhiddenGem', 'Popular')
-                    }
+
 
                   }}
                 />
@@ -338,7 +483,7 @@ const ListingForm = () => {
                 id="text"
                 placeholder="Upload File"
                 name="text"
-                value={dataObject.image1 && dataObject.image1}
+                value={updateMode ? updateDataObject.image1 && updateDataObject.image1 : dataObject.image1 && dataObject.image1}
                 onChange={(e) => {
                   changeInputField('image1', e.target.value)
                 }}
@@ -349,7 +494,7 @@ const ListingForm = () => {
                 id="text"
                 placeholder="Upload File"
                 name="text"
-                value={dataObject.image2 && dataObject.image2}
+                value={updateMode ? updateDataObject.image2 && updateDataObject.image2 : dataObject.image2 && dataObject.image2}
                 onChange={(e) => {
                   changeInputField('image2', e.target.value)
                 }}
@@ -360,7 +505,7 @@ const ListingForm = () => {
                 id="text"
                 placeholder="Upload File"
                 name="text"
-                value={dataObject.image3 && dataObject.image3}
+                value={updateMode ? updateDataObject.image3 && updateDataObject.image3 : dataObject.image3 && dataObject.image3}
                 onChange={(e) => {
                   changeInputField('image3', e.target.value)
                 }}
@@ -371,7 +516,7 @@ const ListingForm = () => {
                 id="text"
                 placeholder="Upload File"
                 name="text"
-                value={dataObject.image4 && dataObject.image4}
+                value={updateMode ? updateDataObject.image4 && updateDataObject.image4 : dataObject.image4 && dataObject.image4}
                 onChange={(e) => {
                   changeInputField('image4', e.target.value)
                 }}
@@ -382,15 +527,15 @@ const ListingForm = () => {
               <label htmlFor="Vibe">Vibe</label>
               <MultiSelect
                 options={vibeOptions}
-                value={selected}
-                onChange={setSelected}
+                value={updateMode ? updateSelected : selected}
+                onChange={updateMode ? setUpdateSelected : setSelected}
                 labelledBy="Select"
               />
             </div>
 
 
 
-            <button type="submit" className="btn btn-primary" onClick={handleSubmit}>
+            <button type="submit" className="btn btn-primary" onClick={updateMode ? updateDetail : handleSubmit}>
               Submit
             </button>
             <form />

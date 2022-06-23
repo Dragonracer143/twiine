@@ -3,7 +3,7 @@ import ListingForm from './ListingForm';
 import { confirm } from "react-confirm-box";
 import { getAllDetailsApi } from '../Shared/Services';
 import loader from './../img/loader.webp'
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Link } from "react-router-dom";
 
 
 const Listtable = () => {
@@ -104,12 +104,12 @@ const Listtable = () => {
                           <a href="#" className="icon view-icon">
                             <i className="fa fa-eye" aria-hidden="true"></i>
                           </a>
-                          <a href="#" className="icon edit-icon">
+                          <Link to={`/dashboard/edit/id:${item._id}`} className="icon edit-icon">
                             <i
                               className="fa fa-pencil-square-o"
                               aria-hidden="true"
                             ></i>
-                          </a>
+                          </Link>
                           <a
                             href="#"
                             className="icon trash-icon"

@@ -887,7 +887,7 @@ button.exit_btn {
   /*form */
   .post-form
   {
-    box-shadow: 0px 0px 16px 6px #02020236;
+    /* box-shadow: 0px 0px 16px 6px #02020236; */
     width: 80%;
     margin: 90px auto 50px;
   }
@@ -2140,3 +2140,8 @@ button.Visit_btn.more_result_btn {
 
 
   }
+
+  .post-form button,  .post-form button:hover,   .post-form button:focus {
+    background: #000 !important;
+    border-color: #000 !important;
+}

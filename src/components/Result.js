@@ -8,7 +8,7 @@ import {
   Routes,
 } from "react-router-dom";
 
-import { increasePopularityApi,notInterstedApi } from '../Shared/Services';
+import { increasePopularityApi, notInterstedApi } from '../Shared/Services';
 
 const Result = (props) => {
   const [filteredData, setFilteredData] = React.useState([])
@@ -34,14 +34,14 @@ const Result = (props) => {
       });
   }
 
-  const notInterstedIncrement=(id)=>{
+  const notInterstedIncrement = (id) => {
     notInterstedApi(id)
-    .then(function (response) {
-      console.log(response.data);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+      .then(function (response) {
+        console.log(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
 
   }
 
@@ -111,14 +111,16 @@ const Result = (props) => {
                                 <button className="yes_no_btn2"
                                   onClick={() => {
                                     notInterstedIncrement(item._id)
-                                    setI((old) => {
-                                      let nexti = old - 1
-                                      if (nexti < 0) {
-                                        nexti = old
-                                      }
-                                      return nexti
-                                    })
                                     let indexValue = filteredData.indexOf(item)
+                                    if (indexValue === filteredData.length - 1 && index === 0) {
+                                      setI((old) => {
+                                        let nexti = old - 1
+                                        if (nexti < 0) {
+                                          nexti = old
+                                        }
+                                        return nexti
+                                      })
+                                    }
                                     // console.log(indexValue) 
                                     setFilteredData((old) => {
                                       old.splice(indexValue, 1)
