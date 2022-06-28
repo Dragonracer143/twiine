@@ -2379,3 +2379,17 @@ button.Visit_btn.more_result_btn {
 }
 
 }
+@media screen and (max-width:480px){
+  .Screen_4 {
+    height: 100%;
+}
+.Screen_4 button {
+  top: 946px;
+}
+.Screen_4  button img {
+  width: 105px;
+}
+.Screen_4 .showSpan {
+  padding: 16px 19px;
+}
+}
