@@ -35,6 +35,7 @@ const Listtable = () => {
         .then((res) => {
           // console.log(res.data)
           setDataToShow([...res.data])
+          console.log("datato", dataToShow)
           setLoaderState(false)
         })
         .catch((e) => {

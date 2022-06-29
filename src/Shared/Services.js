@@ -27,7 +27,6 @@ export const getAllDetailsApi = (token) => {
   var data = JSON.stringify({
     "ac_token": token
   });
-
   var config = {
     method: 'post',
     url: baseUrl + 'getAlldetails',
@@ -121,6 +120,25 @@ export const getDetailByIdApi = (id, ac_token) => {
   var config = {
     method: 'post',
     url: baseUrl + 'getdetail',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    data: data
+  };
+
+  return axios(config)
+
+
+}
+export const getPlacenames = (id, ac_token) => {
+  var data = JSON.stringify({
+    "id": id,
+    "ac_token": ac_token
+  });
+
+  var config = {
+    method: 'post',
+    url: baseUrl + 'createPlacename',
     headers: {
       'Content-Type': 'application/json'
     },
