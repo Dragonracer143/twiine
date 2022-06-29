@@ -211,9 +211,15 @@ const ListingForm = () => {
     if (!ac_token) {
       navigate('/admin')
     } else {
+      console.log(paramsObject)
+      let paramsObjectKeys=Object.keys(paramsObject)
+      if(paramsObjectKeys.length>0){
+        console.log("yes")
+        
       let id = paramsObject.id.split(':')[1]
-      // console.log(id)
-      if (id) {
+
+      if (id)
+       {
         getDetailByIdApi(id, ac_token)
           .then(function (response) {
             console.log(response.data);
@@ -227,7 +233,25 @@ const ListingForm = () => {
           });
       } else {
         navigate('/dashboard')
+      }  
       }
+      // let id = paramsObject.id.split(':')[1]
+
+      // if (id) {
+      //   getDetailByIdApi(id, ac_token)
+      //     .then(function (response) {
+      //       console.log(response.data);
+      //       setUpdateDataObject({ ...response.data.result })
+      //       setUpdateMode(true)
+      //     })
+      //     .catch(function (error) {
+      //       alert("Somwthing went wrong")
+      //       navigate('/dashboard')
+      //       console.log(error)
+      //     });
+      // } else {
+      //   navigate('/dashboard')
+      // }
 
 
     }
