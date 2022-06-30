@@ -1,9 +1,28 @@
 import axios from "axios";
-const baseUrl = 'https://agile-plateau-96207.herokuapp.com/'
-// const baseUrl = 'http://localhost:8000/'
+// const baseUrl = 'https://agile-plateau-96207.herokuapp.com/'
+const baseUrl = 'http://localhost:8000/'
 // const baseUrl = 'http://192.168.1.37:8000/'
 
 
+export const Addplaces = (dataObject) => {
+  var data = JSON.stringify(dataObject);
+
+  // var data = JSON.stringify({
+  //   "data": dataObject
+  // });
+  var config = {
+    method: 'post',
+    url: baseUrl + 'createPlacename',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    data: data
+  };
+
+  return axios(config)
+
+
+}
 export const createRecordApi = (dataObject) => {
 
   var data = JSON.stringify({
@@ -130,25 +149,25 @@ export const getDetailByIdApi = (id, ac_token) => {
 
 
 }
-export const getPlacenames = (id, ac_token) => {
-  var data = JSON.stringify({
-    "id": id,
-    "ac_token": ac_token
-  });
+// export const getPlacenames = (id, ac_token) => {
+//   var data = JSON.stringify({
+//     "id": id,
+//     "ac_token": ac_token
+//   });
 
-  var config = {
-    method: 'post',
-    url: baseUrl + 'createPlacename',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    data: data
-  };
+//   var config = {
+//     method: 'post',
+//     url: baseUrl + 'createPlacename',
+//     headers: {
+//       'Content-Type': 'application/json'
+//     },
+//     data: data
+//   };
 
-  return axios(config)
+//   return axios(config)
 
 
-}
+// }
 
 export const updateDetailApi = (id,ac_token,dataObject) => {
   var data = JSON.stringify({

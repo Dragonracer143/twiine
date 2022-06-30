@@ -1,39 +1,54 @@
 import React, { useState } from 'react'
 import data from './Place.json'
-import { getPlacenames } from '../Shared/Services'
+import { Addplaces } from '../Shared/Services'
 const Placemanage = () => {
   const [val, setVal] = useState(100)
-  const [placeObject, setPoginObject] = React.useState({
-    state:'',
-    city:''
+  const [placeObject, setPlaceObject] = React.useState({
+    state:"",
+    city:""
 })
+
   const placemanagefunc = (value) => {
     const findCities = data.find((x)=>x.state_name == value)
     if(findCities){
       const findIndex = data.indexOf(findCities)
       setVal(findIndex) 
+      setPlaceObject((placeObject)=>{
+        return{
+          ...placeObject,
+          state:value,
+        }
+      })
        }
   };
+  const changeCities = (value)=>{
+    setPlaceObject((placeObject)=>{
+      return{
+        ...placeObject,
+        city:value,
+      }
+    })
+  }
   const placemanagesubmit=(e)=>{
     e.preventDefault()
-    getPlacenames(placeObject)
+    Addplaces(placeObject)
     .then(function (response) {
-        console.log(response.data);
         localStorage.setItem("access_token",response.data.result)
-        // navigate('/dashboard')
+        alert("place added")
+
       })
       .catch(function (error) {
         console.log(error);
-
         if(error.response.status==500){
             console.log(error);
         }else{
             alert(error.response.data.message)
         }
-       
       });
 }
-  
+
+
+
   return (
     <div  className="listing-table">
         <div className="table-card">
@@ -46,6 +61,7 @@ const Placemanage = () => {
                 id="state"
                 placeholder="Enter city name"
                 name="state"
+                value={placeObject.state}
                 onChange={(e) => placemanagefunc(e.target.value)}
                 > 
                 {data?.map((ele)=>
@@ -58,8 +74,9 @@ const Placemanage = () => {
                 type="text"
                 id="City"
                 placeholder="Enter city name"
-                name="City"
-                onChange={(e) => placemanagefunc(e.target.value)}
+                name="city"
+                value={placeObject.city}
+                onChange={(e) => changeCities(e.target.value)}
                 > 
                 {data[val]?.city_name?.map((ele)=>
                 <option value={ele}>{ele}</option>

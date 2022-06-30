@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import { createRecordApi } from './../Shared/Services'
 import { MultiSelect } from "react-multi-select-component";
-import { getDetailByIdApi, updateDetailApi } from './../Shared/Services'
+import { getDetailByIdApi, updateDetailApi, getAllPlacenames } from './../Shared/Services'
 import { useNavigate, Link } from "react-router-dom";
-
 import {
   BrowserRouter as Router,
   Switch,
@@ -18,6 +17,7 @@ const ListingForm = () => {
   const [yelpURL, setYelpURL] = useState(null)
   const [food, setFood] = useState(null)
   const [selected, setSelected] = useState([]);
+  const [repos, setRepos] = React.useState([]);
   const [updateSelected, setUpdateSelected] = useState([])
   const vibeOptions = [
     { label: "Chill", value: "Chill" },
@@ -195,7 +195,7 @@ const ListingForm = () => {
       }
     }
     let ac_token = localStorage.getItem('access_token')
-    updateDetailApi(updateDataObject._id,ac_token,updateDataObject)
+    updateDetailApi(updateDataObject._id, ac_token, updateDataObject)
       .then(function (response) {
         alert(response.data.message)
         console.log(JSON.stringify(response.data));
@@ -212,28 +212,27 @@ const ListingForm = () => {
       navigate('/admin')
     } else {
       console.log(paramsObject)
-      let paramsObjectKeys=Object.keys(paramsObject)
-      if(paramsObjectKeys.length>0){
+      let paramsObjectKeys = Object.keys(paramsObject)
+      if (paramsObjectKeys.length > 0) {
         console.log("yes")
-        
-      let id = paramsObject.id.split(':')[1]
 
-      if (id)
-       {
-        getDetailByIdApi(id, ac_token)
-          .then(function (response) {
-            console.log(response.data);
-            setUpdateDataObject({ ...response.data.result })
-            setUpdateMode(true)
-          })
-          .catch(function (error) {
-            alert("Somwthing went wrong")
-            navigate('/dashboard')
-            console.log(error)
-          });
-      } else {
-        navigate('/dashboard')
-      }  
+        let id = paramsObject.id.split(':')[1]
+
+        if (id) {
+          getDetailByIdApi(id, ac_token)
+            .then(function (response) {
+              console.log(response.data);
+              setUpdateDataObject({ ...response.data.result })
+              setUpdateMode(true)
+            })
+            .catch(function (error) {
+              alert("Somwthing went wrong")
+              navigate('/dashboard')
+              console.log(error)
+            });
+        } else {
+          navigate('/dashboard')
+        }
       }
       // let id = paramsObject.id.split(':')[1]
 
@@ -255,12 +254,26 @@ const ListingForm = () => {
 
 
     }
-
   }, [])
   React.useEffect(() => {
     console.log(updateSelected)
   }, [updateSelected])
+  const baseUrl = 'http://localhost:8000/'
 
+  React.useEffect(() => {
+    const fetchData = async () => {
+      const response = await axios.get(baseUrl + 'getplaces');
+      console.log("responses :", response.data[0].state)
+      let dupChars = getUniqueListBy(response.data,"state")
+      console.log("dupchars :", dupChars)
+      setRepos(dupChars);
+
+    } 
+    fetchData();
+  }, []);
+  function getUniqueListBy(arr, key) {
+    return [...new Map(arr.map(item => [item[key], item])).values()]
+}
   return (
     <>
       {/* <div className="Background_color"> */}
@@ -278,9 +291,9 @@ const ListingForm = () => {
                 name="text"
                 value={updateMode ? updateDataObject.businessName && updateDataObject.businessName : dataObject.businessName && dataObject.businessName}
                 onChange={(e) => {
-                  if(updateMode){
-                  changeUpdateInputField('businessName', e.target.value)
-                  }else{
+                  if (updateMode) {
+                    changeUpdateInputField('businessName', e.target.value)
+                  } else {
                     changeInputField('businessName', e.target.value)
                   }
                 }}
@@ -315,8 +328,12 @@ const ListingForm = () => {
                   }
                 }}
               >
-                <option value="Alabama">Choose State</option>
-                <option value="Alabama">California</option>
+                {repos.map((item, i) => (
+                  <option key={i}>
+                    {item.state} </option>
+                ))}
+                {/* <option value="Alabama">Choose State</option>
+                <option value="Alabama">California</option> */}
               </select>
             </div>
             <div className="mb-3">
@@ -330,9 +347,13 @@ const ListingForm = () => {
                   }
                 }}
               >
-                <option>choose city</option>
-                {citesArray.map((item, i) => (
+                {/* {citesArray.map((item, i) => (
                   <option key={i}> {item} </option>
+                ))} */}
+
+                {repos.map((item, i) => (
+                  <option key={i}>
+                    {item.city} </option>
                 ))}
               </select>
             </div>
