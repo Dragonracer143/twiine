@@ -2,15 +2,15 @@ import React, { useState } from "react";
 import axios from "axios";
 import { createRecordApi } from './../Shared/Services'
 import { MultiSelect } from "react-multi-select-component";
-import { getDetailByIdApi, updateDetailApi } from './../Shared/Services'
+import { getDetailByIdApi, updateDetailApi, getAllPlacenames } from './../Shared/Services'
 import { useNavigate, Link } from "react-router-dom";
-
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   useParams,
 } from "react-router-dom";
+import Maindashboard from "./Maindashboard";
 
 const ListingForm = () => {
   let navigate = useNavigate()
@@ -18,6 +18,7 @@ const ListingForm = () => {
   const [yelpURL, setYelpURL] = useState(null)
   const [food, setFood] = useState(null)
   const [selected, setSelected] = useState([]);
+  const [repos, setRepos] = React.useState([]);
   const [updateSelected, setUpdateSelected] = useState([])
   const vibeOptions = [
     { label: "Chill", value: "Chill" },
@@ -195,7 +196,7 @@ const ListingForm = () => {
       }
     }
     let ac_token = localStorage.getItem('access_token')
-    updateDetailApi(updateDataObject._id,ac_token,updateDataObject)
+    updateDetailApi(updateDataObject._id, ac_token, updateDataObject)
       .then(function (response) {
         alert(response.data.message)
         console.log(JSON.stringify(response.data));
@@ -212,28 +213,26 @@ const ListingForm = () => {
       navigate('/admin')
     } else {
       console.log(paramsObject)
-      let paramsObjectKeys=Object.keys(paramsObject)
-      if(paramsObjectKeys.length>0){
+      let paramsObjectKeys = Object.keys(paramsObject)
+      if (paramsObjectKeys.length > 0) {
         console.log("yes")
-        
-      let id = paramsObject.id.split(':')[1]
 
-      if (id)
-       {
-        getDetailByIdApi(id, ac_token)
-          .then(function (response) {
-            console.log(response.data);
-            setUpdateDataObject({ ...response.data.result })
-            setUpdateMode(true)
-          })
-          .catch(function (error) {
-            alert("Somwthing went wrong")
-            navigate('/dashboard')
-            console.log(error)
-          });
-      } else {
-        navigate('/dashboard')
-      }  
+        let id = paramsObject.id.split(':')[1]
+
+        if (id) {
+          getDetailByIdApi(id, ac_token)
+            .then(function (response) {
+              setUpdateDataObject({ ...response.data.result })
+              setUpdateMode(true)
+            })
+            .catch(function (error) {
+              alert("Somwthing went wrong")
+              navigate('/dashboard')
+              console.log(error)
+            });
+        } else {
+          navigate('/dashboard')
+        }
       }
       // let id = paramsObject.id.split(':')[1]
 
@@ -255,16 +254,46 @@ const ListingForm = () => {
 
 
     }
-
   }, [])
+  const [vall, setVall] = useState([])
+  const [selectcity, setSelectcity] = useState([])
+
+
   React.useEffect(() => {
     console.log(updateSelected)
-  }, [updateSelected])
 
+  }, [updateSelected])
+  const baseUrl = 'http://localhost:8000/'
+  function check(state, val = vall) {
+    let test = []
+    val.forEach(des => {
+      if (des.state == state) {
+        test.push(des)
+      }
+    }
+    )
+    let dupChars = getUniqueListBy(test, "city")
+    setSelectcity(dupChars)
+  }
+
+  React.useEffect(() => {
+    const fetchData = async () => {
+      const response = await axios.get(baseUrl + 'getplaces');
+      let dupChars = getUniqueListBy(response.data, "state")
+      setVall(response.data)
+      setRepos(dupChars);
+      setSelectcity(dupChars);
+    }
+    fetchData();
+  }, []);
+  function getUniqueListBy(arr, key) {
+    return [...new Map(arr.map(item => [item[key], item])).values()]
+  }
   return (
     <>
+      <Maindashboard />
       {/* <div className="Background_color"> */}
-      <div className="inner">
+      <div className="inner list-wrappers">
         <div className="content">
           <div className="post-form">
             <form action="#" />
@@ -278,9 +307,9 @@ const ListingForm = () => {
                 name="text"
                 value={updateMode ? updateDataObject.businessName && updateDataObject.businessName : dataObject.businessName && dataObject.businessName}
                 onChange={(e) => {
-                  if(updateMode){
-                  changeUpdateInputField('businessName', e.target.value)
-                  }else{
+                  if (updateMode) {
+                    changeUpdateInputField('businessName', e.target.value)
+                  } else {
                     changeInputField('businessName', e.target.value)
                   }
                 }}
@@ -309,14 +338,18 @@ const ListingForm = () => {
               <select name="states" id="states" className="form-control"
                 onChange={(e) => {
                   if (updateMode) {
+                    check(e.target.value)
                     changeUpdateInputField('state', e.target.value)
                   } else {
+                    check(e.target.value)
                     changeInputField('state', e.target.value)
                   }
                 }}
               >
-                <option value="Alabama">Choose State</option>
-                <option value="Alabama">California</option>
+                {repos?.map((item, i) => (
+                  <option key={i}>
+                    {item.state} </option>
+                ))}
               </select>
             </div>
             <div className="mb-3">
@@ -330,9 +363,10 @@ const ListingForm = () => {
                   }
                 }}
               >
-                <option>choose city</option>
-                {citesArray.map((item, i) => (
-                  <option key={i}> {item} </option>
+
+                {selectcity?.map((item, i) => (
+                  <option key={i}>
+                    {item?.city} </option>
                 ))}
               </select>
             </div>

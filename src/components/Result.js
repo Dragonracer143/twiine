@@ -37,7 +37,6 @@ const Result = (props) => {
   const notInterstedIncrement = (id) => {
     notInterstedApi(id)
       .then(function (response) {
-        console.log(response.data);
       })
       .catch(function (error) {
         console.log(error);
@@ -46,10 +45,8 @@ const Result = (props) => {
   }
 
   React.useEffect(() => {
-    console.log(props.collectedData)
     customFilterDataApi(props.collectedData)
       .then(function (response) {
-        console.log(response.data);
         setFilteredData([...response.data])
         setLoaderState(false)
         setTempFilteredData([...response.data])
