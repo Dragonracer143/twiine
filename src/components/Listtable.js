@@ -3,7 +3,7 @@ import ListingForm from './ListingForm';
 import { confirm } from "react-confirm-box";
 import { getAllDetailsApi } from '../Shared/Services';
 import loader from './../img/loader.webp'
-import { useNavigate,Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 
 const Listtable = () => {
@@ -35,7 +35,6 @@ const Listtable = () => {
         .then((res) => {
           // console.log(res.data)
           setDataToShow([...res.data])
-          console.log("datato", dataToShow)
           setLoaderState(false)
         })
         .catch((e) => {
@@ -51,13 +50,13 @@ const Listtable = () => {
         <div className="table-card">
           <div className="table-head pb-4 d-flex justify-content-end">
             {/* <h3>{formSwitch ? "Listing Table" : "Post Form"}</h3> */}
-            <a
-              href='#'
+            <Link
+              to="/form-listing"
               className="btn bg-red text-white"
               onClick={addform}
             >
               Add
-            </a>
+            </Link>
           </div>
           {formSwitch ? "" : <ListingForm />}
           <div

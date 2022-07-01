@@ -4,6 +4,8 @@ import Listtable from "./Listtable";
 import logo from "../logo.png";
 import restaurant from "../restaurant.png";
 import Placemanage from "./Placemanage";
+import ListingForm from "./ListingForm";
+import { Link } from "react-router-dom";
 
 function Dashboard() {
   const [open, setopen] = useState();
@@ -35,27 +37,28 @@ function Dashboard() {
           </div>
           <div className="sidebar-menu-inner">
             <div className="menu-items">
-              <a href="#" className="theme-color1">
+              <Link to="/dashboard" href="#" className="theme-color1">
                 {" "}
                 <img src={restaurant} className="site-logo" />
                 &nbsp;<span>Listing</span>{" "}
-              </a>
+              </Link>
             </div>
             <div className="menu-items">
-              <a href="#" className="theme-color1" onClick={addPlacehandler}>
+              <Link to="/place-management" className="theme-color1" onClick={addPlacehandler}>
                 {" "}
                 <img src={restaurant} className="site-logo" />
                 &nbsp;<span>Place Management</span>{" "}
-              </a>
+              </Link>
             </div>
           </div>
         </div>
 
         <div
-          className={open ? "body-wrapper full" : "body-wrapper"}
+          className={open ? "body-wrapper full" : "body-wrapper  "}
           id="body-content"
         >
-          <DashHeader togglefn={openSidebar} />
+          <DashHeader togglefn={openSidebar}/>
+    
           <div className="list-wrapper">
             {addplace ? <Placemanage/>  : <Listtable />}
 

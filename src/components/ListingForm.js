@@ -10,6 +10,7 @@ import {
   Route,
   useParams,
 } from "react-router-dom";
+import Maindashboard from "./Maindashboard";
 
 const ListingForm = () => {
   let navigate = useNavigate()
@@ -221,7 +222,6 @@ const ListingForm = () => {
         if (id) {
           getDetailByIdApi(id, ac_token)
             .then(function (response) {
-              console.log(response.data);
               setUpdateDataObject({ ...response.data.result })
               setUpdateMode(true)
             })
@@ -255,29 +255,45 @@ const ListingForm = () => {
 
     }
   }, [])
+  const [vall, setVall] = useState([])
+  const [selectcity, setSelectcity] = useState([])
+
+
   React.useEffect(() => {
     console.log(updateSelected)
+
   }, [updateSelected])
   const baseUrl = 'http://localhost:8000/'
+  function check(state, val = vall) {
+    let test = []
+    val.forEach(des => {
+      if (des.state == state) {
+        test.push(des)
+      }
+    }
+    )
+    let dupChars = getUniqueListBy(test, "city")
+    setSelectcity(dupChars)
+  }
 
   React.useEffect(() => {
     const fetchData = async () => {
       const response = await axios.get(baseUrl + 'getplaces');
-      console.log("responses :", response.data[0].state)
-      let dupChars = getUniqueListBy(response.data,"state")
-      console.log("dupchars :", dupChars)
+      let dupChars = getUniqueListBy(response.data, "state")
+      setVall(response.data)
       setRepos(dupChars);
-
-    } 
+      setSelectcity(dupChars);
+    }
     fetchData();
   }, []);
   function getUniqueListBy(arr, key) {
     return [...new Map(arr.map(item => [item[key], item])).values()]
-}
+  }
   return (
     <>
+      <Maindashboard />
       {/* <div className="Background_color"> */}
-      <div className="inner">
+      <div className="inner list-wrappers">
         <div className="content">
           <div className="post-form">
             <form action="#" />
@@ -322,18 +338,18 @@ const ListingForm = () => {
               <select name="states" id="states" className="form-control"
                 onChange={(e) => {
                   if (updateMode) {
+                    check(e.target.value)
                     changeUpdateInputField('state', e.target.value)
                   } else {
+                    check(e.target.value)
                     changeInputField('state', e.target.value)
                   }
                 }}
               >
-                {repos.map((item, i) => (
+                {repos?.map((item, i) => (
                   <option key={i}>
                     {item.state} </option>
                 ))}
-                {/* <option value="Alabama">Choose State</option>
-                <option value="Alabama">California</option> */}
               </select>
             </div>
             <div className="mb-3">
@@ -347,13 +363,10 @@ const ListingForm = () => {
                   }
                 }}
               >
-                {/* {citesArray.map((item, i) => (
-                  <option key={i}> {item} </option>
-                ))} */}
 
-                {repos.map((item, i) => (
+                {selectcity?.map((item, i) => (
                   <option key={i}>
-                    {item.city} </option>
+                    {item?.city} </option>
                 ))}
               </select>
             </div>
