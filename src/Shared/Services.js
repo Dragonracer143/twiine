@@ -1,6 +1,6 @@
 import axios from "axios";
-// const baseUrl = 'https://agile-plateau-96207.herokuapp.com/'
-const baseUrl = 'http://localhost:8000/'
+const baseUrl = 'https://agile-plateau-96207.herokuapp.com/'
+//const baseUrl = 'http://localhost:8000/'
 // const baseUrl = 'http://192.168.1.37:8000/'
 
 
