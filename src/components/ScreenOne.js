@@ -55,11 +55,11 @@ const selectCity = (value) =>{
 } 
 
   React.useEffect(() => {
-    let ac_token = localStorage.getItem("access_token");
+    // let ac_token = localStorage.getItem("access_token");
     // if (!ac_token) {
     //   navigate("/admin");
     // } else {
-      getAllDetailsApi(ac_token)
+      getAllDetailsApi()
         .then((res) => {
           setDataToShow([...res.data]);
           let dupState = getUniqueListBy(res.data, "state");
