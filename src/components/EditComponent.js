@@ -44,13 +44,13 @@ function EditComponent() {
         </div>
 
         <div
-          className={open ? "body-wrapper full" : "body-wrapper"}
+          className={open ? "body-wrapper full" : "edit-body-wrapper"}
           id="body-content"
         >
-          <DashHeader togglefn={openSidebar} />
-          <div className="list-wrapper">
+          {/* <DashHeader togglefn={openSidebar} /> */}
+          <div className="edit-list-wrapper">
           <div className="listing-table">
-        <div className="table-card">
+        <div className="edit-table-card">
           <div className="table-head pb-4 d-flex justify-content-end">
            
           </div>
