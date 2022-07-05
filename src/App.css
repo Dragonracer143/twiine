@@ -1094,6 +1094,17 @@ button.exit_btn {
     width: 90%;
     margin: 0px auto;
     padding: 30px;
+  }.edit-table-card{
+
+    box-shadow: 0px 0px 16px 6px #0202020a;
+    background-color: #fff;
+    /* width: 90%;
+    margin: 0px auto;
+    padding: 30px; */
+
+  }
+  .edit-list-wrapper{
+    padding: 0;
   }
   button.btn
   {
@@ -1653,6 +1664,14 @@ button.exit_btn {
       background-color: #edf1f5;
       height: 100%;
       min-height: 100vh;
+  }
+  .edit-body-wrapper{
+    transition: 0.5s ease-in-out;
+    background-color: #edf1f5;
+    height: 100%;
+    min-height: 100vh;
+    margin-top: -25px;
+    margin-left: 16px;
   }
 
   .body-wrapper.full {
