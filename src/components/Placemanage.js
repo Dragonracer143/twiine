@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import data from './Place.json'
 import { Addplaces } from '../Shared/Services'
 import Maindashboard from './Maindashboard'
+import { useNavigate } from 'react-router-dom'
 const Placemanage = () => {
   const [val, setVal] = useState([0])
   const [showcity, setShowcity] = useState([])
@@ -9,7 +10,7 @@ const Placemanage = () => {
     state: "",
     city: ""
   })
-
+  let navigate = useNavigate()
   const placemanagefunc = (value) => {
     const findCities = data.find((x) => x.state_name == value)
     if (findCities) {
@@ -36,7 +37,9 @@ const Placemanage = () => {
     Addplaces(placeObject)
       .then(function (response) {
         localStorage.setItem("access_token", response.data.result)
-        alert("place added")
+        // alert("place added")
+        navigate('/form-listing')
+
 
       })
       .catch(function (error) {
