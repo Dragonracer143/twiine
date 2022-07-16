@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { customFilterDataApi } from '../Shared/Services'
 import loader from './../img/loader.webp'
 import {
@@ -7,8 +7,12 @@ import {
   Link,
   Routes,
 } from "react-router-dom";
-
+import ReactStars from "react-rating-stars-component";
+import { AddRating } from '../Shared/Services';
 import { increasePopularityApi, notInterstedApi } from '../Shared/Services';
+import { Stars } from '@mui/icons-material';
+import axios from 'axios';
+
 
 const Result = (props) => {
   const [filteredData, setFilteredData] = React.useState([])
@@ -16,9 +20,14 @@ const Result = (props) => {
   const [clickedBtnIndexes, setClickedBtnIndexes] = React.useState([])
   const [loaderState, setLoaderState] = React.useState(true)
   const [i, setI] = React.useState(0)
+  const [starsrate, setStarrate] = useState({
+    rating: ""
+  })
+  console.log("star", starsrate)
   const handleClick = (e) => {
     props.setProcess(props.process - 9)
   }
+  const baseUrl = 'http://localhost:8000/'
   const popularIncrement = (id) => {
     // console.log(id)
     increasePopularityApi(id)
@@ -43,6 +52,20 @@ const Result = (props) => {
       });
 
   }
+  const AddRatinghandler = async (e) => {
+    try {
+      const starrating = await axios.post(baseUrl + "rating-add", {
+        rating: starsrate
+      }).then(function (response) {
+        alert(starsrate + " Star rating added")
+      })
+    }
+    catch (err) {
+      console.log(err)
+    }
+
+  }
+
 
   React.useEffect(() => {
     customFilterDataApi(props.collectedData)
@@ -55,6 +78,20 @@ const Result = (props) => {
         console.log(error);
       });
   }, [])
+  const secondExample = {
+    size: 40,
+    count: 5,
+    isHalf: false,
+    value: 2,
+    color: "rgb(133 106 107)",
+    activeColor: "white",
+    onChange: rating => {
+      {
+        console.log(`Example 3: new value is ${starsrate.rating}`);
+        setStarrate(rating)
+      }
+    }
+  };
 
   return (
     <>
@@ -140,20 +177,40 @@ const Result = (props) => {
                   </div>
                 </>
               })}
-              {filteredData.length > 3 ? <button className="Visit_btn more_result_btn"
-                onClick={() => {
-                  setI((old) => {
-                    let nexti = old + 3
-                    if (nexti >= filteredData.length) {
-                      nexti = old
-                      alert("no more data")
-                    }
-                    return nexti
+              {filteredData.length > 3 ?
+                <div className='get-three-more'>
+                  <button className="Visit_btn more_result_btn fw-bold"
+                    onClick={() => {
+                      setI((old) => {
+                        let nexti = old + 3
+                        if (nexti >= filteredData.length) {
+                          nexti = old
+                          alert("no more data")
+                        }
+                        return nexti
 
-                  })
-                }}
-              >get 3 More Result</button>
+                      })
+                    }}
+                  >
+                    <span className='text-dark fw-bold'>Not satisfied?</span><br />
+                    Get <span className='fst-italic  text-dark'>3</span> more recommendation here!</button> </div>
                 : ''}
+              <div className='join-our-waitlist'>
+                <button className="Visit_btn more_result_btn fw-bold">
+                  Like our Prototype?<span className='text-dark'> Join our waitlist!</span></button>
+              </div>
+              <div className='How-are-these-results'>
+                <button className="how-result fw-bold">
+                  How are these results?</button>
+              </div>
+              <div className='react-star'>
+                <ReactStars {...secondExample} />
+
+              </div>
+              <div className='How-are-these-results'>
+                <button type='submit' className="rating-submit fw-bold" onClick={(e) => { AddRatinghandler(e) }}>
+                  Submit</button>
+              </div>
             </>
             :
             <>
@@ -180,6 +237,7 @@ const Result = (props) => {
                 }
               </center>
             </>}
+
 
         </div>
         <button onClick={handleClick} className="exit_btn" type="button">Exit</button>
