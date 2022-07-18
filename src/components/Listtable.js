@@ -1,16 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ListingForm from './ListingForm';
 import { confirm } from "react-confirm-box";
 import { getAllDetailsApi } from '../Shared/Services';
 import loader from './../img/loader.webp'
 import { useNavigate, Link } from "react-router-dom";
-
-
+import axios from 'axios';
 const Listtable = () => {
   let navigate = useNavigate()
   const [formSwitch, setformSwitch] = useState(true);
   const [loaderState, setLoaderState] = useState(true)
   const [dataToShow, setDataToShow] = useState([])
+  const [selectedFile, setSelectedFile] = useState(null);
+
   const options = {
     labels: {
       confirmable: "Confirm",
@@ -34,7 +35,8 @@ const Listtable = () => {
       getAllDetailsApi(ac_token)
         .then((res) => {
           // console.log(res.data)
-          setDataToShow([...res.data])
+          let dupdata = ([...res.data])
+          setDataToShow(dupdata)
           setLoaderState(false)
         })
         .catch((e) => {
@@ -44,12 +46,51 @@ const Listtable = () => {
     }
 
   }, [])
+  const baseUrl = 'http://localhost:8000/'
+
+console.log("data to show", dataToShow)
+
+  useEffect(() => {
+  }, [selectedFile]);
+
+  const handleSubmit = async (event) => {
+    const formdata = new FormData()
+    formdata.append("file", selectedFile)
+
+    event.preventDefault()
+    try {
+      const response = await axios.post(baseUrl + "UploadFile",
+        formdata
+      );
+      alert("Data Added")
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const handleFileSelect = (event) => {
+    setSelectedFile(event.target.files[0])
+  }
+  // function getUniqueListBy(arr, key) {
+  //   return [...new Map(arr.map(item => [item[key], item])).values()]
+  // }
   return (
     <>
       <div className="listing-table">
         <div className="table-card">
           <div className="table-head pb-4 d-flex justify-content-end">
             {/* <h3>{formSwitch ? "Listing Table" : "Post Form"}</h3> */}
+
+            <input name="file" type="file"
+
+              onChange={(event) => handleFileSelect(event)}
+            />
+            <button onClick={handleSubmit} className="btn bg-red text-white">
+              Upload!
+            </button>
+
+
+
             <Link
               to="/form-listing"
               className="btn bg-red text-white"
@@ -57,6 +98,7 @@ const Listtable = () => {
             >
               Add
             </Link>
+
           </div>
           {formSwitch ? "" : <ListingForm />}
           <div

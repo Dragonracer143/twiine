@@ -626,11 +626,11 @@ color: #ffffff;
       .Screen_4_two .form button img {
         width: 130px;
       }
-
+      a.btn.bg-red.text-white.mr-4 {
+        margin-right: 70px;
+    }
 
 /* ScreenFive */
-
-
 
       .Screen_5 {
         height: 100vh;
