@@ -10,7 +10,9 @@ const Ratingmanage = () => {
 
 
 
-    const baseUrl = 'http://localhost:8000/'
+    // const baseUrl = 'http://localhost:8000/'
+    const baseUrl = 'https://agile-plateau-96207.herokuapp.com/'
+
     const getALlratingdata = async () => {
         const getstarvar = await axios.get(baseUrl + 'getstar')
             .then(data)

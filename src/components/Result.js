@@ -27,7 +27,9 @@ const Result = (props) => {
   const handleClick = (e) => {
     props.setProcess(props.process - 9)
   }
-  const baseUrl = 'http://localhost:8000/'
+  // const baseUrl = 'http://localhost:8000/'
+  const baseUrl = 'https://agile-plateau-96207.herokuapp.com/'
+
   const popularIncrement = (id) => {
     // console.log(id)
     increasePopularityApi(id)

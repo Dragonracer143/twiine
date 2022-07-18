@@ -46,7 +46,8 @@ const Listtable = () => {
     }
 
   }, [])
-  const baseUrl = 'http://localhost:8000/'
+  // const baseUrl = 'http://localhost:8000/'
+  const baseUrl = 'https://agile-plateau-96207.herokuapp.com/'
 
 console.log("data to show", dataToShow)
 
