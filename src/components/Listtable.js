@@ -45,8 +45,9 @@ const Listtable = () => {
         });
     }
   }, []);
-  // const baseUrl = "http://localhost:8000/";
-  const baseUrl = 'https://agile-plateau-96207.herokuapp.com/'
+  const baseUrl = "http://localhost:8000/";
+  
+  // const baseUrl = 'https://agile-plateau-96207.herokuapp.com/'
 
   console.log("data to show", selectedFile);
 
@@ -58,9 +59,9 @@ const Listtable = () => {
     const formdata = new FormData();
     formdata.append("file", selectedFile);
     try {
-      const response = await axios.post(baseUrl + "UploadFile", formdata);
+      const response = await axios.post(baseUrl+"UploadFile", formdata);
       window.location.reload(true);
-      getAllDetailsApi()
+      // getAllDetailsApi()
         } catch (error) {
       console.log(error);
     }
