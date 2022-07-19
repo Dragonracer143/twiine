@@ -915,6 +915,8 @@ color: #ffffff;
 .excel-input {
   opacity: 0;
   position: absolute;
+  width: 102px !important;
+  height: 39px !important;
 }
 .upload-section {
   position: relative;

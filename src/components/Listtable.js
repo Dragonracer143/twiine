@@ -73,7 +73,7 @@ const Listtable = () => {
     <>
       <div className="listing-table">
         <div className="table-card">
-          <div className="table-head pb-4 d-flex justify-content-between">
+          <div className="table-head pb-4 d-flex justify-content-end">
             {/* <h3>{formSwitch ? "Listing Table" : "Post Form"}</h3> */}
             <div className="upload-section">
               <input
@@ -82,7 +82,7 @@ const Listtable = () => {
                 className="excel-input"
                 onChange={(event) => handleSubmitChange(event)}
               />
-              <button className="btn bg-red text-white">Upload!</button>
+              <button className="btn bg-red text-white">Upload</button>
             </div>
 
             <Link
