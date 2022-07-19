@@ -626,11 +626,11 @@ color: #ffffff;
       .Screen_4_two .form button img {
         width: 130px;
       }
-
+      a.btn.bg-red.text-white.mr-4 {
+        margin-right: 70px;
+    }
 
 /* ScreenFive */
-
-
 
       .Screen_5 {
         height: 100vh;
@@ -912,6 +912,15 @@ color: #ffffff;
   padding: 20px;
   margin: 40px;
 }
+.excel-input {
+  opacity: 0;
+  position: absolute;
+  width: 102px !important;
+  height: 39px !important;
+}
+.upload-section {
+  position: relative;
+}
 
 .cartt2InnerDiv {
   display: flex;
@@ -963,10 +972,14 @@ button.Visit_btn {
   border-radius: 19px;
   border: none;
   color: #fff;
-  padding: 14px 33px;
+  padding: 14px 18px;
 }
 .nameHeading{
   max-width: 70%;
+}
+.react-star {
+  display: flex;
+  justify-content: center;
 }
 button.exit_btn {
   position: absolute;
@@ -977,6 +990,13 @@ button.exit_btn {
   color: #fff;
   font-size: 20px;
   padding: 13px 66px;
+}
+i.fa.fa-star {
+  margin: 28px;
+  /* background: black; */
+  border-radius: 30px;
+  background: #f87179;
+  font-size: 43px;
 }
   p.fire_content {
   font-size: 34px;
@@ -1216,7 +1236,24 @@ button.exit_btn {
     border: 1px solid #f87179;
     font-weight: 600;
   }
+  .undefined.react-stars {
+  display: flex;
+  gap: 20px;
   
+}
+i.fa.fa-star.rate {
+  font-size: 15px !important;
+  margin: 7px !important;
+  background: white !important;
+}
+.undefined.react-stars span {
+  padding: 0 20px !important;
+  /* color: rgb(255 255 255) !important; */
+  font-size: 34px !important;
+  background: rgb(248, 113, 121) !important;
+  border-radius: 100% !important;
+  padding-bottom: 6px !important;
+}
   .approv-btn {
     padding: 12px 25px;
     font-size: 16px;
@@ -1745,7 +1782,39 @@ button.exit_btn {
   .approve-table tr td {
     width: 25%;
   }
-  
+  .get-three-more {
+    text-align: center;
+    font-size: 29px;
+    line-height: 29px;
+}
+.join-our-waitlist {
+  margin-top: 42px;
+  text-align: center;
+  font-size: 29px;
+  line-height: 29px;
+  margin-bottom: 42px;
+}
+.How-are-these-results {
+  text-align: center;
+  font-size: 29px;
+  line-height: 21px;
+  margin-bottom: 28px;
+  margin-top: 17px;
+}
+.how-result{
+  background: #000;
+  border-radius: 19px;
+  border: none;
+  color: #fff;
+  padding: 14px 33px;
+}
+.rating-submit{
+  background: #f87179;
+  border-radius: 19px;
+  border: none;
+  color: #fff;
+  padding: 14px 33px;
+}
   .feedback-table tr td {
     width: 20%;
   }
@@ -2041,6 +2110,11 @@ button.exit_btn {
     font-size: 50px;
     color: #fff;
   }
+  button.Visit_btn.more_result_btn {
+    /* position: absolute; */
+    bottom: 10px;
+    right: 22px;
+  }
   .no-of-vote-card span {
     color: #fff;
     font-size: 18px;
@@ -2051,6 +2125,15 @@ button.exit_btn {
   @media screen and (max-width: 768px) {
     .hide-desktop {
       display: block;
+    }
+    .City{
+      font-size: 18px !important;
+    }
+    .state{
+      font-size: 18px !important;
+    }
+    .btn-add{
+      font-size: 18px !important;
     }
     .btn-lg-primary {
       padding: 12px 15px;
@@ -2070,6 +2153,50 @@ button.exit_btn {
     .title-bar {
       display: flex;
     }
+    button.Visit_btn.more_result_btn {
+      position: relative !important;
+      bottom: 0px !important;
+      right: 0px !important;
+    }
+    .join-our-waitlist {
+      margin-top: 20px !important;
+  }
+  .how-result {
+    background: #000;
+    border-radius: 19px;
+    border: none;
+    color: #fff;
+    padding: 14px 33px;
+}
+.undefined.react-stars {
+  display: flex;
+  gap: 20px;
+  
+}
+.list-wrappers {
+  padding: 50px 0;
+  margin-left: 0 !important;
+}
+button.btn {
+  margin-right: 10px;
+  text-align: end;
+  font-size: 15px;
+}
+.adminLoginDiv {
+  width: 100%;
+  margin-top: 3%;
+  margin-left: 0% !important;
+  padding: 49px;
+}
+
+.undefined.react-stars span {
+  padding: 0 10px !important;
+  /* color: rgb(255 255 255) !important; */
+  font-size: 29px !important;
+  background: rgb(248, 113, 121) !important;
+  border-radius: 100% !important;
+  padding-bottom: 6px !important;
+}
     .body-wrapper {
       margin-left: 0px;
     }
@@ -2118,9 +2245,7 @@ button.exit_btn {
     justify-content: center;
     flex-direction: column;
   }
-  .viewAgainbtn{
 
-  }
   .loaderClass{
     float: right;
   }
@@ -2287,7 +2412,7 @@ button.Visit_btn {
 .result {
   padding-top: 5rem;
   position: relative;
-  padding-bottom: 3rem;
+  padding-bottom: 2rem;
 }
 .result .inner .content h1 img {
   margin-right: 6px;
@@ -2300,11 +2425,7 @@ button.Visit_btn {
   font-size: 16px;
   padding: 12px 45px;
 }
-button.Visit_btn.more_result_btn {
-  position: absolute;
-  bottom: 10px;
-  right: 22px;
-}
+
 .result .result_loader{
   width: 50px;
 }
@@ -2430,6 +2551,11 @@ button.Visit_btn.more_result_btn {
     background: transparent;
 }
 
+
+
+
+
+
 }
 @media screen and (max-width:480px){
   .Screen_4 {
@@ -2444,4 +2570,9 @@ button.Visit_btn.more_result_btn {
 .Screen_4 .showSpan {
   padding: 16px 19px;
 }
+.button.Visit_btn.more_result_btn {
+  bottom: 10px;
+   right: 22px;
 }
+}
+

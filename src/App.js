@@ -13,6 +13,7 @@ import AdminLogin from "./components/AdminLogin";
 import EditComponent from "./components/EditComponent";
 import Placemanage from "./components/Placemanage";
 import Maindashboard from "./components/Maindashboard";
+import Ratingmanage from "./components/Ratingmange";
 function App() {
   return (
     <>
@@ -22,6 +23,7 @@ function App() {
           <Route path="/" element={<Process/>} />
           <Route path="/form-listing" element={<ListingForm/>} />
           <Route path="/place-management" element={<Placemanage/>} />
+          <Route path="/rating" element={<Ratingmanage/>} />
           <Route path="/dashboard/edit/:id" element={<EditComponent/>} />
           <Route path="/admin" element={<AdminLogin/>} />
           <Route path="/dashboard" element={<Dashboard/>} />

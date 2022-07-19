@@ -19,8 +19,8 @@ function Dashboard() {
     // setAddplace(true);
 
   }
-  React.useEffect(()=>{
-   
+  React.useEffect(() => {
+
   })
   return (
     <>
@@ -50,6 +50,13 @@ function Dashboard() {
                 &nbsp;<span>Place Management</span>{" "}
               </Link>
             </div>
+            {/* <div className="menu-items">
+              <Link to="/rating" className="theme-color1" onClick={addPlacehandler}>
+                {" "}
+                <img src={restaurant} className="site-logo" />
+                &nbsp;<span>Rating</span>{" "}
+              </Link>
+            </div> */}
           </div>
         </div>
 
@@ -57,10 +64,10 @@ function Dashboard() {
           className={open ? "body-wrapper full" : "body-wrapper  "}
           id="body-content"
         >
-          <DashHeader togglefn={openSidebar}/>
-    
+          <DashHeader togglefn={openSidebar} />
+
           <div className="list-wrapper">
-            {addplace ? <Placemanage/>  : <Listtable />}
+            {addplace ? <Placemanage /> : <Listtable />}
 
           </div>
         </div>

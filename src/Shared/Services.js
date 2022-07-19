@@ -1,15 +1,11 @@
 import axios from "axios";
 const baseUrl = 'https://agile-plateau-96207.herokuapp.com/'
-//const baseUrl = 'http://localhost:8000/'
+// const baseUrl = 'http://localhost:8000/'
 // const baseUrl = 'http://192.168.1.37:8000/'
 
 
 export const Addplaces = (dataObject) => {
   var data = JSON.stringify(dataObject);
-
-  // var data = JSON.stringify({
-  //   "data": dataObject
-  // });
   var config = {
     method: 'post',
     url: baseUrl + 'createPlacename',
@@ -23,6 +19,22 @@ export const Addplaces = (dataObject) => {
 
 
 }
+// export const AddRating = (dataObject) => {
+//   var data = JSON.stringify(dataObject);
+
+//   var config = {
+//     method: 'post',
+//     url: baseUrl + 'rating-add',
+//     headers: {
+//       'Content-Type': 'application/json'
+//     },
+//     data: data
+//   };
+
+//   return axios(config)
+
+
+// }
 export const createRecordApi = (dataObject) => {
 
   var data = JSON.stringify({
