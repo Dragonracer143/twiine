@@ -60,7 +60,7 @@ const Listtable = () => {
     formdata.append("file", selectedFile);
     try {
       const response = await axios.post(baseUrl + "UploadFile", formdata);
-      // window.location.reload(true);
+      window.location.reload(true);
       getAllDetailsApi()
         } catch (error) {
       console.log(error);
