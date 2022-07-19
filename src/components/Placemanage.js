@@ -55,7 +55,7 @@ const Placemanage = () => {
 
 
   return (<>
-<Maindashboard/>
+<Maindashboard />
     <div className="listing-table list-wrappers">
       <div className="table-card">
         <div className="table-head pb-4 d-flex justify-content-end">
@@ -89,7 +89,7 @@ const Placemanage = () => {
                 )}
               </select>
             </div>
-            <button type='submit' className='btn btn-success'>Add</button>
+            <button type='submit' className='btn btn-success btn-add'>Add</button>
           </form>
         </div>
       </div>

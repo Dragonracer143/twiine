@@ -50,13 +50,13 @@ function Dashboard() {
                 &nbsp;<span>Place Management</span>{" "}
               </Link>
             </div>
-            <div className="menu-items">
+            {/* <div className="menu-items">
               <Link to="/rating" className="theme-color1" onClick={addPlacehandler}>
                 {" "}
                 <img src={restaurant} className="site-logo" />
                 &nbsp;<span>Rating</span>{" "}
               </Link>
-            </div>
+            </div> */}
           </div>
         </div>
 

@@ -23,11 +23,12 @@ const Maindashboard = (props) => {
   return (
     <>
     {/* <DashHeader/> */}
+<div className="main-dashboard-body">
     <nav className="bg-red">
             <div className="container small-container">
               <div className="d-flex justify-content-between py-3 align-items-center">
                 <div className="title-bar">
-                <a className="d-inline-block text-white" href="#" onClick={props.togglefn}>
+                <a className="d-inline-block text-white" href="#" onClick={openSidebar}>
                      <i className="fa fa-bars" aria-hidden="true"></i>
                 </a>
                   {/* <a className="mobile-menu-icon " href="#">
@@ -76,16 +77,17 @@ const Maindashboard = (props) => {
                 &nbsp;<span>Place Management</span>{" "}
               </Link>
             </div>
-            <div className="menu-items">
+            {/* <div className="menu-items">
               <Link to="/rating" className="theme-color1" onClick={addPlacehandler}>
                 {" "}
                 <img src={restaurant} className="site-logo" />
                 &nbsp;<span>Rating</span>{" "}
               </Link>
-            </div>
+            </div> */}
           </div>
         </div>
         
+        </div>
         </div>
     </>
   )

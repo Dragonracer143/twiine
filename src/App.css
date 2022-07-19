@@ -912,6 +912,13 @@ color: #ffffff;
   padding: 20px;
   margin: 40px;
 }
+.excel-input {
+  opacity: 0;
+  position: absolute;
+}
+.upload-section {
+  position: relative;
+}
 
 .cartt2InnerDiv {
   display: flex;
@@ -2117,6 +2124,15 @@ i.fa.fa-star.rate {
     .hide-desktop {
       display: block;
     }
+    .City{
+      font-size: 18px !important;
+    }
+    .state{
+      font-size: 18px !important;
+    }
+    .btn-add{
+      font-size: 18px !important;
+    }
     .btn-lg-primary {
       padding: 12px 15px;
     }
@@ -2154,6 +2170,21 @@ i.fa.fa-star.rate {
   display: flex;
   gap: 20px;
   
+}
+.list-wrappers {
+  padding: 50px 0;
+  margin-left: 0 !important;
+}
+button.btn {
+  margin-right: 10px;
+  text-align: end;
+  font-size: 15px;
+}
+.adminLoginDiv {
+  width: 100%;
+  margin-top: 3%;
+  margin-left: 0% !important;
+  padding: 49px;
 }
 
 .undefined.react-stars span {
@@ -2379,7 +2410,7 @@ button.Visit_btn {
 .result {
   padding-top: 5rem;
   position: relative;
-  padding-bottom: 3rem;
+  padding-bottom: 2rem;
 }
 .result .inner .content h1 img {
   margin-right: 6px;
