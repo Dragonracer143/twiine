@@ -14,6 +14,8 @@ import EditComponent from "./components/EditComponent";
 import Placemanage from "./components/Placemanage";
 import Maindashboard from "./components/Maindashboard";
 import Ratingmanage from "./components/Ratingmange";
+import Waitlist from "./components/Waitlist";
+import Waitinglisttable from "./components/Waitinglisttable";
 function App() {
   return (
     <>
@@ -26,6 +28,9 @@ function App() {
           <Route path="/rating" element={<Ratingmanage/>} />
           <Route path="/dashboard/edit/:id" element={<EditComponent/>} />
           <Route path="/admin" element={<AdminLogin/>} />
+          <Route path="/waitlist" element={<Waitlist/>} />
+          <Route path="/waiting-list" element={<Waitinglisttable/>} />
+
           <Route path="/dashboard" element={<Dashboard/>} />
           <Route path="/dashboard" element={<Maindashboard/>} />
 

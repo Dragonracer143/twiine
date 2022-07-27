@@ -1023,6 +1023,39 @@ i.fa.fa-star {
   font-size: 24px;
   color: #fff;
   }
+  .button_join {
+    text-align: center;
+}
+.form-data {
+  width: 40%;
+  margin-left: 29%;
+  margin-top: 3%;
+}
+.button_join button {
+  background: #27AE60;
+  box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+  border-radius: 13px;
+  font-weight: 300;
+  font-size: 18px;
+  text-align: center;
+  color: #ffffff;
+  padding: 10px 53px;
+  border: none;
+  margin-top: 1rem;
+}
+.waitlist-form{
+  background: #ffffff;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 19px;
+  width: 470px;
+  margin: auto;
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid #f87179;
+  font-size: 28px;
+  font-weight: 300;
+  font-family: 'Inter';
+}
   button.yes_no_btn2 {
   background: #f87179;
   border-radius: 19px;
@@ -2126,6 +2159,23 @@ i.fa.fa-star.rate {
     .hide-desktop {
       display: block;
     }
+    .form-data {
+      width: auto !important;
+      margin-left: 0% !important;
+      margin-top: 3% !important;
+  }
+  .waitlist-form {
+    background: #ffffff;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 19px;
+     width: 332px !important; 
+     margin: auto; 
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #f87179;
+    font-size: 21px;
+
+}
     .City{
       font-size: 18px !important;
     }

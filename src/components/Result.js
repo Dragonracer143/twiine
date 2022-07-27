@@ -46,19 +46,19 @@ const Result = (props) => {
       });
   };
   
-  // const AddRatinghandler = async (e) => {
-  //   try {
-  //     const starrating = await axios
-  //       .post(baseUrl + "rating-add", {
-  //         rating: starsrate,
-  //       })
-  //       .then(function (response) {
-  //         alert(starsrate + " Star rating added");
-  //       });
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
+  const AddRatinghandler = async (e) => {
+    try {
+      const starrating = await axios
+        .post(baseUrl + "rating-add", {
+          rating: starsrate,
+        })
+        .then(function (response) {
+          alert(starsrate + " Star rating added");
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   React.useEffect(() => {
     customFilterDataApi(props.collectedData)
@@ -71,20 +71,20 @@ const Result = (props) => {
         console.log(error);
       });
   }, []);
-  // const secondExample = {
-  //   size: 40,
-  //   count: 5,
-  //   isHalf: false,
-  //   value: 2,
-  //   color: "rgb(133 106 107)",
-  //   activeColor: "white",
-  //   onChange: (rating) => {
-  //     {
-  //       console.log(`Example 3: new value is ${starsrate.rating}`);
-  //       setStarrate(rating);
-  //     }
-  //   },
-  // };
+  const secondExample = {
+    size: 40,
+    count: 5,
+    isHalf: false,
+    value: 2,
+    color: "rgb(133 106 107)",
+    activeColor: "white",
+    onChange: (rating) => {
+      {
+        console.log(`Example 3: new value is ${starsrate.rating}`);
+        setStarrate(rating);
+      }
+    },
+  };
 
   return (
     <>
@@ -220,13 +220,18 @@ const Result = (props) => {
               ) : (
                 ""
               )}
-              {/* <div className="join-our-waitlist">
+           <div className="join-our-waitlist">
                 <button className="Visit_btn more_result_btn fw-bold">
                   Like our Prototype?
-                  <span className="text-dark"> Join our waitlist!</span>
+                  <Link
+              to="/waitlist"
+              className="text-dark"
+            >
+              Join our waitlist!
+            </Link>
                 </button>
               </div>
-              <div className="How-are-these-results">
+                <div className="How-are-these-results">
                 <button className="how-result fw-bold">
                   How are these results?
                 </button>
@@ -244,7 +249,7 @@ const Result = (props) => {
                 >
                   Submit
                 </button>
-              </div> */}
+              </div>
             </>
           ) : (
             <>

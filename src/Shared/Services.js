@@ -14,27 +14,37 @@ export const Addplaces = (dataObject) => {
     },
     data: data
   };
+  return axios(config)
+}
+ export const Addwaitlist = (dataObject) =>{
+  var data = JSON.stringify(dataObject);
+  var config = {
+    method: 'post',
+    url: baseUrl + 'joinwaitlist',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    data: data
+  };
+  return axios(config)
+
+ }
+export const AddRating = (dataObject) => {
+  var data = JSON.stringify(dataObject);
+
+  var config = {
+    method: 'post',
+    url: baseUrl + 'rating-add',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    data: data
+  };
 
   return axios(config)
 
 
 }
-// export const AddRating = (dataObject) => {
-//   var data = JSON.stringify(dataObject);
-
-//   var config = {
-//     method: 'post',
-//     url: baseUrl + 'rating-add',
-//     headers: {
-//       'Content-Type': 'application/json'
-//     },
-//     data: data
-//   };
-
-//   return axios(config)
-
-
-// }
 export const createRecordApi = (dataObject) => {
 
   var data = JSON.stringify({
@@ -66,11 +76,7 @@ export const getAllDetailsApi = (token) => {
     },
     data: data
   };
-
   return axios(config)
-
-
-
 }
 
 export const customFilterDataApi = (objectForFilter) => {
