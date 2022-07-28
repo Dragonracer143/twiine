@@ -55,10 +55,10 @@ const selectCity = (value) =>{
 } 
 
   React.useEffect(() => {
-    let ac_token = localStorage.getItem("access_token");
-    if (!ac_token) {
-      navigate("/admin");
-    } else {
+    // let ac_token = localStorage.getItem("access_token");
+    // if (!ac_token) {
+    //   navigate("/admin");
+    // } else {
       getAllDetailsApi()
         .then((res) => {
           setDataToShow([...res.data]);
@@ -73,7 +73,7 @@ const selectCity = (value) =>{
           console.log(e);
           navigate("/admin");
         });
-    }
+    // }
   }, []);
   function getUniqueListBy(arr, key) {
     return [...new Map(arr.map((item) => [item[key], item])).values()];
