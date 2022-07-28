@@ -71,7 +71,7 @@ const selectCity = (value) =>{
         })
         .catch((e) => {
           console.log(e);
-          navigate("/admin");
+          navigate("/test");
         });
     // }
   }, []);

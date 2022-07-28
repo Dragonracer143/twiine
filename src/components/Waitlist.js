@@ -35,10 +35,10 @@ const Waitlist = (props) => {
       })
       .catch(function (error) {
         if (error.response.status == 500) {
+          alert("email already exist !");
           console.log(error);
         } else {
-          alert("email already exist!");
-
+          alert(error.response.data.message);
         }
       });
   };
