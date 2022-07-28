@@ -17,6 +17,7 @@ export const Addplaces = (dataObject) => {
   return axios(config)
 }
  export const Addwaitlist = (dataObject) =>{
+  console.log("dataObject",dataObject)
   var data = JSON.stringify(dataObject);
   var config = {
     method: 'post',

@@ -6,26 +6,24 @@ import axios from "axios";
 const Waitinglisttable = () => {
   const [formSwitch, setformSwitch] = useState(true);
   const [loaderState, setLoaderState] = useState(true);
-  const [waitlistdata, setWaitlistdata] = useState()
-
+  const [waitlistdata, setWaitlistdata] = useState();
 
   const baseUrl = 'https://agile-plateau-96207.herokuapp.com/'
 
-//   const baseUrl = "http://localhost:8000/";
+  // const baseUrl = "http://localhost:8000/";
 
-useEffect(()=>{
+  useEffect(() => {
     getData();
-},[waitlistdata]);
+  }, [waitlistdata]);
 
-const getData =()=>{
-    axios.get(baseUrl + "getwaitlist")
-.then((response)=>{
-    console.log("data", response.data);
-    setWaitlistdata(response.data)
-    console.log("state:", response.data);
-    setLoaderState(false)
-})
-}
+  const getData = () => {
+    axios.get(baseUrl + "getwaitlist").then((response) => {
+      console.log("data", response.data);
+      setWaitlistdata(response.data);
+      console.log("state:", response.data);
+      setLoaderState(false);
+    });
+  };
 
   return (
     <>
