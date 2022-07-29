@@ -22,7 +22,6 @@ const Waitlist = (props) => {
     Addwaitlist(payload)
       .then(function (response) {
         alert("join waitlist");
-
         setWaitlistObject((waitlistobject) => {
           return {
             ...waitlistobject,
@@ -66,7 +65,17 @@ const Waitlist = (props) => {
               className=" waitlist-form"
               placeholder="First Name"
               onChange={(e) => {
+                debugger  
                 if (/[a-z]$/.test(e.target.value)) {
+                  setWaitlistObject((waitlistobject)=>{
+                    return{
+                      ...waitlistobject,
+                      firstname:e.target.value
+               
+                    }
+               
+                  })
+                }else if (e.target.value == ""){
                   setWaitlistObject((waitlistobject)=>{
                     return{
                       ...waitlistobject,
@@ -85,6 +94,13 @@ const Waitlist = (props) => {
               placeholder="Last Name"
               onChange={(e) => {
                 if (/[a-z]$/.test(e.target.value)) {
+                  setWaitlistObject((waitlistobject)=>{
+                    return{
+                      ...waitlistobject,
+                      lastname:e.target.value
+                    }
+                  })
+                }else if (e.target.value == ""){
                   setWaitlistObject((waitlistobject)=>{
                     return{
                       ...waitlistobject,
