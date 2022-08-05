@@ -16,6 +16,7 @@ import Maindashboard from "./components/Maindashboard";
 import Ratingmanage from "./components/Ratingmange";
 import Waitlist from "./components/Waitlist";
 import Waitinglisttable from "./components/Waitinglisttable";
+import Login from "./components/Login";
 function App() {
   return (
     <>
@@ -30,6 +31,7 @@ function App() {
           <Route path="/admin" element={<AdminLogin/>} />
           <Route path="/waitlist" element={<Waitlist/>} />
           <Route path="/waiting-list" element={<Waitinglisttable/>} />
+          <Route path="/logindashboard" element={<Login/>} />
 
           <Route path="/dashboard" element={<Dashboard/>} />
           <Route path="/dashboard" element={<Maindashboard/>} />

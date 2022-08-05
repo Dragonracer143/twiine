@@ -921,7 +921,14 @@ color: #ffffff;
 .upload-section {
   position: relative;
 }
-
+.login-setup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  align-self: center;
+  margin-top: 40px;
+}
 .cartt2InnerDiv {
   display: flex;
 }
