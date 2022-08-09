@@ -7,8 +7,8 @@ import { useNavigate } from "react-router-dom";
 import { Filter } from "@mui/icons-material";
 const Ratingmanage = () => {
   const [startData, setStarData] = useState([]);
-  // const baseUrl = "http://localhost:8000/";
-  const baseUrl = "https://agile-plateau-96207.herokuapp.com/";
+  const baseUrl = "http://localhost:8000/";
+  // const baseUrl = "https://agile-plateau-96207.herokuapp.com/";
   const getALlratingdata = async () => {
     const getstarvar = await axios.get(baseUrl + "getstar").then(data);
     setStarData(getstarvar.data).catch((error) => console.log(error));

@@ -7,8 +7,16 @@ const Login = () => {
   const [playlist, setPlaylist] = useState();
   const [user, setUser] = useState([]);
   const [recent, setRecent] = useState([]);
+  const [geners, setGeners] = useState(false);
+  const [tracks, setTracks] = useState(false);
+  const [final, setFinal] = useState([]);
 
-  // console.log("token", token);
+  recent.forEach(function (x) {
+    final[x] = (final[x] || 0) + 1;
+  });
+
+  let genereArray = Object.entries(final);
+  console.log("sddsdsd",genereArray);
   useEffect(() => {
     const hash = window.location.hash;
     let token = window.localStorage.getItem("token");
@@ -30,6 +38,7 @@ const Login = () => {
     setToken("");
     window.localStorage.removeItem("token");
   };
+
   const scopes = [
     "user-read-private",
     "user-read-email",
@@ -45,56 +54,49 @@ const Login = () => {
     "user-read-currently-playing",
   ];
 
-  const CLIENT_ID = "f8ce2984801049e3be24910f05cacc68";
+  const CLIENT_ID = "f01e78664fc6407e815de229d1616785";
   const REDIRECT_URI = "http://localhost:3000/logindashboard";
   const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
   const RESPONSE_TYPE = "token";
   const onGetdata = async (e) => {
     e.preventDefault();
     const { data } = await axios.get(
-      "https://api.spotify.com/v1/me/playlists",
+      "https://api.spotify.com/v1/me/top/tracks?offset=0&limit=5",
       {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       }
     );
-
-    setPlaylist(data);
+    setPlaylist(data.items);
+    setTracks(true);
   };
-  console.log("Playlist name == ", playlist)
+  // console.log("Top Tracks", playlist);
 
-  const getUserdata = async (e) => {
-    e.preventDefault();
-    const { data } = await axios.get(
-      "https://api.spotify.com/v1/me",
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-
-    setUser(data);
-  };
-
-  console.log("all tracks", user);
+  useEffect(() => {
+    getrecentlyplayed();
+  }, []);
   const getrecentlyplayed = async (e) => {
     e.preventDefault();
     const { data } = await axios.get(
-      // "https://api.spotify.com/v1/me/player/recently-played",
-      // "https://api.spotify.com/v1/me/player/currently-playing",
-      "https://api.spotify.com/v1/me/top/tracks",
+      "https://api.spotify.com/v1/me/top/artists?offset=0&limit=60",
+      // "https://api.spotify.com/v1/me/tracks",
       {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       }
     );
-
-    setRecent(data.items);
+    let vall = [];
+    data.items.map((first) => {
+      first.genres.forEach((valdata) => vall.push(valdata));
+    });
+    console.log("vall", vall);
+    setRecent(vall);
+    setGeners(true);
   };
-  console.log("recent", recent)
+
+  console.log("recent", recent);
   return (
     <>
       <div className="container">
@@ -121,17 +123,27 @@ const Login = () => {
                   onClick={(e) => onGetdata(e)}
                 >
                   {" "}
-                  get playlist
+                  Top Tracks
                 </button>
+                {tracks ? (
+                  <>
+                    <br />
+                    <br />
+                    <br />
+
+                    <h1>Your Current Top 5  Songs: </h1>
+
+                    {playlist.map((item, key) => (
+                      <>
+                        <p key={key}>
+                          song name - {item.name} By {item.artists[0].name}
+                        </p>
+                      </>
+                    ))}
+                  </>
+                ) : null}
                 <br />
 
-                <button
-                  className="mt-5 btn-dark"
-                  onClick={(e) => getUserdata(e)}
-                >
-                  {" "}
-                  get User
-                </button>
                 <br />
 
                 <button
@@ -139,8 +151,19 @@ const Login = () => {
                   onClick={(e) => getrecentlyplayed(e)}
                 >
                   {" "}
-                  recently played
+                  Top geners
                 </button>
+                <p>{final}</p>
+                {geners ? (
+                  <>
+                    <h1>Your Current Top Geners </h1>
+                    <p>
+                      {genereArray.slice(0,4).map((item) => (
+                        <p>{item.join(" = ")}</p>
+                      ))}
+                    </p>
+                  </>
+                ) : null}
               </div>
             </>
           )}
