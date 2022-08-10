@@ -1,22 +1,9 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 const Musiclogin = () => {
   const [token, setToken] = useState("");
-  const [playlist, setPlaylist] = useState();
-  const [user, setUser] = useState([]);
-  const [recent, setRecent] = useState([]);
-  const [geners, setGeners] = useState(false);
-  const [tracks, setTracks] = useState(false);
-  const [final, setFinal] = useState([]);
   const navigate = useNavigate();
-
-  recent.forEach(function (x) {
-    final[x] = (final[x] || 0) + 1;
-  });
-
-  let genereArray = Object.entries(final);
   useEffect(() => {
     const hash = window.location.hash;
     let token = window.localStorage.getItem("token");
@@ -30,7 +17,9 @@ const Musiclogin = () => {
       window.location.hash = "";
       localStorage.setItem("token", token);
     }
-
+    if(token){
+      navigate("/userlocation")
+    }
     setToken(token);
   }, []);
 
@@ -55,12 +44,11 @@ const Musiclogin = () => {
   ];
 
   const CLIENT_ID = "f01e78664fc6407e815de229d1616785";
-  const REDIRECT_URI = "http://localhost:3000/userLocation";
+  const REDIRECT_URI = "http://localhost:3000/Musiclogin";
   const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
   const RESPONSE_TYPE = "token";
 
 
-  console.log("recent", recent);
   return (
     <>
       <div className="musiclogin_main">

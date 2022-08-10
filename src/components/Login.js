@@ -79,7 +79,7 @@ const Login = () => {
   const getrecentlyplayed = async (e) => {
     e.preventDefault();
     const { data } = await axios.get(
-      "https://api.spotify.com/v1/me/top/artists?offset=0&limit=60",
+      "https://api.spotify.com/v1/me/top/artists?offset=0&limit=10",
       // "https://api.spotify.com/v1/me/tracks",
       {
         headers: {

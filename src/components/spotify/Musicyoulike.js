@@ -1,6 +1,13 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Musicyoulike = () => {
+     const navigate = useNavigate()
+      
+     const getGeners = () =>{
+        let path ="/Resultbreakdown"
+        navigate(path)
+     }
   return (
   <>
 
@@ -45,12 +52,12 @@ const Musicyoulike = () => {
                 <p>Location: Los Angeles, CA</p>
                 <p>Vibes: <span>Country </span><span>Blues</span></p>
             </div>
-            <button class="Moreinfo btn" type="button">More Info</button>
+            <button className="Moreinfo btn" type="button">More Info</button>
             </div>
         </div>
 
     <div className='share_buttons'>
-    <button class="btn" type="button">See your Genre Breakdown</button>
+    <button class="btn" type="button" onClick={getGeners}>See your Genre Breakdown</button>
     <button class="btn light_blue" type="button">Share on Social Media</button>
     </div>
     <div className='share_buttons'>
