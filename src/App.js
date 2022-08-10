@@ -16,6 +16,11 @@ import Maindashboard from "./components/Maindashboard";
 import Ratingmanage from "./components/Ratingmange";
 import Waitlist from "./components/Waitlist";
 import Waitinglisttable from "./components/Waitinglisttable";
+import Musiclogin from "./components/spotify/MusicLogin";
+import Userlocation from "./components/spotify/Userlocation";
+import Musicyoulike from "./components/spotify/Musicyoulike";
+import ResultBreakdown from "./components/spotify/ResultBreakdown";
+import Instagramstory from "./components/spotify/Instagramstory";
 import Login from "./components/Login";
 function App() {
   return (
@@ -31,10 +36,21 @@ function App() {
           <Route path="/admin" element={<AdminLogin/>} />
           <Route path="/waitlist" element={<Waitlist/>} />
           <Route path="/waiting-list" element={<Waitinglisttable/>} />
-          <Route path="/logindashboard" element={<Login/>} />
-
           <Route path="/dashboard" element={<Dashboard/>} />
           <Route path="/dashboard" element={<Maindashboard/>} />
+          <Route path="/logindashboard" element={<Login/>} />
+
+
+          <Route path="/Musiclogin" element={<Musiclogin/>} />
+          <Route path="/userlocation" element={<Userlocation/>} />
+          <Route path="/musicyoulike" element={<Musicyoulike/>} />
+          <Route path="/Resultbreakdown" element={<ResultBreakdown/>} />
+          <Route path="/instagramstory" element={<Instagramstory/>} />
+
+
+
+
+
 
         </Routes>
       </Router>

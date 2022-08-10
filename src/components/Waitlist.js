@@ -84,7 +84,7 @@ const Waitlist = (props) => {
                   })
                 }
               }}
-              
+              required
             ></input>
             <input
               type="text"
@@ -109,7 +109,7 @@ const Waitlist = (props) => {
                   })
                 }
               }}
-              
+              required
             ></input>
             <input
               type="email"
