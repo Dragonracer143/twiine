@@ -53,6 +53,8 @@ const ListingForm = () => {
     image2: '',
     image3: '',
     image4: '',
+    location:'',
+    genres:'',
   })
 
   const [updateDataObject, setUpdateDataObject] = useState({
@@ -74,6 +76,8 @@ const ListingForm = () => {
     image2: '',
     image3: '',
     image4: '',
+    location:'',
+    genres:'',
   })
 
   const [updateMode, setUpdateMode] = useState(false)
@@ -452,6 +456,43 @@ const ListingForm = () => {
                     changeUpdateInputField('yelpURL', e.target.value)
                   } else {
                     changeInputField('yelpURL', e.target.value)
+                  }
+                }}
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="text">Location</label>
+              <input
+                type="text"
+                className="form-control"
+                id="text"
+                placeholder="New York"
+                name="location"
+                value={updateMode ? updateDataObject.location && updateDataObject.location : dataObject.location && dataObject.location}
+                onChange={(e) => {
+                  if (updateMode) {
+                    changeUpdateInputField('location', e.target.value)
+                  } else {
+                    changeInputField('location', e.target.value)
+                  }
+                }}
+                
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="text">Genres</label>
+              <input
+                type="text"
+                className="form-control"
+                id="text"
+                placeholder="Sad, Hip Hop"
+                name="genres"
+                value={updateMode ? updateDataObject.genres && updateDataObject.genres : dataObject.genres && dataObject.genres}
+                onChange={(e) => {
+                  if (updateMode) {
+                    changeUpdateInputField('genres', e.target.value)
+                  } else {
+                    changeInputField('genres', e.target.value)
                   }
                 }}
               />

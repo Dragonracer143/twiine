@@ -45,12 +45,6 @@ function App() {
           <Route path="/musicyoulike" element={<Musicyoulike/>} />
           <Route path="/Resultbreakdown" element={<ResultBreakdown/>} />
           <Route path="/instagramstory" element={<Instagramstory/>} />
-
-
-
-
-
-
         </Routes>
       </Router>
     </>

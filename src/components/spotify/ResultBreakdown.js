@@ -5,42 +5,46 @@ import Chart from "chart.js/auto";
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Pie } from "react-chartjs-2";
+import * as htmlToImage from 'html-to-image';
+import { toPng } from 'html-to-image';
+import  { useCallback, useRef } from 'react';
+
 const ResultBreakdown = () => {
+    const refs = document.getElementById('id')
+  const onButtonClick = useCallback(() => {
+    if (refs === null) {
+      return
+    }
+
+    toPng(refs)
+      .then((dataUrl) => {
+        const link = document.createElement('a')
+        link.download = 'name.png'
+        link.href = dataUrl
+        link.click()
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }, [refs])
+
+
+
+
   const [playlist, setPlaylist] = useState();
-  let token = localStorage.getItem("token")
-  const [recent, setRecent] = useState([]);
+  let token = localStorage.getItem("token");
   const [final, setFinal] = useState([]);
-  // console.log("recent ",recent)
+  const [genernames, setGenernames] = useState([]);
+  const [genervalues, setGenervalues] = useState([]);
+  let navigate = useNavigate();
 
-  let navigate = useNavigate()
-  recent.forEach(function (x) {
-    final[x] = (final[x] || 0 ) + 1;
-  });
-  
-  // final[x] = (final[x] || 0 ) + 1;
-  console.log("final val",final)
-
-  let genereArray = Object.entries(final);
-  // console.log("generarray",genereArray);
-
-   let genername = []
-   for (let i = 0; i < genereArray.length; i++) {
-    const element = genereArray[i][0];
-    genername.push(element)
-   }
-   
-    let genervalue = []
-    for (let i = 1; i < genereArray.length; i++) {
-      const element = genereArray[i][1];
-      genervalue.push(element)
-     }
   const data = {
-    
-    labels: genername.slice(0,4),
+    labels: genernames.slice(0, 6),
+    indexLabel: genernames.slice(0, 6),
+    indexLabelPlacement: "inside",
     datasets: [
       {
-        data: genervalue.slice(0,4),
+        data: genervalues.slice(0, 6),
         backgroundColor: [
           "rgb(201, 134, 73)",
           "rgb(70, 136, 236)",
@@ -53,21 +57,75 @@ const ResultBreakdown = () => {
         borderRadius: 18,
         borderColor: "#000",
         borderWidth: 1,
-        display:true
+        display: true,
+
       },
+      
     ],
+  };
+  const options = {
+    plugins: {
+      legend: {
+        display: false,
+        
+      },
+    },
+
   };
   const config = {
     type: "doughnut",
     data: data,
-    
+
   };
 
+  useEffect(() => {
+    getGenerslist();
+  }, []);
+  const getGenerslist = async (e) => {
+    const { data } = await axios.get(
+      "https://api.spotify.com/v1/me/top/artists?offset=0&limit=10",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
 
+    let vall = [];
+    data.items.map((first) => {
+      first.genres.forEach((valdata) => vall.push(valdata));
+    });
+    let newarray = [];
+    vall.forEach(function (x) {
+      newarray[x] = (newarray[x] || 0) + 1;
+    });
 
-   useEffect(()=>{
-onGetdata();
-   },[])
+    let genereArray = Object.entries(newarray);
+    function compareSecondColumn(a, b) {
+      if (a[1] === b[1]) {
+        return 0;
+      } else {
+        return b[1] < a[1] ? -1 : 1;
+      }
+    }
+    genereArray.sort(compareSecondColumn);
+    let genername = [];
+    for (let i = 0; i < genereArray.length; i++) {
+      const element = genereArray[i][0];
+      genername.push(element);
+    }
+    let genervalue = [];
+    for (let i = 1; i < genereArray.length; i++) {
+      const element = genereArray[i][1];
+      genervalue.push(element);
+    }
+    setGenernames(genername);
+    setGenervalues(genervalue);
+  };
+
+  useEffect(() => {
+    onGetdata();
+  }, []);
   const onGetdata = async (e) => {
     const { data } = await axios.get(
       "https://api.spotify.com/v1/me/top/tracks?offset=0&limit=5",
@@ -79,36 +137,15 @@ onGetdata();
     );
     setPlaylist(data.items);
   };
-  useEffect(() => {
-    getGenerslist();
-  }, [final]);
-  const getGenerslist = async (e) => {
-    const { data } = await axios.get(
-      "https://api.spotify.com/v1/me/top/artists?offset=0&limit=10",
-      // "https://api.spotify.com/v1/me/tracks",
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-    let vall = [];
-    data.items.map((first) => {
-      first.genres.forEach((valdata) => vall.push(valdata));
-    });
-    // console.log("vall", data  )
-    setRecent(vall);
-  };
-  const goBack = () =>{
-    let  path = "/musicyoulike"
-    navigate(path)
-  }
-  
 
+  const goBack = () => {
+    let path = "/musicyoulike";
+    navigate(path);
+  };
 
   return (
     <>
-      <div className="ResultBreakdown">
+      <div className="ResultBreakdown" id="id">
         <img className="twiinevblack_logo" src="./img/twiineblack.png" />
         <div className="heading mb-4">We saw that you like:</div>
 
@@ -116,66 +153,38 @@ onGetdata();
           <div className="col-12 col-md-6">
             <div className="map">
               <div className="leftchart">
-                <Doughnut data={data} 
-                
-                ></Doughnut>
+                <Doughnut data={data} options={options}></Doughnut>
               </div>
             </div>
           </div>
           <div className="col-12 col-md-6">
             <div className="right_table">
               <p>Your current top 5:</p>
-              {playlist?.map((ele,key)=>
-              <div key={key} className="song_one mt-2">
-              <img className="song_img" src={ele?.album?.images[1]?.url} />
-              <div className="song_detail">
-                <p>{ele?.name}</p>
-                <p>{ele?.artists[0]?.name}</p>
-              </div>
-              <div className="song_no"><p>#{key + 1}</p></div>
-            </div>
-              )}
-              
-              {/* <div className="song_one mt-2">
-                <img className="song_img" src="./img/song_one.png" />
-                <div className="song_detail">
-                  <p>Heartbreak Anniversary</p>
-                  <p>Giveon</p>
+              {playlist?.map((ele, key) => (
+                <div key={key} className="song_one mt-2">
+                  <img className="song_img" src={ele?.album?.images[1]?.url} />
+                  <div className="song_detail">
+                    <p>{ele?.name}</p>
+                    <p>{ele?.artists[0]?.name}</p>
+                  </div>
+                  <div className="song_no">
+                    <p>#{key + 1}</p>
+                  </div>
                 </div>
-
-
-                <div className="song_no"><p>#2</p></div>
-              </div>
-              <div className="song_one mt-2">
-                <img className="song_img" src="./img/song_one.png" />
-                <div className="song_detail">
-                  <p>Strange Fruit</p>
-                  <p>Billie Holiday</p>
-                </div>
-                <div className="song_no"><p>#3</p></div>
-              </div>
-              <div className="song_one mt-2">
-                <img className="song_img" src="./img/song_one.png" />
-                <div className="song_detail">
-                  <p>Clarity</p>
-                  <p>Zedd</p>
-                </div>
-                <div className="song_no"><p>#4</p></div>
-              </div>
-              <div className="song_one mt-2">
-                <img className="song_img" src="./img/song_one.png" />
-                <div className="song_detail">
-                  <p>The Message</p>
-                  <p>Grandmaster Flash</p>
-                </div>
-                <div className="song_no"><p>#5</p></div>
-              </div> */}
+              ))}
             </div>
           </div>
         </div>
+        <button className="Go_Back btn" onClick={goBack} type="button">
+          Go Back
+        </button>
+        <br/>
+        <br/>
+        <br/>
 
-        <button className="Go_Back btn" onClick={goBack} type="button">Go Back</button>
+        <div  refs={refs}></div>
 
+      <button onClick={onButtonClick}>Click me</button>
       </div>
     </>
   );

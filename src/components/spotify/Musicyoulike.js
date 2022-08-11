@@ -57,11 +57,11 @@ const Musicyoulike = () => {
         </div>
 
     <div className='share_buttons'>
-    <button class="btn" type="button" onClick={getGeners}>See your Genre Breakdown</button>
-    <button class="btn light_blue" type="button">Share on Social Media</button>
+    <button className="btn" type="button" onClick={getGeners}>See your Genre Breakdown</button>
+    <button className="btn light_blue" type="button">Share on Social Media</button>
     </div>
     <div className='share_buttons'>
-    <button class="btn red" type="button">Subscribe for product updates</button>
+    <button className="btn red" type="button">Subscribe for product updates</button>
     </div>
 
 

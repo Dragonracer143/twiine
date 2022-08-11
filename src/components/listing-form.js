@@ -72,7 +72,10 @@ const ListingForm = () => {
       <label for="text">Zipcode</label>
       <input id="zip" name="zip" className='form-control' type="number" pattern="^(?(^00000(|-0000))|(\d{5}(|-\d{4})))$"/>
     </div>
-    {/* TOGGLE */}
+    <div className='mb-3'>
+    <label for="text">Location</label>
+      <input type="text" className='form-control' id="text" placeholder="Location" name="text"/>  
+</div>
 
     <div className='price mb-3'>
       <label for="price">Price</label>

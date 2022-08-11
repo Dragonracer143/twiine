@@ -31,7 +31,9 @@ const Userlocation = () => {
       </div>
 
       <div className='yes_btn'>
-      <button className='btn' type="button" onClick={getLocation}>Yes</button>
+      <button className='btn' type="button" 
+      onClick={getLocation}
+      >Yes</button>
       </div>
       <div className='no_btn'>
       <button className='btn' type="button" onClick={logout}>No</button>
