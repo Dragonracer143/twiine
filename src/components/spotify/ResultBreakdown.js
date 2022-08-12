@@ -5,46 +5,22 @@ import Chart from "chart.js/auto";
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import * as htmlToImage from 'html-to-image';
-import { toPng } from 'html-to-image';
-import  { useCallback, useRef } from 'react';
-
-const ResultBreakdown = () => {
-    const refs = document.getElementById('id')
-  const onButtonClick = useCallback(() => {
-    if (refs === null) {
-      return
-    }
-
-    toPng(refs)
-      .then((dataUrl) => {
-        const link = document.createElement('a')
-        link.download = 'name.png'
-        link.href = dataUrl
-        link.click()
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  }, [refs])
 
 
+const ResultBreakdown = (props) => {
 
 
   const [playlist, setPlaylist] = useState();
   let token = localStorage.getItem("token");
-  const [final, setFinal] = useState([]);
-  const [genernames, setGenernames] = useState([]);
-  const [genervalues, setGenervalues] = useState([]);
+
   let navigate = useNavigate();
 
   const data = {
-    labels: genernames.slice(0, 6),
-    indexLabel: genernames.slice(0, 6),
-    indexLabelPlacement: "inside",
+    labels: props?.genernames.slice(0, 6),
+    indexLabel: props?.genernames.slice(0, 6),
     datasets: [
       {
-        data: genervalues.slice(0, 6),
+        data: props?.genervalues.slice(0, 6),
         backgroundColor: [
           "rgb(201, 134, 73)",
           "rgb(70, 136, 236)",
@@ -58,24 +34,19 @@ const ResultBreakdown = () => {
         borderColor: "#000",
         borderWidth: 1,
         display: true,
-
       },
-      
     ],
   };
   const options = {
     plugins: {
       legend: {
         display: false,
-        
       },
     },
-
   };
   const config = {
     type: "doughnut",
     data: data,
-
   };
 
   useEffect(() => {
@@ -119,11 +90,12 @@ const ResultBreakdown = () => {
       const element = genereArray[i][1];
       genervalue.push(element);
     }
-    setGenernames(genername);
-    setGenervalues(genervalue);
+    props?.setGenernames(genername);
+    props?.setGenervalues(genervalue);
   };
 
   useEffect(() => {
+
     onGetdata();
   }, []);
   const onGetdata = async (e) => {
@@ -178,13 +150,9 @@ const ResultBreakdown = () => {
         <button className="Go_Back btn" onClick={goBack} type="button">
           Go Back
         </button>
-        <br/>
-        <br/>
-        <br/>
-
-        <div  refs={refs}></div>
-
-      <button onClick={onButtonClick}>Click me</button>
+        <br />
+        <br />
+        <br />
       </div>
     </>
   );

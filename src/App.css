@@ -6,7 +6,7 @@ body {
 }
 
 .disabled {
-  opacity: .6;
+  opacity: 0.6;
   cursor: not-allowed !important;
 }
 
@@ -17,7 +17,7 @@ body {
 }
 
 button {
-  font-family: 'Inter';
+  font-family: "Inter";
   cursor: pointer;
 }
 
@@ -102,7 +102,6 @@ button {
   margin-top: 1rem;
 }
 
-
 /* ScreenOne */
 
 .Screen_1 {
@@ -167,7 +166,7 @@ button {
   margin-bottom: 3rem;
   font-size: 28px;
   font-weight: 300;
-  font-family: 'Inter';
+  font-family: "Inter";
 }
 
 .Screen_1 .form select.City {
@@ -207,9 +206,7 @@ button {
   width: 130px;
 }
 
-
 /* ScreenTwo */
-
 
 .Screen_2 {
   height: 100vh;
@@ -280,7 +277,7 @@ button {
   margin-bottom: 3rem;
   font-size: 28px;
   font-weight: 300;
-  font-family: 'Inter';
+  font-family: "Inter";
   margin-right: 30px;
 }
 
@@ -293,7 +290,7 @@ button {
   margin-bottom: 3rem;
   font-size: 28px;
   font-weight: 300;
-  font-family: 'Inter';
+  font-family: "Inter";
 }
 
 .Screen_2 .form button.radio_btn {
@@ -307,7 +304,7 @@ button {
   border: 1px solid #f87179;
   font-size: 28px;
   font-weight: 300;
-  font-family: 'Inter';
+  font-family: "Inter";
 }
 
 .Screen_2 button.radio_btn:focus,
@@ -316,9 +313,7 @@ button {
   color: white;
 }
 
-
 /* ScreenThree */
-
 
 .Screen_3 {
   height: 100vh;
@@ -367,14 +362,14 @@ button {
 
 .Screen_3 .form button {
   width: 44%;
-  background: #FFFFFF;
+  background: #ffffff;
   box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
   border-radius: 19px;
   padding: 18px;
   border: 1px solid #f87179;
   font-size: 20px;
   font-weight: 300;
-  font-family: 'Inter';
+  font-family: "Inter";
   text-transform: capitalize;
 }
 
@@ -383,10 +378,7 @@ button {
   color: white;
 }
 
-
 /* ScreenFour */
-
-
 
 .Screen_4 {
   height: 100vh;
@@ -423,7 +415,6 @@ button {
   color: #000000;
   font-weight: 300;
   margin: 0px;
-  ;
 }
 
 .Screen_4 .inner .content p {
@@ -456,7 +447,7 @@ button {
   border: 1px solid #f87179;
   margin-bottom: 3rem;
   font-weight: 300;
-  font-family: 'Inter';
+  font-family: "Inter";
 
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -494,7 +485,7 @@ button {
   border: 1px solid #f87179;
   margin-bottom: 3rem;
   font-weight: 300;
-  font-family: 'Inter';
+  font-family: "Inter";
 
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -517,7 +508,7 @@ button {
   border: 1px solid #f87179;
   margin-bottom: 3rem;
   font-weight: 300;
-  font-family: 'Inter';
+  font-family: "Inter";
   color: #ffffff;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -541,7 +532,7 @@ button {
   border: 1px solid #f87179;
   margin-bottom: 3rem;
   font-weight: 300;
-  font-family: 'Inter';
+  font-family: "Inter";
   appearance: none;
   /* background-image: url(../public/img/Polygon.png); */
   background-repeat: no-repeat;
@@ -566,7 +557,6 @@ button {
 .activityDescDivKeys .desc {
   font-weight: 300;
   font-size: 15px;
-
 }
 
 .activityDescDivKeys {
@@ -604,9 +594,7 @@ button {
   width: 130px;
 }
 
-
 /* ScreenFour-Two */
-
 
 .Screen_4_two {
   height: 100vh;
@@ -664,7 +652,7 @@ button {
   border: 1px solid #f87179;
   font-size: 28px;
   font-weight: 300;
-  font-family: 'Inter';
+  font-family: "Inter";
 
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -775,11 +763,11 @@ a.btn.bg-red.text-white.mr-4 {
   margin: auto;
   padding: 15px;
   margin-bottom: 20px;
-  color: #BDBDBD;
+  color: #bdbdbd;
   border: 1px solid #f87179;
   font-size: 28px;
   font-weight: 300;
-  font-family: 'Inter';
+  font-family: "Inter";
 }
 
 .Screen_5 button.radio_btn:focus,
@@ -789,8 +777,6 @@ a.btn.bg-red.text-white.mr-4 {
 }
 
 /* ScreenSix */
-
-
 
 .Screen_6 {
   height: 100vh;
@@ -872,7 +858,7 @@ a.btn.bg-red.text-white.mr-4 {
   border: 1px solid #f87179;
   font-size: 28px;
   font-weight: 300;
-  font-family: 'Inter';
+  font-family: "Inter";
 }
 
 .Screen_6 .form input#City {
@@ -895,9 +881,7 @@ a.btn.bg-red.text-white.mr-4 {
   width: 130px;
 }
 
-
 /* ScreenSeven */
-
 
 .Screen_7 {
   height: 100vh;
@@ -956,7 +940,7 @@ a.btn.bg-red.text-white.mr-4 {
   font-size: 25px;
   border: 1px solid #f87179;
   font-weight: 300;
-  font-family: 'Inter';
+  font-family: "Inter";
 }
 
 .Screen_7 .form button:focus,
@@ -976,7 +960,6 @@ a.btn.bg-red.text-white.mr-4 {
   border-radius: 19px;
   color: #fff;
 }
-
 
 /* Result */
 
@@ -1123,7 +1106,7 @@ p.fire_content {
   text-align: center;
   font-weight: 700;
   margin: 0;
-  text-align: right
+  text-align: right;
 }
 
 .yes_no p {
@@ -1139,7 +1122,7 @@ p.fire_content {
 }
 
 button.yes_no_btn1 {
-  background: #27AE60;
+  background: #27ae60;
   border-radius: 19px;
   border: none;
   padding: 10px 100px;
@@ -1158,7 +1141,7 @@ button.yes_no_btn1 {
 }
 
 .button_join button {
-  background: #27AE60;
+  background: #27ae60;
   box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
   border-radius: 13px;
   font-weight: 300;
@@ -1181,7 +1164,7 @@ button.yes_no_btn1 {
   border: 1px solid #f87179;
   font-size: 28px;
   font-weight: 300;
-  font-family: 'Inter';
+  font-family: "Inter";
 }
 
 button.yes_no_btn2 {
@@ -1234,7 +1217,7 @@ button.yes_no_btn2 {
   bottom: 0;
   left: 0;
   right: 0;
-  transition: .4s;
+  transition: 0.4s;
   border-radius: 34px;
   margin-top: 13px;
   margin-bottom: -12px;
@@ -1256,16 +1239,13 @@ button.yes_no_btn2 {
   border-radius: 50px;
 }
 
-input:checked+.slider {
+input:checked + .slider {
   background-color: #f87179;
 }
 
-input:checked+.slider ::before {
+input:checked + .slider ::before {
   transform: translateX(50px);
 }
-
-
-
 
 /* LIST TABLE */
 .list-wrapper {
@@ -1281,13 +1261,11 @@ input:checked+.slider ::before {
 }
 
 .edit-table-card {
-
   box-shadow: 0px 0px 16px 6px #0202020a;
   background-color: #fff;
   /* width: 90%;
     margin: 0px auto;
     padding: 30px; */
-
 }
 
 .edit-list-wrapper {
@@ -1305,7 +1283,6 @@ button.btn {
   text-align: end;
   padding-right: 10px;
 }
-
 
 /* Dashboard Section */
 /* @font-face {
@@ -1338,7 +1315,6 @@ body .container {
 
 body .small-container {
   max-width: 1116px;
-
 }
 
 .list-wrappers {
@@ -1411,7 +1387,8 @@ li {
   padding: 12px 25px;
   line-height: 1.2;
   text-transform: uppercase;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
   border: 1px solid #f87179;
   font-weight: 600;
 }
@@ -1419,7 +1396,6 @@ li {
 .undefined.react-stars {
   display: flex;
   gap: 20px;
-
 }
 
 i.fa.fa-star.rate {
@@ -1441,7 +1417,8 @@ i.fa.fa-star.rate {
   padding: 12px 25px;
   font-size: 16px;
   line-height: 1.2;
-  box-shadow: rgb(50 50 93 / 25%) 0px 50px 100px -20px, rgb(0 0 0 / 30%) 0px 30px 60px -30px;
+  box-shadow: rgb(50 50 93 / 25%) 0px 50px 100px -20px,
+    rgb(0 0 0 / 30%) 0px 30px 60px -30px;
 }
 
 .debny-btn {
@@ -1454,7 +1431,8 @@ i.fa.fa-star.rate {
   padding: 12px 25px;
   line-height: 1.2;
   text-transform: uppercase;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
   border: 1px solid #f87179;
   border-radius: 50px;
 }
@@ -1480,8 +1458,8 @@ i.fa.fa-star.rate {
   right: 0;
   bottom: 0;
   background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
 }
 
 .slider:before {
@@ -1492,15 +1470,15 @@ i.fa.fa-star.rate {
   left: 4px;
   bottom: 4px;
   background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
 }
 
-input:focus+.slider {
+input:focus + .slider {
   box-shadow: 0 0 1px #f87179;
 }
 
-input:checked+.slider:before {
+input:checked + .slider:before {
   -webkit-transform: translateX(26px);
   -ms-transform: translateX(26px);
   transform: translateX(26px);
@@ -1539,13 +1517,13 @@ input:checked+.slider:before {
 
 /* On mouse-over, add a grey background color */
 
-.custom-radio:hover input~.checkmark {
+.custom-radio:hover input ~ .checkmark {
   background-color: #ccc;
 }
 
 /* When the radio button is checked, add a blue background */
 
-.custom-radio input:checked~.checkmark {
+.custom-radio input:checked ~ .checkmark {
   background-color: #ec1620;
 }
 
@@ -1559,7 +1537,7 @@ input:checked+.slider:before {
 
 /* Show the indicator (dot/circle) when checked */
 
-.custom-radio input:checked~.checkmark:after {
+.custom-radio input:checked ~ .checkmark:after {
   display: block;
 }
 
@@ -1590,7 +1568,7 @@ input:checked+.slider:before {
   height: 50px;
   line-height: 50px;
   text-align: left;
-  background: #FFFFFF;
+  background: #ffffff;
   overflow: hidden;
   position: relative;
 }
@@ -1612,16 +1590,16 @@ input:checked+.slider:before {
 
 .file-upload.active .file-select {
   border-color: #3fa46a;
-  transition: all .2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
 .file-upload.active .file-select .file-select-button {
   background: #3fa46a;
-  color: #FFFFFF;
-  transition: all .2s ease-in-out;
+  color: #ffffff;
+  transition: all 0.2s ease-in-out;
 }
 
-.file-upload .file-select input[type=file] {
+.file-upload .file-select input[type="file"] {
   z-index: 100;
   cursor: pointer;
   position: absolute;
@@ -1647,7 +1625,7 @@ input:checked+.slider:before {
   line-height: 50px;
   margin-top: 5px;
   text-align: left;
-  background: #FFFFFF;
+  background: #ffffff;
   overflow: hidden;
   position: relative;
 }
@@ -1703,7 +1681,7 @@ input:checked+.slider:before {
 
 .breadcrumb {
   background-color: transparent;
-  padding: .75rem 0rem;
+  padding: 0.75rem 0rem;
 }
 
 ol.breadcrumb li a {
@@ -1736,7 +1714,7 @@ ol.breadcrumb li a {
 .brand-name h3 {
   color: #fff;
   font-family: "Libre Baskerville", serif;
-  margin-bottom: 0px
+  margin-bottom: 0px;
 }
 
 .remove-sidebar-text h3,
@@ -2036,7 +2014,8 @@ ol.breadcrumb li a {
 
 .feature-table tbody tr:hover {
   background-color: #f87179;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px,
+    rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
   position: relative;
 }
 
@@ -2264,7 +2243,7 @@ span.mt-2.company-label {
 }
 
 .company-post-wrapper:before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   border-bottom: 3px solid #ec1620;
@@ -2295,8 +2274,8 @@ span.mt-2.company-label {
   text-align: center;
 }
 
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -2316,7 +2295,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .or:after {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   right: 0;
@@ -2374,7 +2353,6 @@ button.Visit_btn.more_result_btn {
     margin-bottom: 20px;
     border: 1px solid #f87179;
     font-size: 21px;
-
   }
 
   .City {
@@ -2433,7 +2411,6 @@ button.Visit_btn.more_result_btn {
   .undefined.react-stars {
     display: flex;
     gap: 20px;
-
   }
 
   .list-wrappers {
@@ -2530,7 +2507,7 @@ button.Visit_btn.more_result_btn {
   width: 150px;
 }
 
-@media screen and (max-width:996px) {
+@media screen and (max-width: 996px) {
   body h1 {
     font-size: 28px !important;
   }
@@ -2700,7 +2677,7 @@ button.Visit_btn.more_result_btn {
 
   button.yes_no_btn1,
   button.yes_no_btn2 {
-    background: #27AE60;
+    background: #27ae60;
     border-radius: 19px;
     border: none;
     padding: 15px 50px;
@@ -2769,8 +2746,6 @@ button.Visit_btn.more_result_btn {
   .result .result_loader {
     width: 50px;
   }
-
-
 }
 
 .post-form button,
@@ -2781,7 +2756,6 @@ button.Visit_btn.more_result_btn {
 }
 
 @media only screen and (max-device-width: 480px) {
-
   /* styles for mobile browsers smaller than 480px; (iPhone) */
   .Screen_4 .showSpan:focus {
     background-color: rgb(235, 87, 87) !important;
@@ -2808,7 +2782,7 @@ button.Visit_btn.more_result_btn {
     border: 1px solid #f87179;
     margin-bottom: 3rem;
     font-weight: 300;
-    font-family: 'Inter';
+    font-family: "Inter";
 
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -2831,7 +2805,7 @@ button.Visit_btn.more_result_btn {
     border: 1px solid #f87179;
     margin-bottom: 3rem;
     font-weight: 300;
-    font-family: 'Inter';
+    font-family: "Inter";
     color: #ffffff;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -2855,7 +2829,7 @@ button.Visit_btn.more_result_btn {
     border: 1px solid #f87179;
     margin-bottom: 3rem;
     font-weight: 300;
-    font-family: 'Inter';
+    font-family: "Inter";
     appearance: none;
     /* background-image: url(../public/img/Polygon.png); */
     background-repeat: no-repeat;
@@ -2902,15 +2876,9 @@ button.Visit_btn.more_result_btn {
     top: 116%;
     background: transparent;
   }
-
-
-
-
-
-
 }
 
-@media screen and (max-width:480px) {
+@media screen and (max-width: 480px) {
   .Screen_4 {
     height: 100%;
   }
@@ -2932,7 +2900,6 @@ button.Visit_btn.more_result_btn {
     right: 22px;
   }
 }
-
 
 /* Spotify Music CSS */
 .musiclogin_main {
@@ -2961,7 +2928,7 @@ button.Visit_btn.more_result_btn {
   font-weight: 600;
   font-size: 54px;
   line-height: 75px;
-  color: #FFFFFF;
+  color: #ffffff;
   text-align: center;
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   width: 768px;
@@ -2976,12 +2943,12 @@ button.Visit_btn.more_result_btn {
 .applemusic_btn .btn {
   margin-top: 6rem !important;
   background: #000000;
-  border: 3px solid #FF0000;
+  border: 3px solid #ff0000;
   border-radius: 10px;
   text-align: center;
   height: 60px;
   color: #fff;
-  font-family: 'Nunito';
+  font-family: "Nunito";
   font-weight: 400;
   font-size: 28px;
   line-height: 55px;
@@ -2998,12 +2965,12 @@ button.Visit_btn.more_result_btn {
 .spotify_btn .btn {
   margin-top: 1.2rem !important;
   background: #000000;
-  border: 3px solid #00FF19;
+  border: 3px solid #00ff19;
   border-radius: 10px;
   text-align: center;
   height: 60px;
   color: #fff;
-  font-family: 'Nunito';
+  font-family: "Nunito";
   font-weight: 400;
   font-size: 28px;
   line-height: 55px;
@@ -3016,7 +2983,7 @@ img.spotify_logo {
   width: 32px;
 }
 
-@media screen and (max-width:767px) {
+@media screen and (max-width: 767px) {
   .twiinevblack_logo {
     position: absolute;
     top: 6px;
@@ -3070,7 +3037,7 @@ img.spotify_logo {
   font-weight: 600;
   font-size: 54px;
   line-height: 75px;
-  color: #FFFFFF;
+  color: #ffffff;
   text-align: center;
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   max-width: 1024px;
@@ -3089,7 +3056,7 @@ img.spotify_logo {
   text-align: center;
   height: 60px;
   color: #000;
-  font-family: 'Nunito';
+  font-family: "Nunito";
   font-weight: 400;
   font-size: 28px;
   line-height: 55px;
@@ -3110,7 +3077,7 @@ img.spotify_logo {
   text-align: center;
   height: 60px;
   color: #000;
-  font-family: 'Nunito';
+  font-family: "Nunito";
   font-weight: 400;
   font-size: 28px;
   line-height: 55px;
@@ -3120,7 +3087,7 @@ img.spotify_logo {
 }
 
 .Userlocation_main_inner .text {
-  font-family: 'Nunito';
+  font-family: "Nunito";
   font-style: normal;
   font-weight: 700;
   font-size: 28px;
@@ -3128,11 +3095,11 @@ img.spotify_logo {
   display: flex;
   align-items: center;
   text-align: center;
-  color: #FB5E5E;
+  color: #fb5e5e;
   margin-top: 2rem;
 }
 
-@media screen and (max-width:767px) {
+@media screen and (max-width: 767px) {
   .Userlocation_main .Userlocation_main_inner .heading {
     font-size: 30px;
     line-height: 32px;
@@ -3180,10 +3147,6 @@ img.spotify_logo {
 
 /* Userlocation End CSS */
 
-
-
-
-
 /* Musicyoulike CSS */
 
 .Musicyoulike {
@@ -3203,13 +3166,13 @@ img.spotify_logo {
 }
 
 .Musicyoulike .heading {
-  font-family: 'Nunito';
+  font-family: "Nunito";
   font-style: normal;
   font-weight: 700;
   font-size: 48px;
   line-height: 58px;
   max-width: 768px;
-  color: #FFFFFF;
+  color: #ffffff;
   text-align: center;
 }
 
@@ -3220,7 +3183,12 @@ img.spotify_logo {
 }
 
 .Musicyoulike_card_blue {
-  background: linear-gradient(180deg, #4586E8 0.01%, #3970C2 0.02%, #0E1D33 100%);
+  background: linear-gradient(
+    180deg,
+    #4586e8 0.01%,
+    #3970c2 0.02%,
+    #0e1d33 100%
+  );
   border-radius: 8px;
   display: flex;
   flex-direction: column;
@@ -3228,19 +3196,19 @@ img.spotify_logo {
 }
 
 .card_content p {
-  font-family: 'Nunito';
+  font-family: "Nunito";
   font-style: normal;
   font-size: 18px;
   line-height: 34px;
   display: flex;
   align-items: center;
   text-align: center;
-  color: #FFFFFF;
+  color: #ffffff;
   margin-bottom: 0px;
 }
 
 button.Moreinfo.btn {
-  background: #FE3C3C;
+  background: #fe3c3c;
   border-radius: 8px;
   max-width: 300px;
   margin: auto;
@@ -3260,7 +3228,6 @@ button.Moreinfo.btn {
   align-items: center;
   justify-content: center;
   gap: 30px;
-
 }
 
 .share_buttons .btn {
@@ -3269,7 +3236,7 @@ button.Moreinfo.btn {
   max-width: 582px;
   left: 114px;
   top: 858px;
-  background: #00FF19;
+  background: #00ff19;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 25px;
   width: 40%;
@@ -3282,16 +3249,15 @@ button.Moreinfo.btn {
 }
 
 .share_buttons .light_blue {
-  background-color: #AFCCF9;
+  background-color: #afccf9;
 }
 
 .share_buttons .red {
-  background-color: #FE3C3C;
+  background-color: #fe3c3c;
   color: #fff;
 }
 
-
-@media screen and (max-width:767px) {
+@media screen and (max-width: 767px) {
   .Musicyoulike .heading {
     font-size: 30px;
     line-height: 32px;
@@ -3316,7 +3282,8 @@ button.Moreinfo.btn {
     padding-top: 2rem;
   }
 
-  .row.cards.Musicyoulikes .col-12, .Musicyoulike  {
+  .row.cards.Musicyoulikes .col-12,
+  .Musicyoulike {
     margin-bottom: 1.5rem;
   }
 
@@ -3350,7 +3317,7 @@ button.Moreinfo.btn {
 }
 
 .row.results .leftchart {
-  background: #ABC7F3;
+  background: #abc7f3;
   box-shadow: 0px 4px 50px rgba(0, 0, 0, 0.08);
   border-radius: 100%;
   margin-top: 2rem;
@@ -3370,20 +3337,20 @@ button.Moreinfo.btn {
   font-weight: 600;
   font-size: 54px;
   line-height: 75px;
-  color: #FFFFFF;
+  color: #ffffff;
   text-align: center;
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   max-width: 1024px;
 }
 
 .ResultBreakdown .results .right_table {
-  background: linear-gradient(180deg, #AFCCF9 0%, #11213A 100%);
+  background: linear-gradient(180deg, #afccf9 0%, #11213a 100%);
   border-radius: 8px;
   padding: 5px 15px 20px 15px;
 }
 
 .ResultBreakdown .results .right_table p {
-  font-family: 'Nunito';
+  font-family: "Nunito";
   font-weight: 700;
   font-size: 28px;
   line-height: 48px;
@@ -3391,7 +3358,7 @@ button.Moreinfo.btn {
 }
 
 .ResultBreakdown .song_one {
-  background: #CECECE;
+  background: #cecece;
   border: 1px solid #000000;
   border-radius: 8px;
   display: flex;
@@ -3411,7 +3378,7 @@ button.Moreinfo.btn {
 }
 
 .ResultBreakdown .song_one .song_detail p {
-  font-family: 'Nunito';
+  font-family: "Nunito";
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
@@ -3421,7 +3388,7 @@ button.Moreinfo.btn {
 }
 
 .ResultBreakdown .song_no p {
-  font-family: 'Nunito';
+  font-family: "Nunito";
   font-style: normal;
   font-weight: 500;
   font-size: 56px !important;
@@ -3430,12 +3397,12 @@ button.Moreinfo.btn {
 }
 
 button.Go_Back.btn {
-  background: #4485E7;
+  background: #4485e7;
   border-radius: 18px;
   max-width: 400px;
   width: 400px;
   text-align: center;
-  font-family: 'Nunito';
+  font-family: "Nunito";
   font-style: normal;
   font-weight: 700;
   font-size: 22px;
@@ -3443,8 +3410,8 @@ button.Go_Back.btn {
   margin-top: 2rem;
 }
 
-@media screen and (max-width:767px) {
-  .ResultBreakdown{
+@media screen and (max-width: 767px) {
+  .ResultBreakdown {
     height: unset;
   }
   .Userlocation_main .Userlocation_main_inner .heading {
@@ -3467,24 +3434,24 @@ button.Go_Back.btn {
   .ResultBreakdown .heading {
     font-size: 32px;
     margin-top: 4rem;
-}
-.ResultBreakdown .row.results .leftchart {
-  width: 90%;
-  margin: auto;
-  margin-bottom: 2rem;
-}
-.ResultBreakdown .right_table {
-  margin-right: 20px;
-  margin-left: 20px;
-}
-.ResultBreakdown button.Go_Back.btn {
-  max-width: unset;
-  width: 85% !important;
-  font-weight: 700;
-  margin-bottom: 2rem;
-  margin-left: 20px;
-  margin-right: 20px;
-}
+  }
+  .ResultBreakdown .row.results .leftchart {
+    width: 90%;
+    margin: auto;
+    margin-bottom: 2rem;
+  }
+  .ResultBreakdown .right_table {
+    margin-right: 20px;
+    margin-left: 20px;
+  }
+  .ResultBreakdown button.Go_Back.btn {
+    max-width: unset;
+    width: 85% !important;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
 }
 
 /* Results End CSS */
@@ -3501,7 +3468,7 @@ button.Go_Back.btn {
   padding: 4rem 0 1rem;
 }
 .Instagramstory .chart {
-  background: #ABC7F3;
+  background: #abc7f3;
   box-shadow: 0px 4px 50px rgba(0, 0, 0, 0.08);
   border-radius: 100%;
   margin-top: 2rem;
@@ -3512,30 +3479,35 @@ button.Go_Back.btn {
   padding-left: 20px;
 }
 .Instagramstory .heading {
-  font-family: 'Nunito';
+  font-family: "Nunito";
   font-style: normal;
   font-weight: 700;
   font-size: 48px;
   line-height: 58px;
   max-width: 768px;
-  color: #FFFFFF;
+  color: #ffffff;
   text-align: center;
 }
 
 .Instagramstory .content {
-  font-family: 'Nunito';
+  font-family: "Nunito";
   font-style: normal;
   font-weight: 700;
   font-size: 36px;
   max-width: 600px;
   line-height: 48px;
   text-align: center;
-  color: #FFFFFF;
+  color: #ffffff;
   margin-top: 1rem;
 }
 
 .Instagramstory_card_blue {
-  background: linear-gradient(180deg, #4586E8 0.01%, #3970C2 0.02%, #0E1D33 100%);
+  background: linear-gradient(
+    180deg,
+    #4586e8 0.01%,
+    #3970c2 0.02%,
+    #0e1d33 100%
+  );
   border-radius: 8px;
   display: flex;
   flex-direction: column;
@@ -3543,14 +3515,14 @@ button.Go_Back.btn {
 }
 
 .card_content p {
-  font-family: 'Nunito';
+  font-family: "Nunito";
   font-style: normal;
   font-size: 18px;
   line-height: 34px;
   display: flex;
   align-items: center;
   text-align: center;
-  color: #FFFFFF;
+  color: #ffffff;
   margin-bottom: 0px;
 }
 
@@ -3562,13 +3534,13 @@ button.Go_Back.btn {
 }
 
 button.poweredby_btn.btn {
-  font-family: 'Nunito';
+  font-family: "Nunito";
   font-style: normal;
   font-weight: 700;
   font-size: 18px;
   line-height: 27px;
   color: #000000;
-  background: #AFCCF9;
+  background: #afccf9;
   border-radius: 8px;
   margin-top: 1rem;
   position: absolute;
@@ -3588,8 +3560,7 @@ button.poweredby_btn.btn img {
   margin-left: 1.5rem;
 }
 
-
-@media screen and (max-width:767px) {
+@media screen and (max-width: 767px) {
   .Instagramstory {
     padding: 2rem 0 1rem;
   }
@@ -3645,7 +3616,28 @@ button.poweredby_btn.btn img {
     padding-left: 0px;
     margin-left: 20px;
     margin-right: 20px;
-}
+  }
 }
 
+.Musicyoulike_card_blue img {
+  max-height: 234px !important;
+  object-fit: cover !important;
+}
+.Instagramstory_card_blue img{
+
+  max-height: 234px !important;
+  object-fit: cover !important;
+}
+.fa-download:before {
+  content: "\f019";
+  color: white;
+  font-size: 30px;
+}
 /* Instagramstory End CSS */
+.download-button {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  margin-right: 60px;
+  cursor: pointer;
+}

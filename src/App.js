@@ -23,6 +23,9 @@ import ResultBreakdown from "./components/spotify/ResultBreakdown";
 import Instagramstory from "./components/spotify/Instagramstory";
 import Login from "./components/Login";
 function App() {
+  const [rest , setRest] = useState([])
+  const [genernames, setGenernames] = useState([]);
+  const [genervalues, setGenervalues] = useState([]);
   return (
     <>
       <Router>
@@ -42,9 +45,9 @@ function App() {
 
           <Route path="/Musiclogin" element={<Musiclogin/>} />
           <Route path="/userlocation" element={<Userlocation/>} />
-          <Route path="/musicyoulike" element={<Musicyoulike/>} />
-          <Route path="/Resultbreakdown" element={<ResultBreakdown/>} />
-          <Route path="/instagramstory" element={<Instagramstory/>} />
+          <Route path="/musicyoulike" element={<Musicyoulike rest={rest} setRest={setRest}/>} />
+          <Route path="/Resultbreakdown" element={<ResultBreakdown genernames={genernames} genervalues={genervalues} setGenernames={setGenernames} setGenervalues={setGenervalues}/>} />
+          <Route path="/instagramstory" element={<Instagramstory genernames={genernames} genervalues={genervalues} rest={rest} setRest={setRest} />} />
         </Routes>
       </Router>
     </>
