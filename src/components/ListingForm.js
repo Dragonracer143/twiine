@@ -53,8 +53,9 @@ const ListingForm = () => {
     image2: '',
     image3: '',
     image4: '',
-    location:'',
     genres:'',
+    lattitude:'',
+    longitude:'',
   })
 
   const [updateDataObject, setUpdateDataObject] = useState({
@@ -76,10 +77,11 @@ const ListingForm = () => {
     image2: '',
     image3: '',
     image4: '',
-    location:'',
     genres:'',
-  })
+    lattitude:'',
+    longitude:'',
 
+  })
   const [updateMode, setUpdateMode] = useState(false)
 
 
@@ -102,9 +104,9 @@ const ListingForm = () => {
 
   const handleSubmit = () => {
     let data = dataObject
-    for (let i = 0; i <= 3; i++) {
-      data['vibe' + i] = selected[i].value
-    }
+    // for (let i = 0; i <= 3; i++) {
+    //   data['vibe' + i] = selected[i].value
+    // }
     // console.log(data)
     createRecordApi(data)
       .then(function (response) {
@@ -194,11 +196,11 @@ const ListingForm = () => {
 
   const updateDetail = () => {
     let data = updateDataObject
-    if (updateSelected.length) {
-      for (let i = 0; i <= 3; i++) {
-        data['vibe' + i] = updateSelected[i].value
+      if (updateSelected.length) {
+        for (let i = 0; i <= 3; i++) {
+          data['vibe' + i] = updateSelected[i].value
+        }
       }
-    }
     let ac_token = localStorage.getItem('access_token')
     updateDetailApi(updateDataObject._id, ac_token, updateDataObject)
       .then(function (response) {
@@ -461,19 +463,38 @@ const ListingForm = () => {
               />
             </div>
             <div className="mb-3">
-              <label htmlFor="text">Location</label>
+              <label htmlFor="text">Lattitude</label>
               <input
                 type="text"
                 className="form-control"
                 id="text"
-                placeholder="New York"
-                name="location"
-                value={updateMode ? updateDataObject.location && updateDataObject.location : dataObject.location && dataObject.location}
+                placeholder="31.1254"
+                name="Lattitude"
+                value={updateMode ? updateDataObject.lattitude && updateDataObject.lattitude : dataObject.lattitude && dataObject.lattitude}
                 onChange={(e) => {
                   if (updateMode) {
-                    changeUpdateInputField('location', e.target.value)
+                    changeUpdateInputField('lattitude', e.target.value)
                   } else {
-                    changeInputField('location', e.target.value)
+                    changeInputField('lattitude', e.target.value)
+                  }
+                }}
+                
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="text">Longitude</label>
+              <input
+                type="text"
+                className="form-control"
+                id="text"
+                placeholder="-70.1254"
+                name="Longitude"
+                value={updateMode ? updateDataObject.longitude && updateDataObject.longitude : dataObject.longitude && dataObject.longitude}
+                onChange={(e) => {
+                  if (updateMode) {
+                    changeUpdateInputField('longitude', e.target.value)
+                  } else {
+                    changeInputField('longitude', e.target.value)
                   }
                 }}
                 

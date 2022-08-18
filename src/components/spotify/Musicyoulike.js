@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getAllDetailsApi } from '../../Shared/Services';
+
 const Musicyoulike = (props) => {
     const navigate = useNavigate()
       
@@ -19,9 +20,11 @@ const Musicyoulike = (props) => {
               console.log(e);
             });
       }, []);
-      const getStories = () =>{
+      const getStories = () =>{ 
         navigate("/instagramstory")
       }
+      
+      
   return (
   <>
 
