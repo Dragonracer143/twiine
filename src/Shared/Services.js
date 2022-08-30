@@ -4,6 +4,7 @@ const baseUrl = 'http://localhost:8000/'
 // const baseUrl = 'http://192.168.1.37:8000/'
 
 
+
 export const Addplaces = (dataObject) => {
   var data = JSON.stringify(dataObject);
   var config = {
