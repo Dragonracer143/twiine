@@ -9,13 +9,6 @@ function DashHeader(props) {
                 <a className="d-inline-block text-white" href="#" onClick={props.togglefn}>
                      <i className="fa fa-bars" aria-hidden="true"></i>
                 </a>
-                  {/* <a className="mobile-menu-icon " href="#">
-                    <img
-                      src="images/toggle.png"
-                      className="img-fluid"
-                      width="20px"
-                    />
-                  </a> */}
                 </div>
                 <div id="navbar-custom">
                   <ul className="d-flex justify-content-center align-items-center mb-0">

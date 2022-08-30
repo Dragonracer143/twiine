@@ -1,24 +1,16 @@
 import React, { useState } from "react";
-import DashHeader from "./DashHeader";
-import Listtable from "./Listtable";
-import logo from "../logo.png";
-import restaurant from "../restaurant.png";
-import ListingForm from './ListingForm';
-
-
-
+import logo from "../../logo.png";
+import restaurant from "../../restaurant.png";
+import ListingForm from "../admin/ListingForm";
 
 function EditComponent() {
-  
   const [open, setopen] = useState();
-  const [token, setToken] = useState(0)
+  const [token, setToken] = useState(0);
   function openSidebar() {
     setopen((prevState) => !prevState);
   }
 
-  React.useEffect(()=>{
-   
-  })
+  React.useEffect(() => {});
   return (
     <>
       <div className="main-body">
@@ -49,15 +41,12 @@ function EditComponent() {
         >
           {/* <DashHeader togglefn={openSidebar} /> */}
           <div className="edit-list-wrapper">
-          <div className="listing-table">
-        <div className="edit-table-card">
-          <div className="table-head pb-4 d-flex justify-content-end">
-           
-          </div>
-          <ListingForm />
-          
-        </div>
-      </div>
+            <div className="listing-table">
+              <div className="edit-table-card">
+                <div className="table-head pb-4 d-flex justify-content-end"></div>
+                <ListingForm />
+              </div>
+            </div>
           </div>
         </div>
       </div>

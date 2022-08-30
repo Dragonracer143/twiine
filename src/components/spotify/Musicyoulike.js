@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getAllDetailsApi } from '../../Shared/Services';
+import { getAllDetailsApi } from '../../Services/Services';
 
 const Musicyoulike = (props) => {
     const navigate = useNavigate()

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import data from './Place.json'
-import { Addplaces } from '../Shared/Services'
-import Maindashboard from './Maindashboard'
+import data from '../../Json/Place.json'
+import { Addplaces } from '../../Services/Services'
+import Maindashboard from '../admin/Maindashboard'
 import { useNavigate } from 'react-router-dom'
 const Placemanage = () => {
   const [val, setVal] = useState([0])

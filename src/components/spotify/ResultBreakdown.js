@@ -6,10 +6,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-
 const ResultBreakdown = (props) => {
-
-
   const [playlist, setPlaylist] = useState();
   let token = localStorage.getItem("token");
 
@@ -34,7 +31,6 @@ const ResultBreakdown = (props) => {
         borderColor: "#000",
         borderWidth: 1,
         display: true,
-        
       },
     ],
   };
@@ -62,44 +58,29 @@ const ResultBreakdown = (props) => {
         },
       }
     );
-console.log("data ::", data)
     let vall = [];
     data.items.map((first) => {
-      // console.log("first :", first.genres)
-      first.genres.forEach((valdata) =>{ 
-        // console.log("valdata", valdata)
-        vall.push(valdata)});
+      first.genres.forEach((valdata) => {
+        vall.push(valdata);
+      });
     });
-console.log("val", vall)
 
     let newarray = [];
     vall.forEach(function (x) {
-      // console.log("x value", x)
       newarray[x] = (newarray[x] || 0) + 1;
-    //  console.log("neewarray xx ", newarray[x])
-    //  console.log("neewarray xx || 0 ", newarray[x] || 0)
-     console.log("neewarray xx || 0 + 1 ", ( newarray[x] || 0)+1)
-
     });
- console.log("newarray", newarray)
     let genereArray = Object.entries(newarray);
-    
-       console.log("genrearray :", genereArray)
     function compareSecondColumn(a, b) {
       if (a[1] === b[1]) {
- 
-
         return 0;
       } else {
         return b[1] < a[1] ? -1 : 1;
       }
     }
     genereArray.sort(compareSecondColumn);
-    let genername = []; 
-
+    let genername = [];
 
     for (let i = 0; i < genereArray.length; i++) {
-
       const element = genereArray[i][0];
       genername.push(element);
     }

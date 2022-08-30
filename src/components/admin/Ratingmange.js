@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from "react";
-import data from "./Place.json";
-import { Addplaces } from "../Shared/Services";
-import Maindashboard from "./Maindashboard";
+import data from '../../Json/Place.json'
+import Maindashboard from "../admin/Maindashboard";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import { Filter } from "@mui/icons-material";
+import { baseUrl } from "../../Services/Config";
 const Ratingmanage = () => {
   const [startData, setStarData] = useState([]);
-  const baseUrl = "http://localhost:8000/";
-  // const baseUrl = "https://agile-plateau-96207.herokuapp.com/";
+
   const getALlratingdata = async () => {
     const getstarvar = await axios.get(baseUrl + "getstar").then(data);
     setStarData(getstarvar.data).catch((error) => console.log(error));

@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Chart from "chart.js/auto";
 import { Doughnut } from "react-chartjs-2";
-import { spacing } from "@mui/system";
 import { useCallback } from "react";
 import { toPng } from "html-to-image";
 import axios from "axios";

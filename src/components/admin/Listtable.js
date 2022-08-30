@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import ListingForm from "./ListingForm";
+import ListingForm from "../admin/ListingForm";
 import { confirm } from "react-confirm-box";
-import { getAllDetailsApi } from "../Shared/Services";
-import loader from "./../img/loader.webp";
+import { getAllDetailsApi } from "../../Services/Services";
+import loader from "../../img/loader.webp";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
+import { baseUrl } from "../../Services/Config";
 const Listtable = () => {
   let navigate = useNavigate();
   const [formSwitch, setformSwitch] = useState(true);
@@ -34,7 +35,6 @@ const Listtable = () => {
     } else {
       getAllDetailsApi(ac_token)
         .then((res) => {
-          // console.log(res.data)
           let dupdata = [...res.data];
           setDataToShow(dupdata);
           setLoaderState(false);
@@ -45,13 +45,11 @@ const Listtable = () => {
         });
     }
   }, []);
-  // const baseUrl = "http://localhost:8000/";
-  const baseUrl = 'https://agile-plateau-96207.herokuapp.com/'
 
   console.log("data to show", selectedFile);
 
   useEffect(() => {
-    handleFileSelect()
+    handleFileSelect();
   }, [selectedFile]);
 
   const handleFileSelect = async (event) => {
@@ -60,8 +58,8 @@ const Listtable = () => {
     try {
       const response = await axios.post(baseUrl + "UploadFile", formdata);
       window.location.reload(true);
-      getAllDetailsApi()
-        } catch (error) {
+      getAllDetailsApi();
+    } catch (error) {
       console.log(error);
     }
   };

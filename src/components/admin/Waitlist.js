@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-import { Navigate } from "react-router-dom";
-import { Addwaitlist } from "../Shared/Services";
-import { useNavigate } from "react-router-dom";
+import { Addwaitlist } from "../../Services/Services";
 
 const Waitlist = (props) => {
   const [waitlistobject, setWaitlistObject] = useState({
@@ -10,15 +8,13 @@ const Waitlist = (props) => {
     email: "",
   });
 
-  let navigate = useNavigate();
-
   const Waitlistmange = (e) => {
     e.preventDefault();
-    let payload ={
+    let payload = {
       firstname: waitlistobject.firstname,
       lastname: waitlistobject.lastname,
       email: waitlistobject.email,
-    }
+    };
     Addwaitlist(payload)
       .then(function (response) {
         alert("join waitlist");
@@ -65,23 +61,21 @@ const Waitlist = (props) => {
               className=" waitlist-form"
               placeholder="First Name"
               onChange={(e) => {
-                debugger  
+                debugger;
                 if (/[a-z]$/.test(e.target.value)) {
-                  setWaitlistObject((waitlistobject)=>{
-                    return{
+                  setWaitlistObject((waitlistobject) => {
+                    return {
                       ...waitlistobject,
-                      firstname:e.target.value
-               
-                    }
-               
-                  })
-                }else if (e.target.value == ""){
-                  setWaitlistObject((waitlistobject)=>{
-                    return{
+                      firstname: e.target.value,
+                    };
+                  });
+                } else if (e.target.value == "") {
+                  setWaitlistObject((waitlistobject) => {
+                    return {
                       ...waitlistobject,
-                      firstname:e.target.value
-                    }
-                  })
+                      firstname: e.target.value,
+                    };
+                  });
                 }
               }}
               required
@@ -94,19 +88,19 @@ const Waitlist = (props) => {
               placeholder="Last Name"
               onChange={(e) => {
                 if (/[a-z]$/.test(e.target.value)) {
-                  setWaitlistObject((waitlistobject)=>{
-                    return{
+                  setWaitlistObject((waitlistobject) => {
+                    return {
                       ...waitlistobject,
-                      lastname:e.target.value
-                    }
-                  })
-                }else if (e.target.value == ""){
-                  setWaitlistObject((waitlistobject)=>{
-                    return{
+                      lastname: e.target.value,
+                    };
+                  });
+                } else if (e.target.value == "") {
+                  setWaitlistObject((waitlistobject) => {
+                    return {
                       ...waitlistobject,
-                      lastname:e.target.value
-                    }
-                  })
+                      lastname: e.target.value,
+                    };
+                  });
                 }
               }}
               required
@@ -117,12 +111,14 @@ const Waitlist = (props) => {
               value={waitlistobject.email}
               className=" waitlist-form"
               placeholder="Email Address"
-              onChange={(e) => setWaitlistObject((waitlistobject)=>{
-                return{
-                  ...waitlistobject,
-                  email:e.target.value
-                }
-              })}
+              onChange={(e) =>
+                setWaitlistObject((waitlistobject) => {
+                  return {
+                    ...waitlistobject,
+                    email: e.target.value,
+                  };
+                })
+              }
               required
             ></input>
             <div className="button_join">

@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 const Userlocation = () => {
   const geolocation = useGeolocation();
-  const [locate , setLocate] = useState("");
   const lattitudeValue =geolocation.latitude
   const langitudeValue =geolocation.longitude
 
@@ -12,13 +11,12 @@ const Userlocation = () => {
   const getLocation = () =>{ 
     let path = `/musicyoulike`;
     const data =  axios.get(`http://localhost:8000/filterResturants?lat=${lattitudeValue}&long=${langitudeValue}`)
-    console.log("dnd", data)
     navigate(path);
   }
   const logout = () => {
     // setToken("");
     window.localStorage.removeItem("token");
-    let path = `/Musiclogin`; 
+    let path = `/`; 
     navigate(path);
   };
   

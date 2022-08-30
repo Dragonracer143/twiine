@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from "react";
-import ListingForm from "./ListingForm";
-import loader from "./../img/loader.webp";
-import Maindashboard from "./Maindashboard";
+import ListingForm from "../admin/Maindashboard";
+import loader from "../../img/loader.webp";
+import Maindashboard from "../admin/Maindashboard";
 import axios from "axios";
+import { baseUrl } from "../../Services/Config";
 const Waitinglisttable = () => {
   const [formSwitch, setformSwitch] = useState(true);
   const [loaderState, setLoaderState] = useState(true);
   const [waitlistdata, setWaitlistdata] = useState();
 
-  const baseUrl = 'https://agile-plateau-96207.herokuapp.com/'
-
-  // const baseUrl = "http://localhost:8000/";
 
   useEffect(() => {
     getData();
@@ -18,9 +16,7 @@ const Waitinglisttable = () => {
 
   const getData = () => {
     axios.get(baseUrl + "getwaitlist").then((response) => {
-      console.log("data", response.data);
       setWaitlistdata(response.data);
-      console.log("state:", response.data);
       setLoaderState(false);
     });
   };

@@ -1,6 +1,13 @@
 import React from "react";
 import { useEffect, useState } from "react";
- import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import {
+  scopes,
+  CLIENT_ID,
+  REDIRECT_URI,
+  AUTH_ENDPOINT,
+  RESPONSE_TYPE,
+} from "../../Services/Config";
 const Musiclogin = () => {
   const [token, setToken] = useState("");
   const navigate = useNavigate();
@@ -17,37 +24,11 @@ const Musiclogin = () => {
       window.location.hash = "";
       localStorage.setItem("token", token);
     }
-    if(token){
-      navigate("/userlocation")
+    if (token) {
+      navigate("/userlocation");
     }
     setToken(token);
   }, []);
-
-  const logout = () => {
-    setToken("");
-    window.localStorage.removeItem("token");
-  };
-
-  const scopes = [
-    "user-read-private",
-    "user-read-email",
-    "user-follow-modify",
-    "user-library-read",
-    "user-top-read",
-    "user-library-modify",
-    "user-follow-read",
-    "user-read-playback-position",
-    "user-read-playback-state",
-    "user-read-recently-played",
-    "user-modify-playback-state",
-    "user-read-currently-playing",
-  ];
-
-  const CLIENT_ID = "f01e78664fc6407e815de229d1616785";
-  const REDIRECT_URI = "http://localhost:3000/Musiclogin";
-  const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
-  const RESPONSE_TYPE = "token";
-
 
   return (
     <>
