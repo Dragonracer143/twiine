@@ -1,168 +1,154 @@
 import axios from "axios";
 import { baseUrl } from "./Config";
 
-
-
 export const Addplaces = (dataObject) => {
   var data = JSON.stringify(dataObject);
   var config = {
-    method: 'post',
-    url: baseUrl + 'createPlacename',
+    method: "post",
+    url: baseUrl + "createPlacename",
     headers: {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json",
     },
-    data: data
+    data: data,
   };
-  return axios(config)
-}
- export const Addwaitlist = (dataObject) =>{
+  return axios(config);
+};
+export const Addwaitlist = (dataObject) => {
   var data = JSON.stringify(dataObject);
   var config = {
-    method: 'post',
-    url: baseUrl + 'joinwaitlist',
+    method: "post",
+    url: baseUrl + "joinwaitlist",
     headers: {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json",
     },
-    data: data
+    data: data,
   };
-  return axios(config)
+  return axios(config);
+};
 
- }
 export const AddRating = (dataObject) => {
   var data = JSON.stringify(dataObject);
 
   var config = {
-    method: 'post',
-    url: baseUrl + 'rating-add',
+    method: "post",
+    url: baseUrl + "rating-add",
     headers: {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json",
     },
-    data: data
+    data: data,
   };
 
-  return axios(config)
-
-
-}
+  return axios(config);
+};
 export const createRecordApi = (dataObject) => {
-
   var data = JSON.stringify({
-    "data": dataObject
+    data: dataObject,
   });
   var config = {
-    method: 'post',
-    url: baseUrl + 'create',
+    method: "post",
+    url: baseUrl + "create",
     headers: {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json",
     },
-    data: data
+    data: data,
   };
 
-  return axios(config)
+  return axios(config);
+};
 
-
-}
-
-export const getAllDetailsApi = (token) => {
-
+export const getAllDetailsApi = () => {
   var config = {
-    method: 'post',
-    url: baseUrl + 'getAlldetails',
+    method: "post",
+    url: baseUrl + "getAlldetails",
     headers: {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json",
     },
   };
-  return axios(config)
-}
+  return axios(config);
+};
 
 export const customFilterDataApi = (objectForFilter) => {
   // console.log(objectForFilter.city.name)
-  var axios = require('axios');
+  var axios = require("axios");
   var config = {
-    method: 'get',
-    url: baseUrl + `customFilterData?cityName=${objectForFilter.city}&hungry=${objectForFilter.hungry}&vibe1=${objectForFilter.vibe1}&vibe2=${objectForFilter.vibe2}`,
+    method: "get",
+    url:
+      baseUrl +
+      `customFilterData?cityName=${objectForFilter.city}&hungry=${objectForFilter.hungry}&vibe1=${objectForFilter.vibe1}&vibe2=${objectForFilter.vibe2}`,
     //   url: baseUrl+`customFilterData?cityName=Los Angeles&hungry=yes&vibe1=Fun&vibe2=Energetic&foodtype=Fusion&budget=30&activity=Nightlife`,
-    headers: {}
+    headers: {},
   };
 
-  return axios(config)
-
-
-}
+  return axios(config);
+};
 
 export const increasePopularityApi = (id, setcount) => {
   var data = JSON.stringify({
-    "id": id,
-    "setcount": setcount
-
+    id: id,
+    setcount: setcount,
   });
 
   var config = {
-    method: 'post',
-    url: baseUrl + 'increasePopularity',
+    method: "post",
+    url: baseUrl + "increasePopularity",
     headers: {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json",
     },
-    data: data
+    data: data,
   };
 
-  return axios(config)
-
-}
+  return axios(config);
+};
 
 export const adminLoginApi = (userObject) => {
   var data = JSON.stringify(userObject);
 
   var config = {
-    method: 'post',
-    url: baseUrl + 'adminlogin',
+    method: "post",
+    url: baseUrl + "adminlogin",
     headers: {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json",
     },
-    data: data
+    data: data,
   };
 
-  return axios(config)
-
-}
+  return axios(config);
+};
 
 export const notInterstedApi = (id) => {
   var data = JSON.stringify({
-    "id": id
+    id: id,
   });
 
   var config = {
-    method: 'post',
-    url: baseUrl + 'notIntersted',
+    method: "post",
+    url: baseUrl + "notIntersted",
     headers: {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json",
     },
-    data: data
+    data: data,
   };
 
-  return axios(config)
-
-}
+  return axios(config);
+};
 
 export const getDetailByIdApi = (id, ac_token) => {
   var data = JSON.stringify({
-    "id": id,
-    "ac_token": ac_token
+    id: id,
+    ac_token: ac_token,
   });
 
   var config = {
-    method: 'post',
-    url: baseUrl + 'getdetail',
+    method: "post",
+    url: baseUrl + "getdetail",
     headers: {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json",
     },
-    data: data
+    data: data,
   };
 
-  return axios(config)
-
-
-}
+  return axios(config);
+};
 // export const getPlacenames = (id, ac_token) => {
 //   var data = JSON.stringify({
 //     "id": id,
@@ -180,26 +166,23 @@ export const getDetailByIdApi = (id, ac_token) => {
 
 //   return axios(config)
 
-
 // }
 
-export const updateDetailApi = (id,ac_token,dataObject) => {
+export const updateDetailApi = (id, ac_token, dataObject) => {
   var data = JSON.stringify({
-    "id": id,
-    "data": dataObject,
-    "ac_token": ac_token
+    id: id,
+    data: dataObject,
+    ac_token: ac_token,
   });
 
   var config = {
-    method: 'post',
-    url: baseUrl+'updateDetails',
+    method: "post",
+    url: baseUrl + "updateDetails",
     headers: {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json",
     },
-    data: data
+    data: data,
   };
 
-  return axios(config)
-    
-}
-
+  return axios(config);
+};

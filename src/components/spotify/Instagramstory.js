@@ -1,8 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { Doughnut } from "react-chartjs-2";
+import { Pie } from 'react-chartjs-2';
 import { useCallback } from "react";
 import { toPng } from "html-to-image";
 import axios from "axios";
+import { ArcElement } from "chart.js";
+
+import "../../../src/App.css"
+import { Chart as ChartJS,  Tooltip, Legend } from 'chart.js';
+
+ChartJS.register(ArcElement, Tooltip, Legend);
+
 const Instagramstory = (props) => {
   const [genernames, setGenernames] = useState([]);
   const [genervalues, setGenervalues] = useState([]);
@@ -26,40 +33,38 @@ const Instagramstory = (props) => {
       });
   }, [refs]);
   const data = {
-    labels: genernames.slice(0, 6),
-    indexLabel: genernames.slice(0, 6),
+    labels: props?.genernames.slice(0, 5),
+    indexLabel: props?.genernames.slice(0, 5),
+    indexLabelPlacement: "inside",
     datasets: [
       {
-        data: genervalues.slice(0, 6),
+        data: props?.genervalues.slice(0, 5),
         backgroundColor: [
-          "rgb(201, 134, 73)",
-          "rgb(70, 136, 236)",
-          "rgb(255, 154, 98)",
-          "rgb(217, 155, 255)",
-          "rgb(228, 169, 81)",
+          "#AC6E5F",
+          "#978287",
+          "#030200",
+          "#322421",
+          "#D4BCB0",
         ],
         hoverOffset: 8,
-        spacing: 20,
-        borderRadius: 18,
         borderColor: "#000",
-        borderWidth: 1,
+        display: true,
+        
       },
     ],
-
   };
 
   const options = {
     plugins: {
-      datalabels: {
-        formatter: function (value, context) {
-          return context?.chart?.data?.labels[context.dataIndex];
-        },
-      },
       legend: {
         display: false,
       },
     },
+    
   };
+  const [playlist, setPlaylist] = useState();
+
+
   useEffect(() => {
     getGenerslist();
   }, []);
@@ -93,7 +98,7 @@ const Instagramstory = (props) => {
     genereArray.sort(compareSecondColumn);
     let genername = [];
     for (let i = 0; i < genereArray.length; i++) {
-        console.log("d",i)
+      console.log("d", i);
       const element = genereArray[i][0];
       genername.push(element);
     }
@@ -106,9 +111,25 @@ const Instagramstory = (props) => {
     setGenernames(genername);
     setGenervalues(genervalue);
   };
+  useEffect(() => {
+    onGetdata();
+  }, []);
+  const onGetdata = async (e) => {
+    const { data } = await axios.get(
+      "https://api.spotify.com/v1/me/top/tracks?offset=0&limit=5",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    setPlaylist(data.items);
+  };
   return (
     <>
       <div className="Instagramstory" id="id">
+        <img className="twiinevblack_logo" src="./img/twiineblack.png" />
+
         <div className="download-button">
           <i
             onClick={onButtonClick}
@@ -118,18 +139,48 @@ const Instagramstory = (props) => {
         </div>
 
         <div className="heading">
-          My <span style={{ color: "#FE3C3C" }}>music</span> Breakdown:
+          Check Out my current{" "}
+          <span style={{ color: "#FE3C3C", position: "relative" }}>
+            music rotation!
+            <img className="img-insta" src="./img/Vector.png"></img>
+          </span>
         </div>
 
-        <div className="chart">
-          <Doughnut data={data} options={options} />
+        <div className="row results">
+          <div className="col-12 col-md-6">
+            <div className="right_table">
+              <p>Your top 5 songs right now</p>
+              {playlist?.map((ele, key) => (
+                <div key={key} className="song_one mt-2">
+                  <div className="song_no">
+                    <p>{key + 1}.</p>
+                  </div>
+                  <div className="song_detail">
+                    <p className="song-name">{ele?.name}</p>
+                    <p className="artist">{ele?.artists[0]?.name}</p>
+                  </div>
+                  <img className="song_img" src={ele?.album?.images[1]?.url} />
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="col-12 col-md-6">
+            <div className="map">
+              <div className="leftchart">
+              <Pie data={data}  options={options} ></Pie>
+              </div>
+            </div>
+          </div>
         </div>
         <div className="content">
-          Based on my <span style={{ color: "#FE3C3C" }}>music taste</span>,
-          twiine recommended me to visit:
+          Twine helped me decide where to eat based on <span style={{ color: "#FE3C3C", position:"relative" }}>my music taste
+          
+      <img className="Location_Vector_logo" src="./img/Vector.png" />
+          
+          </span>,
         </div>
 
-        <div className="row cards mt-4 mb-5">
+        {/* <div className="row cards mt-4 mb-5">
           {props?.rest?.slice(0, 3).map((ele) => (
             <div className="col-12 col-md-6 mt-5">
               <div className="Instagramstory_card_blue">
@@ -145,41 +196,24 @@ const Instagramstory = (props) => {
               </div>
             </div>
           ))}
-          {/* <div className="col-12 col-md-6">
-            <div className="Instagramstory_card_blue">
-              <img className="img" src="./img/dummy_card.png" />
+        
+        </div> */}
+          <div className="row cards insta">
+        {props.rest?.slice(0, 3).map((ele, key) => (
+          <div className="col-12 col-md-4" key={key}>
+            <div className="Musicyoulike_card_blue">
+              <img className="img" src={ele?.image1} />
               <div className="card_content">
-                <p style={{ paddingTop: "1rem" }}>The American Bar $$</p>
-                <p>Distance: 13.2 mi</p>
-                <p>Location: Los Angeles, CA</p>
-                <p>
-                  Vibes: <span>Country </span>
-                  <span>Blues</span>
+                <p style={{ paddingTop: "1rem" }} className="businnes">{ele?.businessName} <span>{ele?.price}</span></p>
+                <p className="vives">
+                  Vibes :&nbsp; <span className="gener-name">Jazz</span> &nbsp;
+                  <span className="gener-name"     >Popp</span>
                 </p>
               </div>
             </div>
           </div>
-          <div className="col-12 col-md-6 mt-4">
-            <div className="Instagramstory_card_blue">
-              <img className="img" src="./img/dummy_card.png" />
-              <div className="card_content">
-                <p style={{ paddingTop: "1rem" }}>The American Bar $$</p>
-                <p>Distance: 13.2 mi</p>
-                <p>Location: Los Angeles, CA</p>
-                <p>
-                  Vibes: <span>Country </span>
-                  <span>Blues</span>
-                </p>
-              </div>
-            </div>
-          </div> */}
-        </div>
+        ))} </div>
 
-        <div className="powerby_btn">
-          <button className="poweredby_btn btn" type="button">
-            Powered by: <img src="./img/twiineblack.png" />
-          </button>
-        </div>
       </div>
     </>
   );

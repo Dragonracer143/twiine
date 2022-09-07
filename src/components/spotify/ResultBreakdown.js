@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
-import { Doughnut } from "react-chartjs-2";
-import { spacing } from "@mui/system";
-import Chart from "chart.js/auto";
+import { Pie } from 'react-chartjs-2';
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { ArcElement } from "chart.js";
+import { Chart as ChartJS,  Tooltip, Legend } from 'chart.js';
 
+ChartJS.register(ArcElement, Tooltip, Legend);
 const ResultBreakdown = (props) => {
   const [playlist, setPlaylist] = useState();
   let token = localStorage.getItem("token");
@@ -13,34 +14,37 @@ const ResultBreakdown = (props) => {
   let navigate = useNavigate();
 
   const data = {
-    labels: props?.genernames.slice(0, 6),
-    indexLabel: props?.genernames.slice(0, 6),
+    labels: props?.genernames.slice(0, 5),
+    indexLabel: props?.genernames.slice(0, 5),
+    indexLabelPlacement: "inside",
     datasets: [
       {
-        data: props?.genervalues.slice(0, 6),
+        data: props?.genervalues.slice(0, 5),
         backgroundColor: [
-          "rgb(201, 134, 73)",
-          "rgb(70, 136, 236)",
-          "rgb(255, 154, 98)",
-          "rgb(217, 155, 255)",
-          "rgb(228, 169, 81)",
+          "#AC6E5F",
+          "#978287",
+          "#030200",
+          "#322421",
+          "#D4BCB0",
         ],
         hoverOffset: 8,
-        spacing: 18,
-        borderRadius: 18,
         borderColor: "#000",
-        borderWidth: 1,
         display: true,
+        
       },
     ],
   };
+
   const options = {
     plugins: {
       legend: {
         display: false,
       },
     },
+    
   };
+
+
   const config = {
     type: "doughnut",
     data: data,
@@ -117,37 +121,51 @@ const ResultBreakdown = (props) => {
     <>
       <div className="ResultBreakdown" id="id">
         <img className="twiinevblack_logo" src="./img/twiineblack.png" />
-        <div className="heading mb-4">We saw that you like:</div>
+        <div className="heading mb-4">
+          *drum roll* Here's your{" "}
+          <span className="img-result-down">
+            genere breakdown:{" "}
+            <img className="img-result" src="./img/Vector.png"></img>
+          </span>
+        </div>
 
         <div className="row results">
           <div className="col-12 col-md-6">
-            <div className="map">
-              <div className="leftchart">
-                <Doughnut data={data} options={options}></Doughnut>
-              </div>
-            </div>
-          </div>
-          <div className="col-12 col-md-6">
             <div className="right_table">
-              <p>Your current top 5:</p>
+              <p>Your top 5 songs right now</p>
               {playlist?.map((ele, key) => (
                 <div key={key} className="song_one mt-2">
-                  <img className="song_img" src={ele?.album?.images[1]?.url} />
-                  <div className="song_detail">
-                    <p>{ele?.name}</p>
-                    <p>{ele?.artists[0]?.name}</p>
-                  </div>
                   <div className="song_no">
-                    <p>#{key + 1}</p>
+                    <p>{key + 1}.</p>
                   </div>
+                  <div className="song_detail">
+                    <p className="song-name">{ele?.name}</p>
+                    <p className="artist">{ele?.artists[0]?.name}</p>
+                  </div>
+                  <img className="song_img" src={ele?.album?.images[1]?.url} />
                 </div>
               ))}
             </div>
           </div>
+          <div className="col-12 col-md-6">
+            <div className="map">
+              <div className="leftchart">
+                <Pie data={data}  options={options} ></Pie>
+             
+              </div>
+            </div>
+          </div>
         </div>
-        <button className="Go_Back btn" onClick={goBack} type="button">
-          Go Back
-        </button>
+        <div className="go-back-share">
+          <button className="Go_Back btn" onClick={goBack} type="button">
+            <img className="back" src="./img/back-arrow.png" />
+            Go Back
+          </button>
+          <button className="Go_Back btn" onClick={goBack} type="button">
+            <img className="genere-image" src="./img/share.png" />
+            Share on social media{" "}
+          </button>
+        </div>
         <br />
         <br />
         <br />

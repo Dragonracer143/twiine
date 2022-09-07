@@ -49,9 +49,7 @@ const ListingForm = () => {
     image2: "",
     image3: "",
     image4: "",
-    genres: "",
-    lattitude: "",
-    longitude: "",
+
   });
 
   const [updateDataObject, setUpdateDataObject] = useState({
@@ -73,9 +71,7 @@ const ListingForm = () => {
     image2: "",
     image3: "",
     image4: "",
-    genres: "",
-    lattitude: "",
-    longitude: "",
+
   });
   const [updateMode, setUpdateMode] = useState(false);
 
@@ -454,7 +450,7 @@ const ListingForm = () => {
                 }}
               />
             </div>
-            <div className="mb-3">
+            {/* <div className="mb-3">
               <label htmlFor="text">Lattitude</label>
               <input
                 type="text"
@@ -519,7 +515,7 @@ const ListingForm = () => {
                   }
                 }}
               />
-            </div>
+            </div> */}
             <div className="mb-3">
               <label htmlFor="food">Food Options</label>
               <select

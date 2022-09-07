@@ -2904,12 +2904,12 @@ button.Visit_btn.more_result_btn {
 /* Spotify Music CSS */
 .musiclogin_main {
   padding: 45px 35px;
-  background-color: #000;
+  background: linear-gradient(98.26deg, #79954E -12.51%, #C6D2B6 107.96%);
 }
 
 .mausiclogin_main_inner {
   position: relative;
-  background: #204274;
+  /* background: #204274; */
   border-radius: 12.5px;
   height: calc(100vh - 90px);
   display: flex;
@@ -2941,10 +2941,10 @@ button.Visit_btn.more_result_btn {
 }
 
 .applemusic_btn .btn {
-  margin-top: 6rem !important;
+  margin-top: 1rem !important;
   background: #000000;
-  border: 3px solid #ff0000;
-  border-radius: 10px;
+  /* border: 3px solid #ff0000; */
+  border-radius: 40px;
   text-align: center;
   height: 60px;
   color: #fff;
@@ -2952,7 +2952,7 @@ button.Visit_btn.more_result_btn {
   font-weight: 400;
   font-size: 28px;
   line-height: 55px;
-  padding: 0px 15rem;
+  padding: 0px 14rem;
   margin: auto;
 }
 
@@ -2960,13 +2960,13 @@ button.Visit_btn.more_result_btn {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 6rem;
 }
 
 .spotify_btn .btn {
-  margin-top: 1.2rem !important;
   background: #000000;
-  border: 3px solid #00ff19;
-  border-radius: 10px;
+  /* border: 3px solid #00ff19; */
+  border-radius: 40px;
   text-align: center;
   height: 60px;
   color: #fff;
@@ -2980,9 +2980,25 @@ button.Visit_btn.more_result_btn {
 }
 
 img.spotify_logo {
-  width: 32px;
+  width: 31px;
+  margin-right: 15px;
 }
-
+img.apple_logo {
+  width: 31px;
+  margin-right: 10px;
+  height: 33px;
+  margin-bottom: 6px;
+}
+img.Vector_logo {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  right: 0;
+  bottom: -20px;
+}
+.music-taste {
+  position: relative;
+}
 @media screen and (max-width: 767px) {
   .twiinevblack_logo {
     position: absolute;
@@ -3013,12 +3029,11 @@ img.spotify_logo {
 /* Userlocation CSS */
 .Userlocation_main {
   padding: 45px 35px;
-  background-color: #000;
-}
+  background: linear-gradient(98.26deg, #79954E -12.51%, #C6D2B6 107.96%);
+  }
 
 .Userlocation_main .Userlocation_main_inner {
   position: relative;
-  background: #000;
   border-radius: 12.5px;
   height: calc(100vh - 90px);
   display: flex;
@@ -3026,7 +3041,17 @@ img.spotify_logo {
   justify-content: center;
   align-items: center;
 }
-
+.location{
+  position: relative;
+  color: green;
+}
+.Location_Vector_logo {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  right: 0;
+  bottom: -8px;
+}
 .Userlocation_main .twiinevblack_logo {
   position: absolute;
   top: 18px;
@@ -3051,16 +3076,16 @@ img.spotify_logo {
 
 .Userlocation_main .yes_btn .btn {
   margin-top: 6rem !important;
-  background: #fff;
+  background: #000;
   border-radius: 20px;
   text-align: center;
   height: 60px;
-  color: #000;
+  color: #fff;
   font-family: "Nunito";
   font-weight: 400;
   font-size: 28px;
   line-height: 55px;
-  padding: 0px 12rem;
+  padding: 0px 18rem;
   margin: auto;
 }
 
@@ -3072,16 +3097,16 @@ img.spotify_logo {
 
 .Userlocation_main .no_btn .btn {
   margin-top: 1.2rem !important;
-  background: #fff;
+  background: #000;
   border-radius: 20px;
   text-align: center;
   height: 60px;
-  color: #000;
+  color: #fff;
   font-family: "Nunito";
   font-weight: 400;
   font-size: 28px;
   line-height: 55px;
-  padding: 0px 12rem;
+  padding: 0px 19rem;
   margin: auto;
   gap: 15px;
 }
@@ -3151,7 +3176,7 @@ img.spotify_logo {
 
 .Musicyoulike {
   position: relative;
-  background: #000;
+  background: #fff;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -3171,8 +3196,8 @@ img.spotify_logo {
   font-weight: 700;
   font-size: 48px;
   line-height: 58px;
-  max-width: 768px;
-  color: #ffffff;
+  max-width: 1069px;
+  color: #79954E;
   text-align: center;
 }
 
@@ -3183,16 +3208,12 @@ img.spotify_logo {
 }
 
 .Musicyoulike_card_blue {
-  background: linear-gradient(
-    180deg,
-    #4586e8 0.01%,
-    #3970c2 0.02%,
-    #0e1d33 100%
-  );
-  border-radius: 8px;
+  background-color: #EFF3ED;
+  border-radius: 50px;
   display: flex;
   flex-direction: column;
   padding: 15px;
+  width: 406px;
 }
 
 .card_content p {
@@ -3206,21 +3227,52 @@ img.spotify_logo {
   color: #ffffff;
   margin-bottom: 0px;
 }
-
+p.vives {
+  margin-top: 17px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
 button.Moreinfo.btn {
-  background: #fe3c3c;
-  border-radius: 8px;
-  max-width: 300px;
-  margin: auto;
+  background: #A9B88D;
+  border-radius: 4px;
   padding-left: 3rem;
   padding-right: 3rem;
-  color: #fff;
+  color: black;
   margin-top: 2rem;
   margin-bottom: 10px;
+  text-align: center;
+  border: 1px solid #79954E;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  height: 40px;
+  font-family: 'Gerbera-Light';
+  font-size: 20px;
 }
-
+img.right-arrow {
+  margin-left: 12px;
+}
+p.businnes {
+  font-family: 'Gerbera-Bold';
+  font-size: 30px;
+  line-height: 35px;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.05em;
+  font-weight: 900;
+  justify-content: space-between;
+  border-bottom: 4px solid;
+}
+span.gener-name {
+  width: 64px;
+  height: 33px;
+  background: #0D1109;
+  color: white;
+  padding: 0px 10px;
+  gap: 25px;
+  border-radius: 18px;
+}
 .row.cards.Musicyoulikes {
-  margin: 0;
+  margin: 80px;
 }
 
 .share_buttons {
@@ -3236,18 +3288,22 @@ button.Moreinfo.btn {
   max-width: 582px;
   left: 114px;
   top: 858px;
-  background: #00ff19;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 25px;
   width: 40%;
   text-align: center;
+  background: #FFFFFF;
+  border: 2px solid #0D1109;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
 }
 
 .share_buttons .btn {
   font-size: 28px;
   font-weight: 600;
 }
-
+img.genere-image {
+  margin-right: 16px;
+}
 .share_buttons .light_blue {
   background-color: #afccf9;
 }
@@ -3308,15 +3364,19 @@ button.Moreinfo.btn {
 
 .ResultBreakdown {
   position: relative;
-  background: #000;
+  background: #fff;
   height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
+.img-result-down {
+  position: relative;
+  color: #A28F74;
+}
 
-.row.results .leftchart {
+/* .row.results .leftchart {
   background: #abc7f3;
   box-shadow: 0px 4px 50px rgba(0, 0, 0, 0.08);
   border-radius: 100%;
@@ -3325,7 +3385,7 @@ button.Moreinfo.btn {
   padding-bottom: 34px;
   padding-right: 20px;
   padding-left: 20px;
-}
+} */
 
 .ResultBreakdown .twiinevblack_logo {
   position: absolute;
@@ -3337,16 +3397,24 @@ button.Moreinfo.btn {
   font-weight: 600;
   font-size: 54px;
   line-height: 75px;
-  color: #ffffff;
+  color: #000;
   text-align: center;
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  max-width: 1024px;
+  max-width: 1058px;
+  margin-top: 216px;
 }
-
+img.img-result {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  right: 0;
+  bottom: -28px;
+}
 .ResultBreakdown .results .right_table {
-  background: linear-gradient(180deg, #afccf9 0%, #11213a 100%);
-  border-radius: 8px;
+
   padding: 5px 15px 20px 15px;
+  background: #FFFFFF;
+  border: 2px solid #0D1109;
 }
 
 .ResultBreakdown .results .right_table p {
@@ -3357,20 +3425,25 @@ button.Moreinfo.btn {
   color: #000000;
 }
 
+.song-name {
+  font-size: 20px !important;
+  width: 301px !important;
+}
 .ResultBreakdown .song_one {
-  background: #cecece;
-  border: 1px solid #000000;
-  border-radius: 8px;
   display: flex;
   padding: 10px;
   align-items: center;
   gap: 16px;
   justify-content: space-between;
+  border-bottom: 1px solid;
 }
-
+p.artist {
+  margin-left: 17px;
+}
 .ResultBreakdown .song_one .song_img {
   width: 68px;
   height: 68px;
+  border-radius: 17px;
 }
 
 .ResultBreakdown .song_one .song_detail {
@@ -3397,7 +3470,6 @@ button.Moreinfo.btn {
 }
 
 button.Go_Back.btn {
-  background: #4485e7;
   border-radius: 18px;
   max-width: 400px;
   width: 400px;
@@ -3408,8 +3480,14 @@ button.Go_Back.btn {
   font-size: 22px;
   color: #000000;
   margin-top: 2rem;
+  background: #FFFFFF;
+  border: 2px solid #0D1109;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
 }
-
+img.back {
+  margin-right: 10px;
+}
 @media screen and (max-width: 767px) {
   .ResultBreakdown {
     height: unset;
@@ -3460,12 +3538,12 @@ button.Go_Back.btn {
 
 .Instagramstory {
   position: relative;
-  background: #000;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 4rem 0 1rem;
+  margin-bottom: 50px;
 }
 .Instagramstory .chart {
   background: #abc7f3;
@@ -3484,23 +3562,83 @@ button.Go_Back.btn {
   font-weight: 700;
   font-size: 48px;
   line-height: 58px;
-  max-width: 768px;
-  color: #ffffff;
+  max-width: 950px;
+  color: #000;
   text-align: center;
-}
+  padding-bottom: 75px;
 
+}
+img.img-insta {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  right: 0;
+  bottom: -12px;
+}
+.Instagramstory .results .right_table {
+
+  padding: 5px 15px 20px 15px;
+  background: #FFFFFF;
+  border: 2px solid #0D1109;
+}
 .Instagramstory .content {
   font-family: "Nunito";
   font-style: normal;
   font-weight: 700;
   font-size: 36px;
-  max-width: 600px;
+  max-width: 596px;
   line-height: 48px;
   text-align: center;
-  color: #ffffff;
-  margin-top: 1rem;
+  color: #79954E;
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+}
+.row.cards.insta .col-12:nth-child(2) {
+  margin-top: 13rem !important;
+}
+.Instagramstory .results .right_table p {
+  font-family: "Nunito";
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 48px;
+  color: #000000;
+}
+.Instagramstory .song_one {
+  display: flex;
+  padding: 10px;
+  align-items: center;
+  gap: 16px;
+  justify-content: space-between;
+  border-bottom: 1px solid;
+}
+.Instagramstory .song_one .song_img {
+  width: 68px;
+  height: 68px;
+  border-radius: 17px;
 }
 
+.Instagramstory .song_one .song_detail {
+  margin-right: auto;
+}
+
+.Instagramstory .song_one .song_detail p {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 27px;
+  color: #000000;
+  margin-bottom: 0;
+}
+
+.Instagramstory .song_no p {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 56px !important;
+  color: #000000;
+  margin-bottom: 0px;
+}
 .Instagramstory_card_blue {
   background: linear-gradient(
     180deg,
@@ -3522,7 +3660,7 @@ button.Go_Back.btn {
   display: flex;
   align-items: center;
   text-align: center;
-  color: #ffffff;
+  color: #000;
   margin-bottom: 0px;
 }
 
@@ -3620,17 +3758,17 @@ button.poweredby_btn.btn img {
 }
 
 .Musicyoulike_card_blue img {
-  max-height: 234px !important;
+  max-height: 300px !important;
   object-fit: cover !important;
+  border-radius: 24px;
 }
-.Instagramstory_card_blue img{
-
+.Instagramstory_card_blue img {
   max-height: 234px !important;
   object-fit: cover !important;
 }
 .fa-download:before {
   content: "\f019";
-  color: white;
+  color: black;
   font-size: 30px;
 }
 /* Instagramstory End CSS */
