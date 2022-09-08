@@ -1,27 +1,96 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import useGeolocation from "react-hook-geolocation";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { baseUrl } from "../../Services/Config";
 const Userlocation = () => {
   const geolocation = useGeolocation();
-  const lattitudeValue =geolocation.latitude
-  const longitudeValue =geolocation.longitude
-
+  const lattitudeValue = geolocation.latitude;
+  const longitudeValue = geolocation.longitude;
+  const [musicvibe, setMusicvibe] = useState([]);
+  console.log("muiscvibe", musicvibe);
+  let token = localStorage.getItem("token");
   const navigate = useNavigate();
-  const getLocation = () => {
+  const getDataBytLocation = () => {
     let path = `/musicyoulike`;
-   const localUrl = "http://localhost:3000/"
-    const data = axios.get(
-      `${baseUrl}filterResturants?lat=${lattitudeValue}&long=${longitudeValue}`
-    );
-    console.log("data", data);
+    // const localUrl = "http://localhost:8000/";
+    const data = axios
+      .get(
+        `${baseUrl}filterResturants?lat=${lattitudeValue}&long=${longitudeValue}`
+      )
+      .then((res) => {
+        const dupdata = res.data.data;
+
+        let test = [];
+        musicvibe.forEach((element) => {
+          const findData = dupdata.filter(
+            (x) =>
+              x.MusicVibe1.toLowerCase() == element.toLowerCase() ||
+              x.MusicVibe2.toLowerCase() == element.toLowerCase()
+          );
+          test.push(...findData);
+        });
+        let dupChars = getUniqueListBy(test, "businessName");
+
+        localStorage.setItem("filterResturant", JSON.stringify(dupChars));
+      });
 
     navigate(path);
+  };
+  function getUniqueListBy(arr, key) {
+    return [...new Map(arr.map((item) => [item[key], item])).values()];
+  }
+
+  useEffect(() => {
+    getGenerslist();
+  }, []);
+  const getGenerslist = async (e) => {
+    const { data } = await axios
+      .get("https://api.spotify.com/v1/me/top/artists?offset=0&limit=10", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .catch((err) => {
+        console.log(err.response.status);
+        if (err?.response?.status == 401) {
+          localStorage.clear();
+          navigate("/");
+        }
+      });
+    let vall = [];
+    data.items.map((first) => {
+      first.genres.forEach((valdata) => {
+        vall.push(valdata);
+      });
+    });
+
+    let newarray = [];
+    vall.forEach(function (x) {
+      newarray[x] = (newarray[x] || 0) + 1;
+    });
+    let genereArray = Object.entries(newarray);
+    function compareSecondColumn(a, b) {
+      if (a[1] === b[1]) {
+        return 0;
+      } else {
+        return b[1] < a[1] ? -1 : 1;
+      }
+    }
+
+    genereArray.sort(compareSecondColumn);
+    let genername = [];
+
+    for (let i = 0; i < genereArray.length; i++) {
+      const element = genereArray[i][0];
+      genername.push(element);
+    }
+    setMusicvibe(genername);
   };
   const logout = () => {
     // setToken("");
     window.localStorage.removeItem("token");
+    localStorage.clear();
     let path = `/`;
     navigate(path);
   };
@@ -41,7 +110,7 @@ const Userlocation = () => {
           </div>
 
           <div className="yes_btn">
-            <button className="btn" type="button" onClick={getLocation}>
+            <button className="btn" type="button" onClick={getDataBytLocation}>
               yes, please!
             </button>
           </div>

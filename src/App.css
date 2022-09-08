@@ -3263,7 +3263,7 @@ p.businnes {
   border-bottom: 4px solid;
 }
 span.gener-name {
-  width: 64px;
+  width: auto;
   height: 33px;
   background: #0D1109;
   color: white;
@@ -3758,7 +3758,7 @@ button.poweredby_btn.btn img {
 }
 
 .Musicyoulike_card_blue img {
-  max-height: 300px !important;
+  max-height: 218px !important;
   object-fit: cover !important;
   border-radius: 24px;
 }

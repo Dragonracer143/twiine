@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
-import { Pie } from 'react-chartjs-2';
+import { Pie } from "react-chartjs-2";
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArcElement } from "chart.js";
-import { Chart as ChartJS,  Tooltip, Legend } from 'chart.js';
+import { Chart as ChartJS, Tooltip, Legend } from "chart.js";
+import CircularIndeterminate from "./Loader";
+import { AddBoxOutlined } from "@mui/icons-material";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 const ResultBreakdown = (props) => {
@@ -27,10 +29,8 @@ const ResultBreakdown = (props) => {
           "#322421",
           "#D4BCB0",
         ],
-        hoverOffset: 8,
         borderColor: "#000",
         display: true,
-        
       },
     ],
   };
@@ -41,9 +41,7 @@ const ResultBreakdown = (props) => {
         display: false,
       },
     },
-    
   };
-
 
   const config = {
     type: "doughnut",
@@ -54,14 +52,20 @@ const ResultBreakdown = (props) => {
     getGenerslist();
   }, []);
   const getGenerslist = async (e) => {
-    const { data } = await axios.get(
-      "https://api.spotify.com/v1/me/top/artists?offset=0&limit=10",
-      {
+    const { data } = await axios
+      .get("https://api.spotify.com/v1/me/top/artists?offset=0&limit=10", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-      }
-    );
+      })
+      .catch((err) => {
+        console.log(err.response.status);
+        if (err?.response?.status == 401) {
+          localStorage.clear();
+          navigate("/");
+        }
+      });
+    // console.log("data", data)
     let vall = [];
     data.items.map((first) => {
       first.genres.forEach((valdata) => {
@@ -100,15 +104,21 @@ const ResultBreakdown = (props) => {
   useEffect(() => {
     onGetdata();
   }, []);
+
   const onGetdata = async (e) => {
-    const { data } = await axios.get(
-      "https://api.spotify.com/v1/me/top/tracks?offset=0&limit=5",
-      {
+    const { data } = await axios
+      .get("https://api.spotify.com/v1/me/top/tracks?offset=0&limit=5", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-      }
-    );
+      })
+      .catch((err) => {
+        console.log(err.response.status);
+        if (err?.response?.status == 401) {
+          localStorage.clear();
+          navigate("/");
+        }
+      });
     setPlaylist(data.items);
   };
 
@@ -128,34 +138,40 @@ const ResultBreakdown = (props) => {
             <img className="img-result" src="./img/Vector.png"></img>
           </span>
         </div>
-
-        <div className="row results">
-          <div className="col-12 col-md-6">
-            <div className="right_table">
-              <p>Your top 5 songs right now</p>
-              {playlist?.map((ele, key) => (
-                <div key={key} className="song_one mt-2">
-                  <div className="song_no">
-                    <p>{key + 1}.</p>
+        {playlist?.length !== 0 ? (
+          <div className="row results">
+            <div className="col-12 col-md-6">
+              <div className="right_table">
+                <p>Your top 5 songs right now</p>
+                {playlist?.map((ele, key) => (
+                  <div key={key} className="song_one mt-2">
+                    <div className="song_no">
+                      <p>{key + 1}.</p>
+                    </div>
+                    <div className="song_detail">
+                      <p className="song-name">{ele?.name}</p>
+                      <p className="artist">{ele?.artists[0]?.name}</p>
+                    </div>
+                    <img
+                      className="song_img"
+                      src={ele?.album?.images[1]?.url}
+                    />
                   </div>
-                  <div className="song_detail">
-                    <p className="song-name">{ele?.name}</p>
-                    <p className="artist">{ele?.artists[0]?.name}</p>
-                  </div>
-                  <img className="song_img" src={ele?.album?.images[1]?.url} />
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
-          <div className="col-12 col-md-6">
-            <div className="map">
-              <div className="leftchart">
-                <Pie data={data}  options={options} ></Pie>
-             
+            <div className="col-12 col-md-6">
+              <div className="map">
+                <div className="leftchart">
+                  <Pie data={data} options={options}></Pie>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        ) : (
+          <CircularIndeterminate />
+        )}
+
         <div className="go-back-share">
           <button className="Go_Back btn" onClick={goBack} type="button">
             <img className="back" src="./img/back-arrow.png" />
