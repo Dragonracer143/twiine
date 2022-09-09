@@ -5,8 +5,13 @@ import Geocode from "react-geocode";
 import { getDistance, getPreciseDistance } from "geolib";
 import CircularIndeterminate from "./Loader";
 import useGeolocation from "react-hook-geolocation";
+import { toPng } from "html-to-image";
+import { useCallback } from "react";
+import Instagramstory from './Instagramstory';
+
 const Musicyoulike = (props) => {
   const [filterdata, setFilterData] = useState();
+ const [story, setStory] = useState(false)
   Geocode.setApiKey("AIzaSyCLpRelH01xoapkwWD7w4chtFMQvjQPWn4");
 
   const navigate = useNavigate();
@@ -35,9 +40,8 @@ const Musicyoulike = (props) => {
     }, 3000);
   }, []);
   const getStories = () => {
-    navigate("/instagramstory");
-
-
+    // navigate("/instagramstory");
+    setStory(true)
   };
   const geolocation = useGeolocation();
   const lattitudeValue = geolocation.latitude;
@@ -50,11 +54,41 @@ const Musicyoulike = (props) => {
       },
       { latitude: cordinates[1], longitude: cordinates[0] }
     );
-    dis = ((parseFloat(dis) / 1000)/  1.609).toFixed(1);
+    dis = (parseFloat(dis) / 1000 / 1.609).toFixed(1);
 
     return dis;
   };
 
+  useEffect(() => {
+     if(story == true){
+      setTimeout(() => {
+        onButtonClick();
+      }, 3000);
+     }
+
+  });
+
+  const refs = document.getElementById("id");
+
+  const onButtonClick = useCallback(() => {
+    if (refs === null) {
+      return;
+    }
+
+    toPng(refs)
+      .then((dataUrl) => {
+        const link = document.createElement("a");
+        link.download = "name.png";
+        link.href = dataUrl;
+        link.click();
+        setTimeout(() => {
+          setStory(false);
+        }, 1000);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [refs]);
   return (
     <>
       <div className="Musicyoulike">
@@ -89,7 +123,8 @@ const Musicyoulike = (props) => {
                       </p>
                       <p>
                         Distance:{" "}
-                        {getDistanceFromCurrent(ele?.location?.coordinates)} miles
+                        {getDistanceFromCurrent(ele?.location?.coordinates)}{" "}
+                        miles
                       </p>
                       <p>Location : {ele?.city}</p>
                       <p>
@@ -105,11 +140,14 @@ const Musicyoulike = (props) => {
                       </p>
                     </div>
                     <button className="Moreinfo btn" type="button">
+                    <a href={ele.yelpURL} target="_blank">
+                     
                       see more info
                       <img
                         className="right-arrow"
                         src="./img/right-arrow.png"
                       />
+                    </a>
                     </button>
                   </div>
                 </div>
@@ -165,11 +203,14 @@ const Musicyoulike = (props) => {
                       </p>
                     </div>
                     <button className="Moreinfo btn" type="button">
+                      <a href={ele?.yelpURL} target="_blank">
                       see more info
+                      
                       <img
                         className="right-arrow"
                         src="./img/right-arrow.png"
                       />
+                      </a>
                     </button>
                   </div>
                 </div>
@@ -200,6 +241,11 @@ const Musicyoulike = (props) => {
           )}
         </>
       )}
+   {story == true ? 
+   
+   <Instagramstory story={story} filterdata={filterdata}/>
+    : null}
+  
     </>
   );
 };

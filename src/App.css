@@ -181,7 +181,9 @@ button {
   color: #7c7c7c;
   cursor: pointer;
 }
-
+.display-insta{
+  visibility: hidden;
+}
 .Screen_1 select#State:focus {
   color: #000 !important;
 }
@@ -224,7 +226,9 @@ button {
   justify-content: center;
   flex-direction: column;
 }
-
+button.Moreinfo.btn a {
+  color: black !important;
+}
 .Screen_2 .inner .content h1 {
   font-size: 60px;
   text-align: center;
@@ -3232,6 +3236,9 @@ p.vives {
   text-align: center;
   display: flex;
   justify-content: center;
+}
+.go-back-share {
+  margin-bottom: 14rem;
 }
 button.Moreinfo.btn {
   background: #a9b88d;

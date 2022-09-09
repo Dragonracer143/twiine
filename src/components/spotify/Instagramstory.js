@@ -20,7 +20,6 @@ const Instagramstory = (props) => {
   const [filterdatas, setFilterDatas] = useState([]);
   let token = localStorage.getItem("token");
   const geolocation = useGeolocation();
-
   let navigate = useNavigate();
   const onButtonClick = useCallback(() => {
     if (refs === null) {
@@ -161,15 +160,13 @@ const Instagramstory = (props) => {
   return (
     <>
       {filterdatas?.length !== 0 ? (
-        <div className="Instagramstory" id="id">
+        <div className={props.story== true ? "display-insta" : ""}>
+
+        <div className="Instagramstory" id="id"  >
           <img className="twiinevblack_logo" src="./img/twiineblack.png" />
 
           <div className="download-button">
-            <i
-              onClick={onButtonClick}
-              className="fa fa-download"
-              aria-hidden="true"
-            ></i>
+
           </div>
 
           <div className="heading">
@@ -220,7 +217,7 @@ const Instagramstory = (props) => {
           {props.randomdata == 0 ? (
             <>
                 <div className="row cards Musicyoulikes insta">
-                  {filterdatas?.slice(0, 3).map((ele, key) => (
+                  {props.filterdata.slice(0, 3).map((ele, key) => (
                     <div className="col-12 col-md-4" key={key}>
                       <div className="Musicyoulike_card_blue">
                         <img className="img" src={ele?.image1} />
@@ -280,6 +277,8 @@ const Instagramstory = (props) => {
             </>
           )}
         </div>
+        </div>
+
       ) : (
         <CircularIndeterminate />
       )}
