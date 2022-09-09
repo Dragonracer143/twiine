@@ -75,7 +75,6 @@ const Instagramstory = (props) => {
       .get("https://api.spotify.com/v1/me/top/artists?offset=0&limit=10", {
         headers: {
           Authorization: `Bearer ${token}`,
-          "Access-Control-Allow-Origin": "*", 
 
         },
       })
@@ -127,7 +126,6 @@ const Instagramstory = (props) => {
       .get("https://api.spotify.com/v1/me/top/tracks?offset=0&limit=5", {
         headers: {
           Authorization: `Bearer ${token}`,
-          "Access-Control-Allow-Origin": "*", 
         },
       })
       .catch((err) => {

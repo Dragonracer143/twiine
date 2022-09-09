@@ -49,7 +49,6 @@ props.setRandomdata("0")
       .get("https://api.spotify.com/v1/me/top/artists?offset=0&limit=10", {
         headers: {
           Authorization: `Bearer ${token}`,
-          "Access-Control-Allow-Origin": "*",          
         },
       })
       .catch((err) => {
