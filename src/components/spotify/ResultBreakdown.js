@@ -17,8 +17,11 @@ const ResultBreakdown = (props) => {
 
   const data = {
     labels: props?.genernames.slice(0, 5),
+    type:"pie",
     indexLabel: props?.genernames.slice(0, 5),
-    indexLabelPlacement: "inside",
+    indexLabelPlacement: "inside",    
+    indexLabelFontSize: 15,
+    indexLabelMaxWidth: 53,   
     datasets: [
       {
         data: props?.genervalues.slice(0, 5),
