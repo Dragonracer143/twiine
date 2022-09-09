@@ -159,7 +159,7 @@ const Instagramstory = (props) => {
   };
   return (
     <>
-      {playlist?.length !== 0 ? (
+      {filterdatas?.length !== 0 ? (
         <div className="Instagramstory" id="id">
           <img className="twiinevblack_logo" src="./img/twiineblack.png" />
 
