@@ -139,7 +139,7 @@ const ResultBreakdown = (props) => {
         <div className="heading mb-4">
           *drum roll* Here's your{" "}
           <span className="img-result-down">
-            genere breakdown:{" "}
+          genre breakdown:{" "}
             <img className="img-result" src="./img/Vector.png"></img>
           </span>
         </div>
@@ -182,7 +182,7 @@ const ResultBreakdown = (props) => {
             <img className="back" src="./img/back-arrow.png" />
             Go Back
           </button>
-          <button className="Go_Back btn" onClick={goBack} type="button">
+          <button className="Go_Back btn" onClick={shareOnsocial} type="button">
             <img className="genere-image" src="./img/share.png" />
             Share on social media{" "}
           </button>

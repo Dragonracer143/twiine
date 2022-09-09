@@ -17,14 +17,16 @@ const Musicyoulike = (props) => {
     navigate(path);
   };
   React.useEffect(() => {
-    getAllDetailsApi()
-      .then((res) => {
-        let dupdata = [...res.data];
-        props.setRest(dupdata);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+    setTimeout(() => {
+      getAllDetailsApi()
+        .then((res) => {
+          let dupdata = [...res.data];
+          props.setRest(dupdata);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    }, 3000);
   }, []);
   useEffect(() => {
     setTimeout(() => {
@@ -33,7 +35,6 @@ const Musicyoulike = (props) => {
       setFilterData(localData);
     }, 3000);
   }, []);
-  console.log("filterdata", filterdata);
   const getStories = () => {
     navigate("/instagramstory");
   };
@@ -48,7 +49,7 @@ const Musicyoulike = (props) => {
       },
       { latitude: cordinates[1], longitude: cordinates[0] }
     );
-    dis = parseFloat(dis) / 1000;
+    dis = ((parseFloat(dis) / 1000)/  1.609).toFixed(1);
 
     return dis;
   };
@@ -87,7 +88,7 @@ const Musicyoulike = (props) => {
                       </p>
                       <p>
                         Distance:{" "}
-                        {getDistanceFromCurrent(ele?.location?.coordinates)} Km
+                        {getDistanceFromCurrent(ele?.location?.coordinates)} miles
                       </p>
                       <p>Location : {ele?.city}</p>
                       <p>
@@ -122,10 +123,15 @@ const Musicyoulike = (props) => {
                   <img className="genere-image" src="./img/share.png" />
                   Share on social media
                 </button>
-                <button className="btn " type="button">
+                <a
+                  className="btn "
+                  type="button"
+                  href="https://forms.gle/gfVL5MjSPxDUTHsw7"
+                  target="_blank"
+                >
                   <img className="genere-image" src="./img/rocket.png" />
                   Subscribe for product updates
-                </button>
+                </a>
               </div>
             </div>
           ) : (
@@ -177,10 +183,15 @@ const Musicyoulike = (props) => {
                   <img className="genere-image" src="./img/share.png" />
                   Share on social media
                 </button>
-                <button className="btn " type="button">
+                <a
+                  className="btn "
+                  type="button"
+                  href="https://forms.gle/gfVL5MjSPxDUTHsw7"
+                  target="_blank"
+                >
                   <img className="genere-image" src="./img/rocket.png" />
                   Subscribe for product updates
-                </button>
+                </a>
               </div>
             </div>
           ) : (
