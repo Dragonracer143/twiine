@@ -4,7 +4,6 @@ import { useCallback } from "react";
 import { toPng } from "html-to-image";
 import axios from "axios";
 import { ArcElement } from "chart.js";
-
 import "../../../src/App.css";
 import { Chart as ChartJS, Tooltip, Legend } from "chart.js";
 import CircularIndeterminate from "./Loader";
@@ -193,7 +192,7 @@ const Instagramstory = (props) => {
           </div>
 
           <div className="row cards insta">
-            {props.rest?.slice(0, 3).map((ele, key) => (
+            {props?.rest?.slice(0, 3).map((ele, key) => (
               <div className="col-12 col-md-4" key={key}>
                 <div className="Musicyoulike_card_blue">
                   <img className="img" src={ele?.image1} />

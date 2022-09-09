@@ -65,6 +65,7 @@ const Musiclogin = () => {
               Log in with Apple Music
             </button>
           </div>
+          <p className="text-white mt-4">Heads up! By choosing "no thanks", we will just generate results that aren't near you.</p>
         </div>
       </div>
     </>

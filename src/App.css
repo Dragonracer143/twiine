@@ -3274,6 +3274,10 @@ span.gener-name {
 .row.cards.Musicyoulikes {
   margin: 80px;
 }
+p.text-white.mt-4 {
+  font-size: 20px;
+  line-height: 23px;
+}
 
 .share_buttons {
   display: flex;

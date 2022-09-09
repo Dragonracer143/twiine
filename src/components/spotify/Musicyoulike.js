@@ -38,7 +38,7 @@ const Musicyoulike = (props) => {
   const getStories = () => {
     navigate("/instagramstory");
 
-    
+
   };
   const geolocation = useGeolocation();
   const lattitudeValue = geolocation.latitude;
@@ -142,7 +142,7 @@ const Musicyoulike = (props) => {
         </>
       ) : (
         <>
-          {props.rest?.length >= 0 ? (
+          {props.rest?.length !== 0 ? (
             <div className="row cards Musicyoulikes">
               {props.rest?.slice(0, 3).map((ele, key) => (
                 <div className="col-12 col-md-4" key={key}>
