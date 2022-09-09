@@ -37,6 +37,8 @@ const Musicyoulike = (props) => {
   }, []);
   const getStories = () => {
     navigate("/instagramstory");
+
+    
   };
   const geolocation = useGeolocation();
   const lattitudeValue = geolocation.latitude;
