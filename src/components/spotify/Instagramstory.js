@@ -8,6 +8,8 @@ import "../../../src/App.css";
 import { Chart as ChartJS, Tooltip, Legend } from "chart.js";
 import CircularIndeterminate from "./Loader";
 import { useNavigate } from "react-router-dom";
+import useGeolocation from "react-hook-geolocation";
+import { getDistance, getPreciseDistance } from "geolib";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -15,7 +17,10 @@ const Instagramstory = (props) => {
   const [genernames, setGenernames] = useState([]);
   const [genervalues, setGenervalues] = useState([]);
   const refs = document.getElementById("id");
+  const [filterdatas, setFilterDatas] = useState([]);
   let token = localStorage.getItem("token");
+  const geolocation = useGeolocation();
+
   let navigate = useNavigate();
   const onButtonClick = useCallback(() => {
     if (refs === null) {
@@ -39,7 +44,7 @@ const Instagramstory = (props) => {
     indexLabelPlacement: "inside",
     datasets: [
       {
-        data:   genervalues.slice(0, 5),
+        data: genervalues.slice(0, 5),
         backgroundColor: [
           "#AC6E5F",
           "#978287",
@@ -131,6 +136,27 @@ const Instagramstory = (props) => {
       });
     setPlaylist(data.items);
   };
+  useEffect(() => {
+    setTimeout(() => {
+      const localData = JSON.parse(localStorage.getItem("filterResturant"));
+
+      setFilterDatas(localData);
+    }, 3000);
+  }, []);
+  const lattitudeValue = geolocation.latitude;
+  const longitudeValue = geolocation.longitude;
+  const getDistanceFromCurrent = (cordinates) => {
+    let dis = getDistance(
+      {
+        latitude: JSON.stringify(lattitudeValue),
+        longitude: JSON.stringify(longitudeValue),
+      },
+      { latitude: cordinates[1], longitude: cordinates[0] }
+    );
+    dis = (parseFloat(dis) / 1000 / 1.609).toFixed(1);
+
+    return dis;
+  };
   return (
     <>
       {playlist?.length !== 0 ? (
@@ -190,26 +216,71 @@ const Instagramstory = (props) => {
             </span>
             ,
           </div>
-
-          <div className="row cards insta">
-            {props?.rest?.slice(0, 3).map((ele, key) => (
-              <div className="col-12 col-md-4" key={key}>
-                <div className="Musicyoulike_card_blue">
-                  <img className="img" src={ele?.image1} />
-                  <div className="card_content">
-                    <p style={{ paddingTop: "1rem" }} className="businnes">
-                      {ele?.businessName} <span>{ele?.price}</span>
-                    </p>
-                    <p className="vives">
-                      Vibes :&nbsp; <span className="gener-name">Jazz</span>{" "}
-                      &nbsp;
-                      <span className="gener-name">Pop</span>
-                    </p>
-                  </div>
+          {props.randomdata == 0 ? (
+            <>
+              {filterdatas?.length >= 0 ? (
+                <div className="row cards Musicyoulikes">
+                  {filterdatas?.slice(0, 3).map((ele, key) => (
+                    <div className="col-12 col-md-4" key={key}>
+                      <div className="Musicyoulike_card_blue">
+                        <img className="img" src={ele?.image1} />
+                        <div className="card_content">
+                          <p
+                            style={{ paddingTop: "1rem" }}
+                            className="businnes"
+                          >
+                            {ele?.businessName} <span>{ele?.price}</span>
+                          </p>
+                          <p>
+                            Distance:{" "}
+                            {getDistanceFromCurrent(ele?.location?.coordinates)}{" "}
+                            miles
+                          </p>
+                          <p>Location : {ele?.city}</p>
+                          <p>
+                            Vibes :&nbsp;{" "}
+                            <span className="gener-name">
+                              {" "}
+                              {ele.MusicVibe1 ? ele.MusicVibe1 : "Jazz"}{" "}
+                            </span>{" "}
+                            &nbsp;
+                            <span className="gener-name">
+                              {ele.MusicVibe2 ? ele.MusicVibe2 : "Pop"}
+                            </span>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              </div>
-            ))}{" "}
-          </div>
+              ) : (
+                <CircularIndeterminate />
+              )}
+            </>
+          ) : (
+            <>
+              {" "}
+              <div className="row cards insta">
+                {props?.rest?.slice(0, 3).map((ele, key) => (
+                  <div className="col-12 col-md-4" key={key}>
+                    <div className="Musicyoulike_card_blue">
+                      <img className="img" src={ele?.image1} />
+                      <div className="card_content">
+                        <p style={{ paddingTop: "1rem" }} className="businnes">
+                          {ele?.businessName} <span>{ele?.price}</span>
+                        </p>
+                        <p className="vives">
+                          Vibes :&nbsp; <span className="gener-name">Jazz</span>{" "}
+                          &nbsp;
+                          <span className="gener-name">Pop</span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                ))}{" "}
+              </div>{" "}
+            </>
+          )}
         </div>
       ) : (
         <CircularIndeterminate />

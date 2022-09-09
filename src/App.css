@@ -3272,7 +3272,11 @@ span.gener-name {
   border-radius: 18px;
 }
 .row.cards.Musicyoulikes {
+
   margin: 80px;
+}
+.row.cards.Musicyoulikes .col-12:nth-child(2) {
+  margin-top: 13rem !important;
 }
 p.text-white.mt-4 {
   font-size: 20px;
