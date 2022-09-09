@@ -2904,7 +2904,7 @@ button.Visit_btn.more_result_btn {
 /* Spotify Music CSS */
 .musiclogin_main {
   padding: 45px 35px;
-  background: linear-gradient(98.26deg, #79954E -12.51%, #C6D2B6 107.96%);
+  background: linear-gradient(98.26deg, #79954e -12.51%, #c6d2b6 107.96%);
 }
 
 .mausiclogin_main_inner {
@@ -3029,8 +3029,8 @@ img.Vector_logo {
 /* Userlocation CSS */
 .Userlocation_main {
   padding: 45px 35px;
-  background: linear-gradient(98.26deg, #79954E -12.51%, #C6D2B6 107.96%);
-  }
+  background: linear-gradient(98.26deg, #79954e -12.51%, #c6d2b6 107.96%);
+}
 
 .Userlocation_main .Userlocation_main_inner {
   position: relative;
@@ -3041,7 +3041,7 @@ img.Vector_logo {
   justify-content: center;
   align-items: center;
 }
-.location{
+.location {
   position: relative;
   color: green;
 }
@@ -3197,7 +3197,7 @@ img.Vector_logo {
   font-size: 48px;
   line-height: 58px;
   max-width: 1069px;
-  color: #79954E;
+  color: #79954e;
   text-align: center;
 }
 
@@ -3208,7 +3208,7 @@ img.Vector_logo {
 }
 
 .Musicyoulike_card_blue {
-  background-color: #EFF3ED;
+  background-color: #eff3ed;
   border-radius: 50px;
   display: flex;
   flex-direction: column;
@@ -3234,7 +3234,7 @@ p.vives {
   justify-content: center;
 }
 button.Moreinfo.btn {
-  background: #A9B88D;
+  background: #a9b88d;
   border-radius: 4px;
   padding-left: 3rem;
   padding-right: 3rem;
@@ -3242,17 +3242,17 @@ button.Moreinfo.btn {
   margin-top: 2rem;
   margin-bottom: 10px;
   text-align: center;
-  border: 1px solid #79954E;
+  border: 1px solid #79954e;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   height: 40px;
-  font-family: 'Gerbera-Light';
+  font-family: "Gerbera-Light";
   font-size: 20px;
 }
 img.right-arrow {
   margin-left: 12px;
 }
 p.businnes {
-  font-family: 'Gerbera-Bold';
+  font-family: "Gerbera-Bold";
   font-size: 30px;
   line-height: 35px;
   display: flex;
@@ -3265,14 +3265,13 @@ p.businnes {
 span.gener-name {
   width: auto;
   height: 33px;
-  background: #0D1109;
+  background: #0d1109;
   color: white;
   padding: 0px 10px;
   gap: 25px;
   border-radius: 18px;
 }
 .row.cards.Musicyoulikes {
-
   margin: 80px;
 }
 .row.cards.Musicyoulikes.insta .col-12:nth-child(2) {
@@ -3287,7 +3286,7 @@ p.text-white.mt-4 {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 30px;
+  gap: 10px;
 }
 
 .share_buttons .btn {
@@ -3299,14 +3298,14 @@ p.text-white.mt-4 {
   border-radius: 25px;
   width: 40%;
   text-align: center;
-  background: #FFFFFF;
-  border: 2px solid #0D1109;
+  background: #ffffff;
+  border: 2px solid #0d1109;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 15px;
 }
 
 .share_buttons .btn {
-  font-size: 28px;
+  font-size: 27px;
   font-weight: 600;
 }
 img.genere-image {
@@ -3381,7 +3380,7 @@ img.genere-image {
 }
 .img-result-down {
   position: relative;
-  color: #A28F74;
+  color: #a28f74;
 }
 
 /* .row.results .leftchart {
@@ -3419,10 +3418,9 @@ img.img-result {
   bottom: -28px;
 }
 .ResultBreakdown .results .right_table {
-
   padding: 5px 15px 20px 15px;
-  background: #FFFFFF;
-  border: 2px solid #0D1109;
+  background: #ffffff;
+  border: 2px solid #0d1109;
 }
 
 .ResultBreakdown .results .right_table p {
@@ -3488,8 +3486,8 @@ button.Go_Back.btn {
   font-size: 22px;
   color: #000000;
   margin-top: 2rem;
-  background: #FFFFFF;
-  border: 2px solid #0D1109;
+  background: #ffffff;
+  border: 2px solid #0d1109;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 15px;
 }
@@ -3574,7 +3572,6 @@ img.back {
   color: #000;
   text-align: center;
   padding-bottom: 75px;
-
 }
 img.img-insta {
   position: absolute;
@@ -3584,10 +3581,9 @@ img.img-insta {
   bottom: -12px;
 }
 .Instagramstory .results .right_table {
-
   padding: 5px 15px 20px 15px;
-  background: #FFFFFF;
-  border: 2px solid #0D1109;
+  background: #ffffff;
+  border: 2px solid #0d1109;
 }
 .Instagramstory .content {
   font-family: "Nunito";
@@ -3597,7 +3593,7 @@ img.img-insta {
   max-width: 596px;
   line-height: 48px;
   text-align: center;
-  color: #79954E;
+  color: #79954e;
   margin-top: 4rem;
   margin-bottom: 4rem;
 }
@@ -3786,4 +3782,63 @@ button.poweredby_btn.btn img {
   justify-content: end;
   margin-right: 60px;
   cursor: pointer;
+}
+
+@media screen and (max-width: 767px) {
+  .Musicyoulike .heading {
+    font-size: 16px;
+  }
+  .row.cards.Musicyoulikes {
+    margin: 15px;
+  }
+  .Musicyoulike_card_blue {
+    width: 100%;
+  }
+  .share_buttons .btn {
+    font-size: 14px;
+    font-weight: 600;
+    width: 100%;
+  }
+  .share_buttons {
+    margin-bottom: 15rem;
+  }
+  .mausiclogin_main_inner {
+    height: calc(100vh - 200px);
+  }
+  .Userlocation_main .Userlocation_main_inner {
+    height: calc(100vh - 200px);
+  }
+  .song-name {
+    font-size: 14px !important;
+    width: 100% !important;
+  }
+  .ResultBreakdown .song_no p {
+    font-size: 28px !important;
+  }
+  .row.cards.Musicyoulikes.insta .col-12:nth-child(2) {
+    margin-top: 1rem !important;
+}
+.row.cards.insta .col-12:nth-child(2) {
+  margin-top: 1rem !important;
+}
+.Instagramstory .heading {
+
+  padding-bottom: 28px;
+  padding-top: 40px;
+}
+.Instagramstory .row.cards {
+
+  padding-bottom: 173px;
+}
+.Instagramstory .right_table {
+  margin-right: 20px;
+  margin-left: 20px;
+}
+.ResultBreakdown .row.results .leftchart {
+  margin-bottom: 0rem;
+  margin-top: 2rem;
+}
+.go-back-share {
+  margin-bottom: 2rem;
+}
 }
