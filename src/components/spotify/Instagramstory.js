@@ -219,7 +219,7 @@ const Instagramstory = (props) => {
           {props.randomdata == 0 ? (
             <>
               {filterdatas?.length >= 0 ? (
-                <div className="row cards Musicyoulikes">
+                <div className="row cards Musicyoulikes insta">
                   {filterdatas?.slice(0, 3).map((ele, key) => (
                     <div className="col-12 col-md-4" key={key}>
                       <div className="Musicyoulike_card_blue">
