@@ -72,7 +72,7 @@ const Musicyoulike = (props) => {
         </div>
       </div>
 
-      {filterdata?.length !== 0 ? (
+      {filterdata?.length >= 0 ? (
         <div className="row cards Musicyoulikes">
           {filterdata?.slice(0, 3).map((ele, key) => (
             <div className="col-12 col-md-4" key={key}>

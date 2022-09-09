@@ -13,7 +13,7 @@ const Userlocation = () => {
   const navigate = useNavigate();
   const getDataBytLocation = () => {
     let path = `/musicyoulike`;
-    // const localUrl = "http://localhost:8000/";
+    // const baseUrl = "http://localhost:8000/";
     const data = axios
       .get(
         `${baseUrl}filterResturants?lat=${lattitudeValue}&long=${longitudeValue}`
