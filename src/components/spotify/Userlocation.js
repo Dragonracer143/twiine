@@ -16,7 +16,9 @@ const Userlocation = (props) => {
     // const baseUrl = "http://localhost:8000/";
     const data = axios
       .get(
-        `${baseUrl}filterResturants?lat=${lattitudeValue}&long=${longitudeValue}`
+        `${baseUrl}filterResturants?lat=${lattitudeValue}&long=${longitudeValue}`,
+
+        { 'headers': {  "Access-Control-Allow-Origin": "*"} }
       )
       .then((res) => {
         const dupdata = res.data.data;
