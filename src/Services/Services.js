@@ -68,7 +68,6 @@ export const getAllDetailsApi = () => {
 };
 
 export const customFilterDataApi = (objectForFilter) => {
-  // console.log(objectForFilter.city.name)
   var axios = require("axios");
   var config = {
     method: "get",

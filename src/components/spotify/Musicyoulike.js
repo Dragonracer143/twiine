@@ -6,7 +6,6 @@ import { getDistance, getPreciseDistance } from "geolib";
 import CircularIndeterminate from "./Loader";
 import useGeolocation from "react-hook-geolocation";
 const Musicyoulike = (props) => {
-  console.log("randomdata", props.randomdata);
   const [filterdata, setFilterData] = useState();
   Geocode.setApiKey("AIzaSyCLpRelH01xoapkwWD7w4chtFMQvjQPWn4");
 

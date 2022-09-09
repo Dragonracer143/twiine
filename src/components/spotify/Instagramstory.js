@@ -34,12 +34,12 @@ const Instagramstory = (props) => {
       });
   }, [refs]);
   const data = {
-    labels: props?.genernames.slice(0, 5),
-    indexLabel: props?.genernames.slice(0, 5),
+    labels: genernames.slice(0, 5),
+    indexLabel: genernames.slice(0, 5),
     indexLabelPlacement: "inside",
     datasets: [
       {
-        data: props?.genervalues.slice(0, 5),
+        data:   genervalues.slice(0, 5),
         backgroundColor: [
           "#AC6E5F",
           "#978287",

@@ -46,7 +46,6 @@ const Listtable = () => {
     }
   }, []);
 
-  console.log("data to show", selectedFile);
 
   useEffect(() => {
     handleFileSelect();

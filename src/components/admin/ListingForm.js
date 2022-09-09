@@ -223,7 +223,6 @@ const ListingForm = () => {
   const [selectcity, setSelectcity] = useState([]);
 
   React.useEffect(() => {
-    console.log(updateSelected);
   }, [updateSelected]);
 
   function check(state, val = vall) {

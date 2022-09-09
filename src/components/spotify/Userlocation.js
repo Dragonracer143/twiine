@@ -9,7 +9,6 @@ const Userlocation = (props) => {
   const lattitudeValue = geolocation.latitude;
   const longitudeValue = geolocation.longitude;
   const [musicvibe, setMusicvibe] = useState([]);
-  console.log("muiscvibe", musicvibe);
   let token = localStorage.getItem("token");
   const navigate = useNavigate();
   const getDataBytLocation = () => {
