@@ -204,7 +204,7 @@ const Instagramstory = (props) => {
                     <p className="vives">
                       Vibes :&nbsp; <span className="gener-name">Jazz</span>{" "}
                       &nbsp;
-                      <span className="gener-name">Popp</span>
+                      <span className="gener-name">Pop</span>
                     </p>
                   </div>
                 </div>
