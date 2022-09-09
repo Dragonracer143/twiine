@@ -48,7 +48,6 @@ const Instagramstory = (props) => {
           "#322421",
           "#D4BCB0",
         ],
-        hoverOffset: 8,
         borderColor: "#000",
         display: true,
       },

@@ -19,6 +19,8 @@ const Routesdata = () => {
     const [rest, setRest] = useState([]);
     const [genernames, setGenernames] = useState([]);
     const [genervalues, setGenervalues] = useState([]);
+    const [randomdata ,setRandomdata] = useState("");
+
   return (
     <Router>
     <Routes>
@@ -35,10 +37,10 @@ const Routesdata = () => {
       {/* end admin routes */}
 
       <Route path="/" element={<Musiclogin />} />
-      <Route path="/userlocation" element={<Userlocation />} />
+      <Route path="/userlocation" element={<Userlocation setRandomdata={setRandomdata} />} />
       <Route
         path="/musicyoulike"
-        element={<Musicyoulike rest={rest} setRest={setRest} />}
+        element={<Musicyoulike rest={rest} setRest={setRest} randomdata={randomdata}/>}
       />
       <Route
         path="/Resultbreakdown"

@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import useGeolocation from "react-hook-geolocation";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { PowerInputSharp } from "@mui/icons-material";
 import { baseUrl } from "../../Services/Config";
-const Userlocation = () => {
+const Userlocation = (props) => {
   const geolocation = useGeolocation();
   const lattitudeValue = geolocation.latitude;
   const longitudeValue = geolocation.longitude;
@@ -34,7 +35,7 @@ const Userlocation = () => {
 
         localStorage.setItem("filterResturant", JSON.stringify(dupChars));
       });
-
+props.setRandomdata("0")
     navigate(path);
   };
   function getUniqueListBy(arr, key) {
@@ -87,12 +88,10 @@ const Userlocation = () => {
     }
     setMusicvibe(genername);
   };
-  const logout = () => {
-    // setToken("");
-    window.localStorage.removeItem("token");
-    localStorage.clear();
-    let path = `/`;
+  const getNotbynear = () => {
+    let path = `/musicyoulike`;
     navigate(path);
+    props.setRandomdata("1")
   };
 
   return (
@@ -115,7 +114,7 @@ const Userlocation = () => {
             </button>
           </div>
           <div className="no_btn">
-            <button className="btn" type="button" onClick={logout}>
+            <button className="btn" type="button" onClick={getNotbynear}>
               no thanks
             </button>
           </div>

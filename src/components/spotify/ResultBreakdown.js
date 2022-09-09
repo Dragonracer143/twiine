@@ -126,6 +126,11 @@ const ResultBreakdown = (props) => {
     let path = "/musicyoulike";
     navigate(path);
   };
+  
+  const shareOnsocial = () => {
+    let path = "/instagramstory";
+    navigate(path);
+  };
 
   return (
     <>

@@ -6,6 +6,7 @@ import { getDistance, getPreciseDistance } from "geolib";
 import CircularIndeterminate from "./Loader";
 import useGeolocation from "react-hook-geolocation";
 const Musicyoulike = (props) => {
+  console.log("randomdata", props.randomdata);
   const [filterdata, setFilterData] = useState();
   Geocode.setApiKey("AIzaSyCLpRelH01xoapkwWD7w4chtFMQvjQPWn4");
 
@@ -72,58 +73,120 @@ const Musicyoulike = (props) => {
         </div>
       </div>
 
-      {filterdata?.length >= 0 ? (
-        <div className="row cards Musicyoulikes">
-          {filterdata?.slice(0, 3).map((ele, key) => (
-            <div className="col-12 col-md-4" key={key}>
-              <div className="Musicyoulike_card_blue">
-                <img className="img" src={ele?.image1} />
-                <div className="card_content">
-                  <p style={{ paddingTop: "1rem" }} className="businnes">
-                    {ele?.businessName} <span>{ele?.price}</span>
-                  </p>
-                  <p>
-                    Distance:{" "}
-                    {getDistanceFromCurrent(ele?.location?.coordinates)} Km
-                  </p>
-                  <p>Location : {ele?.city}</p>
-                  <p>
-                    Vibes :&nbsp;{" "}
-                    <span className="gener-name">
-                      {" "}
-                      {ele.MusicVibe1 ? ele.MusicVibe1 : "Jazz"}{" "}
-                    </span>{" "}
-                    &nbsp;
-                    <span className="gener-name">
-                      {ele.MusicVibe2 ? ele.MusicVibe2 : "Pop"}
-                    </span>
-                  </p>
+      {props.randomdata == 0 ? (
+        <>
+          {filterdata?.length >= 0 ? (
+            <div className="row cards Musicyoulikes">
+              {filterdata?.slice(0, 3).map((ele, key) => (
+                <div className="col-12 col-md-4" key={key}>
+                  <div className="Musicyoulike_card_blue">
+                    <img className="img" src={ele?.image1} />
+                    <div className="card_content">
+                      <p style={{ paddingTop: "1rem" }} className="businnes">
+                        {ele?.businessName} <span>{ele?.price}</span>
+                      </p>
+                      <p>
+                        Distance:{" "}
+                        {getDistanceFromCurrent(ele?.location?.coordinates)} Km
+                      </p>
+                      <p>Location : {ele?.city}</p>
+                      <p>
+                        Vibes :&nbsp;{" "}
+                        <span className="gener-name">
+                          {" "}
+                          {ele.MusicVibe1 ? ele.MusicVibe1 : "Jazz"}{" "}
+                        </span>{" "}
+                        &nbsp;
+                        <span className="gener-name">
+                          {ele.MusicVibe2 ? ele.MusicVibe2 : "Pop"}
+                        </span>
+                      </p>
+                    </div>
+                    <button className="Moreinfo btn" type="button">
+                      see more info
+                      <img
+                        className="right-arrow"
+                        src="./img/right-arrow.png"
+                      />
+                    </button>
+                  </div>
                 </div>
-                <button className="Moreinfo btn" type="button">
-                  see more info
-                  <img className="right-arrow" src="./img/right-arrow.png" />
+              ))}
+
+              <div className="share_buttons">
+                <button className="btn" type="button" onClick={getGeners}>
+                  <img className="genere-image" src="./img/31.png" />
+                  See your genre Breakdown
+                </button>
+                <button className="btn " type="button" onClick={getStories}>
+                  <img className="genere-image" src="./img/share.png" />
+                  Share on social media
+                </button>
+                <button className="btn " type="button">
+                  <img className="genere-image" src="./img/rocket.png" />
+                  Subscribe for product updates
                 </button>
               </div>
             </div>
-          ))}
-
-          <div className="share_buttons">
-            <button className="btn" type="button" onClick={getGeners}>
-              <img className="genere-image" src="./img/31.png" />
-              See your genre Breakdown
-            </button>
-            <button className="btn " type="button" onClick={getStories}>
-              <img className="genere-image" src="./img/share.png" />
-              Share on social media
-            </button>
-            <button className="btn " type="button">
-              <img className="genere-image" src="./img/rocket.png" />
-              Subscribe for product updates
-            </button>
-          </div>
-        </div>
+          ) : (
+            <CircularIndeterminate />
+          )}
+        </>
       ) : (
-        <CircularIndeterminate />
+        <>
+          {props.rest?.length >= 0 ? (
+            <div className="row cards Musicyoulikes">
+              {props.rest?.slice(0, 3).map((ele, key) => (
+                <div className="col-12 col-md-4" key={key}>
+                  <div className="Musicyoulike_card_blue">
+                    <img className="img" src={ele?.image1} />
+                    <div className="card_content">
+                      <p style={{ paddingTop: "1rem" }} className="businnes">
+                        {ele?.businessName} <span>{ele?.price}</span>
+                      </p>
+                      <p>Location : {ele?.city}</p>
+                      <p>
+                        Vibes :&nbsp;{" "}
+                        <span className="gener-name">
+                          {" "}
+                          {ele.MusicVibe1 ? ele.MusicVibe1 : "Jazz"}{" "}
+                        </span>{" "}
+                        &nbsp;
+                        <span className="gener-name">
+                          {ele.MusicVibe2 ? ele.MusicVibe2 : "Pop"}
+                        </span>
+                      </p>
+                    </div>
+                    <button className="Moreinfo btn" type="button">
+                      see more info
+                      <img
+                        className="right-arrow"
+                        src="./img/right-arrow.png"
+                      />
+                    </button>
+                  </div>
+                </div>
+              ))}
+
+              <div className="share_buttons">
+                <button className="btn" type="button" onClick={getGeners}>
+                  <img className="genere-image" src="./img/31.png" />
+                  See your genre Breakdown
+                </button>
+                <button className="btn " type="button" onClick={getStories}>
+                  <img className="genere-image" src="./img/share.png" />
+                  Share on social media
+                </button>
+                <button className="btn " type="button">
+                  <img className="genere-image" src="./img/rocket.png" />
+                  Subscribe for product updates
+                </button>
+              </div>
+            </div>
+          ) : (
+            <CircularIndeterminate />
+          )}
+        </>
       )}
     </>
   );
