@@ -18,7 +18,7 @@ const Userlocation = (props) => {
       .get(
         `${baseUrl}filterResturants?lat=${lattitudeValue}&long=${longitudeValue}`,
 
-        { 'headers': {  "Access-Control-Allow-Origin": "*"} }
+        { 'headers': {  "Access-Control-Allow-Origin": "https://twine-new.vercel.app/"} }
       )
       .then((res) => {
         const dupdata = res.data.data;
