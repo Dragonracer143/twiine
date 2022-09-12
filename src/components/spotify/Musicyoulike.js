@@ -7,11 +7,15 @@ import CircularIndeterminate from "./Loader";
 import useGeolocation from "react-hook-geolocation";
 import { toPng } from "html-to-image";
 import { useCallback } from "react";
-import Instagramstory from './Instagramstory';
+import Instagramstory from "./Instagramstory";
 
 const Musicyoulike = (props) => {
   const [filterdata, setFilterData] = useState();
- const [story, setStory] = useState(false)
+  const refs = document.getElementById("id");
+  const [story, setStory] = useState(false);
+  const [notfilterdata, setNofilterdata] = useState();
+  const [updatedata, setUpdatedata] = useState();
+
   Geocode.setApiKey("AIzaSyCLpRelH01xoapkwWD7w4chtFMQvjQPWn4");
 
   const navigate = useNavigate();
@@ -39,9 +43,30 @@ const Musicyoulike = (props) => {
       setFilterData(localData);
     }, 3000);
   }, []);
+  useEffect(() => {
+    setTimeout(() => {
+      const localDatafiler = JSON.parse(localStorage.getItem("Withoutfilter"));
+
+      setNofilterdata(localDatafiler);
+    }, 3000);
+  }, []);
+
+
+  useEffect(() => {
+    const localDatafilter = localStorage.getItem("unfilterstate");
+    const Datafilter = JSON.parse(localStorage.getItem("filterstate"));
+    if (localDatafilter) {
+      setUpdatedata(localDatafilter);
+    } else {
+      setUpdatedata(Datafilter);
+    }
+  });
   const getStories = () => {
-    // navigate("/instagramstory");
-    setStory(true)
+    setStory(true);
+// console.log("refs", refs)
+
+
+
   };
   const geolocation = useGeolocation();
   const lattitudeValue = geolocation.latitude;
@@ -60,15 +85,13 @@ const Musicyoulike = (props) => {
   };
 
   useEffect(() => {
-     if(story == true){
+    if (story == true) {
       setTimeout(() => {
         onButtonClick();
-      }, 3000);
-     }
-
+      }, 1000);
+    }
   });
-
-  const refs = document.getElementById("id");
+// console.log("refs", refs)
 
   const onButtonClick = useCallback(() => {
     if (refs === null) {
@@ -90,7 +113,7 @@ const Musicyoulike = (props) => {
       });
   }, [refs]);
   return (
-    <>
+    <div className={story == true ? "download-image" : ""}>
       <div className="Musicyoulike">
         <img className="twiinevblack_logo" src="./img/twiineblack.png" />
         <div className="heading">
@@ -109,7 +132,7 @@ const Musicyoulike = (props) => {
         </div>
       </div>
 
-      {props.randomdata == 0 ? (
+      {updatedata == 0 ? (
         <>
           {filterdata?.length >= 0 ? (
             <div className="row cards Musicyoulikes">
@@ -140,14 +163,13 @@ const Musicyoulike = (props) => {
                       </p>
                     </div>
                     <button className="Moreinfo btn" type="button">
-                    <a href={ele.yelpURL} target="_blank">
-                     
-                      see more info
-                      <img
-                        className="right-arrow"
-                        src="./img/right-arrow.png"
-                      />
-                    </a>
+                      <a href={ele.yelpURL} target="_blank">
+                        see more info
+                        <img
+                          className="right-arrow"
+                          src="./img/right-arrow.png"
+                        />
+                      </a>
                     </button>
                   </div>
                 </div>
@@ -179,9 +201,9 @@ const Musicyoulike = (props) => {
         </>
       ) : (
         <>
-          {props.rest?.length !== 0 ? (
+          {notfilterdata?.length >= 0 ? (
             <div className="row cards Musicyoulikes">
-              {props.rest?.slice(0, 3).map((ele, key) => (
+              {notfilterdata?.slice(0, 3).map((ele, key) => (
                 <div className="col-12 col-md-4" key={key}>
                   <div className="Musicyoulike_card_blue">
                     <img className="img" src={ele?.image1} />
@@ -204,12 +226,11 @@ const Musicyoulike = (props) => {
                     </div>
                     <button className="Moreinfo btn" type="button">
                       <a href={ele?.yelpURL} target="_blank">
-                      see more info
-                      
-                      <img
-                        className="right-arrow"
-                        src="./img/right-arrow.png"
-                      />
+                        see more info
+                        <img
+                          className="right-arrow"
+                          src="./img/right-arrow.png"
+                        />
                       </a>
                     </button>
                   </div>
@@ -241,12 +262,18 @@ const Musicyoulike = (props) => {
           )}
         </>
       )}
-   {story == true ? 
-   
-   <Instagramstory story={story} filterdata={filterdata}/>
-    : null}
-  
-    </>
+
+      {story == true ? <p className="download "> ...downloading</p> : null}
+      {story == true ? (
+        <Instagramstory
+          rest={props.rest}
+          story={story}
+          filterdata={filterdata}
+          notfilterdata={notfilterdata}
+          updatedata={updatedata}
+        />
+      ) : null}
+    </div>
   );
 };
 

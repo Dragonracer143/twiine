@@ -10,6 +10,7 @@ const Userlocation = (props) => {
   const longitudeValue = geolocation.longitude;
   const [musicvibe, setMusicvibe] = useState([]);
   let token = localStorage.getItem("token");
+
   const navigate = useNavigate();
   const getDataBytLocation = () => {
     let path = `/musicyoulike`;
@@ -18,7 +19,11 @@ const Userlocation = (props) => {
       .get(
         `${baseUrl}filterResturants?lat=${lattitudeValue}&long=${longitudeValue}`,
 
-        { 'headers': {  "Access-Control-Allow-Origin": "https://twine-new.vercel.app/"} }
+        {
+          headers: {
+            "Access-Control-Allow-Origin": "https://twine-new.vercel.app/",
+          },
+        }
       )
       .then((res) => {
         const dupdata = res.data.data;
@@ -36,9 +41,37 @@ const Userlocation = (props) => {
 
         localStorage.setItem("filterResturant", JSON.stringify(dupChars));
       });
-props.setRandomdata("0")
+    props.setRandomdata("0");
+
+    localStorage.setItem("filterstate", "0");
+
     navigate(path);
   };
+
+  const getDataByGener = () => {
+    let path = `/musicyoulike`;
+    // const baseUrl = "http://localhost:8000/";
+    const data = axios.get(`${baseUrl}withoutfilter`).then((res) => {
+      const dupdata = res.data;
+      let test = [];
+      musicvibe.forEach((element) => {
+        const findData = dupdata.filter(
+          (x) =>
+            x.MusicVibe1.toLowerCase() == element.toLowerCase() ||
+            x.MusicVibe2.toLowerCase() == element.toLowerCase()
+        );
+        test.push(...findData);
+      });
+      let dupChars = getUniqueListBy(test, "businessName");
+
+      localStorage.setItem("Withoutfilter", JSON.stringify(dupChars));
+    });
+    props.setRandomdata("1");
+    navigate(path);
+    localStorage.setItem("filterstate","1");
+
+  };
+
   function getUniqueListBy(arr, key) {
     return [...new Map(arr.map((item) => [item[key], item])).values()];
   }
@@ -92,7 +125,7 @@ props.setRandomdata("0")
   const getNotbynear = () => {
     let path = `/musicyoulike`;
     navigate(path);
-    props.setRandomdata("1")
+    props.setRandomdata("1");
   };
 
   return (
@@ -115,7 +148,7 @@ props.setRandomdata("0")
             </button>
           </div>
           <div className="no_btn">
-            <button className="btn" type="button" onClick={getNotbynear}>
+            <button className="btn" type="button" onClick={getDataByGener}>
               no thanks
             </button>
           </div>

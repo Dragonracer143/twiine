@@ -13,8 +13,7 @@ import { getDistance, getPreciseDistance } from "geolib";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const Instagramstory = (props) => {
-
+const ResultBreakdownstory = (props) => {
 
   const [genernames, setGenernames] = useState([]);
   const [genervalues, setGenervalues] = useState([]);
@@ -23,22 +22,7 @@ const Instagramstory = (props) => {
   let token = localStorage.getItem("token");
   const geolocation = useGeolocation();
   let navigate = useNavigate();
-  const onButtonClick = useCallback(() => {
-    if (refs === null) {
-      return;
-    }
 
-    toPng(refs)
-      .then((dataUrl) => {
-        const link = document.createElement("a");
-        link.download = "name.png";
-        link.href = dataUrl;
-        link.click();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [refs]);
   const data = {
     labels: genernames.slice(0, 5),
     indexLabel: genernames.slice(0, 5),
@@ -79,7 +63,6 @@ const Instagramstory = (props) => {
         },
       })
       .catch((err) => {
-        console.log(err.response.status);
         if (err?.response?.status == 401) {
           localStorage.clear();
           navigate("/");
@@ -121,7 +104,7 @@ const Instagramstory = (props) => {
   useEffect(() => {
     onGetdata();
   }, []);
-  const onGetdata = async (e) => {
+   const onGetdata = async (e) => {
     const { data } = await axios
       .get("https://api.spotify.com/v1/me/top/tracks?offset=0&limit=5", {
         headers: {
@@ -140,7 +123,6 @@ const Instagramstory = (props) => {
   useEffect(() => {
     setTimeout(() => {
       const localData = JSON.parse(localStorage.getItem("filterResturant"));
-
       setFilterDatas(localData);
     }, 3000);
   }, []);
@@ -158,9 +140,10 @@ const Instagramstory = (props) => {
 
     return dis;
   };
+   console.log("updata", props.updata)
   return (
     <>
-      <div className={props.story == true ? "display-insta" : ""}>
+      <div className={props.instagram == true ? "display-insta" : ""}>
         <div className="Instagramstory" id="id">
           <img className="twiinevblack_logo" src="./img/twiineblack.png" />
 
@@ -211,10 +194,10 @@ const Instagramstory = (props) => {
             </span>
             ,
           </div>
-          {props.updatedata == 0 ? (
+          {props.updata == 0 ? (
             <>
               <div className="row cards Musicyoulikes insta">
-                {props?.filterdata?.slice(0, 3).map((ele, key) => (
+                {props?.filterstory?.slice(0, 3).map((ele, key) => (
                   <div className="col-12 col-md-4" key={key}>
                     <div className="Musicyoulike_card_blue">
                       <img className="img" src={ele?.image1} />
@@ -249,7 +232,7 @@ const Instagramstory = (props) => {
             <>
               {" "}
               <div className="row cards insta">
-                {props?.notfilterdata?.slice(0, 3).map((ele, key) => (
+                {props?.unfilterstory?.slice(0, 3).map((ele, key) => (
                   <div className="col-12 col-md-4" key={key}>
                     <div className="Musicyoulike_card_blue">
                       <img className="img" src={ele?.image1} />
@@ -275,4 +258,4 @@ const Instagramstory = (props) => {
   );
 };
 
-export default Instagramstory;
+export default ResultBreakdownstory;
