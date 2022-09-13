@@ -57,8 +57,8 @@ const Userlocation = (props) => {
       musicvibe.forEach((element) => {
         const findData = dupdata.filter(
           (x) =>
-            x.MusicVibe1.toLowerCase() == element.toLowerCase() ||
-            x.MusicVibe2.toLowerCase() == element.toLowerCase()
+            x.MusicVibe1?.toLowerCase() == element?.toLowerCase() ||
+            x.MusicVibe2?.toLowerCase() == element?.toLowerCase()
         );
         test.push(...findData);
       });
