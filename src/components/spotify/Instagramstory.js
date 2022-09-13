@@ -150,7 +150,7 @@ const Instagramstory = (props) => {
       color: "#DAB762",
     },
   ];
-  let generss = props?.genernames?.slice(0, 6);
+  let generss = genernames?.slice(0, 6);
   let colorss = ["#9ac3c3", "#05e6fd", "#24d58b", "#032416", "#5e5617"];
   for (let i = 0; i < generss?.length; i++) {
     for (let j = 0; j < colorArray?.length; j++) {
@@ -173,6 +173,16 @@ const Instagramstory = (props) => {
     ],
   };
 
+
+
+
+
+
+
+
+
+
+  
   const options = {
     plugins: {
       legend: {

@@ -148,13 +148,13 @@ const ResultBreakdownstory = (props) => {
       color: "#DAB762",
     },
   ];
-  let generss = props?.genernames?.slice(0, 6);
-  let colorss = ["#9ac3c3", "#05e6fd", "#24d58b", "#032416", "#5e5617"];
+  let generss = genernames?.slice(0, 6);
+  let colorss = ["black", "#05e6fd", "#24d58b", "#032416", "#5e5617"];
 
   for (let i = 0; i < generss?.length; i++) {
     for (let j = 0; j < colorArray?.length; j++) {
       if (colorArray[j]?.name === generss[i]) {
-        colorss[i]=colorArray[j].color;
+        colorss[i] = colorArray[j].color;
       }
     }
   }
@@ -269,7 +269,7 @@ const ResultBreakdownstory = (props) => {
   };
   return (
     <>
-      <div className={props.instagram == true ? "display-insta" : "hide"}>
+      <div className={props.instagram == true ? "display-insta" : "hides"}>
         <div className="Instagramstory" id="id">
           <img className="twiinevblack_logo" src="./img/twiineblack.png" />
 
