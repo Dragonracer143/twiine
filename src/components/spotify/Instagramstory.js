@@ -127,7 +127,7 @@ const Instagramstory = (props) => {
     },
     {
       id: 17,
-      name: "abdc",
+      name: "desi hip hop",
       color: "#D4BCB0",
     },
     {
@@ -167,7 +167,7 @@ const Instagramstory = (props) => {
     },
   ];
   let generss = props?.genernames?.slice(0, 6);
-  let colorss = ["red", "white", "yellow", "blue", "orange"];
+  let colorss = ["#9ac3c3", "#05e6fd", "#24d58b", "#032416", "#5e5617"];
   for (let i = 0; i < generss?.length; i++) {
     for (let j = 0; j < colorArray?.length; j++) {
       if (colorArray[j]?.name === generss[i]) {

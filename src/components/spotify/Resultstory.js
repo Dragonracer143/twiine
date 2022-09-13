@@ -18,7 +18,7 @@ const ResultBreakdownstory = (props) => {
   const [genernames, setGenernames] = useState([]);
   const [genervalues, setGenervalues] = useState([]);
   const refs = document.getElementById("id");
-  const [filterdatas, setFilterDatas] = useState([]);
+  // const [filterdatas, setFilterDatas] = useState([]);
   let token = localStorage.getItem("token");
   const geolocation = useGeolocation();
   let navigate = useNavigate();
@@ -110,7 +110,7 @@ const ResultBreakdownstory = (props) => {
     },
     {
       id: 17,
-      name: "abdc",
+      name: "desi hip hop",
       color: "#D4BCB0",
     },
     {
@@ -151,6 +151,7 @@ const ResultBreakdownstory = (props) => {
   ];
   let generss = props?.genernames?.slice(0, 6);
   let colorss = ["#9ac3c3", "#05e6fd", "#24d58b", "#032416", "#5e5617"];
+
   for (let i = 0; i < generss?.length; i++) {
     for (let j = 0; j < colorArray?.length; j++) {
       if (colorArray[j]?.name === generss[i]) {
@@ -249,12 +250,10 @@ const ResultBreakdownstory = (props) => {
       });
     setPlaylist(data.items);
   };
-  useEffect(() => {
-    setTimeout(() => {
-      const localData = JSON.parse(localStorage.getItem("filterResturant"));
-      setFilterDatas(localData);
-    }, 3000);
-  }, []);
+  // useEffect(() => {
+  //     const localData = JSON.parse(localStorage.getItem("filterResturant"));
+  //     setFilterDatas(localData);
+  // }, []);
   const lattitudeValue = geolocation.latitude;
   const longitudeValue = geolocation.longitude;
   const getDistanceFromCurrent = (cordinates) => {

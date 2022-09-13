@@ -8,13 +8,14 @@ import { Chart as ChartJS, Tooltip, Legend } from "chart.js";
 import CircularIndeterminate from "./Loader";
 import { AddBoxOutlined } from "@mui/icons-material";
 import ResultBreakdownstory from "./Resultstory";
-import { LinearProgress ,Box} from "@mui/material";
+import { LinearProgress, Box } from "@mui/material";
 import { toPng } from "html-to-image";
 import { useCallback } from "react";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 const ResultBreakdown = (props) => {
   const refs = document.getElementById("id");
+  console.log("refs", refs);
   const [playlist, setPlaylist] = useState();
   const [filterstory, setFilterstory] = useState([]);
   const [unfilterstory, setUnfilterstory] = useState([]);
@@ -147,11 +148,12 @@ const ResultBreakdown = (props) => {
     },
   ];
   let generss = props?.genernames?.slice(0, 6);
-  let colorss = ["red", "white", "yellow", "blue", "orange"];
+  let colorss = ["#9ac3c3", "#05e6fd", "#24d58b", "#032416", "#5e5617"];
+
   for (let i = 0; i < generss?.length; i++) {
     for (let j = 0; j < colorArray?.length; j++) {
       if (colorArray[j]?.name === generss[i]) {
-        colorss[i]=colorArray[j].color;
+        colorss[i] = colorArray[j].color;
       }
     }
   }
@@ -290,9 +292,8 @@ const ResultBreakdown = (props) => {
 
   useEffect(() => {
     if (instagram == true) {
-      setTimeout(() => {
         onButtonClick();
-      }, 1000);
+      
     }
   });
 
@@ -307,7 +308,7 @@ const ResultBreakdown = (props) => {
         link.download = "name.png";
         link.href = dataUrl;
         link.click();
-          setInstagram(false);
+        setInstagram(false);
       })
       .catch((err) => {
         console.log(err);
@@ -383,12 +384,12 @@ const ResultBreakdown = (props) => {
 </p> : null}
 
         {instagram == true ? (
-          <ResultBreakdownstory
-            filterstory={filterstory}
-            unfilterstory={unfilterstory}
-            instagram={instagram}
-            updata={updata}
-          />
+        <ResultBreakdownstory
+          filterstory={filterstory}
+          unfilterstory={unfilterstory}
+          instagram={instagram}
+          updata={updata}
+        />
         ) : null}
       </div>
     </>

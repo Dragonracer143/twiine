@@ -37,18 +37,12 @@ const Musicyoulike = (props) => {
     }, 3000);
   }, []);
   useEffect(() => {
-    setTimeout(() => {
       const localData = JSON.parse(localStorage.getItem("filterResturant"));
-
       setFilterData(localData);
-    }, 3000);
   }, []);
   useEffect(() => {
-    setTimeout(() => {
       const localDatafiler = JSON.parse(localStorage.getItem("Withoutfilter"));
-
       setNofilterdata(localDatafiler);
-    }, 3000);
   }, []);
 
   useEffect(() => {
