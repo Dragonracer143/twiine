@@ -107,7 +107,7 @@ const ResultBreakdown = (props) => {
     },
     {
       id: 17,
-      name: "abdc",
+      name: "desi hip hop",
       color: "#D4BCB0",
     },
     {
