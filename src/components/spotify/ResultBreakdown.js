@@ -145,10 +145,10 @@ const ResultBreakdown = (props) => {
   let randomcolor = [ "red", "white", "yellow", "blue", "orange"]
 
   let colorss = [];
-  for (let i = 0; i < generss.length; i++) {
-    for (let j = 0; j < colorArray.length; j++) {
-      if (colorArray[j].name === generss[i]) {
-        colorss.push(colorArray[j].color);
+  for (let i = 0; i < generss?.length; i++) {
+    for (let j = 0; j < colorArray?.length; j++) {
+      if (colorArray[j]?.name === generss[i]) {
+        colorss.push(colorArray[j]?.color);
       }
       else{
 

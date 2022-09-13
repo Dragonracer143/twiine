@@ -148,10 +148,10 @@ const ResultBreakdownstory = (props) => {
   let generss = props?.genernames?.slice(0, 5);
 
   let colorss = [];
-  for (let i = 0; i < generss.length; i++) {
-    for (let j = 0; j < colorArray.length; j++) {
-      if (colorArray[j].name === generss[i]) {
-        colorss.push(colorArray[j].color);
+  for (let i = 0; i < generss?.length; i++) {
+    for (let j = 0; j < colorArray?.length; j++) {
+      if (colorArray[j]?.name === generss[i]) {
+        colorss.push(colorArray[j]?.color);
       }
       else{
 
