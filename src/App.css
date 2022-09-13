@@ -2540,7 +2540,7 @@ button.Visit_btn.more_result_btn {
   }
 
   body p {
-    font-size: 16px !important;
+    font-size: 15px !important;
   }
 
   body form label {
@@ -3038,9 +3038,8 @@ img.Vector_logo {
 
   .applemusic_btn .btn {
     font-size: 20px;
-    padding: 0px 25px;
-  }
-
+    padding: 3px 13px;
+}
   .spotify_btn .btn {
     font-size: 20px;
     padding: 0px 30px;
@@ -3508,7 +3507,7 @@ button.Go_Back.btn {
   font-family: "Nunito";
   font-style: normal;
   font-weight: 700;
-  font-size: 22px;
+  font-size: 20px;
   color: #000000;
   margin-top: 2rem;
   background: #ffffff;
@@ -3557,8 +3556,7 @@ img.back {
     max-width: unset;
     width: 85% !important;
     font-weight: 700;
-    margin-bottom: 2rem;
-    margin-left: 20px;
+      margin-left: 20px;
     margin-right: 20px;
   }
 }
@@ -3815,7 +3813,7 @@ button.poweredby_btn.btn img {
 
 @media screen and (max-width: 767px) {
   .Musicyoulike .heading {
-    font-size: 16px;
+    font-size: 15px;
   }
   .row.cards.Musicyoulikes {
     margin: 15px;
@@ -3829,14 +3827,14 @@ button.poweredby_btn.btn img {
     width: 100%;
   }
   .share_buttons {
-    margin-bottom: 15rem;
+    margin-bottom: 3rem;
   }
-  .mausiclogin_main_inner {
+  /* .mausiclogin_main_inner {
     height: calc(100vh - 200px);
-  }
-  .Userlocation_main .Userlocation_main_inner {
+  } */
+  /* .Userlocation_main .Userlocation_main_inner {
     height: calc(100vh - 200px);
-  }
+  } */
   .song-name {
     font-size: 14px !important;
     width: 100% !important;
@@ -3867,7 +3865,5 @@ button.poweredby_btn.btn img {
   margin-bottom: 0rem;
   margin-top: 2rem;
 }
-.go-back-share {
-  margin-bottom: 2rem;
-}
+
 }
