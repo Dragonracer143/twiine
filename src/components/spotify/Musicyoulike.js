@@ -12,6 +12,7 @@ import Instagramstory from "./Instagramstory";
 const Musicyoulike = (props) => {
   const [filterdata, setFilterData] = useState();
   const refs = document.getElementById("id");
+
   const [story, setStory] = useState(false);
   const [notfilterdata, setNofilterdata] = useState();
   const [updatedata, setUpdatedata] = useState();
@@ -35,7 +36,6 @@ const Musicyoulike = (props) => {
           console.log(e);
         });
     }, 3000);
-    
   }, []);
   useEffect(() => {
     setTimeout(() => {
@@ -61,9 +61,15 @@ const Musicyoulike = (props) => {
       setUpdatedata(Datafilter);
     }
   });
+
   const getStories = () => {
     setStory(true);
+
+    setTimeout(() => {
+      onButtonClick();
+    }, 1000);
   };
+
   const geolocation = useGeolocation();
   const lattitudeValue = geolocation.latitude;
   const longitudeValue = geolocation.longitude;
@@ -80,16 +86,17 @@ const Musicyoulike = (props) => {
     return parseFloat(dis).toFixed(1);
   };
 
-  useEffect(() => {
-    if (story == true) {
-      setTimeout(() => {
-        onButtonClick();
-      }, 1000);
-    }
-  });
+  // useEffect(() => {
+  //   if (story == true) {
+  //     setTimeout(() => {
+  //       onButtonClick();
+  //     }, 1000);
+  //   }
+  // });
 
   const onButtonClick = useCallback(() => {
     if (refs === null) {
+      console.log("Not Working");
       return;
     }
 
@@ -257,19 +264,17 @@ const Musicyoulike = (props) => {
       )}
 
       {story == true ? (
-        <p className="download ">
+        <div className="download ">
           <CircularIndeterminate />
-        </p>
+        </div>
       ) : null}
-      {story == true ? (
-        <Instagramstory
-          rest={props.rest}
-          story={story}
-          filterdata={filterdata}
-          notfilterdata={notfilterdata}
-          updatedata={updatedata}
-        />
-      ) : null}
+      <Instagramstory
+        rest={props.rest}
+        story={story}
+        filterdata={filterdata}
+        notfilterdata={notfilterdata}
+        updatedata={updatedata}
+      />
     </div>
   );
 };

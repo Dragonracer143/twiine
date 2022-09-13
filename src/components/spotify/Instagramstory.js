@@ -18,27 +18,11 @@ const Instagramstory = (props) => {
 
   const [genernames, setGenernames] = useState([]);
   const [genervalues, setGenervalues] = useState([]);
-  const refs = document.getElementById("id");
   const [filterdatas, setFilterDatas] = useState([]);
   let token = localStorage.getItem("token");
   const geolocation = useGeolocation();
   let navigate = useNavigate();
-  const onButtonClick = useCallback(() => {
-    if (refs === null) {
-      return;
-    }
 
-    toPng(refs)
-      .then((dataUrl) => {
-        const link = document.createElement("a");
-        link.download = "name.png";
-        link.href = dataUrl;
-        link.click();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [refs]);
   const colorArray = [
     {
       id: 0,
@@ -290,7 +274,7 @@ const Instagramstory = (props) => {
   };
   return (
     <>
-      <div className={props.story == true ? "display-insta" : ""}>
+      <div className={props.story == true ? "display-insta" : "hide"}>
         <div className="Instagramstory" id="id">
           <img className="twiinevblack_logo" src="./img/twiineblack.png" />
 

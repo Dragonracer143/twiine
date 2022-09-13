@@ -1457,7 +1457,7 @@ i.fa.fa-star.rate {
   height: 100vh;
 }
 
-p.download {
+.download {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -3807,6 +3807,10 @@ button.poweredby_btn.btn img {
   justify-content: end;
   margin-right: 60px;
   cursor: pointer;
+}
+
+.hide {
+  display: none;
 }
 
 @media screen and (max-width: 767px) {

@@ -292,8 +292,7 @@ const ResultBreakdown = (props) => {
 
   useEffect(() => {
     if (instagram == true) {
-        onButtonClick();
-      
+      onButtonClick();
     }
   });
 
@@ -301,7 +300,6 @@ const ResultBreakdown = (props) => {
     if (refs === null) {
       return;
     }
-
     toPng(refs)
       .then((dataUrl) => {
         const link = document.createElement("a");
@@ -379,18 +377,20 @@ const ResultBreakdown = (props) => {
           <br />
           <br />
         </div>
-        {instagram == true ? <p className="download">         
-      <CircularIndeterminate />
-</p> : null}
-
         {instagram == true ? (
-        <ResultBreakdownstory
-          filterstory={filterstory}
-          unfilterstory={unfilterstory}
-          instagram={instagram}
-          updata={updata}
-        />
+          <div className="download">
+            <CircularIndeterminate />
+          </div>
         ) : null}
+
+     
+          <ResultBreakdownstory
+            filterstory={filterstory}
+            unfilterstory={unfilterstory}
+            instagram={instagram}
+            updata={updata}
+          />
+      
       </div>
     </>
   );

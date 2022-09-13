@@ -6,8 +6,10 @@ import { PowerInputSharp } from "@mui/icons-material";
 import { baseUrl } from "../../Services/Config";
 const Userlocation = (props) => {
   const geolocation = useGeolocation();
+   
   const lattitudeValue = geolocation.latitude;
   const longitudeValue = geolocation.longitude;
+  
   const [musicvibe, setMusicvibe] = useState([]);
   let token = localStorage.getItem("token");
 

@@ -17,7 +17,6 @@ const ResultBreakdownstory = (props) => {
 
   const [genernames, setGenernames] = useState([]);
   const [genervalues, setGenervalues] = useState([]);
-  const refs = document.getElementById("id");
   // const [filterdatas, setFilterDatas] = useState([]);
   let token = localStorage.getItem("token");
   const geolocation = useGeolocation();
@@ -270,7 +269,7 @@ const ResultBreakdownstory = (props) => {
   };
   return (
     <>
-      <div className={props.instagram == true ? "display-insta" : ""}>
+      <div className={props.instagram == true ? "display-insta" : "hide"}>
         <div className="Instagramstory" id="id">
           <img className="twiinevblack_logo" src="./img/twiineblack.png" />
 
