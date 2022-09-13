@@ -63,27 +63,27 @@ const ResultBreakdown = (props) => {
     {
       id: 8,
       name: "pakistani hip hop",
-      color: "#D0F0C0",
+      color: "#ff6347",
     },
     {
       id: 9,
       name: "sufi",
-      color: "#ACA173",
+      color: "#6f22af",
     },
     {
       id: 10,
       name: "desi hip hop",
-      color: "#978287",
+      color: "#8ca754",
     },
     {
       id: 11,
       name: "desi pop",
-      color: "#DAA762",
+      color: "#483e1e",
     },
     {
       id: 12,
       name: "punjabi pop",
-      color: "#030200",
+      color: "#42a75d",
     },
     {
       id: 13,
@@ -115,14 +115,44 @@ const ResultBreakdown = (props) => {
       name: "Soul",
       color: "#B27229",
     },
+    {
+      id: 19,
+      name: "Lo-Fi",
+      color: "#D0F0C0",
+    },
+    {
+      id: 20,
+      name: "Latin",
+      color: "#ACA173",
+    },
+    {
+      id: 21,
+      name: "Jazz",
+      color: "#978287",
+    },
+    {
+      id: 22,
+      name: "J-Pop",
+      color: "#DAA762",
+    },
+    {
+      id: 23,
+      name: "Dance Electronic",
+      color: "#030200",
+    },
   ];
   let generss = props?.genernames.slice(0, 5);
+  let randomcolor = [ "red", "white", "yellow", "blue", "orange"]
 
   let colorss = [];
   for (let i = 0; i < generss.length; i++) {
     for (let j = 0; j < colorArray.length; j++) {
       if (colorArray[j].name === generss[i]) {
         colorss.push(colorArray[j].color);
+      }
+      else{
+
+        colorss.push(randomcolor[j]);
       }
     }
   }

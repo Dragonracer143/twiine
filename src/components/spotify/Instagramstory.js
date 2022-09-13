@@ -39,6 +39,138 @@ const Instagramstory = (props) => {
         console.log(err);
       });
   }, [refs]);
+  const colorArray = [
+    {
+      id: 0,
+      name: "Pop",
+      color: "#375F68",
+    },
+    {
+      id: 1,
+      name: "PoFolk/Acousticp",
+      color: "#AC6E5F",
+    },
+    {
+      id: 2,
+      name: "Reggae",
+      color: "#4D745F",
+    },
+    {
+      id: 3,
+      name: "Rock",
+      color: "#322421",
+    },
+    {
+      id: 4,
+      name: "Classical",
+      color: "#C0C9C8",
+    },
+    {
+      id: 5,
+      name: "Rap",
+      color: "#234465",
+    },
+    {
+      id: 6,
+      name: "Hip Hop",
+      color: "#98BDC5",
+    },
+    {
+      id: 7,
+      name: "Metal",
+      color: "#F05745",
+    },
+    {
+      id: 8,
+      name: "pakistani hip hop",
+      color: "#ff6347",
+    },
+    {
+      id: 9,
+      name: "sufi",
+      color: "#6f22af",
+    },
+    {
+      id: 10,
+      name: "desi hip hop",
+      color: "#8ca754",
+    },
+    {
+      id: 11,
+      name: "desi pop",
+      color: "#483e1e",
+    },
+    {
+      id: 12,
+      name: "punjabi pop",
+      color: "#42a75d",
+    },
+    {
+      id: 13,
+      name: "Easy Listening / Soft Ro",
+      color: "#8A5334",
+    },
+    {
+      id: 14,
+      name: "K-Pop",
+      color: "#DEB0BA",
+    },
+    {
+      id: 15,
+      name: "R & B",
+      color: "#947700",
+    },
+    {
+      id: 16,
+      name: "Alternative",
+      color: "#8A8D6E",
+    },
+    {
+      id: 17,
+      name: "Country",
+      color: "#D4BCB0",
+    },
+    {
+      id: 18,
+      name: "Soul",
+      color: "#B27229",
+    },
+    {
+      id: 19,
+      name: "Lo-Fi",
+      color: "#D0F0C0",
+    },
+    {
+      id: 20,
+      name: "Latin",
+      color: "#ACA173",
+    },
+    {
+      id: 21,
+      name: "Jazz",
+      color: "#978287",
+    },
+    {
+      id: 22,
+      name: "J-Pop",
+      color: "#DAA762",
+    },
+    {
+      id: 23,
+      name: "Dance Electronic",
+      color: "#030200",
+    },
+  ];
+  let generss = props?.genernames.slice(0, 5);
+
+  let colorss = [];
+  for (let i = 0; i < generss.length; i++) {
+    for (let j = 0; j < colorArray.length; j++) {
+      if (colorArray[j].name === generss[i]) {
+        colorss.push(colorArray[j].color);
+      }
+    }
+  }
   const data = {
     labels: genernames.slice(0, 5),
     indexLabel: genernames.slice(0, 5),
@@ -46,13 +178,7 @@ const Instagramstory = (props) => {
     datasets: [
       {
         data: genervalues.slice(0, 5),
-        backgroundColor: [
-          "#AC6E5F",
-          "#978287",
-          "#030200",
-          "#322421",
-          "#D4BCB0",
-        ],
+        backgroundColor:colorss,
         borderColor: "#000",
         display: true,
       },
