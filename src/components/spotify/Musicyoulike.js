@@ -51,7 +51,6 @@ const Musicyoulike = (props) => {
     }, 3000);
   }, []);
 
-
   useEffect(() => {
     const localDatafilter = localStorage.getItem("unfilterstate");
     const Datafilter = JSON.parse(localStorage.getItem("filterstate"));
@@ -63,10 +62,7 @@ const Musicyoulike = (props) => {
   });
   const getStories = () => {
     setStory(true);
-// console.log("refs", refs)
-
-
-
+    // console.log("refs", refs)
   };
   const geolocation = useGeolocation();
   const lattitudeValue = geolocation.latitude;
@@ -81,7 +77,7 @@ const Musicyoulike = (props) => {
     );
     dis = (parseFloat(dis) / 1000 / 1.609).toFixed(1);
 
-    return dis;
+    return parseFloat(dis).toFixed(1);
   };
 
   useEffect(() => {
@@ -91,7 +87,7 @@ const Musicyoulike = (props) => {
       }, 1000);
     }
   });
-// console.log("refs", refs)
+  // console.log("refs", refs)
 
   const onButtonClick = useCallback(() => {
     if (refs === null) {

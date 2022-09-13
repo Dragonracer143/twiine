@@ -3,7 +3,7 @@ import useGeolocation from "react-hook-geolocation";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { PowerInputSharp } from "@mui/icons-material";
-import { baseUrl } from "../../Services/Config";
+// import { baseUrl } from "../../Services/Config";
 const Userlocation = (props) => {
   const geolocation = useGeolocation();
   const lattitudeValue = geolocation.latitude;
@@ -14,7 +14,7 @@ const Userlocation = (props) => {
   const navigate = useNavigate();
   const getDataBytLocation = () => {
     let path = `/musicyoulike`;
-    // const baseUrl = "http://localhost:8000/";
+    const baseUrl = "http://localhost:8000/";
     const data = axios
       .get(
         `${baseUrl}filterResturants?lat=${lattitudeValue}&long=${longitudeValue}`,
@@ -50,7 +50,7 @@ const Userlocation = (props) => {
 
   const getDataByGener = () => {
     let path = `/musicyoulike`;
-    // const baseUrl = "http://localhost:8000/";
+    const baseUrl = "http://localhost:8000/";
     const data = axios.get(`${baseUrl}withoutfilter`).then((res) => {
       const dupdata = res.data;
       let test = [];
