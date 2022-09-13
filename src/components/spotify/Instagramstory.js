@@ -161,7 +161,7 @@ const Instagramstory = (props) => {
       color: "#030200",
     },
   ];
-  let generss = props?.genernames.slice(0, 5);
+  let generss = props?.genernames?.slice(0, 5);
 
   let colorss = [];
   for (let i = 0; i < generss.length; i++) {
