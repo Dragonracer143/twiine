@@ -307,9 +307,7 @@ const ResultBreakdown = (props) => {
         link.download = "name.png";
         link.href = dataUrl;
         link.click();
-        setTimeout(() => {
           setInstagram(false);
-        }, 1000);
       })
       .catch((err) => {
         console.log(err);
