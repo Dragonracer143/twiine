@@ -51,7 +51,7 @@ const Userlocation = (props) => {
   const getDataByGener = () => {
     let path = `/musicyoulike`;
     // const baseUrl = "http://localhost:8000/";
-    const data = axios.post(`${baseUrl}withoutfilter`).then((res) => {
+    const data = axios.get(`${baseUrl}withoutfilter`).then((res) => {
       const dupdata = res.data;
       let test = [];
       musicvibe.forEach((element) => {
