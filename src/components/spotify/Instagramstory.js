@@ -166,7 +166,7 @@ const Instagramstory = (props) => {
       color: "#DAB762",
     },
   ];
-  let generss = props?.genernames.slice(0, 6);
+  let generss = props?.genernames?.slice(0, 6);
   let colorss = ["red", "white", "yellow", "blue", "orange"];
   for (let i = 0; i < generss?.length; i++) {
     for (let j = 0; j < colorArray?.length; j++) {
@@ -176,12 +176,12 @@ const Instagramstory = (props) => {
     }
   }
   const data = {
-    labels: genernames.slice(0, 5),
-    indexLabel: genernames.slice(0, 5),
+    labels: genernames?.slice(0, 5),
+    indexLabel: genernames?.slice(0, 5),
     indexLabelPlacement: "inside",
     datasets: [
       {
-        data: genervalues.slice(0, 5),
+        data: genervalues?.slice(0, 5),
         backgroundColor:colorss,
         borderColor: "#000",
         display: true,

@@ -146,7 +146,7 @@ const ResultBreakdown = (props) => {
       color: "#DAB762",
     },
   ];
-  let generss = props?.genernames.slice(0, 6);
+  let generss = props?.genernames?.slice(0, 6);
   let colorss = ["red", "white", "yellow", "blue", "orange"];
   for (let i = 0; i < generss?.length; i++) {
     for (let j = 0; j < colorArray?.length; j++) {
@@ -157,15 +157,15 @@ const ResultBreakdown = (props) => {
   }
 
   const data = {
-    labels: props?.genernames.slice(0, 5),
+    labels: props?.genernames?.slice(0, 5),
     type: "pie",
-    indexLabel: props?.genernames.slice(0, 5),
+    indexLabel: props?.genernames?.slice(0, 5),
     indexLabelPlacement: "inside",
     indexLabelFontSize: 15,
     indexLabelMaxWidth: 53,
     datasets: [
       {
-        data: props?.genervalues.slice(0, 5),
+        data: props?.genervalues?.slice(0, 5),
         backgroundColor: colorss,
         borderColor: "#000",
         display: true,
