@@ -21,6 +21,12 @@ const Musicyoulike = (props) => {
 
   const navigate = useNavigate();
 
+
+
+
+
+
+
   const getGeners = () => {
     let path = "/Resultbreakdown";
     navigate(path);
@@ -67,7 +73,7 @@ const Musicyoulike = (props) => {
 
     setTimeout(() => {
       onButtonClick();
-    }, 1000);
+    }, 3000);
   };
 
   const geolocation = useGeolocation();

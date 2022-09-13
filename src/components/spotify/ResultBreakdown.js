@@ -286,15 +286,16 @@ const ResultBreakdown = (props) => {
     navigate(path);
   };
 
+
   const shareOnsocial = () => {
     setInstagram(true);
+
+    setTimeout(() => {
+      onButtonClick();
+    }, 3000);
   };
 
-  useEffect(() => {
-    if (instagram == true) {
-      onButtonClick();
-    }
-  });
+
 
   const onButtonClick = useCallback(() => {
     if (refs === null) {
