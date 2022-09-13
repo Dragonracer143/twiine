@@ -269,7 +269,7 @@ const ResultBreakdownstory = (props) => {
   };
   return (
     <>
-      <div className={props.instagram == true ? "display-insta" : "hides"}>
+      <div className={props.instagram == true ? "display-insta" : "hide"}>
         <div className="Instagramstory" id="id">
           <img className="twiinevblack_logo" src="./img/twiineblack.png" />
 
