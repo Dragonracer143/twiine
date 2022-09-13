@@ -8,7 +8,7 @@ import { Chart as ChartJS, Tooltip, Legend } from "chart.js";
 import CircularIndeterminate from "./Loader";
 import { AddBoxOutlined } from "@mui/icons-material";
 import ResultBreakdownstory from "./Resultstory";
-
+import { LinearProgress ,Box} from "@mui/material";
 import { toPng } from "html-to-image";
 import { useCallback } from "react";
 
@@ -378,7 +378,9 @@ const ResultBreakdown = (props) => {
           <br />
           <br />
         </div>
-        {instagram == true ? <p className="download"> ...downloading</p> : null}
+        {instagram == true ? <p className="download">         
+      <CircularIndeterminate />
+</p> : null}
 
         {instagram == true ? (
           <ResultBreakdownstory

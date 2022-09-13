@@ -62,7 +62,6 @@ const Musicyoulike = (props) => {
   });
   const getStories = () => {
     setStory(true);
-    // console.log("refs", refs)
   };
   const geolocation = useGeolocation();
   const lattitudeValue = geolocation.latitude;
@@ -87,7 +86,6 @@ const Musicyoulike = (props) => {
       }, 1000);
     }
   });
-  // console.log("refs", refs)
 
   const onButtonClick = useCallback(() => {
     if (refs === null) {
@@ -100,7 +98,7 @@ const Musicyoulike = (props) => {
         link.download = "name.png";
         link.href = dataUrl;
         link.click();
-          setStory(false);
+        setStory(false);
       })
       .catch((err) => {
         console.log(err);
@@ -257,7 +255,11 @@ const Musicyoulike = (props) => {
         </>
       )}
 
-      {story == true ? <p className="download "> ...downloading</p> : null}
+      {story == true ? (
+        <p className="download ">
+          <CircularIndeterminate />
+        </p>
+      ) : null}
       {story == true ? (
         <Instagramstory
           rest={props.rest}

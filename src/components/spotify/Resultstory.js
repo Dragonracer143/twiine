@@ -269,7 +269,6 @@ const ResultBreakdownstory = (props) => {
 
     return dis;
   };
-   console.log("updata", props.updata)
   return (
     <>
       <div className={props.instagram == true ? "display-insta" : ""}>
