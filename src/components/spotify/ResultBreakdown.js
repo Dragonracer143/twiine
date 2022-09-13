@@ -15,145 +15,119 @@ import { useCallback } from "react";
 ChartJS.register(ArcElement, Tooltip, Legend);
 const ResultBreakdown = (props) => {
   const refs = document.getElementById("id");
-  console.log("vrefsrefs: ", refs);
   const [playlist, setPlaylist] = useState();
   const [filterstory, setFilterstory] = useState([]);
   const [unfilterstory, setUnfilterstory] = useState([]);
   const [updata, setUpdata] = useState();
-  const colorArray =[
-
+  const colorArray = [
     {
-      "id":0,
-      "name": "Pop",
-      "color":"#375F68"
-
+      id: 0,
+      name: "Pop",
+      color: "#375F68",
     },
     {
-      "id":1,
-      "name": "PoFolk/Acousticp",
-      "color":"#AC6E5F"
-
+      id: 1,
+      name: "PoFolk/Acousticp",
+      color: "#AC6E5F",
     },
     {
-      "id":2,
-      "name": "Reggae",
-      "color":"#4D745F"
-
+      id: 2,
+      name: "Reggae",
+      color: "#4D745F",
     },
-      {
-        "id":3,
-        "name": "Rock",
-        "color":"#322421"
-  
-      },
-      {
-        "id":4,
-        "name": "Classical",
-        "color":"#C0C9C8"
-  
-      },
-      {
-        "id":5,
-        "name": "Rap",
-        "color":"#234465"
-  
-      },
-      {
-        "id":6,
-        "name": "Hip Hop",
-        "color":"#98BDC5"
-  
-      },
-      {
-        "id":7,
-        "name": "Metal",
-        "color":"#F05745"
-  
-      },
-      {
-        "id":8,
-        "name": "pakistani hip hop",
-        "color":"#D0F0C0"
-  
-      },
-      {
-        "id":9,
-        "name": "sufi",
-        "color":"#ACA173"
-  
-      },
-      {
-        "id":10,
-        "name": "desi hip hop",
-        "color":"#978287"
-  
-      },
-      {
-        "id":11,
-        "name": "desi pop",
-        "color":"#DAA762"
-  
-      },
-      {
-        "id":12,
-        "name": "punjabi pop",
-        "color":"#030200"
-  
-      },
-      {
-        "id":13,
-        "name": "Easy Listening / Soft Ro",
-        "color":"#8A5334"
-  
-      }, {
-        "id":14,
-        "name": "K-Pop",
-        "color":"#DEB0BA"
-  
-      }, {
-        "id":15,
-        "name": "R & B",
-        "color":"#947700"
-  
-      }
-      , {
-        "id":16,
-        "name": "Alternative",
-        "color":"#8A8D6E"
-  
-      }
-      , {
-        "id":17,
-        "name": "Country",
-        "color":"#D4BCB0"
-  
-      }
-      , {
-        "id":18,
-        "name": "Soul",
-        "color":"#B27229"
-  
-      }
+    {
+      id: 3,
+      name: "Rock",
+      color: "#322421",
+    },
+    {
+      id: 4,
+      name: "Classical",
+      color: "#C0C9C8",
+    },
+    {
+      id: 5,
+      name: "Rap",
+      color: "#234465",
+    },
+    {
+      id: 6,
+      name: "Hip Hop",
+      color: "#98BDC5",
+    },
+    {
+      id: 7,
+      name: "Metal",
+      color: "#F05745",
+    },
+    {
+      id: 8,
+      name: "pakistani hip hop",
+      color: "#D0F0C0",
+    },
+    {
+      id: 9,
+      name: "sufi",
+      color: "#ACA173",
+    },
+    {
+      id: 10,
+      name: "desi hip hop",
+      color: "#978287",
+    },
+    {
+      id: 11,
+      name: "desi pop",
+      color: "#DAA762",
+    },
+    {
+      id: 12,
+      name: "punjabi pop",
+      color: "#030200",
+    },
+    {
+      id: 13,
+      name: "Easy Listening / Soft Ro",
+      color: "#8A5334",
+    },
+    {
+      id: 14,
+      name: "K-Pop",
+      color: "#DEB0BA",
+    },
+    {
+      id: 15,
+      name: "R & B",
+      color: "#947700",
+    },
+    {
+      id: 16,
+      name: "Alternative",
+      color: "#8A8D6E",
+    },
+    {
+      id: 17,
+      name: "Country",
+      color: "#D4BCB0",
+    },
+    {
+      id: 18,
+      name: "Soul",
+      color: "#B27229",
+    },
+  ];
+  let generss = props?.genernames.slice(0, 5);
 
-
-    ]
-    let generss=props?.genernames.slice(0, 5)
-    console.log("color", generss);
-
-    let colorss=[];
-    for(let i=0; i<generss.length; i++){
-      for(let j=0; j<colorArray.length; j++){
-        // console.log("colors are matched", colorArray[j].color);
-        
-        if(colorArray[j].name===generss[i]){
-          colorss.push(colorArray[j].color);  
-          
-          console.log("colors are matched", colorArray[j].color);
-        }
+  let colorss = [];
+  for (let i = 0; i < generss.length; i++) {
+    for (let j = 0; j < colorArray.length; j++) {
+      if (colorArray[j].name === generss[i]) {
+        colorss.push(colorArray[j].color);
       }
     }
-    
-   const data = {
+  }
+
+  const data = {
     labels: props?.genernames.slice(0, 5),
     type: "pie",
     indexLabel: props?.genernames.slice(0, 5),
@@ -170,26 +144,19 @@ const ResultBreakdown = (props) => {
     ],
   };
 
-
-
-
   const [instagram, setInstagram] = useState(false);
   let token = localStorage.getItem("token");
-  console.log("filterstory", filterstory);
-
   useEffect(() => {
     setTimeout(() => {
       const localData = JSON.parse(localStorage.getItem("filterResturant"));
       setFilterstory(localData);
     }, 3000);
-  console.log("localdata", filterstory.MusicVibe1)
   }, []);
   useEffect(() => {
     setTimeout(() => {
       const localDatafiler = JSON.parse(localStorage.getItem("Withoutfilter"));
       setUnfilterstory(localDatafiler);
     }, 3000);
- 
   }, []);
   let navigate = useNavigate();
   useEffect(() => {
