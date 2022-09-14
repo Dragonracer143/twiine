@@ -11,7 +11,6 @@ import Instagramstory from "./Instagramstory";
 import { baseUrl } from "../../Services/Config";
 import axios from "axios";
 
-
 const Musicyoulike = (props) => {
   const [filterdata, setFilterData] = useState();
   const refs = document.getElementById("id");
@@ -19,7 +18,7 @@ const Musicyoulike = (props) => {
   const [story, setStory] = useState(false);
   const [notfilterdata, setNofilterdata] = useState();
   const [updatedata, setUpdatedata] = useState();
-  const [ musicvibes, setMusicvibes] = useState([])
+  const [musicvibes, setMusicvibes] = useState([]);
   let token = localStorage.getItem("token");
 
   const geolocation = useGeolocation();
@@ -46,21 +45,21 @@ const Musicyoulike = (props) => {
   //   }, 3000);
   // }, []);
   useEffect(() => {
-    getDataBytLocation()
-    },[musicvibes]);
-    useEffect(() => {
-      getDataByGener()
-      },[musicvibes]);
-    const getDataByGener = () => {
-      // const baseUrl = "http://localhost:8000/";
+    getDataBytLocation();
+  }, [musicvibes]);
+  useEffect(() => {
+    getDataByGener();
+  }, [musicvibes]);
+  const getDataByGener = () => {
+    // const baseUrl = "http://localhost:8000/";
 
-      const data = axios.get(`${baseUrl}withoutfilter`,
-       {
-          headers: {
-            "Access-Control-Allow-Origin": "https://twine-new.vercel.app/",
-          },
-        }
-      ).then((res) => {
+    const data = axios
+      .get(`${baseUrl}withoutfilter`, {
+        headers: {
+          "Access-Control-Allow-Origin": "https://twine-new.vercel.app/",
+        },
+      })
+      .then((res) => {
         const dupdata = res.data;
         let test = [];
         musicvibes.forEach((element) => {
@@ -70,12 +69,11 @@ const Musicyoulike = (props) => {
           test.push(...findData);
         });
         let dupChars = getUniqueListBy(test, "businessName");
-  
-        setNofilterdata(dupChars)
-      });
 
-    };
-  
+        setNofilterdata(dupChars);
+      });
+  };
+
   const getDataBytLocation = () => {
     // const baseUrl = "http://localhost:8000/";
     const data = axios
@@ -101,10 +99,8 @@ const Musicyoulike = (props) => {
           test.push(...findData);
         });
         let dupChars = getUniqueListBy(test, "businessName");
-        setFilterData(dupChars)
+        setFilterData(dupChars);
       });
- 
-
   };
   function getUniqueListBy(arr, key) {
     return [...new Map(arr.map((item) => [item[key], item])).values()];
@@ -183,7 +179,6 @@ const Musicyoulike = (props) => {
     }, 3000);
   };
 
-
   const getDistanceFromCurrent = (cordinates) => {
     let dis = getDistance(
       {
@@ -223,8 +218,6 @@ const Musicyoulike = (props) => {
         console.log(err);
       });
   }, [refs]);
-  
-
 
   return (
     <div className={story == true ? "download-image" : ""}>

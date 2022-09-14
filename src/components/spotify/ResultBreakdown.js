@@ -15,7 +15,6 @@ import { useCallback } from "react";
 ChartJS.register(ArcElement, Tooltip, Legend);
 const ResultBreakdown = (props) => {
   const refs = document.getElementById("id");
-  console.log("refs", refs);
   const [playlist, setPlaylist] = useState();
   const [filterstory, setFilterstory] = useState([]);
   const [unfilterstory, setUnfilterstory] = useState([]);
