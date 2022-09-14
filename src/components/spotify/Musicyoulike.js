@@ -83,7 +83,6 @@ const Musicyoulike = (props) => {
         }
       )
       .then((res) => {
-          console.log("res", res)
         const dupdata = res.data.data;
 
         let test = [];
@@ -218,7 +217,9 @@ const Musicyoulike = (props) => {
         console.log(err);
       });
   }, [refs]);
-   console.log("fil", filterdata)
+  
+
+  
   return (
     <div className={story == true ? "download-image" : ""}>
       <div className="Musicyoulike">
