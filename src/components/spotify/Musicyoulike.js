@@ -8,6 +8,9 @@ import useGeolocation from "react-hook-geolocation";
 import { toPng } from "html-to-image";
 import { useCallback } from "react";
 import Instagramstory from "./Instagramstory";
+import { baseUrl } from "../../Services/Config";
+import axios from "axios";
+
 
 const Musicyoulike = (props) => {
   const [filterdata, setFilterData] = useState();
@@ -16,16 +19,15 @@ const Musicyoulike = (props) => {
   const [story, setStory] = useState(false);
   const [notfilterdata, setNofilterdata] = useState();
   const [updatedata, setUpdatedata] = useState();
+  const [ musicvibes, setMusicvibes] = useState()
+  let token = localStorage.getItem("token");
 
+  const geolocation = useGeolocation();
+  const lattitudeValue = geolocation.latitude;
+  const longitudeValue = geolocation.longitude;
   Geocode.setApiKey("AIzaSyCLpRelH01xoapkwWD7w4chtFMQvjQPWn4");
 
   const navigate = useNavigate();
-
-
-
-
-
-
 
   const getGeners = () => {
     let path = "/Resultbreakdown";
@@ -44,12 +46,112 @@ const Musicyoulike = (props) => {
     }, 3000);
   }, []);
   useEffect(() => {
-    setTimeout(() => {
-      const localData = JSON.parse(localStorage.getItem("filterResturant"));
+    getDataBytLocation()
+    });
+    useEffect(() => {
+      getDataByGener()
+      });
+    const getDataByGener = () => {
+      // const baseUrl = "http://localhost:8000/";
 
-      setFilterData(localData);
-    }, 3000);
+      const data = axios.get(`${baseUrl}withoutfilter`).then((res) => {
+        const dupdata = res.data;
+        let test = [];
+        musicvibes.forEach((element) => {
+          const findData = dupdata.filter(
+            (x) => x.MusicVibe1 == element || x.MusicVibe2 == element
+          );
+          test.push(...findData);
+        });
+        let dupChars = getUniqueListBy(test, "businessName");
+  
+        setNofilterdata(dupChars)
+      });
+
+    };
+  
+  const getDataBytLocation = () => {
+    // const baseUrl = "http://localhost:8000/";
+    const data = axios
+      .get(
+        `${baseUrl}filterResturants?lat=${lattitudeValue}&long=${longitudeValue}`,
+
+        {
+          headers: {
+            "Access-Control-Allow-Origin": "https://twine-new.vercel.app/",
+          },
+        }
+      )
+      .then((res) => {
+          console.log("res", res)
+        const dupdata = res.data.data;
+
+        let test = [];
+        musicvibes.forEach((element) => {
+          const findData = dupdata.filter(
+            (x) =>
+              x.MusicVibe1 == element.toLowerCase() ||
+              x.MusicVibe2 == element.toLowerCase()
+          );
+          test.push(...findData);
+        });
+        let dupChars = getUniqueListBy(test, "businessName");
+        setFilterData(dupChars)
+      });
+ 
+
+  };
+  function getUniqueListBy(arr, key) {
+    return [...new Map(arr.map((item) => [item[key], item])).values()];
+  }
+
+  useEffect(() => {
+    getGenerslist();
   }, []);
+  const getGenerslist = async (e) => {
+    const { data } = await axios
+      .get("https://api.spotify.com/v1/me/top/artists?offset=0&limit=10", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .catch((err) => {
+        console.log(err.response.status);
+        if (err?.response?.status == 401) {
+          localStorage.clear();
+          navigate("/");
+        }
+      });
+    let vall = [];
+    data.items.map((first) => {
+      first.genres.forEach((valdata) => {
+        vall.push(valdata);
+      });
+    });
+
+    let newarray = [];
+    vall.forEach(function (x) {
+      newarray[x] = (newarray[x] || 0) + 1;
+    });
+    let genereArray = Object.entries(newarray);
+    function compareSecondColumn(a, b) {
+      if (a[1] === b[1]) {
+        return 0;
+      } else {
+        return b[1] < a[1] ? -1 : 1;
+      }
+    }
+
+    genereArray.sort(compareSecondColumn);
+    let genername = [];
+
+    for (let i = 0; i < genereArray.length; i++) {
+      const element = genereArray[i][0];
+      genername.push(element);
+    }
+    setMusicvibes(genername);
+  };
+
   useEffect(() => {
     setTimeout(() => {
       const localDatafiler = JSON.parse(localStorage.getItem("Withoutfilter"));
@@ -76,9 +178,7 @@ const Musicyoulike = (props) => {
     }, 3000);
   };
 
-  const geolocation = useGeolocation();
-  const lattitudeValue = geolocation.latitude;
-  const longitudeValue = geolocation.longitude;
+
   const getDistanceFromCurrent = (cordinates) => {
     let dis = getDistance(
       {
@@ -118,6 +218,7 @@ const Musicyoulike = (props) => {
         console.log(err);
       });
   }, [refs]);
+   console.log("fil", filterdata)
   return (
     <div className={story == true ? "download-image" : ""}>
       <div className="Musicyoulike">
@@ -140,7 +241,7 @@ const Musicyoulike = (props) => {
 
       {updatedata == 0 ? (
         <>
-          {filterdata?.length >= 0 ? (
+          {filterdata?.length > 0 ? (
             <div className="row cards Musicyoulikes">
               {filterdata?.slice(0, 3).map((ele, key) => (
                 <div className="col-12 col-md-4" key={key}>

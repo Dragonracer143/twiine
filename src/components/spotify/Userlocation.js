@@ -6,14 +6,15 @@ import { PowerInputSharp } from "@mui/icons-material";
 import { baseUrl } from "../../Services/Config";
 const Userlocation = (props) => {
   const geolocation = useGeolocation();
-   
+
   const lattitudeValue = geolocation.latitude;
   const longitudeValue = geolocation.longitude;
-  
+
   const [musicvibe, setMusicvibe] = useState([]);
   let token = localStorage.getItem("token");
 
   const navigate = useNavigate();
+
   const getDataBytLocation = () => {
     let path = `/musicyoulike`;
     // const baseUrl = "http://localhost:8000/";
@@ -58,9 +59,7 @@ const Userlocation = (props) => {
       let test = [];
       musicvibe.forEach((element) => {
         const findData = dupdata.filter(
-          (x) =>
-            x.MusicVibe1 == element ||
-            x.MusicVibe2 == element
+          (x) => x.MusicVibe1 == element || x.MusicVibe2 == element
         );
         test.push(...findData);
       });
@@ -70,10 +69,11 @@ const Userlocation = (props) => {
     });
     props.setRandomdata("1");
     navigate(path);
-    localStorage.setItem("filterstate","1");
-
+    localStorage.setItem("filterstate", "1");
   };
 
+
+  
   function getUniqueListBy(arr, key) {
     return [...new Map(arr.map((item) => [item[key], item])).values()];
   }
