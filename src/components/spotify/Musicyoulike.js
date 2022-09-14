@@ -68,11 +68,12 @@ const Musicyoulike = (props) => {
             }
             let dupChars = getUniqueListBy(test, "businessName");
 
-            setFilterData(dupChars);
+            setFilterData(test);
           });
         } else {
           /* if a new user (does not have music list to identify genere, following data will be visible)*/
-          setNofilterdata(dupdata);
+          setFilterData(dupdata);
+
         }
       });
   };
@@ -93,17 +94,18 @@ const Musicyoulike = (props) => {
             const findData = dupdata.filter(
               (x) => x.MusicVibe2 == element || x.MusicVibe3 == element
             );
+
             if (findData?.length != 0) {
-              test.push(...findData);
-            } else {
               test.push(...dupdata);
+              let dupChars = getUniqueListBy(test, "businessName");
+
+              setNofilterdata(dupChars);
+            } else {
+              test.push(findData);
             }
           });
-
-          let dupChars = getUniqueListBy(test, "businessName");
-          setNofilterdata(dupChars);
         } else {
-          setNofilterdata(dupdata);
+          setNofilterdata(...test);
         }
       });
   };
@@ -238,7 +240,7 @@ const Musicyoulike = (props) => {
               {filterdata?.slice(0, 3).map((ele, key) => (
                 <div className="col-12 col-md-4" key={key}>
                   <div className="Musicyoulike_card_blue">
-                    <img className="img" src={ele?.image1} />
+                    <img className="img" src={ele?.image1 ? ele?.image1 : ele?.image2  } />
                     <div className="card_content">
                       <p style={{ paddingTop: "1rem" }} className="businnes">
                         {ele?.businessName} <span>{ele?.price}</span>
@@ -302,10 +304,10 @@ const Musicyoulike = (props) => {
         <>
           {notfilterdata?.length > 0 ? (
             <div className="row cards Musicyoulikes">
-              {notfilterdata?.slice(0, 3).map((ele, key) => (
+              {notfilterdata?.slice(1, 4).map((ele, key) => (
                 <div className="col-12 col-md-4" key={key}>
                   <div className="Musicyoulike_card_blue">
-                    <img className="img" src={ele?.image1} />
+                    <img className="img" src={ele?.image1 ? ele?.image3 : ele?.image4} />
                     <div className="card_content">
                       <p style={{ paddingTop: "1rem" }} className="businnes">
                         {ele?.businessName} <span>{ele?.price}</span>
