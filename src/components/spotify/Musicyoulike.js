@@ -19,7 +19,7 @@ const Musicyoulike = (props) => {
   const [story, setStory] = useState(false);
   const [notfilterdata, setNofilterdata] = useState();
   const [updatedata, setUpdatedata] = useState();
-  const [ musicvibes, setMusicvibes] = useState()
+  const [ musicvibes, setMusicvibes] = useState([])
   let token = localStorage.getItem("token");
 
   const geolocation = useGeolocation();
@@ -33,24 +33,24 @@ const Musicyoulike = (props) => {
     let path = "/Resultbreakdown";
     navigate(path);
   };
-  React.useEffect(() => {
-    setTimeout(() => {
-      getAllDetailsApi()
-        .then((res) => {
-          let dupdata = [...res.data];
-          props.setRest(dupdata);
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-    }, 3000);
-  }, []);
+  // React.useEffect(() => {
+  //   setTimeout(() => {
+  //     getAllDetailsApi()
+  //       .then((res) => {
+  //         let dupdata = [...res.data];
+  //         props.setRest(dupdata);
+  //       })
+  //       .catch((e) => {
+  //         console.log(e);
+  //       });
+  //   }, 3000);
+  // }, []);
   useEffect(() => {
     getDataBytLocation()
-    },[]);
+    },[musicvibes]);
     useEffect(() => {
       getDataByGener()
-      },[]);
+      },[musicvibes]);
     const getDataByGener = () => {
       // const baseUrl = "http://localhost:8000/";
 
