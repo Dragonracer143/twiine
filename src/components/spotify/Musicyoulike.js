@@ -55,15 +55,15 @@ const Musicyoulike = (props) => {
       // const baseUrl = "http://localhost:8000/";
 
       const data = axios.get(`${baseUrl}withoutfilter`,
-      {
-        headers: {
-          "Access-Control-Allow-Origin": "https://twine-new.vercel.app/",
-        },
-      }
+       {
+          headers: {
+            "Access-Control-Allow-Origin": "https://twine-new.vercel.app/",
+          },
+        }
       ).then((res) => {
         const dupdata = res.data;
         let test = [];
-        musicvibes?.forEach((element) => {
+        musicvibes.forEach((element) => {
           const findData = dupdata.filter(
             (x) => x.MusicVibe1 == element || x.MusicVibe2 == element
           );
@@ -92,7 +92,7 @@ const Musicyoulike = (props) => {
         const dupdata = res.data.data;
 
         let test = [];
-        musicvibes?.forEach((element) => {
+        musicvibes.forEach((element) => {
           const findData = dupdata.filter(
             (x) =>
               x.MusicVibe1 == element.toLowerCase() ||
@@ -128,14 +128,14 @@ const Musicyoulike = (props) => {
         }
       });
     let vall = [];
-    data?.items?.map((first) => {
-      first?.genres?.forEach((valdata) => {
-        vall?.push(valdata);
+    data.items.map((first) => {
+      first.genres.forEach((valdata) => {
+        vall.push(valdata);
       });
     });
 
     let newarray = [];
-    vall?.forEach(function (x) {
+    vall.forEach(function (x) {
       newarray[x] = (newarray[x] || 0) + 1;
     });
     let genereArray = Object.entries(newarray);

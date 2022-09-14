@@ -32,7 +32,7 @@ const Userlocation = (props) => {
         const dupdata = res.data.data;
 
         let test = [];
-        musicvibe?.forEach((element) => {
+        musicvibe.forEach((element) => {
           const findData = dupdata.filter(
             (x) =>
               x.MusicVibe1 == element.toLowerCase() ||
@@ -56,15 +56,15 @@ const Userlocation = (props) => {
     // const baseUrl = "http://localhost:8000/";
     const data = axios.get(`${baseUrl}withoutfilter`,
     
-    {
-      headers: {
-        "Access-Control-Allow-Origin": "https://twine-new.vercel.app/",
-      },
-    }
+     {
+          headers: {
+            "Access-Control-Allow-Origin": "https://twine-new.vercel.app/",
+          },
+        }
     ).then((res) => {
       const dupdata = res.data;
       let test = [];
-      musicvibe?.forEach((element) => {
+      musicvibe.forEach((element) => {
         const findData = dupdata.filter(
           (x) => x.MusicVibe1 == element || x.MusicVibe2 == element
         );
