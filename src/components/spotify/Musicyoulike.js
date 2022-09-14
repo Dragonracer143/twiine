@@ -47,10 +47,10 @@ const Musicyoulike = (props) => {
   }, []);
   useEffect(() => {
     getDataBytLocation()
-    });
+    },[]);
     useEffect(() => {
       getDataByGener()
-      });
+      },[]);
     const getDataByGener = () => {
       // const baseUrl = "http://localhost:8000/";
 
