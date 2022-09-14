@@ -4,6 +4,9 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { PowerInputSharp } from "@mui/icons-material";
 import { baseUrl } from "../../Services/Config";
+
+    // const baseUrl = "http://localhost:8000/";
+
 const Userlocation = (props) => {
   const geolocation = useGeolocation();
 
@@ -17,7 +20,6 @@ const Userlocation = (props) => {
 
   const getDataBytLocation = () => {
     let path = `/musicyoulike`;
-    // const baseUrl = "http://localhost:8000/";
     const data = axios
       .get(
         `${baseUrl}filterResturants?lat=${lattitudeValue}&long=${longitudeValue}`,
@@ -53,7 +55,6 @@ const Userlocation = (props) => {
 
   const getDataByGener = () => {
     let path = `/musicyoulike`;
-    // const baseUrl = "http://localhost:8000/";
     const data = axios.get(`${baseUrl}withoutfilter`,
     
      {

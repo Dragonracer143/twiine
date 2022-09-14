@@ -10,6 +10,7 @@ import { useCallback } from "react";
 import Instagramstory from "./Instagramstory";
 import { baseUrl } from "../../Services/Config";
 import axios from "axios";
+// const baseUrl = "http://localhost:8000/";
 
 const Musicyoulike = (props) => {
   const [filterdata, setFilterData] = useState();
@@ -49,7 +50,6 @@ const Musicyoulike = (props) => {
     getDataByGener();
   }, [musicvibes]);
   const getDataByGener = () => {
-    // const baseUrl = "http://localhost:8000/";
 
     const data = axios
       .get(`${baseUrl}withoutfilter`, {
@@ -60,7 +60,7 @@ const Musicyoulike = (props) => {
       .then((res) => {
         const dupdata = res.data;
         let test = [];
-        if (musicvibes?.length != 0) {
+        if (musicvibes?.length >= 0) {
           musicvibes.forEach((element) => {
             const findData = dupdata.filter(
               (x) => x.MusicVibe1 == element || x.MusicVibe2 == element
@@ -69,14 +69,15 @@ const Musicyoulike = (props) => {
           });
           let dupChars = getUniqueListBy(test, "businessName");
           setNofilterdata(dupChars);
+          console.log("if conditions")
         } else {
+          console.log("else conditions")
           setNofilterdata(dupdata);
         }
       });
   };
 
   const getDataBytLocation = () => {
-    // const baseUrl = "http://localhost:8000/";
     const data = axios
       .get(
         `${baseUrl}filterResturants?lat=${lattitudeValue}&long=${longitudeValue}`,
