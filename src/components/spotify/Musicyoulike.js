@@ -63,7 +63,7 @@ const Musicyoulike = (props) => {
       ).then((res) => {
         const dupdata = res.data;
         let test = [];
-        musicvibes.forEach((element) => {
+        musicvibes?.forEach((element) => {
           const findData = dupdata.filter(
             (x) => x.MusicVibe1 == element || x.MusicVibe2 == element
           );
