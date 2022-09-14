@@ -16,7 +16,7 @@ const Musicyoulike = (props) => {
   const refs = document.getElementById("id");
 
   const [story, setStory] = useState(false);
-  const [notfilterdata, setNofilterdata] = useState();
+  const [notfilterdata, setNofilterdata] = useState([]);
   const [updatedata, setUpdatedata] = useState();
   const [musicvibes, setMusicvibes] = useState([]);
   let token = localStorage.getItem("token");
@@ -25,9 +25,7 @@ const Musicyoulike = (props) => {
   const lattitudeValue = geolocation.latitude;
   const longitudeValue = geolocation.longitude;
   Geocode.setApiKey("AIzaSyCLpRelH01xoapkwWD7w4chtFMQvjQPWn4");
-
   const navigate = useNavigate();
-
   const getGeners = () => {
     let path = "/Resultbreakdown";
     navigate(path);
@@ -62,15 +60,18 @@ const Musicyoulike = (props) => {
       .then((res) => {
         const dupdata = res.data;
         let test = [];
-        musicvibes.forEach((element) => {
-          const findData = dupdata.filter(
-            (x) => x.MusicVibe1 == element || x.MusicVibe2 == element
-          );
-          test.push(...findData);
-        });
-        let dupChars = getUniqueListBy(test, "businessName");
-
-        setNofilterdata(dupChars);
+        if (musicvibes?.length != 0) {
+          musicvibes.forEach((element) => {
+            const findData = dupdata.filter(
+              (x) => x.MusicVibe1 == element || x.MusicVibe2 == element
+            );
+            test.push(...findData);
+          });
+          let dupChars = getUniqueListBy(test, "businessName");
+          setNofilterdata(dupChars);
+        } else {
+          setNofilterdata(dupdata);
+        }
       });
   };
 
@@ -88,16 +89,20 @@ const Musicyoulike = (props) => {
       )
       .then((res) => {
         const dupdata = res.data.data;
-
         let test = [];
-        musicvibes.forEach((element) => {
-          const findData = dupdata.filter(
-            (x) =>
-              x.MusicVibe1 == element.toLowerCase() ||
-              x.MusicVibe2 == element.toLowerCase()
-          );
-          test.push(...findData);
-        });
+        if (musicvibes?.length != 0) {
+          musicvibes.forEach((element) => {
+            const findData = dupdata.filter(
+              (x) =>
+                x.MusicVibe1 == element.toLowerCase() ||
+                x.MusicVibe2 == element.toLowerCase()
+            );
+            test.push(...findData);
+          });
+        } else {
+          test = [...dupdata];
+        }
+
         let dupChars = getUniqueListBy(test, "businessName");
         setFilterData(dupChars);
       });
@@ -153,13 +158,6 @@ const Musicyoulike = (props) => {
     setMusicvibes(genername);
   };
 
-  useEffect(() => {
-    setTimeout(() => {
-      const localDatafiler = JSON.parse(localStorage.getItem("Withoutfilter"));
-
-      setNofilterdata(localDatafiler);
-    }, 3000);
-  }, []);
 
   useEffect(() => {
     const localDatafilter = localStorage.getItem("unfilterstate");
@@ -261,16 +259,16 @@ const Musicyoulike = (props) => {
                         Vibes :&nbsp;{" "}
                         <span className="gener-name">
                           {" "}
-                          {ele.MusicVibe1 ? ele.MusicVibe1 : "Jazz"}{" "}
+                          {ele?.MusicVibe1 ? ele?.MusicVibe1 : "Jazz"}{" "}
                         </span>{" "}
                         &nbsp;
                         <span className="gener-name">
-                          {ele.MusicVibe2 ? ele.MusicVibe2 : "Pop"}
+                          {ele?.MusicVibe2 ? ele?.MusicVibe2 : "Pop"}
                         </span>
                       </p>
                     </div>
                     <button className="Moreinfo btn" type="button">
-                      <a href={ele.yelpURL} target="_blank">
+                      <a href={ele?.yelpURL} target="_blank">
                         see more info
                         <img
                           className="right-arrow"
