@@ -54,7 +54,13 @@ const Musicyoulike = (props) => {
     const getDataByGener = () => {
       // const baseUrl = "http://localhost:8000/";
 
-      const data = axios.get(`${baseUrl}withoutfilter`).then((res) => {
+      const data = axios.get(`${baseUrl}withoutfilter`,
+      {
+        headers: {
+          "Access-Control-Allow-Origin": "https://twine-new.vercel.app/",
+        },
+      }
+      ).then((res) => {
         const dupdata = res.data;
         let test = [];
         musicvibes.forEach((element) => {
@@ -219,7 +225,7 @@ const Musicyoulike = (props) => {
   }, [refs]);
   
 
-  
+
   return (
     <div className={story == true ? "download-image" : ""}>
       <div className="Musicyoulike">
