@@ -32,7 +32,7 @@ const Userlocation = (props) => {
         const dupdata = res.data.data;
 
         let test = [];
-        musicvibe.forEach((element) => {
+        musicvibe?.forEach((element) => {
           const findData = dupdata.filter(
             (x) =>
               x.MusicVibe1 == element.toLowerCase() ||
