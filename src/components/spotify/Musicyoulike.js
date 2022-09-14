@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { getAllDetailsApi } from "../../Services/Services";
 import Geocode from "react-geocode";
-import { getDistance, getPreciseDistance } from "geolib";
+import { getDistance } from "geolib";
 import CircularIndeterminate from "./Loader";
 import useGeolocation from "react-hook-geolocation";
 import { toPng } from "html-to-image";
@@ -13,72 +12,35 @@ import axios from "axios";
 // const baseUrl = "http://localhost:8000/";
 
 const Musicyoulike = (props) => {
+  Geocode.setApiKey("AIzaSyCLpRelH01xoapkwWD7w4chtFMQvjQPWn4");
+  const geolocation = useGeolocation();
   const [filterdata, setFilterData] = useState();
+  const [notfilterdata, setNofilterdata] = useState([]);
+
   const refs = document.getElementById("id");
 
   const [story, setStory] = useState(false);
-  const [notfilterdata, setNofilterdata] = useState([]);
+
   const [updatedata, setUpdatedata] = useState();
-  const [musicvibes, setMusicvibes] = useState([]);
+  const [usergeners, setUsergeners] = useState([]);
   let token = localStorage.getItem("token");
 
-  const geolocation = useGeolocation();
   const lattitudeValue = geolocation.latitude;
   const longitudeValue = geolocation.longitude;
-  Geocode.setApiKey("AIzaSyCLpRelH01xoapkwWD7w4chtFMQvjQPWn4");
   const navigate = useNavigate();
   const getGeners = () => {
     let path = "/Resultbreakdown";
     navigate(path);
   };
-  // React.useEffect(() => {
-  //   setTimeout(() => {
-  //     getAllDetailsApi()
-  //       .then((res) => {
-  //         let dupdata = [...res.data];
-  //         props.setRest(dupdata);
-  //       })
-  //       .catch((e) => {
-  //         console.log(e);
-  //       });
-  //   }, 3000);
-  // }, []);
   useEffect(() => {
     getDataBytLocation();
-  }, [musicvibes]);
+  }, [usergeners]);
   useEffect(() => {
     getDataByGener();
-  }, [musicvibes]);
-  const getDataByGener = () => {
+  }, [usergeners]);
 
-    const data = axios
-      .get(`${baseUrl}withoutfilter`, {
-        headers: {
-          "Access-Control-Allow-Origin": "https://twine-new.vercel.app/",
-        },
-      })
-      .then((res) => {
-        const dupdata = res.data;
-        let test = [];
-        if (musicvibes?.length >= 0) {
-          musicvibes.forEach((element) => {
-            const findData = dupdata.filter(
-              (x) => x.MusicVibe1 == element || x.MusicVibe2 == element
-            );
-            test.push(...findData);
-          });
-          let dupChars = getUniqueListBy(test, "businessName");
-          setNofilterdata(dupChars);
-          console.log("if conditions")
-        } else {
-          console.log("else conditions")
-          setNofilterdata(dupdata);
-        }
-      });
-  };
-
-  const getDataBytLocation = () => {
-    const data = axios
+  const getDataBytLocation = async () => {
+    const data = await axios
       .get(
         `${baseUrl}filterResturants?lat=${lattitudeValue}&long=${longitudeValue}`,
 
@@ -91,23 +53,62 @@ const Musicyoulike = (props) => {
       .then((res) => {
         const dupdata = res.data.data;
         let test = [];
-        if (musicvibes?.length != 0) {
-          musicvibes.forEach((element) => {
+        if (usergeners?.length != 0) {
+          /* get data by matching the geners*/
+          usergeners.forEach((element) => {
             const findData = dupdata.filter(
               (x) =>
-                x.MusicVibe1 == element.toLowerCase() ||
-                x.MusicVibe2 == element.toLowerCase()
+                x.MusicVibe2 == element.toLowerCase() ||
+                x.MusicVibe3 == element.toLowerCase()
             );
-            test.push(...findData);
+            if (findData?.length != 0) {
+              test.push(...findData);
+            } else {
+              test.push(...dupdata);
+            }
+            let dupChars = getUniqueListBy(test, "businessName");
+
+            setFilterData(dupChars);
           });
         } else {
-          test = [...dupdata];
+          /* if a new user (does not have music list to identify genere, following data will be visible)*/
+          setNofilterdata(dupdata);
         }
-
-        let dupChars = getUniqueListBy(test, "businessName");
-        setFilterData(dupChars);
       });
   };
+
+  const getDataByGener = () => {
+    const data = axios
+      .get(`${baseUrl}withoutfilter`, {
+        headers: {
+          "Access-Control-Allow-Origin": "https://twine-new.vercel.app/",
+        },
+      })
+
+      .then((res) => {
+        const dupdata = res.data;
+        let test = [];
+        if (usergeners?.length >= 0) {
+          usergeners.forEach((element) => {
+            const findData = dupdata.filter(
+              (x) => x.MusicVibe2 == element || x.MusicVibe3 == element
+            );
+            if (findData?.length != 0) {
+              test.push(...findData);
+            } else {
+              test.push(...dupdata);
+            }
+          });
+
+          let dupChars = getUniqueListBy(test, "businessName");
+          setNofilterdata(dupChars);
+        } else {
+          setNofilterdata(dupdata);
+        }
+      });
+  };
+
+  /* function for not getting duplicate data*/
   function getUniqueListBy(arr, key) {
     return [...new Map(arr.map((item) => [item[key], item])).values()];
   }
@@ -115,6 +116,7 @@ const Musicyoulike = (props) => {
   useEffect(() => {
     getGenerslist();
   }, []);
+  /* This function is used for to get the gneres of user */
   const getGenerslist = async (e) => {
     const { data } = await axios
       .get("https://api.spotify.com/v1/me/top/artists?offset=0&limit=10", {
@@ -156,10 +158,9 @@ const Musicyoulike = (props) => {
       const element = genereArray[i][0];
       genername.push(element);
     }
-    setMusicvibes(genername);
+    setUsergeners(genername);
   };
-
-
+  /* useEffect for to get (updatedata) state value. if value is 0 it renders the data by location otherwise it render data by generes*/
   useEffect(() => {
     const localDatafilter = localStorage.getItem("unfilterstate");
     const Datafilter = JSON.parse(localStorage.getItem("filterstate"));
@@ -170,14 +171,15 @@ const Musicyoulike = (props) => {
     }
   });
 
+  /* Click function for (share on social media ) button.first run this function then it checks the story state wheather it's true or false, if state is true then onButtonClick function run.*/
   const getStories = () => {
     setStory(true);
-
     setTimeout(() => {
       onButtonClick();
     }, 3000);
   };
 
+  /* Function for get distance between to lattitude and longitude */
   const getDistanceFromCurrent = (cordinates) => {
     let dis = getDistance(
       {
@@ -191,20 +193,11 @@ const Musicyoulike = (props) => {
     return parseFloat(dis).toFixed(1);
   };
 
-  // useEffect(() => {
-  //   if (story == true) {
-  //     setTimeout(() => {
-  //       onButtonClick();
-  //     }, 1000);
-  //   }
-  // });
-
+  /* Function for downloading image on click (Share on Social media) Button */
   const onButtonClick = useCallback(() => {
     if (refs === null) {
-      console.log("Not Working");
       return;
     }
-
     toPng(refs)
       .then((dataUrl) => {
         const link = document.createElement("a");
@@ -260,7 +253,7 @@ const Musicyoulike = (props) => {
                         Vibes :&nbsp;{" "}
                         <span className="gener-name">
                           {" "}
-                          {ele?.MusicVibe1 ? ele?.MusicVibe1 : "Jazz"}{" "}
+                          {ele?.MusicVibe3 ? ele?.MusicVibe3 : "Jazz"}{" "}
                         </span>{" "}
                         &nbsp;
                         <span className="gener-name">
@@ -322,7 +315,7 @@ const Musicyoulike = (props) => {
                         Vibes :&nbsp;{" "}
                         <span className="gener-name">
                           {" "}
-                          {ele.MusicVibe1 ? ele.MusicVibe1 : "Jazz"}{" "}
+                          {ele.MusicVibe3 ? ele.MusicVibe3 : "Jazz"}{" "}
                         </span>{" "}
                         &nbsp;
                         <span className="gener-name">

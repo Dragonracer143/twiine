@@ -341,7 +341,7 @@ const ResultBreakdownstory = (props) => {
                           Vibes :&nbsp;{" "}
                           <span className="gener-name">
                             {" "}
-                            {ele.MusicVibe1 ? ele.MusicVibe1 : "Jazz"}{" "}
+                            {ele.MusicVibe3 ? ele.MusicVibe3 : "Jazz"}{" "}
                           </span>{" "}
                           &nbsp;
                           <span className="gener-name">
@@ -367,7 +367,7 @@ const ResultBreakdownstory = (props) => {
                           {ele?.businessName} <span>{ele?.price}</span>
                         </p>
                         <p className="vives">
-                          Vibes zncm,n :&nbsp;{" "}
+                          Vibes :&nbsp;{" "}
                           <span className="gener-name">Jazz</span> &nbsp;
                           <span className="gener-name">Pop</span>
                         </p>
