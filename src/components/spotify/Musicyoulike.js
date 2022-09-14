@@ -102,11 +102,14 @@ const Musicyoulike = (props) => {
               setNofilterdata(dupChars);
             } else {
               test.push(findData);
+
             }
           });
         } else {
           setNofilterdata(...test);
         }
+         setNofilterdata(dupdata)
+
       });
   };
 
