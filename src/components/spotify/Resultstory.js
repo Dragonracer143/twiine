@@ -14,7 +14,6 @@ import { getDistance, getPreciseDistance } from "geolib";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const ResultBreakdownstory = (props) => {
-
   const [genernames, setGenernames] = useState([]);
   const [genervalues, setGenervalues] = useState([]);
   // const [filterdatas, setFilterDatas] = useState([]);
@@ -184,6 +183,7 @@ const ResultBreakdownstory = (props) => {
   useEffect(() => {
     getGenerslist();
   }, []);
+
   const getGenerslist = async (e) => {
     const { data } = await axios
       .get("https://api.spotify.com/v1/me/top/artists?offset=0&limit=10", {
@@ -233,7 +233,7 @@ const ResultBreakdownstory = (props) => {
   useEffect(() => {
     onGetdata();
   }, []);
-   const onGetdata = async (e) => {
+  const onGetdata = async (e) => {
     const { data } = await axios
       .get("https://api.spotify.com/v1/me/top/tracks?offset=0&limit=5", {
         headers: {
@@ -326,7 +326,10 @@ const ResultBreakdownstory = (props) => {
                 {props?.filterstory?.slice(0, 3).map((ele, key) => (
                   <div className="col-12 col-md-4" key={key}>
                     <div className="Musicyoulike_card_blue">
-                      <img className="img" src={ele?.image1} />
+                      <img
+                        className="img"
+                        src={ele?.image1 ? ele?.image3 : ele?.image4}
+                      />
                       <div className="card_content">
                         <p style={{ paddingTop: "1rem" }} className="businnes">
                           {ele?.businessName} <span>{ele?.price}</span>
@@ -361,15 +364,25 @@ const ResultBreakdownstory = (props) => {
                 {props?.unfilterstory?.slice(0, 3).map((ele, key) => (
                   <div className="col-12 col-md-4" key={key}>
                     <div className="Musicyoulike_card_blue">
-                      <img className="img" src={ele?.image1} />
+                      <img
+                        className="img"
+                        src={ele?.image1 ? ele?.image3 : ele?.image4}
+                      />
                       <div className="card_content">
                         <p style={{ paddingTop: "1rem" }} className="businnes">
                           {ele?.businessName} <span>{ele?.price}</span>
                         </p>
                         <p className="vives">
                           Vibes :&nbsp;{" "}
-                          <span className="gener-name">Jazz</span> &nbsp;
-                          <span className="gener-name">Pop</span>
+                          <span className="gener-name">
+                            {" "}
+                            {ele.MusicVibe3 ? ele.MusicVibe3 : "Jazz"}
+                          </span>{" "}
+                          &nbsp;
+                          <span className="gener-name">
+                            {" "}
+                            {ele.MusicVibe3 ? ele.MusicVibe3 : "Pop"}
+                          </span>
                         </p>
                       </div>
                     </div>

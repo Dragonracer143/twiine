@@ -325,10 +325,11 @@ const Instagramstory = (props) => {
           {props.updatedata == 0 ? (
             <>
               <div className="row cards Musicyoulikes insta">
-                { props?.filterdata?.slice(0, 3).map((ele, key) => (
+                {props?.filterdata?.slice(0, 3).map((ele, key) => (
                   <div className="col-12 col-md-4" key={key}>
                     <div className="Musicyoulike_card_blue">
-                      <img className="img" src={ele?.image1} />
+                      <img className="img"                       src={ele?.image1 ? ele?.image3 : ele?.image4}
+/>
                       <div className="card_content">
                         <p style={{ paddingTop: "1rem" }} className="businnes">
                           {ele?.businessName} <span>{ele?.price}</span>
@@ -362,15 +363,25 @@ const Instagramstory = (props) => {
                 {props?.notfilterdata?.slice(0, 3).map((ele, key) => (
                   <div className="col-12 col-md-4" key={key}>
                     <div className="Musicyoulike_card_blue">
-                      <img className="img" src={ele?.image1} />
+                      <img
+                        className="img"
+                        src={ele?.image1 ? ele?.image3 : ele?.image4}
+                      />
                       <div className="card_content">
                         <p style={{ paddingTop: "1rem" }} className="businnes">
                           {ele?.businessName} <span>{ele?.price}</span>
                         </p>
                         <p className="vives">
-                          Vibes :&nbsp; <span className="gener-name">Jazz</span>{" "}
+                          Vibes :&nbsp;{" "}
+                          <span className="gener-name">
+                            {" "}
+                            {ele.MusicVibe3 ? ele.MusicVibe3 : "Jazz"}
+                          </span>{" "}
                           &nbsp;
-                          <span className="gener-name">Pop</span>
+                          <span className="gener-name">
+                            {" "}
+                            {ele.MusicVibe2 ? ele.MusicVibe2 : "Pop"}
+                          </span>
                         </p>
                       </div>
                     </div>
