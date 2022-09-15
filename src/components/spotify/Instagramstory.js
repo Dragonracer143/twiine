@@ -14,15 +14,12 @@ import { getDistance, getPreciseDistance } from "geolib";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const Instagramstory = (props) => {
-
-
   const [genernames, setGenernames] = useState([]);
   const [genervalues, setGenervalues] = useState([]);
   const [filterdatas, setFilterDatas] = useState([]);
   let token = localStorage.getItem("token");
   const geolocation = useGeolocation();
   let navigate = useNavigate();
-
   const colorArray = [
     {
       id: 0,
@@ -155,7 +152,7 @@ const Instagramstory = (props) => {
   for (let i = 0; i < generss?.length; i++) {
     for (let j = 0; j < colorArray?.length; j++) {
       if (colorArray[j]?.name === generss[i]) {
-        colorss[i]=colorArray[j].color;
+        colorss[i] = colorArray[j].color;
       }
     }
   }
@@ -166,23 +163,13 @@ const Instagramstory = (props) => {
     datasets: [
       {
         data: genervalues?.slice(0, 5),
-        backgroundColor:colorss,
+        backgroundColor: colorss,
         borderColor: "#000",
         display: true,
       },
     ],
   };
 
-
-
-
-
-
-
-
-
-
-  
   const options = {
     plugins: {
       legend: {
@@ -338,7 +325,7 @@ const Instagramstory = (props) => {
           {props.updatedata == 0 ? (
             <>
               <div className="row cards Musicyoulikes insta">
-                {props?.filterdata?.slice(0, 3).map((ele, key) => (
+                { props?.filterdata?.slice(0, 3).map((ele, key) => (
                   <div className="col-12 col-md-4" key={key}>
                     <div className="Musicyoulike_card_blue">
                       <img className="img" src={ele?.image1} />
@@ -371,7 +358,6 @@ const Instagramstory = (props) => {
             </>
           ) : (
             <>
-              {" "}
               <div className="row cards insta">
                 {props?.notfilterdata?.slice(0, 3).map((ele, key) => (
                   <div className="col-12 col-md-4" key={key}>
@@ -382,8 +368,8 @@ const Instagramstory = (props) => {
                           {ele?.businessName} <span>{ele?.price}</span>
                         </p>
                         <p className="vives">
-                          Vibes :&nbsp;{" "}
-                          <span className="gener-name">Jazz</span> &nbsp;
+                          Vibes :&nbsp; <span className="gener-name">Jazz</span>{" "}
+                          &nbsp;
                           <span className="gener-name">Pop</span>
                         </p>
                       </div>

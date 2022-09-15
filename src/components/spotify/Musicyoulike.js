@@ -15,7 +15,7 @@ const Musicyoulike = (props) => {
   Geocode.setApiKey("AIzaSyCLpRelH01xoapkwWD7w4chtFMQvjQPWn4");
   const geolocation = useGeolocation();
   const [filterdata, setFilterData] = useState();
-  const [notfilterdata, setNofilterdata] = useState([]);
+  const [notfilterdata, setNofilterdata] = useState();
 
   const refs = document.getElementById("id");
 
@@ -73,7 +73,6 @@ const Musicyoulike = (props) => {
         } else {
           /* if a new user (does not have music list to identify genere, following data will be visible)*/
           setFilterData(dupdata);
-
         }
       });
   };
@@ -89,27 +88,24 @@ const Musicyoulike = (props) => {
       .then((res) => {
         const dupdata = res.data;
         let test = [];
-        if (usergeners?.length >= 0) {
+        if (usergeners?.length > 0) {
           usergeners.forEach((element) => {
             const findData = dupdata.filter(
               (x) => x.MusicVibe2 == element || x.MusicVibe3 == element
             );
-
             if (findData?.length != 0) {
-              test.push(...dupdata);
+              test.push(...findData);
               let dupChars = getUniqueListBy(test, "businessName");
-
               setNofilterdata(dupChars);
             } else {
-              test.push(findData);
-
+              test.push(...dupdata);
+              setNofilterdata(test);
             }
           });
         } else {
-          setNofilterdata(...test);
+          test.push(...dupdata);
+          setNofilterdata(test);
         }
-         setNofilterdata(dupdata)
-
       });
   };
 
@@ -243,7 +239,10 @@ const Musicyoulike = (props) => {
               {filterdata?.slice(0, 3).map((ele, key) => (
                 <div className="col-12 col-md-4" key={key}>
                   <div className="Musicyoulike_card_blue">
-                    <img className="img" src={ele?.image1 ? ele?.image1 : ele?.image2  } />
+                    <img
+                      className="img"
+                      src={ele?.image1 ? ele?.image1 : ele?.image2}
+                    />
                     <div className="card_content">
                       <p style={{ paddingTop: "1rem" }} className="businnes">
                         {ele?.businessName} <span>{ele?.price}</span>
@@ -307,10 +306,13 @@ const Musicyoulike = (props) => {
         <>
           {notfilterdata?.length > 0 ? (
             <div className="row cards Musicyoulikes">
-              {notfilterdata?.slice(1, 4).map((ele, key) => (
+              {notfilterdata?.slice(0, 3).map((ele, key) => (
                 <div className="col-12 col-md-4" key={key}>
                   <div className="Musicyoulike_card_blue">
-                    <img className="img" src={ele?.image1 ? ele?.image3 : ele?.image4} />
+                    <img
+                      className="img"
+                      src={ele?.image1 ? ele?.image3 : ele?.image4}
+                    />
                     <div className="card_content">
                       <p style={{ paddingTop: "1rem" }} className="businnes">
                         {ele?.businessName} <span>{ele?.price}</span>
