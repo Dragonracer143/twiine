@@ -9,7 +9,7 @@ const Userlocation = (props) => {
 
   /*  get data by current Location */
   const yesDataByLocation = () => {
-    let path = `/musicyoulike`;
+    let path = `/Selectmiles`;
     props.setRandomdata("0");
 
     localStorage.setItem("filterstate", "0");

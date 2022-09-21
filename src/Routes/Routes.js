@@ -13,8 +13,8 @@ import Musiclogin from "../components/spotify/MusicLogin";
 import Userlocation from "../components/spotify/Userlocation";
 import Musicyoulike from "../components/spotify/Musicyoulike";
 import ResultBreakdown from "../components/spotify/ResultBreakdown";
-
 import Instagramstory from "../components/spotify/Instagramstory";
+import Selectmiles from "../components/spotify/Selectmiles";
 const Routesdata = () => {
   const [rest, setRest] = useState([]);
   const [genernames, setGenernames] = useState([]);
@@ -74,6 +74,16 @@ const Routesdata = () => {
             />
           }
         />
+         />
+        <Route
+          path="/selectmiles"
+          element={
+            <Selectmiles
+           
+            />
+          }
+        />
+ 
       </Routes>
     </Router>
   );

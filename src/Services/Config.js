@@ -1,6 +1,6 @@
 //Live Url
 //
-export const baseUrl = "https://agile-plateau-96207.herokuapp.com/";
+export const baseUrl = process.env.REACT_APP_API_BASE_URL;
 
 // Local URL
 
@@ -8,23 +8,9 @@ export const baseUrl = "https://agile-plateau-96207.herokuapp.com/";
 
 // spotify api data
 
-export const scopes = [
-  "user-read-private",
-  "user-read-email",
-  "user-follow-modify",
-  "user-library-read",
-  "user-top-read",
-  "user-library-modify",
-  "user-follow-read",
-  "user-read-playback-position",
-  "user-read-playback-state",
-  "user-read-recently-played",
-  "user-modify-playback-state",
-  "user-read-currently-playing",
-];
-
-export const CLIENT_ID = "f01e78664fc6407e815de229d1616785";
+export const scopes = [process.env.REACT_APP_SPOTIFY_SCOPES];
+export const CLIENT_ID = process.env.REACT_APP_CLIENT_SPOTIFY_ID;
 // export const REDIRECT_URI = "http://localhost:3000/";
-export const REDIRECT_URI  = "https://twine-new.vercel.app/"
-export const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
-export const RESPONSE_TYPE = "token";
+export const REDIRECT_URI  = process.env.REACT_APP_REDIRECT_URI;
+export const AUTH_ENDPOINT = process.env.REACT_APP_SPOTIFY_AUTH_ENDPOINT;
+export const RESPONSE_TYPE = process.env.REACT_APP_SPOTFY_RESPONSE_TYPE

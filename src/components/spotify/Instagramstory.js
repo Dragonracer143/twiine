@@ -1,25 +1,25 @@
 import React, { useState, useEffect } from "react";
 import { Pie } from "react-chartjs-2";
-import { useCallback } from "react";
-import { toPng } from "html-to-image";
 import axios from "axios";
 import { ArcElement } from "chart.js";
 import "../../../src/App.css";
 import { Chart as ChartJS, Tooltip, Legend } from "chart.js";
-import CircularIndeterminate from "./Loader";
 import { useNavigate } from "react-router-dom";
 import useGeolocation from "react-hook-geolocation";
-import { getDistance, getPreciseDistance } from "geolib";
+import { getDistance } from "geolib";
+import ChartDataLabels from "chartjs-plugin-datalabels";
 
-ChartJS.register(ArcElement, Tooltip, Legend);
+ChartJS.register(ArcElement, Tooltip, Legend, ChartDataLabels);
 
 const Instagramstory = (props) => {
   const [genernames, setGenernames] = useState([]);
   const [genervalues, setGenervalues] = useState([]);
-  const [filterdatas, setFilterDatas] = useState([]);
+  const [playlist, setPlaylist] = useState();
   let token = localStorage.getItem("token");
   const geolocation = useGeolocation();
   let navigate = useNavigate();
+
+  /*This array stores the colors of various genres*/
   const colorArray = [
     {
       id: 0,
@@ -143,12 +143,22 @@ const Instagramstory = (props) => {
     },
     {
       id: 24,
-      name: "abs",
+      name: "american",
       color: "#DAB762",
     },
+    {
+      id: 25,
+      name: "EDM",
+      color: "#030200",
+    },
   ];
+
   let generss = genernames?.slice(0, 6);
+
+  /*if genre color are not matched then it picks the color from below array*/
   let colorss = ["#9ac3c3", "#05e6fd", "#24d58b", "#032416", "#5e5617"];
+
+  /*loops matches the genre name with above array(colorArray) */
   for (let i = 0; i < generss?.length; i++) {
     for (let j = 0; j < colorArray?.length; j++) {
       if (colorArray[j]?.name === generss[i]) {
@@ -156,6 +166,9 @@ const Instagramstory = (props) => {
       }
     }
   }
+
+  /* data variable for shows the genre name in pie chart */
+
   const data = {
     labels: genernames?.slice(0, 5),
     indexLabel: genernames?.slice(0, 5),
@@ -175,13 +188,31 @@ const Instagramstory = (props) => {
       legend: {
         display: false,
       },
+      tooltip: {
+        enabled: false,
+      },
+      datalabels: {
+        formatter: function (value, context) {
+          return context.chart.data.labels[context.dataIndex];
+        },
+        labels: {
+          title: {
+            font: {
+              size: "14",
+            },
+
+            color: "white",
+          },
+        },
+        rotation: [0, 20, 19, 20, 77],
+      },
     },
   };
-  const [playlist, setPlaylist] = useState();
 
   useEffect(() => {
     getGenerslist();
   }, []);
+  /* This function is used for to get the gneres of user */
   const getGenerslist = async (e) => {
     const { data } = await axios
       .get("https://api.spotify.com/v1/me/top/artists?offset=0&limit=10", {
@@ -196,17 +227,34 @@ const Instagramstory = (props) => {
           navigate("/");
         }
       });
-
     let vall = [];
     data.items.map((first) => {
-      first.genres.forEach((valdata) => vall.push(valdata));
-    });
-    let newarray = [];
-    vall.forEach(function (x) {
-      newarray[x] = (newarray[x] || 0) + 1;
+      first.genres.forEach((valdata) => {
+        vall.push(valdata);
+      });
     });
 
-    let genereArray = Object.entries(newarray);
+    let newarray = [];
+    let newVal = [];
+    for (let i in vall) {
+      let counter = 0;
+      for (let j in vall) {
+        if (!newVal.includes(vall[i]) && vall[i] === vall[j]) {
+          counter++;
+        }
+      }
+      newVal.push(vall[i]);
+      let counter2 = 0;
+      for (let k in newVal) {
+        if (newVal[k] === vall[i]) {
+          counter2++;
+        }
+      }
+      if (counter2 == 1) {
+        newarray.push(new Array(vall[i], counter));
+      }
+    }
+
     function compareSecondColumn(a, b) {
       if (a[1] === b[1]) {
         return 0;
@@ -214,16 +262,17 @@ const Instagramstory = (props) => {
         return b[1] < a[1] ? -1 : 1;
       }
     }
-    genereArray.sort(compareSecondColumn);
+
+    newarray.sort(compareSecondColumn);
     let genername = [];
-    for (let i = 0; i < genereArray.length; i++) {
-      const element = genereArray[i][0];
+
+    for (let i = 0; i < newarray.length; i++) {
+      const element = newarray[i][0];
       genername.push(element);
     }
-
     let genervalue = [];
-    for (let i = 1; i < genereArray.length; i++) {
-      const element = genereArray[i][1];
+    for (let i = 1; i < newarray.length; i++) {
+      const element = newarray[i][1];
       genervalue.push(element);
     }
     setGenernames(genername);
@@ -232,6 +281,7 @@ const Instagramstory = (props) => {
   useEffect(() => {
     onGetdata();
   }, []);
+  /* get the top 5 songs of user */
   const onGetdata = async (e) => {
     const { data } = await axios
       .get("https://api.spotify.com/v1/me/top/tracks?offset=0&limit=5", {
@@ -248,15 +298,9 @@ const Instagramstory = (props) => {
       });
     setPlaylist(data.items);
   };
-  useEffect(() => {
-    setTimeout(() => {
-      const localData = JSON.parse(localStorage.getItem("filterResturant"));
-
-      setFilterDatas(localData);
-    }, 3000);
-  }, []);
   const lattitudeValue = geolocation.latitude;
   const longitudeValue = geolocation.longitude;
+  /* Function for get distance between to lattitude and longitude */
   const getDistanceFromCurrent = (cordinates) => {
     let dis = getDistance(
       {
@@ -328,8 +372,10 @@ const Instagramstory = (props) => {
                 {props?.filterdata?.slice(0, 3).map((ele, key) => (
                   <div className="col-12 col-md-4" key={key}>
                     <div className="Musicyoulike_card_blue">
-                      <img className="img"                       src={ele?.image1 ? ele?.image3 : ele?.image4}
-/>
+                      <img
+                        className="img"
+                        src={ele?.image1 ? ele?.image3 : ele?.image4}
+                      />
                       <div className="card_content">
                         <p style={{ paddingTop: "1rem" }} className="businnes">
                           {ele?.businessName} <span>{ele?.price}</span>

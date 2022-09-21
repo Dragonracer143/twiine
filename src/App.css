@@ -3724,6 +3724,77 @@ button.poweredby_btn.btn img {
   margin-bottom: 1rem;
   margin-left: 1.5rem;
 }
+/* Selectmiles CSS */
+.Selectmiles_main {
+  padding: 45px 35px;
+  background: linear-gradient(98.26deg, #79954e -12.51%, #c6d2b6 107.96%);
+}
+.Selectmiles_main .Selectmiles_main_inner {
+  position: relative;
+  border-radius: 12.5px;
+  height: calc(100vh - 90px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.Selectmiles_main .twiinevblack_logo {
+  position: absolute;
+  top: 18px;
+  left: 8px;
+}
+
+.Selectmiles_main .Selectmiles_main_inner .heading {
+  font-weight: 600;
+  font-size: 54px;
+  line-height: 75px;
+  color: #ffffff;
+  text-align: center;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  max-width: 1024px;
+}
+.Selectmiles_main .results_btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Selectmiles_main .results_btn .btn {
+  margin-top: 6rem !important;
+  background: #000;
+  border-radius: 20px;
+  text-align: center;
+  height: 60px;
+  color: #b9c8a5;
+  font-family: "Nunito";
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 55px;
+  padding: 0px 3rem;
+  margin: auto;
+}
+.results_three_btn{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.results_three_btn .btn {
+  margin-top: 1rem !important;
+  background: #000;
+  border-radius: 5px;
+  text-align: center;
+  height: 51px;
+  color: #b9c8a5;
+  font-family: "Nunito";
+  font-weight: 400;
+  font-size: 25px;
+  line-height: 51px;
+  padding: 0px 15rem;
+  margin: auto;
+}
+/* End Selectmiles CSS */
+
 
 @media screen and (max-width: 767px) {
   .Instagramstory {
@@ -3865,5 +3936,55 @@ button.poweredby_btn.btn img {
   margin-bottom: 0rem;
   margin-top: 2rem;
 }
-
+.Selectmiles_main .Selectmiles_main_inner .heading {
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 46px;
+  color: #ffffff;
+  text-align: center;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.Selectmiles_main .results_btn .btn {
+  margin-top: 6rem !important;
+  background: #000;
+  border-radius: 20px;
+  text-align: center;
+  height: 60px;
+  color: #b9c8a5;
+  font-family: "Nunito";
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 55px;
+  padding: 3px 4rem;
+  margin: auto;
+}
+.results_three_btn .btn {
+    padding: 0px 4rem;
+    font-size: 15px;
+}
+}
+span.MuiSlider-colorPrimary.MuiSlider-sizeMedium.MuiSlider-root {
+  color: black !important;
+  height:10px !important;
+}
+span.MuiSlider-valueLabelCircle {
+  color: #b7c6a2 !important;
+  font-size: 20px !important;
+}
+span.MuiSlider-markLabel.MuiSlider-markLabelActive {
+  font-size: 21px !important;
+  font-weight: 700 !important;
+}
+span.MuiSlider-markLabel{
+  font-size: 21px !important;
+  font-weight: 700 !important;
+}
+span.MuiSlider-thumbColorPrimary.MuiSlider-thumbSizeMedium.MuiSlider-thumb {
+  color: #bdcaa9 !important;
+}
+p.err {
+  margin-top: 25px;
+  font-size: 21px;
+  color: red;
+  font-style: italic;
 }

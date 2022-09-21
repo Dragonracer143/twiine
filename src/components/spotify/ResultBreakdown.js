@@ -6,19 +6,20 @@ import { useNavigate } from "react-router-dom";
 import { ArcElement } from "chart.js";
 import { Chart as ChartJS, Tooltip, Legend } from "chart.js";
 import CircularIndeterminate from "./Loader";
-import { AddBoxOutlined } from "@mui/icons-material";
 import ResultBreakdownstory from "./Resultstory";
-import { LinearProgress, Box } from "@mui/material";
 import { toPng } from "html-to-image";
 import { useCallback } from "react";
+import ChartDataLabels from "chartjs-plugin-datalabels";
 
-ChartJS.register(ArcElement, Tooltip, Legend);
+ChartJS.register(ArcElement, Tooltip, Legend, ChartDataLabels);
 const ResultBreakdown = (props) => {
   const refs = document.getElementById("id");
   const [playlist, setPlaylist] = useState();
-  const [filterstory, setFilterstory] = useState([]);
-  const [unfilterstory, setUnfilterstory] = useState([]);
   const [updata, setUpdata] = useState();
+  const [instagram, setInstagram] = useState(false);
+  let token = localStorage.getItem("token");
+  let navigate = useNavigate();
+  /*This array stores the colors of various genres*/
   const colorArray = [
     {
       id: 0,
@@ -145,10 +146,19 @@ const ResultBreakdown = (props) => {
       name: "abs",
       color: "#DAB762",
     },
+    {
+      id: 25,
+      name: "EDM",
+      color: "#030200",
+    },
   ];
   let generss = props?.genernames?.slice(0, 6);
+
+  /*if genre color are not matched then it picks the color from below array*/
+
   let colorss = ["#9ac3c3", "#05e6fd", "#24d58b", "#032416", "#5e5617"];
 
+  /*loops matches the genre name with above array(colorArray) */
   for (let i = 0; i < generss?.length; i++) {
     for (let j = 0; j < colorArray?.length; j++) {
       if (colorArray[j]?.name === generss[i]) {
@@ -156,7 +166,7 @@ const ResultBreakdown = (props) => {
       }
     }
   }
-
+  /* data variable for shows the genre name in pie chart */
   const data = {
     labels: props?.genernames?.slice(0, 5),
     type: "pie",
@@ -173,22 +183,33 @@ const ResultBreakdown = (props) => {
       },
     ],
   };
+  const options = {
+    plugins: {
+      legend: {
+        display: false,
+      },
+      tooltip: {
+        enabled: false,
+      },
+      datalabels: {
+        formatter: function (value, context) {
+          return context.chart.data.labels[context.dataIndex];
+        },
+        labels: {
+          title: {
+            font: {
+              size: "14",
+            },
 
-  const [instagram, setInstagram] = useState(false);
-  let token = localStorage.getItem("token");
-  useEffect(() => {
-    setTimeout(() => {
-      const localData = JSON.parse(localStorage.getItem("filterResturant"));
-      setFilterstory(localData);
-    }, 3000);
-  }, []);
-  useEffect(() => {
-    setTimeout(() => {
-      const localDatafiler = JSON.parse(localStorage.getItem("Withoutfilter"));
-      setUnfilterstory(localDatafiler);
-    }, 3000);
-  }, []);
-  let navigate = useNavigate();
+            color: "white",
+          },
+        },
+        rotation: [0, 20, 19, 20, 77],
+      },
+    },
+  };
+
+  /* This useeffect the get the value from localstorage to shows actual data */
   useEffect(() => {
     const localDatafilter = localStorage.getItem("unfilterstate");
     const Datafilter = JSON.parse(localStorage.getItem("filterstate"));
@@ -199,17 +220,10 @@ const ResultBreakdown = (props) => {
     }
   });
 
-  const options = {
-    plugins: {
-      legend: {
-        display: false,
-      },
-    },
-  };
-
   useEffect(() => {
     getGenerslist();
   }, []);
+  /* This function is used for to get the gneres of user */
   const getGenerslist = async (e) => {
     const { data } = await axios
       .get("https://api.spotify.com/v1/me/top/artists?offset=0&limit=10", {
@@ -232,10 +246,25 @@ const ResultBreakdown = (props) => {
     });
 
     let newarray = [];
-    vall.forEach(function (x) {
-      newarray[x] = (newarray[x] || 0) + 1;
-    });
-    let genereArray = Object.entries(newarray);
+    let newVal = [];
+    for (let i in vall) {
+      let counter = 0;
+      for (let j in vall) {
+        if (!newVal.includes(vall[i]) && vall[i] === vall[j]) {
+          counter++;
+        }
+      }
+      newVal.push(vall[i]);
+      let counter2 = 0;
+      for (let k in newVal) {
+        if (newVal[k] === vall[i]) {
+          counter2++;
+        }
+      }
+      if (counter2 == 1) {
+        newarray.push(new Array(vall[i], counter));
+      }
+    }
     function compareSecondColumn(a, b) {
       if (a[1] === b[1]) {
         return 0;
@@ -243,16 +272,16 @@ const ResultBreakdown = (props) => {
         return b[1] < a[1] ? -1 : 1;
       }
     }
-    genereArray.sort(compareSecondColumn);
+    newarray.sort(compareSecondColumn);
     let genername = [];
 
-    for (let i = 0; i < genereArray.length; i++) {
-      const element = genereArray[i][0];
+    for (let i = 0; i < newarray.length; i++) {
+      const element = newarray[i][0];
       genername.push(element);
     }
     let genervalue = [];
-    for (let i = 1; i < genereArray.length; i++) {
-      const element = genereArray[i][1];
+    for (let i = 1; i < newarray.length; i++) {
+      const element = newarray[i][1];
       genervalue.push(element);
     }
     props?.setGenernames(genername);
@@ -262,7 +291,7 @@ const ResultBreakdown = (props) => {
   useEffect(() => {
     onGetdata();
   }, []);
-
+  /* get the top 5 songs of user */
   const onGetdata = async (e) => {
     const { data } = await axios
       .get("https://api.spotify.com/v1/me/top/tracks?offset=0&limit=5", {
@@ -279,23 +308,20 @@ const ResultBreakdown = (props) => {
       });
     setPlaylist(data.items);
   };
-
+  /*Back to musicyoulike page */
   const goBack = () => {
     let path = "/musicyoulike";
     navigate(path);
   };
 
-
+  /* shareOnsocial button for downlod the image */
   const shareOnsocial = () => {
     setInstagram(true);
-
     setTimeout(() => {
       onButtonClick();
     }, 3000);
   };
-
-
-
+  /* Function for downloading image on click (Share on Social media) Button */
   const onButtonClick = useCallback(() => {
     if (refs === null) {
       return;
@@ -383,14 +409,7 @@ const ResultBreakdown = (props) => {
           </div>
         ) : null}
 
-     
-          <ResultBreakdownstory
-            filterstory={filterstory}
-            unfilterstory={unfilterstory}
-            instagram={instagram}
-            updata={updata}
-          />
-      
+        <ResultBreakdownstory instagram={instagram} updata={updata} />
       </div>
     </>
   );
