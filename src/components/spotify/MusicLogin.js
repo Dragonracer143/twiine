@@ -8,6 +8,10 @@ import {
   AUTH_ENDPOINT,
   RESPONSE_TYPE,
 } from "../../Services/Config";
+// import AppleLogin from 'react-apple-login'
+import { appleAuthHelpers } from "react-apple-signin-auth";
+import AppleSignin from "react-apple-signin-auth";
+
 const Musiclogin = () => {
   const [token, setToken] = useState("");
   const navigate = useNavigate();
@@ -32,6 +36,35 @@ const Musiclogin = () => {
     setToken(token);
   }, []);
 
+  // appleAuthHelpers.signIn({
+  //   authOptions: {
+  //     clientId: "com.twine.name",
+  //     redirectURI: "https://twine-new.vercel.app/test",
+  //     state: "state",
+  //     nonce: "nonce",
+  //     usePopup: true,
+  //     className: "abc",
+  //   },
+  //   onSuccess: (response) => console.log("respnse",response),
+  //   onError: (error) => console.error("erro",error),
+  // });
+  // const response = appleAuthHelpers.signIn({
+  //   authOptions: {
+  //     clientId: "com.twine.name",
+  //     redirectURI: "https://twine-new.vercel.app/test",
+  //     state: "state",
+  //     nonce: "nonce",
+  //     usePopup: true,
+  //     className: "abc",
+  //   },
+  //   onError: (error) => console.error(error),
+  // });
+
+  // if (response) {
+  //   console.log(response);
+  // } else {
+  //   console.error("Error performing apple signin.");
+  // }
   return (
     <>
       <div className="musiclogin_main">
@@ -58,10 +91,25 @@ const Musiclogin = () => {
             </a>
           </div>
           <div className="applemusic_btn">
-            <button className="btn" type="button">
-              <img className="apple_logo" src="./img/AppleLogo.png" />
-              Log in with Apple Music
-            </button>
+            {/* <button className="btn" type="button"> */}
+              {/* <img className="apple_logo" src="./img/AppleLogo.png" />
+              Log in with Apple Music */}
+              <AppleSignin
+                authOptions={{
+                  clientId: "com.twine.name",
+                  redirectURI: "https://twine-new.vercel.app/test",
+                  state: "state",
+                  nonce: "nonce",
+                  // usePopup: true,
+                  className: "abc",
+                }}
+                onSuccess={(response) => console.log("res", response)}
+                onError={(error) => console.error("err", error)}
+                buttonExtraChildren="Log in with Apple Music"
+
+              />
+              {/* <AppleLogin className="abc" clientId="com.twine.name" responseType="code" redirectURI="https://twine-new.vercel.app/test" /> */}
+            {/* </button> */}
           </div>
           <p className="text-white mt-4">
             Heads up! By choosing "no thanks", we will just generate results
