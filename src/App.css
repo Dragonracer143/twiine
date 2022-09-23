@@ -3993,3 +3993,31 @@ button.Moreinfo.btn a {
   font-size: 20px;
   line-height: 28px;
 }
+div#appleid-signin {
+  height: 85px;
+  margin-bottom: 10px;
+  opacity: 0;
+  
+  margin-top: -51px !important;
+}
+.react-apple-signin-auth-btn-dark {
+  background-color: #000 !important;
+  color: #FFF !important;
+  border-color: #FFF !important;
+  background: #000000 !important;
+  /* border: 3px solid #00ff19; */
+  border-radius: 40px !important;
+  text-align: center !important;
+  height: 60px !important;
+  color: #fff !important;
+  font-family: "Nunito" !important;
+  font-weight: 400 !important;
+  font-size: 28px !important;
+  line-height: 55px !important;
+  padding: 0px 14rem !important;
+  gap: 15px !important;
+  margin-top: 15px !important;
+}
+.react-apple-signin-auth-btn-dar svg {
+  height: 40px !important;
+}
