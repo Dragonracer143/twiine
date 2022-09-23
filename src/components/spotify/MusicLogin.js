@@ -97,7 +97,7 @@ const Musiclogin = () => {
               <AppleSignin
                 authOptions={{
                   clientId: "com.twine.name",
-                  redirectURI: "https://twine-new.vercel.app/userlocation",
+                  redirectURI: "https://twine-new.vercel.app/",
                   state: "state",
                   nonce: "nonce",
                   // usePopup: true,
