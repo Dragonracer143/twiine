@@ -18,6 +18,7 @@ const Musiclogin = () => {
   useEffect(() => {
     const hash = window.location.hash;
     let token = window.localStorage.getItem("token");
+    console.log("tokenb", token)
     if (!token && hash) {
       token = hash
         .substring(1)
@@ -65,6 +66,11 @@ const Musiclogin = () => {
     // } else {
     //   console.error("Error performing apple signin.");
     // }
+     const apple_auth="https://appleid.apple.com/auth/authorize?"
+     const appl_id = "com.twine.name"
+     const redirect_uria = "https://twine-new.vercel.app"
+     const response_type_apple = "code"
+     const apple_scope = "email, user"
   return (
     <>
       <div className="musiclogin_main">
@@ -91,10 +97,13 @@ const Musiclogin = () => {
             </a>
           </div>
           <div className="applemusic_btn">
-            {/* <button className="btn" type="button"> */}
-              {/* <img className="apple_logo" src="./img/AppleLogo.png" />
-              Log in with Apple Music */}
-              <AppleSignin
+
+          <a href={`${apple_auth}client_id=${appl_id}&redirect_uri=${redirect_uria}&response_type=${response_type_apple}`}>
+
+            <button className="btn" type="button">
+              <img className="apple_logo" src="./img/AppleLogo.png" />
+              Log in with Apple Music
+              {/* <AppleSignin
                 authOptions={{
                   clientId: "com.twine.name",
                   redirectURI: "https://twine-new.vercel.app",
@@ -108,9 +117,11 @@ const Musiclogin = () => {
                 buttonExtraChildren="Log in with Apple Music"
                 uiType="dark"
 
-              />
+              /> */}
+
               {/* <AppleLogin className="abc" clientId="com.twine.name" responseType="code" redirectURI="https://twine-new.vercel.app/test" /> */}
-            {/* </button> */}
+            </button>
+            </a>
           </div>
           <p className="text-white mt-4">
             Heads up! By choosing "no thanks", we will just generate results
