@@ -99,6 +99,7 @@ const Musiclogin = () => {
                   clientId: "com.twine.name",
                   redirectURI: "https://twine-new.vercel.app",
                   state: "state",
+                  scope: 'email name',
                   nonce: "nonce",
                   className: "abc",
                 }}
