@@ -47,11 +47,11 @@ const Musiclogin = () => {
   //   },
   //   onSuccess: (response) => console.log("respnse",response),
   //   onError: (error) => console.error("erro",error),
-  // });
+  // // });
   // const response = appleAuthHelpers.signIn({
   //   authOptions: {
   //     clientId: "com.twine.name",
-  //     redirectURI: "https://twine-new.vercel.app/test",
+  //     redirectURI: "https://twine-new.vercel.app",
   //     state: "state",
   //     nonce: "nonce",
   //     usePopup: true,
@@ -60,11 +60,11 @@ const Musiclogin = () => {
   //   onError: (error) => console.error(error),
   // });
 
-  // if (response) {
-  //   console.log(response);
-  // } else {
-  //   console.error("Error performing apple signin.");
-  // }
+    // if (response) {
+    //   console.log(response);
+    // } else {
+    //   console.error("Error performing apple signin.");
+    // }
   return (
     <>
       <div className="musiclogin_main">
@@ -100,12 +100,12 @@ const Musiclogin = () => {
                   redirectURI: "https://twine-new.vercel.app",
                   state: "state",
                   nonce: "nonce",
-                  // usePopup: true,
                   className: "abc",
                 }}
-                onSuccess={(response) => console.log("res", response)}
-                onError={(error) => console.error("err", error)}
+                onSuccess={(response) => console.log("response", response)}
+                onError={(error) => console.error("error", error)}
                 buttonExtraChildren="Log in with Apple Music"
+                uiType="dark"
 
               />
               {/* <AppleLogin className="abc" clientId="com.twine.name" responseType="code" redirectURI="https://twine-new.vercel.app/test" /> */}
