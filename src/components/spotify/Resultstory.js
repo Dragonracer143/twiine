@@ -508,6 +508,10 @@ const ResultBreakdownstory = (props) => {
                           {ele?.businessName} <span>{ele?.price}</span>
                         </p>
                         <p className="vives">
+
+
+
+
                           Vibes :&nbsp;{" "}
                           <span className="gener-name">
                             {" "}
