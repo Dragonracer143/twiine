@@ -6,13 +6,13 @@ const Userlocation = (props) => {
 const [apple , setApple] = useState('')
 console.log("apple", apple)
   /* Get current location */
-  let codetoken = localStorage.getItem("code");
-
+  let token = localStorage.getItem("id_token");
+  console.log("id token ", token)
   const onGetdata = async (e) => {
     const { data } = await axios
       .get("https://api.music.apple.com/v1/me", {
         headers: {
-          Authorization: `Bearer ${codetoken}`,
+          Authorization: `Bearer ${token}`,
         },
       })
       .catch((err) => {
