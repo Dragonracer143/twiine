@@ -15,6 +15,10 @@ import AppleSignin from "react-apple-signin-auth";
 const Musiclogin = () => {
   const [token, setToken] = useState("");
   const navigate = useNavigate();
+
+
+
+  
   useEffect(() => {
     const hash = window.location.hash;
     let token = window.localStorage.getItem("token");
@@ -25,7 +29,7 @@ const Musiclogin = () => {
 
 
 
-    
+
 
     console.log("token apple", tokenApple)
     if (!token && hash) {
