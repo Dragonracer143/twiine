@@ -25,11 +25,10 @@ const Musiclogin = () => {
 
       tokenapple = search
         .substring(1)
-        .split("&")
+        .split("?")
         .find((elem) => elem.startsWith("code"))
-        .split("=")[1];
-
-      window.location.search = "";
+        .split("=")[0];
+      // window.location.search = "";
       localStorage.setItem("id_token", tokenapple);
     }
     if (tokenapple) {
