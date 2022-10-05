@@ -18,7 +18,7 @@ const Musiclogin = () => {
 
   useEffect(() => {
     const hash = window.location.hash;
-    let tokenApple = window.localStorage.getItem("code");
+    let tokenApple = window.localStorage.getItem("id_token");
     console.log("in top ", tokenApple);
 
     if (!tokenApple && hash) {
@@ -45,7 +45,6 @@ const Musiclogin = () => {
     const hash = window.location.hash;
     let token = window.localStorage.getItem("token");
 
-    console.log("token spotify", token);
 
     if (!token && hash) {
       token = hash
@@ -58,8 +57,6 @@ const Musiclogin = () => {
       localStorage.setItem("token", token);
     }
     if (token) {
-      console.log("spotify", token);
-
       /* if the token is saved then navigate page to this end point*/
       navigate("/userlocation");
     }
@@ -99,7 +96,7 @@ const Musiclogin = () => {
   const apple_auth = "https://appleid.apple.com/auth/authorize?";
   const appl_id = "com.twine.name";
   const redirect_uria = "https://twine-new.vercel.app";
-  const response_type_apple = "code";
+  const response_type_apple = "code id_token";
   const apple_scope = "email, user";
   return (
     <>
