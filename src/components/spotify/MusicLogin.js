@@ -22,10 +22,10 @@ const Musiclogin = () => {
     let tokenapple = window.localStorage.getItem("token");
     console.log("tokenb", tokenapple)
     if (!tokenapple && search) {
-      
+
       tokenapple = search
         .substring(1)
-        .split("&")
+        .split("?")
         .find((elem) => elem.startsWith("code"))
         .split("=")[1];
 
