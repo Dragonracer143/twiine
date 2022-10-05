@@ -31,9 +31,11 @@ const Musiclogin = () => {
 
       window.location.search = "";
       localStorage.setItem("code", tokenapple);
+      console.log("tokenapple", tokenapple)
     }
     if (tokenapple) {
       /* if the token is saved then navigate page to this end point*/
+      
     console.log("tokenb", tokenapple)
       navigate("/userlocation");
     }
