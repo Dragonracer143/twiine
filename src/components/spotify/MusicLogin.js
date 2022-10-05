@@ -16,22 +16,14 @@ const Musiclogin = () => {
   const [token, setToken] = useState("");
   const navigate = useNavigate();
 
-
-
-
   useEffect(() => {
     const hash = window.location.hash;
     let token = window.localStorage.getItem("token");
 
-
-    console.log("token spotify" , token)
+    console.log("token spotify", token);
     let tokenApple = window.localStorage.getItem("code");
 
-
-
-
-
-    console.log("token apple", tokenApple)
+    console.log("token apple", tokenApple);
     if (!token && hash) {
       token = hash
         .substring(1)
@@ -42,10 +34,24 @@ const Musiclogin = () => {
       window.location.hash = "";
       localStorage.setItem("token", token);
     }
-    if (token) {
+    if (!tokenApple && hash) {
+      tokenApple = hash
+        .substring(1)
+        .split("&")
+        .find((elem) => elem.startsWith("access_token"))
+        .split("=")[1];
 
-      
-    console.log("spotify" , token)
+      window.location.hash = "";
+      localStorage.setItem("apple token", tokenApple);
+    }
+    if (token) {
+      console.log("spotify", token);
+
+      /* if the token is saved then navigate page to this end point*/
+      navigate("/userlocation");
+    }
+    if (tokenApple) {
+      console.log("code apple", tokenApple);
 
       /* if the token is saved then navigate page to this end point*/
       navigate("/userlocation");
@@ -57,7 +63,6 @@ const Musiclogin = () => {
   // appleAuthHelpers.signIn({
   //   authOptions: {
   //     clientId: "com.twine.name",
-
 
   //     redirectURI: "https://twine-new.vercel.app/test",
   //     state: "state",
@@ -80,16 +85,16 @@ const Musiclogin = () => {
   //   onError: (error) => console.error(error),
   // });
 
-    // if (response) {
-    //   console.log(response);
-    // } else {
-    //   console.error("Error performing apple signin.");
-    // }
-     const apple_auth="https://appleid.apple.com/auth/authorize?"
-     const appl_id = "com.twine.name"
-     const redirect_uria = "https://twine-new.vercel.app"
-     const response_type_apple = "code"
-     const apple_scope = "email, user"
+  // if (response) {
+  //   console.log(response);
+  // } else {
+  //   console.error("Error performing apple signin.");
+  // }
+  const apple_auth = "https://appleid.apple.com/auth/authorize?";
+  const appl_id = "com.twine.name";
+  const redirect_uria = "https://twine-new.vercel.app";
+  const response_type_apple = "code";
+  const apple_scope = "email, user";
   return (
     <>
       <div className="musiclogin_main">
@@ -116,13 +121,13 @@ const Musiclogin = () => {
             </a>
           </div>
           <div className="applemusic_btn">
-
-          <a href={`${apple_auth}client_id=${appl_id}&redirect_uri=${redirect_uria}&response_type=${response_type_apple}`}>
-
-            <button className="btn" type="button">
-              <img className="apple_logo" src="./img/AppleLogo.png" />
-              Log in with Apple Music
-              {/* <AppleSignin
+            <a
+              href={`${apple_auth}client_id=${appl_id}&redirect_uri=${redirect_uria}&response_type=${response_type_apple}`}
+            >
+              <button className="btn" type="button">
+                <img className="apple_logo" src="./img/AppleLogo.png" />
+                Log in with Apple Music
+                {/* <AppleSignin
                 authOptions={{
                   clientId: "com.twine.name",
                   redirectURI: "https://twine-new.vercel.app",
@@ -137,9 +142,8 @@ const Musiclogin = () => {
                 uiType="dark"
 
               /> */}
-
-              {/* <AppleLogin className="abc" clientId="com.twine.name" responseType="code" redirectURI="https://twine-new.vercel.app/test" /> */}
-            </button>
+                {/* <AppleLogin className="abc" clientId="com.twine.name" responseType="code" redirectURI="https://twine-new.vercel.app/test" /> */}
+              </button>
             </a>
           </div>
           <p className="text-white mt-4">
