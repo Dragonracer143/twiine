@@ -25,6 +25,8 @@ const Musiclogin = () => {
 
       tokenapple = search
         .substring(1)
+        .split("?")
+
         .split("&")
         .find((elem) => elem.startsWith("id_token"))
         .split("=")[1];
@@ -34,7 +36,7 @@ const Musiclogin = () => {
     }
     if (tokenapple) {
       /* if the token is saved then navigate page to this end point*/
-    console.log("tokenb", tokenapple)
+    console.log("tokenapple", tokenapple)
       navigate("/userlocation");
     }
     /* Save user token in localstorage to get the data of spotify account */
