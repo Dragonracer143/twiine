@@ -19,11 +19,12 @@ const Musiclogin = () => {
   const navigate = useNavigate();
   useEffect(() => {
     const search = window.location.search;
-    let tokenapple = window.localStorage.getItem("code");
+    let tokenapple = window.localStorage.getItem("token");
+    console.log("tokenb", tokenapple)
     if (!tokenapple && search) {
 
       tokenapple = search
-        .substring(2)
+        .substring(1)
         .split("?")
         .find((elem) => elem.startsWith("code"))
         .split("=")[1];
@@ -33,6 +34,7 @@ const Musiclogin = () => {
     }
     if (tokenapple) {
       /* if the token is saved then navigate page to this end point*/
+    console.log("tokenb", tokenapple)
       navigate("/userlocation");
     }
     /* Save user token in localstorage to get the data of spotify account */
@@ -41,6 +43,7 @@ const Musiclogin = () => {
   useEffect(() => {
     const hash = window.location.hash;
     let token = window.localStorage.getItem("token");
+    console.log("tokenb", token)
     if (!token && hash) {
       token = hash
         .substring(1)
@@ -59,11 +62,39 @@ const Musiclogin = () => {
     setToken(token);
   }, []);
 
+  // appleAuthHelpers.signIn({
+  //   authOptions: {
+  //     clientId: "com.twine.name",
+  //     redirectURI: "https://twine-new.vercel.app/test",
+  //     state: "state",
+  //     nonce: "nonce",
+  //     usePopup: true,
+  //     className: "abc",
+  //   },
+  //   onSuccess: (response) => console.log("respnse",response),
+  //   onError: (error) => console.error("erro",error),
+  // // });
+  // const response = appleAuthHelpers.signIn({
+  //   authOptions: {
+  //     clientId: "com.twine.name",
+  //     redirectURI: "https://twine-new.vercel.app",
+  //     state: "state",
+  //     nonce: "nonce",
+  //     usePopup: true,
+  //     className: "abc",
+  //   },
+  //   onError: (error) => console.error(error),
+  // });
+
+    // if (response) {
+    //   console.log(response);
+    // } else {
+    //   console.error("Error performing apple signin.");
+    // }
      const apple_auth="https://appleid.apple.com/auth/authorize?"
      const appl_id = "com.twine.name"
      const redirect_uria = "https://twine-new.vercel.app"
-     const response_type_apple = "code"
-     const respnse_mode = "fragment"
+     const response_type_apple = "code id_token"
     //  const apple_scope = "email, user"
   return (
     <>
