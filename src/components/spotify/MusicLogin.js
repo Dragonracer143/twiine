@@ -23,6 +23,8 @@ const Musiclogin = () => {
     console.log("token spotify" , token)
     let tokenApple = window.localStorage.getItem("code");
 
+
+    
     console.log("token apple", tokenApple)
     if (!token && hash) {
       token = hash
