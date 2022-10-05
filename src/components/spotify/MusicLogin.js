@@ -14,6 +14,7 @@ import AppleSignin from "react-apple-signin-auth";
 
 const Musiclogin = () => {
   const [token, setToken] = useState("");
+  console.log("tokentokentokentoken", token)
   const navigate = useNavigate();
 
   useEffect(() => {
