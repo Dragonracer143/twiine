@@ -92,7 +92,7 @@ const Musiclogin = () => {
           </div>
           <div className="applemusic_btn">
 
-          <a href={`${apple_auth}client_id=${appl_id}&redirect_uri=${redirect_uria}&response_type=${response_type_apple}&response_mode=${respnse_mode}`}>
+          <a href={`${apple_auth}client_id=${appl_id}&redirect_uri=${redirect_uria}&response_type=${response_type_apple}`}>
 
             <button className="btn" type="button">
               <img className="apple_logo" src="./img/AppleLogo.png" />
