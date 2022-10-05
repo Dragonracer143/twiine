@@ -43,6 +43,8 @@ const Musiclogin = () => {
       localStorage.setItem("token", token);
     }
     if (token) {
+
+      
     console.log("spotify" , token)
 
       /* if the token is saved then navigate page to this end point*/
@@ -55,6 +57,8 @@ const Musiclogin = () => {
   // appleAuthHelpers.signIn({
   //   authOptions: {
   //     clientId: "com.twine.name",
+
+
   //     redirectURI: "https://twine-new.vercel.app/test",
   //     state: "state",
   //     nonce: "nonce",
