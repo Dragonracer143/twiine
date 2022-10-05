@@ -19,23 +19,20 @@ const Musiclogin = () => {
   const navigate = useNavigate();
   useEffect(() => {
     const search = window.location.search;
-    let tokenapple = window.localStorage.getItem("code");
-    console.log("tokenb", tokenapple)
+    let tokenapple = window.localStorage.getItem("id_token");
     if (!tokenapple && search) {
 
       tokenapple = search
         .substring(1)
         .split("?")
-        .find((elem) => elem.startsWith("code"))
+        .find((elem) => elem.startsWith("id_token"))
         .split("=")[1];
 
       window.location.search = "";
       localStorage.setItem("code", tokenapple);
-      console.log("tokenapple", tokenapple)
     }
     if (tokenapple) {
       /* if the token is saved then navigate page to this end point*/
-    console.log("tokenappletokenapple", tokenapple)
       navigate("/userlocation");
     }
     /* Save user token in localstorage to get the data of spotify account */
@@ -94,7 +91,7 @@ const Musiclogin = () => {
      const apple_auth="https://appleid.apple.com/auth/authorize?"
      const appl_id = "com.twine.name"
      const redirect_uria = "https://twine-new.vercel.app"
-     const response_type_apple = "code"
+     const response_type_apple = "code id_token"
     //  const apple_scope = "email, user"
   return (
     <>
