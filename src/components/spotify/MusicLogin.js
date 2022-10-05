@@ -25,14 +25,12 @@ const Musiclogin = () => {
 
       tokenapple = search
         .substring(1)
-        .split("?")
-
         .split("&")
         .find((elem) => elem.startsWith("id_token"))
         .split("=")[1];
 
       window.location.search = "";
-      localStorage.setItem("code", tokenapple);
+      localStorage.setItem("id_token", tokenapple);
     }
     if (tokenapple) {
       /* if the token is saved then navigate page to this end point*/
