@@ -35,7 +35,7 @@ const Musiclogin = () => {
     }
     if (tokenapple) {
       /* if the token is saved then navigate page to this end point*/
-    console.log("tokenb", tokenapple)
+    console.log("tokenappletokenapple", tokenapple)
       navigate("/userlocation");
     }
     /* Save user token in localstorage to get the data of spotify account */
@@ -44,7 +44,6 @@ const Musiclogin = () => {
   useEffect(() => {
     const hash = window.location.hash;
     let token = window.localStorage.getItem("token");
-    console.log("tokenb", token)
     if (!token && hash) {
       token = hash
         .substring(1)
