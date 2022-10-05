@@ -20,7 +20,7 @@ const Musiclogin = () => {
     let token = window.localStorage.getItem("token");
 
 
-    
+    console.log("token spotify" , token)
     let tokenApple = window.localStorage.getItem("code");
 
     console.log("token apple", tokenApple)
