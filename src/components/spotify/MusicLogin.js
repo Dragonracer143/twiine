@@ -25,7 +25,7 @@ const Musiclogin = () => {
 
       tokenapple = search
         .substring(1)
-        .split("/")
+        .split("&")
         .find((elem) => elem.startsWith("code"))
         .split("=")[1];
 
@@ -94,8 +94,8 @@ const Musiclogin = () => {
      const apple_auth="https://appleid.apple.com/auth/authorize?"
      const appl_id = "com.twine.name"
      const redirect_uria = "https://twine-new.vercel.app"
-     const response_type_apple = "code"
-  const TeamID = "NYLT7BW87R"
+     const response_type_apple = "code id_token"
+  const TeamID = " NYLT7BW87R"
     //  const apple_scope = "email, user"
   return (
     <>
