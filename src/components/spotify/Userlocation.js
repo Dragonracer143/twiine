@@ -1,9 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import useGeolocation from "react-hook-geolocation";
 import { useNavigate } from "react-router-dom";
-
+import axios from "axios";
 const Userlocation = (props) => {
+const [apple , setApple] = useState('')
+console.log("apple", apple)
   /* Get current location */
+  let codetoken = localStorage.getItem("code");
+
+  const onGetdata = async (e) => {
+    const { data } = await axios
+      .get("https://api.music.apple.com/v1/me/storefront", {
+        headers: {
+          Authorization: `Bearer ${codetoken}`,
+        },
+      })
+      .catch((err) => {
+        console.log(err.response.status);
+      });
+      setApple(data);
+  };
+
+useEffect(()=>{
+  onGetdata()
+},[])
+
+
   const geolocation = useGeolocation();
   const navigate = useNavigate();
 
