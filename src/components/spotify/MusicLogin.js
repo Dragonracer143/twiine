@@ -62,7 +62,7 @@ const Musiclogin = () => {
      const apple_auth="https://appleid.apple.com/auth/authorize?"
      const appl_id = "com.twine.name"
      const redirect_uria = "https://twine-new.vercel.app"
-     const response_type_apple = "code id_token"
+     const response_type_apple = "code"
      const respnse_mode = "fragment"
     //  const apple_scope = "email, user"
   return (
