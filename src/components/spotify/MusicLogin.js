@@ -18,17 +18,17 @@ const Musiclogin = () => {
 
   const navigate = useNavigate();
   useEffect(() => {
-    const hash = window.location.hash;
+    const search = window.location.search;
     let tokenapple = window.localStorage.getItem("token");
     console.log("tokenb", tokenapple)
-    if (!tokenapple && hash) {
-      tokenapple = hash
+    if (!tokenapple && search) {
+      tokenapple = search
         .substring(1)
         .split("&")
         .find((elem) => elem.startsWith("code"))
         .split("=")[1];
 
-      window.location.hash = "";
+      window.location.search = "";
       localStorage.setItem("code", tokenapple);
     }
     if (tokenapple) {
