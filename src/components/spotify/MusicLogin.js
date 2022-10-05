@@ -92,6 +92,7 @@ const Musiclogin = () => {
      const appl_id = "com.twine.name"
      const redirect_uria = "https://twine-new.vercel.app"
      const response_type_apple = "id_token"
+     const respnse_mode = "fragment"
     //  const apple_scope = "email, user"
   return (
     <>
@@ -120,7 +121,7 @@ const Musiclogin = () => {
           </div>
           <div className="applemusic_btn">
 
-          <a href={`${apple_auth}client_id=${appl_id}&redirect_uri=${redirect_uria}&response_type=${response_type_apple}`}>
+          <a href={`${apple_auth}client_id=${appl_id}&redirect_uri=${redirect_uria}&response_type=${response_type_apple}&response_mode=${respnse_mode}`}>
 
             <button className="btn" type="button">
               <img className="apple_logo" src="./img/AppleLogo.png" />
