@@ -18,12 +18,35 @@ const Musiclogin = () => {
 
   useEffect(() => {
     const hash = window.location.hash;
+    let tokenApple = window.localStorage.getItem("code");
+    console.log("in top ", tokenApple);
+
+    if (!tokenApple && hash) {
+      tokenApple = hash
+        .substring(1)
+        .split("&")
+        .find((elem) => elem.startsWith("access_token"))
+        .split("=")[1];
+
+      window.location.hash = "";
+      localStorage.setItem("token", tokenApple);
+    }
+    if (tokenApple) {
+      console.log("token in if ", tokenApple);
+
+      /* if the token is saved then navigate page to this end point*/
+      navigate("/userlocation");
+    }
+
+    console.log("token apple", tokenApple);
+  }, []);
+
+  useEffect(() => {
+    const hash = window.location.hash;
     let token = window.localStorage.getItem("token");
 
     console.log("token spotify", token);
-    let tokenApple = window.localStorage.getItem("code");
 
-    console.log("token apple", tokenApple);
     if (!token && hash) {
       token = hash
         .substring(1)
@@ -34,24 +57,8 @@ const Musiclogin = () => {
       window.location.hash = "";
       localStorage.setItem("token", token);
     }
-    if (!tokenApple && hash) {
-      tokenApple = hash
-        .substring(1)
-        .split("&")
-        .find((elem) => elem.startsWith("access_token"))
-        .split("=")[1];
-
-      window.location.hash = "";
-      localStorage.setItem("apple token", tokenApple);
-    }
     if (token) {
       console.log("spotify", token);
-
-      /* if the token is saved then navigate page to this end point*/
-      navigate("/userlocation");
-    }
-    if (tokenApple) {
-      console.log("code apple", tokenApple);
 
       /* if the token is saved then navigate page to this end point*/
       navigate("/userlocation");
@@ -63,7 +70,6 @@ const Musiclogin = () => {
   // appleAuthHelpers.signIn({
   //   authOptions: {
   //     clientId: "com.twine.name",
-
   //     redirectURI: "https://twine-new.vercel.app/test",
   //     state: "state",
   //     nonce: "nonce",
