@@ -18,6 +18,9 @@ const Musiclogin = () => {
   useEffect(() => {
     const hash = window.location.hash;
     let token = window.localStorage.getItem("token");
+
+
+    
     let tokenApple = window.localStorage.getItem("code");
 
     console.log("token apple", tokenApple)
