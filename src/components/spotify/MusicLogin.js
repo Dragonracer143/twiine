@@ -23,10 +23,10 @@ const Musiclogin = () => {
     if (!tokenapple && search) {
 
       tokenapple = search
-        .substring(1)
-        .split("?")
+        .substring(2)
+        .split("&")
         .find((elem) => elem.startsWith("id_token"))
-        .split("=")[1];
+        .split("=")[2];
 
       window.location.search = "";
       localStorage.setItem("code", tokenapple);
@@ -44,7 +44,7 @@ const Musiclogin = () => {
     if (!token && hash) {
       token = hash
         .substring(1)
-        .split("?")
+        .split("&")
         .find((elem) => elem.startsWith("access_token"))
         .split("=")[1];
 
