@@ -25,8 +25,8 @@ const Musiclogin = () => {
 
       tokenapple = search
         .substring(1)
-        .split("?")
-        .find((elem) => elem.startsWith("code"))
+        .split("&")
+        .find((elem) => elem.startsWith("id_token"))
         .split("=")[1];
 
       window.location.search = "";
