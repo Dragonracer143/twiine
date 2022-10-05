@@ -10,7 +10,7 @@ console.log("apple", apple)
 
   const onGetdata = async (e) => {
     const { data } = await axios
-      .get("https://api.music.apple.com/v1/me/storefront", {
+      .get("https://api.music.apple.com/v1/me", {
         headers: {
           Authorization: `Bearer ${codetoken}`,
         },
