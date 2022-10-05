@@ -18,7 +18,7 @@ const Musiclogin = () => {
 
 
 
-  
+
   useEffect(() => {
     const hash = window.location.hash;
     let token = window.localStorage.getItem("token");
@@ -43,6 +43,8 @@ const Musiclogin = () => {
       localStorage.setItem("token", token);
     }
     if (token) {
+    console.log("spotify" , token)
+
       /* if the token is saved then navigate page to this end point*/
       navigate("/userlocation");
     }
