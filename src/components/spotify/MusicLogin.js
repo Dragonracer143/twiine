@@ -27,8 +27,8 @@ const Musiclogin = () => {
         .substring(1)
         .split("?")
         .find((elem) => elem.startsWith("code"))
-        .split("=")[0];
-      // window.location.search = "";
+        .split("=")[1];
+      window.location.search = "";
       localStorage.setItem("code", tokenapple);
     }
     if (tokenapple) {
