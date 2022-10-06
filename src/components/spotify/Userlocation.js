@@ -19,7 +19,11 @@ const Userlocation = (props) => {
       })
       .then(function (response) {
         console.log("response", response);
-      });
+      })
+      .catch((err)=>{
+        console.log("eroor", console.error())
+
+      })
   };
 
   useEffect(() => {
