@@ -9,22 +9,23 @@ const Userlocation = (props) => {
   let token = localStorage.getItem("id_token");
   console.log("id token ", token);
   const onGetdata = async (e) => {
-    const {data} = await axios
+  axios
       .get("https://api.music.apple.com/v1/storefronts", {
         headers: {
           "Access-Control-Allow-Origin": "https://twine-new.vercel.app/",
-          'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
-          Authorization: "Bearer eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlU3NzgyRlI0WFoifQeyJpYXQiOjE2NjUwNzQ3MjEsImV4cCI6MTY4MDYyNjcyMSwiaXNzIjoiTllMVDdCVzg3UiJ9jplpYfRtRrCg47s3JwZWzYhRSrSp5m2QKsedT565UcER20qRlGfK53kR_fYiDqemEC-fVEq4o9VfmhmN9AFkCg",
+          "Access-Control-Allow-Methods":
+            "GET, POST, PATCH, PUT, DELETE, OPTIONS",
+          Authorization:
+            "Bearer eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlU3NzgyRlI0WFoifQeyJpYXQiOjE2NjUwNzQ3MjEsImV4cCI6MTY4MDYyNjcyMSwiaXNzIjoiTllMVDdCVzg3UiJ9jplpYfRtRrCg47s3JwZWzYhRSrSp5m2QKsedT565UcER20qRlGfK53kR_fYiDqemEC-fVEq4o9VfmhmN9AFkCg",
           "Content-Type": "application/json",
         },
       })
-      .then((response)=>{
-console.log("myresponse", response)
-      } )
-      .catch((err)=>{
-        console.log("eroor", err)
-
+      .then((response) => {
+        console.log("myresponse", response);
       })
+      .catch((err) => {
+        console.log("eroor", err);
+      });
   };
 
   useEffect(() => {
