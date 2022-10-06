@@ -9,7 +9,7 @@ const Userlocation = (props) => {
   let token = localStorage.getItem("id_token");
   console.log("id token ", token);
   const onGetdata = async (e) => {
-    const data = await axios
+    const {data} = await axios
       .get("https://api.music.apple.com/v1/storefronts", {
         headers: {
           "Access-Control-Allow-Origin": "https://twine-new.vercel.app/",
@@ -18,9 +18,9 @@ const Userlocation = (props) => {
           "Content-Type": "application/json",
         },
       })
-      .then(function (response) {
-        console.log("response", response);
-      })
+      .then((response)=>{
+console.log("myresponse", response)
+      } )
       .catch((err)=>{
         console.log("eroor", err)
 
