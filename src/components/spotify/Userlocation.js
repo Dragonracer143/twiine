@@ -12,7 +12,7 @@ console.log("apple", apple)
     const { data } = await axios
       .get("https://api.music.apple.com/v1/me", {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlU3NzgyRlI0WFoifQ.eyJpYXQiOjE2NjUwNzQ3MjEsImV4cCI6MTY4MDYyNjcyMSwiaXNzIjoiTllMVDdCVzg3UiJ9.jplpYfRtRrCg47s3JwZWzYhRSrSp5m2QKsedT565UcER20qRlGfK53kR_fYiDqemEC-fVEq4o9VfmhmN9AFkCg`,
         },
       })
       .catch((err) => {
