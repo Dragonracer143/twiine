@@ -22,7 +22,7 @@ const Userlocation = (props) => {
         console.log("response", response);
       })
       .catch((err)=>{
-        console.log("eroor", console.error())
+        console.log("eroor", err)
 
       })
   };
