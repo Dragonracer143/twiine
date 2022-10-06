@@ -10,7 +10,7 @@ const Userlocation = (props) => {
   console.log("id token ", token);
   const onGetdata = async (e) => {
     const data = await axios
-      .get("https://api.music.apple.com/v1", {
+      .get("https://api.music.apple.com/v1/storefronts", {
         headers: {
           "Access-Control-Allow-Origin": "https://twine-new.vercel.app/",
           'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
