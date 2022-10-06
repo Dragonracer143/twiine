@@ -9,16 +9,16 @@ console.log("apple", apple)
   let token = localStorage.getItem("id_token");
   console.log("id token ", token)
   const onGetdata = async (e) => {
-    const { data } = await axios
+    const  data  = await axios
       .get("https://api.music.apple.com/v1/me", {
         headers: {
           Authorization: `Bearer eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlU3NzgyRlI0WFoifQ.eyJpYXQiOjE2NjUwNzQ3MjEsImV4cCI6MTY4MDYyNjcyMSwiaXNzIjoiTllMVDdCVzg3UiJ9.jplpYfRtRrCg47s3JwZWzYhRSrSp5m2QKsedT565UcER20qRlGfK53kR_fYiDqemEC-fVEq4o9VfmhmN9AFkCg`,
         },
       })
-      .catch((err) => {
-        console.log(err.response.status);
+      .then(function (response) {
+        console.log(response);
       });
-      setApple(data);
+  
   };
 
 useEffect(()=>{
