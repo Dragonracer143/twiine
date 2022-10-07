@@ -21,6 +21,7 @@ const Musiclogin = () => {
     const search = window.location.search;
     let params = new URLSearchParams(search);
     let tokenapple = params.get('id_token');
+    console.log("tokneapple", tokenapple)
     localStorage.setItem("code", tokenapple);
 
     if (!tokenapple ) {
