@@ -16,7 +16,7 @@ const Userlocation = (props) => {
           "Access-Control-Allow-Methods":
             "GET, POST, PATCH, PUT, DELETE, OPTIONS",
           Authorization:
-            "Bearer eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlU3NzgyRlI0WFoifQeyJpYXQiOjE2NjUwNzQ3MjEsImV4cCI6MTY4MDYyNjcyMSwiaXNzIjoiTllMVDdCVzg3UiJ9jplpYfRtRrCg47s3JwZWzYhRSrSp5m2QKsedT565UcER20qRlGfK53kR_fYiDqemEC-fVEq4o9VfmhmN9AFkCg",
+            "Bearer eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IllIS0xLSk5ZRDMifQ.eyJpYXQiOjE2NjUxNjg0MTIsImV4cCI6MTY4MDcyMDQxMiwiaXNzIjoiTllMVDdCVzg3UiJ9.qM3UV0c7KZiEXMVGkEWXgkEiEcP52WiMz_z71zMD5vnX6V1zOnZJl0jN9VH_4niJnzbYV_s9MhvWwmkC0h29bw",
           "Content-Type": "application/json",
         },
       })
