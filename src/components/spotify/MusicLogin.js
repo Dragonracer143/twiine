@@ -19,21 +19,16 @@ const Musiclogin = () => {
   const navigate = useNavigate();
   useEffect(() => {
     const search = window.location.search;
-    let tokenapple = window.localStorage.getItem("id_token");
-    console.log("tokenb", tokenapple)
-    if (!tokenapple && search) {
+    let params = new URLSearchParams(search);
+    let tokenapple = params.get('id_token');
 
-      tokenapple = search
-        .substring(1)
-        .split("%")
-        .find((elem) => elem.startsWith("id_token"))
-        .split("=")[1];
-      window.location.search = "";
+
+    if (!tokenapple ) {
+
       localStorage.setItem("code", tokenapple);
     }
     if (tokenapple) {
       /* if the token is saved then navigate page to this end point*/
-    console.log("tokenapple", tokenapple)
       navigate("/userlocation");
     }
     /* Save user token in localstorage to get the data of spotify account */
