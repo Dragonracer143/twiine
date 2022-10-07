@@ -19,14 +19,14 @@ const Musiclogin = () => {
   const navigate = useNavigate();
   useEffect(() => {
     const search = window.location.search;
-    let tokenapple = window.localStorage.getItem("code");
+    let tokenapple = window.localStorage.getItem("id_token");
     console.log("tokenb", tokenapple)
     if (!tokenapple && search) {
 
       tokenapple = search
         .substring(1)
         .split("?")
-        .find((elem) => elem.startsWith("code"))
+        .find((elem) => elem.startsWith("id_token"))
         .split("=")[1];
       window.location.search = "";
       localStorage.setItem("code", tokenapple);
