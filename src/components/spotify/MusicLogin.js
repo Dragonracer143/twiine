@@ -89,7 +89,20 @@ const Musiclogin = () => {
      const redirect_uria = "https://twine-new.vercel.app"
      const response_type_apple = "code id_token"
   const TeamID = " NYLT7BW87R"
+ const muisckit =  MusicKit.configure({
+    developerToken:
+      "eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IllIS0xLSk5ZRDMifQ.eyJpYXQiOjE2NjU0MjA5NDcsImV4cCI6MTY4MDk3Mjk0NywiaXNzIjoiTllMVDdCVzg3UiJ9.yADms8Ucvf6RP-KzHkFG2ATh2TT8fZQT58H9jFIp85Zi5u6oDbQGb2Bq3QD6qoIWhXXFlie_WW9HO_fZlCDLBw",
+    app: {
+      name: "Twinedata",
+      build: "1978.4.1",
+    },
+  });
+  
+  const music = MusicKit.getInstance();
+const appDesc =() =>{
+  const musicauth = music.authorize();
 
+}
 
   return (
     <>
@@ -143,6 +156,7 @@ const Musiclogin = () => {
             </button>
             </a>
           </div>
+          <p onClick={appDesc()}>appple sign in</p>
           <p className="text-white mt-4">
             Heads up! By choosing "no thanks", we will just generate results
             that aren't near you.
