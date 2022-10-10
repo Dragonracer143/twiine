@@ -91,10 +91,11 @@ const Musiclogin = () => {
      const redirect_uria = "https://twine-new.vercel.app"
      const response_type_apple = "code id_token"
   const TeamID = " NYLT7BW87R"
+  const tokenDev = "eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IllIS0xLSk5ZRDMifQ.eyJpYXQiOjE2NjU0MjA5NDcsImV4cCI6MTY4MDk3Mjk0NywiaXNzIjoiTllMVDdCVzg3UiJ9.yADms8Ucvf6RP-KzHkFG2ATh2TT8fZQT58H9jFIp85Zi5u6oDbQGb2Bq3QD6qoIWhXXFlie_WW9HO_fZlCDLBw"
     const setupMusicKit = new Promise((resolve) => {
       document.addEventListener("musickitloaded", () => {
         const musicKitInstance = window.MusicKit.configure({
-          developerToken: "eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IllIS0xLSk5ZRDMifQ.eyJpYXQiOjE2NjU0MjA5NDcsImV4cCI6MTY4MDk3Mjk0NywiaXNzIjoiTllMVDdCVzg3UiJ9.yADms8Ucvf6RP-KzHkFG2ATh2TT8fZQT58H9jFIp85Zi5u6oDbQGb2Bq3QD6qoIWhXXFlie_WW9HO_fZlCDLBw",
+          developerToken:tokenDev,
           app: {
             name: "MusicKit Web App",
             build: "1.0.0",
