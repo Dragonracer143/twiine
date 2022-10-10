@@ -91,7 +91,29 @@ const Musiclogin = () => {
      const redirect_uria = "https://twine-new.vercel.app"
      const response_type_apple = "code id_token"
   const TeamID = " NYLT7BW87R"
-    //  const apple_scope = "email, user"
+    const setupMusicKit = new Promise((resolve) => {
+      document.addEventListener("musickitloaded", () => {
+        const musicKitInstance = window.MusicKit.configure({
+          developerToken: "eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IllIS0xLSk5ZRDMifQ.eyJpYXQiOjE2NjUxNjg0MTIsImV4cCI6MTY4MDcyMDQxMiwiaXNzIjoiTllMVDdCVzg3UiJ9.qM3UV0c7KZiEXMVGkEWXgkEiEcP52WiMz_z71zMD5vnX6V1zOnZJl0jN9VH_4niJnzbYV_s9MhvWwmkC0h29bw",
+          app: {
+            name: "MusicKit Web App",
+            build: "1.0.0",
+          },
+        });
+        delete window.MusicKit; // clear global scope
+        resolve(musicKitInstance);
+      });
+    })
+    setupMusicKit.then(async (musicKit) => {
+      try {
+    await musicKit.authorize(); 
+console.log("Authorize", musicKit)
+      // await musicKit.unauthorize(); 
+      } catch(error) {
+        // Handle cases when authorization fails
+      }
+  })
+
   return (
     <>
       <div className="musiclogin_main">
@@ -149,6 +171,8 @@ const Musiclogin = () => {
             that aren't near you.
           </p>
         </div>
+        <button id="apple-music-authorize">Apple</button>
+
       </div>
     </>
   );
