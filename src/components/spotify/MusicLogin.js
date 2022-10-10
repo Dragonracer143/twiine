@@ -171,7 +171,6 @@ console.log("Authorize", musicKit)
             that aren't near you.
           </p>
         </div>
-        <button id="apple-music-authorize">Apple</button>
 
       </div>
     </>
