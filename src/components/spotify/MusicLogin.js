@@ -94,8 +94,10 @@ const Musiclogin = () => {
   const tokenDev = "eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IllIS0xLSk5ZRDMifQ.eyJpYXQiOjE2NjU0MjA5NDcsImV4cCI6MTY4MDk3Mjk0NywiaXNzIjoiTllMVDdCVzg3UiJ9.yADms8Ucvf6RP-KzHkFG2ATh2TT8fZQT58H9jFIp85Zi5u6oDbQGb2Bq3QD6qoIWhXXFlie_WW9HO_fZlCDLBw"
     const setupMusicKit = new Promise((resolve) => {
       document.addEventListener("musickitloaded", () => {
+        console.log("mus", tokenDev)
         const musicKitInstance = window.MusicKit.configure({
           developerToken:tokenDev,
+
           app: {
             name: "MusicKit Web App",
             build: "1.0.0",
