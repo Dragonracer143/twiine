@@ -4,10 +4,8 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 const Userlocation = (props) => {
   const [apple, setApple] = useState("");
-  console.log("apple", apple);
   /* Get current location */
   let token = localStorage.getItem("id_token");
-  console.log("id token ", token);
   const onGetdata = async (e) => {
   axios
       .get("https://api.music.apple.com/v1/me/storefront", {
@@ -22,7 +20,6 @@ const Userlocation = (props) => {
         },
       })
       .then((response) => {
-        console.log("myresponse", response);
       })
       .catch((err) => {
         console.log("eroor", err);
@@ -54,7 +51,6 @@ const Userlocation = (props) => {
   const tokenDev = "eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IllIS0xLSk5ZRDMifQ.eyJpYXQiOjE2NjU0MjA5NDcsImV4cCI6MTY4MDk3Mjk0NywiaXNzIjoiTllMVDdCVzg3UiJ9.yADms8Ucvf6RP-KzHkFG2ATh2TT8fZQT58H9jFIp85Zi5u6oDbQGb2Bq3QD6qoIWhXXFlie_WW9HO_fZlCDLBw"
     const setupMusicKit = new Promise((resolve) => {
       document.addEventListener("musickitloaded", () => {
-        console.log("mus", tokenDev)
         const musicKitInstance = window.MusicKit.configure({
           developerToken:tokenDev,
 

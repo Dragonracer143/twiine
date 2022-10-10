@@ -21,7 +21,6 @@ const Musiclogin = () => {
     const search = window.location.search;
     let params = new URLSearchParams(search);
     let tokenapple = params.get('id_token');
-    console.log("tokneapple", tokenapple)
     localStorage.setItem("code", tokenapple);
 
     if (!tokenapple ) {
@@ -38,7 +37,6 @@ const Musiclogin = () => {
   useEffect(() => {
     const hash = window.location.hash;
     let token = window.localStorage.getItem("token");
-    console.log("tokenb", token)
     if (!token && hash) {
       token = hash
         .substring(1)
