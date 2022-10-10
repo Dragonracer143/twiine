@@ -64,6 +64,7 @@ const Userlocation = (props) => {
           },
         });
         delete window.MusicKit; // clear global scope
+        console.log("music", musicKitInstance)
         resolve(musicKitInstance);
       });
     })
