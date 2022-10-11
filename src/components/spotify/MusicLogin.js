@@ -143,7 +143,6 @@ const Musiclogin = () => {
             </button>
             </a>
           </div>
-          <p>appple sign in</p>
           <p className="text-white mt-4">
             Heads up! By choosing "no thanks", we will just generate results
             that aren't near you.
