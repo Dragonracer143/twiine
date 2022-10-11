@@ -15,26 +15,10 @@ const MusicKit = window.MusicKit;
 
 const Musiclogin = () => {
   const [token, setToken] = useState("");
-  const [appletoken, setAppletoken] = useState("");
+  const [appletoken, setAppleToken] = useState("");
 
   const navigate = useNavigate();
-  useEffect(() => {
-    const search = window.location.search;
-    let params = new URLSearchParams(search);
-    let tokenapple = params.get('id_token');
-    localStorage.setItem("code", tokenapple);
 
-    if (!tokenapple ) {
-
-      localStorage.setItem("code", tokenapple);
-    }
-    if (tokenapple) {
-      /* if the token is saved then navigate page to this end point*/
-      navigate("/userlocation");
-    }
-    /* Save user token in localstorage to get the data of spotify account */
-    setAppletoken(tokenapple);
-  }, []);
   useEffect(() => {
     const hash = window.location.hash;
     let token = window.localStorage.getItem("token");
@@ -56,27 +40,25 @@ const Musiclogin = () => {
     setToken(token);
   }, []);
 
-
-
-     const apple_auth="https://appleid.apple.com/auth/authorize?"
-     const appl_id = "com.twine.name"
-     const redirect_uria = "https://twine-new.vercel.app"
-     const response_type_apple = "code id_token"
-  const TeamID = " NYLT7BW87R"
-  const Loginapi = async () =>{
+  const Loginapi = async () => {
     await MusicKit.configure({
-      developerToken: 'eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IllIS0xLSk5ZRDMifQ.eyJpYXQiOjE2NjU0OTkzOTQsImV4cCI6MTY4MTA1MTM5NCwiaXNzIjoiTllMVDdCVzg3UiJ9.kowm5_kjHPqpovZV1u1tffpztEMt4_wf2t9NojoNg6koNKqRhnM2noVQTI_ISv-tGvdPH2wwIptSWheRBASQjQ',
+      developerToken:
+        "eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IllIS0xLSk5ZRDMifQ.eyJpYXQiOjE2NjU0OTkzOTQsImV4cCI6MTY4MTA1MTM5NCwiaXNzIjoiTllMVDdCVzg3UiJ9.kowm5_kjHPqpovZV1u1tffpztEMt4_wf2t9NojoNg6koNKqRhnM2noVQTI_ISv-tGvdPH2wwIptSWheRBASQjQ",
       app: {
-        name: 'Twine LLC',
-        build: '1978.4.1',
+        name: "Twine LLC",
+        build: "1978.4.1",
       },
     });
     const music = await MusicKit.getInstance();
-    const musicAuthorize = await music.authorize()
-    console.log("musiCauthorize", musicAuthorize)
-    localStorage.setItem("musicUsertoken", musicAuthorize)
-  }
-  
+    const musicAuthorize = await music.authorize();
+
+  };
+  useEffect(() => {
+    localStorage.getItem("musicUsertoken", appletoken);
+    if (appletoken != undefined) {
+      navigate("/userlocation");
+    }
+  }, [appletoken]);
 
   return (
     <>
@@ -104,13 +86,11 @@ const Musiclogin = () => {
             </a>
           </div>
           <div className="applemusic_btn">
+            {/* <a href={`${apple_auth}client_id=${appl_id}&redirect_uri=${redirect_uria}&response_type=${response_type_apple}`}> */}
 
-          {/* <a href={`${apple_auth}client_id=${appl_id}&redirect_uri=${redirect_uria}&response_type=${response_type_apple}`}> */}
-
-            <button onClick={()=>Loginapi()} className="btn" type="button">
+            <button onClick={() => Loginapi()} className="btn" type="button">
               <img className="apple_logo" src="./img/AppleLogo.png" />
               Log in with Apple Music
-      
             </button>
             {/* </a> */}
           </div>
@@ -119,7 +99,6 @@ const Musiclogin = () => {
             that aren't near you.
           </p>
         </div>
-
       </div>
     </>
   );
