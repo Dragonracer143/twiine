@@ -4,9 +4,34 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 const MusicKit = window.MusicKit;
 const Userlocation = (props) => {
-  const [apple, setApple] = useState("");
   /* Get current location */
   let token = localStorage.getItem("id_token");
+  let appletoken = localStorage.getItem("id_token");
+
+  const onGetdata = async (e) => {
+  axios
+      .get("https://api.music.apple.com/v1/me/storefront", {
+        headers: {
+          "Access-Control-Allow-Origin": "https://twine-new.vercel.app/",
+          "Access-Control-Allow-Methods":
+            "GET, POST, PATCH, PUT, DELETE, OPTIONS",
+          Authorization:
+            "Bearer eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IllIS0xLSk5ZRDMifQ.eyJpYXQiOjE2NjUxNjg0MTIsImV4cCI6MTY4MDcyMDQxMiwiaXNzIjoiTllMVDdCVzg3UiJ9.qM3UV0c7KZiEXMVGkEWXgkEiEcP52WiMz_z71zMD5vnX6V1zOnZJl0jN9VH_4niJnzbYV_s9MhvWwmkC0h29bw",
+            "Music-User-Token": `${appletoken}`,
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
+        console.log("response", response)
+      })
+      .catch((err) => {
+        console.log("eroor", err);
+      });
+  };
+
+  useEffect(() => {
+    onGetdata();
+  }, []);
 
   const geolocation = useGeolocation();
   const navigate = useNavigate();
@@ -26,15 +51,7 @@ const Userlocation = (props) => {
     navigate(path);
     localStorage.setItem("filterstate", "1");
   };
- const getusertop = async () =>{
-  const music = MusicKit.getInstance();
-  const { data: result } = await music.api.music('v1/me/library/songs');
-  console.log("data", result)
 
- }
-useEffect(()=>{
-  getusertop()
-},[])
   return (
     <>
       <div className="Userlocation_main">
