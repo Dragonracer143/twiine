@@ -6,7 +6,7 @@ const MusicKit = window.MusicKit;
 const Userlocation = (props) => {
   /* Get current location */
   let token = localStorage.getItem("id_token");
-  let appletoken = localStorage.getItem("id_token");
+  let appletoken = localStorage.getItem("musicUsertoken");
 
   const onGetdata = async (e) => {
   axios
