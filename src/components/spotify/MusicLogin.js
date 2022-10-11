@@ -55,7 +55,7 @@ const Musiclogin = () => {
   };
   useEffect(() => {
     localStorage.getItem("musicUsertoken", appletoken);
-    if (appletoken != undefined) {
+    if (appletoken) {
       navigate("/userlocation");
     }
   }, [appletoken]);
