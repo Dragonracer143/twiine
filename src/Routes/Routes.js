@@ -9,12 +9,18 @@ import Maindashboard from "../components/admin/Maindashboard";
 import Ratingmanage from "../components/admin/Ratingmange";
 import Waitlist from "../components/admin/Waitlist";
 import Waitinglisttable from "../components/admin/Waitinglisttable";
-import Musiclogin from "../components/spotify/MusicLogin";
+import Musiclogin from "../components/Login/MusicLogin";
 import Userlocation from "../components/spotify/Userlocation";
 import Musicyoulike from "../components/spotify/Musicyoulike";
 import ResultBreakdown from "../components/spotify/ResultBreakdown";
 import Instagramstory from "../components/spotify/Instagramstory";
 import Selectmiles from "../components/spotify/Selectmiles";
+import Userlocations from "../components/applemusic/Applenusiclocation";
+import Applemuicyoulike from "../components/applemusic/Applemusicyoulike";
+import Appleselectmile from "../components/applemusic/Appleselectmile";
+import Appleinsta from "../components/applemusic/Appleinsta";
+import AppleResultBreak from "../components/applemusic/Appleresultbreak";
+
 const Routesdata = () => {
   const [rest, setRest] = useState([]);
   const [genernames, setGenernames] = useState([]);
@@ -74,16 +80,40 @@ const Routesdata = () => {
             />
           }
         />
-         />
         <Route
           path="/selectmiles"
+          element={<Selectmiles setRandomdata={setRandomdata} />}
+        />
+        <Route
+          path="/userlocations"
+          element={<Userlocations setRandomdata={setRandomdata} />}
+        />
+        <Route
+          path="/selectedmile"
+          element={<Appleselectmile setRandomdata={setRandomdata} />}
+        />
+        <Route
+          path="/likemusic"
           element={
-            <Selectmiles
-           
+            <Applemuicyoulike
+              rest={rest}
+              setRest={setRest}
+              randomdata={randomdata}
             />
           }
         />
- 
+            <Route
+          path="/Appleresult"
+          element={
+            <AppleResultBreak
+              genernames={genernames}
+              genervalues={genervalues}
+              setGenernames={setGenernames}
+              setGenervalues={setGenervalues}
+            />
+          }
+        />
+        {/* <Route path="/appleinstastory" element={<Appleinsta />} /> */}
       </Routes>
     </Router>
   );

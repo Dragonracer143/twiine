@@ -421,8 +421,11 @@ const ResultBreakdownstory = (props) => {
           <div className="row results">
             <div className="col-12 col-md-6">
               <div className="right_table">
-                <p>Your top 5 songs right now</p>
-                {playlist?.map((ele, key) => (
+              <div className="head-title">
+                  <p>Your top 5 songs right now</p>
+              <img className="img-fluids" src="./img/Spotify.png"></img>
+              </div>                {playlist?.map((ele, key) => (
+                 <a href={ele?.external_urls?.spotify} target="_blank"> 
                   <div key={key} className="song_one mt-2">
                     <div className="song_no">
                       <p>{key + 1}.</p>
@@ -436,6 +439,7 @@ const ResultBreakdownstory = (props) => {
                       src={ele?.album?.images[1]?.url}
                     />
                   </div>
+                  </a>
                 ))}
               </div>
             </div>

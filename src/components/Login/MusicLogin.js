@@ -51,12 +51,15 @@ const Musiclogin = () => {
     });
     const music = await MusicKit.getInstance();
     const musicAuthorize = await music.authorize();
+    localStorage.setItem("music-user_token", musicAuthorize);
+
+    setAppleToken(musicAuthorize)
 
   };
+  
   useEffect(() => {
-    localStorage.getItem("musicUsertoken", appletoken);
     if (appletoken) {
-      navigate("/userlocation");
+      navigate("/userlocations");
     }
   }, [appletoken]);
 

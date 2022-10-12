@@ -7,18 +7,20 @@ import { Chart as ChartJS, Tooltip, Legend } from "chart.js";
 import { useNavigate } from "react-router-dom";
 import useGeolocation from "react-hook-geolocation";
 import { getDistance } from "geolib";
+import { baseUrl } from "../../Services/Config";
+// const baseUrl = "http://localhost:8000/";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 
 ChartJS.register(ArcElement, Tooltip, Legend, ChartDataLabels);
 
-const Instagramstory = (props) => {
+const Appleresultbreakstory = (props) => {
   const [genernames, setGenernames] = useState([]);
   const [genervalues, setGenervalues] = useState([]);
-  const [playlist, setPlaylist] = useState();
+  const [filterdata, setFilterData] = useState([]);
+  const [nonfilterdata, setNonfilterdata] = useState([]);
   let token = localStorage.getItem("token");
   const geolocation = useGeolocation();
   let navigate = useNavigate();
-
   /*This array stores the colors of various genres*/
   const colorArray = [
     {
@@ -152,13 +154,13 @@ const Instagramstory = (props) => {
       color: "#030200",
     },
   ];
-
   let generss = genernames?.slice(0, 6);
-
+  
   /*if genre color are not matched then it picks the color from below array*/
-  let colorss = ["#9ac3c3", "#05e6fd", "#24d58b", "#032416", "#5e5617"];
+  let colorss = ["black", "#05e6fd", "#24d58b", "#032416", "#5e5617"];
 
   /*loops matches the genre name with above array(colorArray) */
+
   for (let i = 0; i < generss?.length; i++) {
     for (let j = 0; j < colorArray?.length; j++) {
       if (colorArray[j]?.name === generss[i]) {
@@ -166,16 +168,14 @@ const Instagramstory = (props) => {
       }
     }
   }
-
   /* data variable for shows the genre name in pie chart */
-
   const data = {
     labels: genernames?.slice(0, 5),
     indexLabel: genernames?.slice(0, 5),
     indexLabelPlacement: "inside",
     datasets: [
       {
-        data: genervalues?.slice(0, 5),
+        data: genervalues?.slice(0,5),
         backgroundColor: colorss,
         borderColor: "#000",
         display: true,
@@ -208,99 +208,67 @@ const Instagramstory = (props) => {
       },
     },
   };
+  const [playlist, setPlaylist] = useState();
+  let appletoken = localStorage.getItem("music-user_token");
 
-  useEffect(() => {
-    getGenerslist();
-  }, []);
-  /* This function is used for to get the gneres of user */
-  const getGenerslist = async (e) => {
-    const { data } = await axios
-      .get("https://api.spotify.com/v1/me/top/artists?offset=0&limit=10", {
+  const onGetdata = async (e) => {
+    axios
+      .get("https://api.music.apple.com/v1/me/recent/played/tracks", {
         headers: {
-          Authorization: `Bearer ${token}`,
+          "Access-Control-Allow-Origin": "https://twine-new.vercel.app/",
+          "Access-Control-Allow-Methods":
+            "GET, POST, PATCH, PUT, DELETE, OPTIONS",
+          Authorization:
+            "Bearer eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IllIS0xLSk5ZRDMifQ.eyJpYXQiOjE2NjUxNjg0MTIsImV4cCI6MTY4MDcyMDQxMiwiaXNzIjoiTllMVDdCVzg3UiJ9.qM3UV0c7KZiEXMVGkEWXgkEiEcP52WiMz_z71zMD5vnX6V1zOnZJl0jN9VH_4niJnzbYV_s9MhvWwmkC0h29bw",
+          "Music-User-Token": `${appletoken}`,
+          "Content-Type": "application/json",
         },
       })
+      .then((response) => {
+        let array = [];
+        response.data.data.forEach((element) => {
+          array.push(element.attributes.albumName);
+        });
+
+        setPlaylist(response.data.data);
+
+        let genernamesapple = [];
+        response.data.data.forEach((element) => {
+          genernamesapple.push(element.attributes.genreNames);
+        });
+        var newArr = [];
+        for (var i = 0; i < genernamesapple.length; i++) {
+          newArr = newArr.concat(genernamesapple[i]);
+        }
+        let counts = {};
+
+        for (let i = 0; i < newArr.length; i++) {
+          if (counts[newArr[i]]) {
+            counts[newArr[i]] += 1;
+          } else {
+            counts[newArr[i]] = 1;
+          }
+        }
+        let values = Object.values(counts);
+        values.sort(function(a, b){return b-a});
+        setGenervalues(values)
+        var keysSorted = Object.keys(counts).sort(function (a, b) {
+          return counts[b] - counts[a];
+        });
+        setGenernames(keysSorted);
+      })
       .catch((err) => {
-        console.log(err.response.status);
-        if (err?.response?.status == 401) {
-          localStorage.clear();
-          navigate("/");
-        }
+        console.log("eroor", err);
       });
-    let vall = [];
-    data.items.map((first) => {
-      first.genres.forEach((valdata) => {
-        vall.push(valdata);
-      });
-    });
-
-    let newarray = [];
-    let newVal = [];
-    for (let i in vall) {
-      let counter = 0;
-      for (let j in vall) {
-        if (!newVal.includes(vall[i]) && vall[i] === vall[j]) {
-          counter++;
-        }
-      }
-      newVal.push(vall[i]);
-      let counter2 = 0;
-      for (let k in newVal) {
-        if (newVal[k] === vall[i]) {
-          counter2++;
-        }
-      }
-      if (counter2 == 1) {
-        newarray.push(new Array(vall[i], counter));
-      }
-    }
-
-    function compareSecondColumn(a, b) {
-      if (a[1] === b[1]) {
-        return 0;
-      } else {
-        return b[1] < a[1] ? -1 : 1;
-      }
-    }
-
-    newarray.sort(compareSecondColumn);
-    let genername = [];
-
-    for (let i = 0; i < newarray.length; i++) {
-      const element = newarray[i][0];
-      genername.push(element);
-    }
-    let genervalue = [];
-    for (let i = 1; i < newarray.length; i++) {
-      const element = newarray[i][1];
-      genervalue.push(element);
-    }
-    setGenernames(genername);
-    setGenervalues(genervalue);
   };
+
   useEffect(() => {
     onGetdata();
   }, []);
-  /* get the top 5 songs of user */
-  const onGetdata = async (e) => {
-    const { data } = await axios
-      .get("https://api.spotify.com/v1/me/top/tracks?offset=0&limit=5", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .catch((err) => {
-        console.log(err.response.status);
-        if (err?.response?.status == 401) {
-          localStorage.clear();
-          navigate("/");
-        }
-      });
-    setPlaylist(data.items);
-  };
+
   const lattitudeValue = geolocation.latitude;
   const longitudeValue = geolocation.longitude;
-  /* Function for get distance between to lattitude and longitude */
+  
   const getDistanceFromCurrent = (cordinates) => {
     let dis = getDistance(
       {
@@ -313,9 +281,93 @@ const Instagramstory = (props) => {
 
     return dis;
   };
+
+  useEffect(() => {
+    getDataBytLocation();
+  }, [genernames]);
+  useEffect(() => {
+    getDataByGener();
+  }, [genernames]);
+
+  const getDataBytLocation = async () => {
+    const data = await axios
+      .get(
+        `${baseUrl}filterResturants?lat=${lattitudeValue}&long=${longitudeValue}`,
+
+        {
+          headers: {
+            "Access-Control-Allow-Origin": "https://twine-new.vercel.app/",
+          },
+        }
+      )
+      .then((res) => {
+        const dupdata = res.data.data;
+        let test = [];
+        if (genernames?.length != 0) {
+          /* get data by matching the geners*/
+          genernames.forEach((element) => {
+            const findData = dupdata.filter(
+              (x) =>
+                x.MusicVibe2 == element.toLowerCase() ||
+                x.MusicVibe3 == element.toLowerCase()
+            );
+            if (findData?.length != 0) {
+              test.push(...findData);
+            } else {
+              test.push(...dupdata);
+            }
+            let dupChars = getUniqueListBy(test, "businessName");
+
+            setFilterData(test);
+          });
+        } else {
+          /* if a new user (does not have music list to identify genere, following data will be visible)*/
+          setFilterData(dupdata);
+        }
+      });
+  };
+
+  const getDataByGener = () => {
+    const data = axios
+      .get(`${baseUrl}withoutfilter`, {
+        headers: {
+          "Access-Control-Allow-Origin": "https://twine-new.vercel.app/",
+        },
+      })
+
+      .then((res) => {
+        const dupdata = res.data;
+        let test = [];
+        if (genernames?.length > 0) {
+          genernames.forEach((element) => {
+            const findData = dupdata.filter(
+              (x) => x.MusicVibe2 == element || x.MusicVibe3 == element
+            );
+            if (findData?.length != 0) {
+              test.push(...findData);
+              let dupChars = getUniqueListBy(test, "businessName");
+              setNonfilterdata(dupChars);
+            } else {
+              test.push(...dupdata);
+              setNonfilterdata(test);
+            }
+          });
+        } else {
+          test.push(...dupdata);
+          setNonfilterdata(test);
+        }
+      });
+  };
+
+  /* function for not getting duplicate data*/
+  function getUniqueListBy(arr, key) {
+    return [...new Map(arr.map((item) => [item[key], item])).values()];
+  }
+
+console.log("Applemusic", playlist)
   return (
     <>
-      <div className={props.story == true ? "display-insta" : "hide"}>
+      <div className={props.instagram == true ? "display-insta" : "hide"}>
         <div className="Instagramstory" id="id">
           <img className="twiinevblack_logo" src="./img/twiineblack.png" />
 
@@ -332,26 +384,26 @@ const Instagramstory = (props) => {
           <div className="row results">
             <div className="col-12 col-md-6">
               <div className="right_table">
-                <div className="head-title">
+              <div className="head-title">
                   <p>Your top 5 songs right now</p>
-                  <img className="img-fluids" src="./img/Spotify.png"></img>
-                </div>{" "}
-                {playlist?.map((ele, key) => (
-                   <a href={ele?.external_urls?.spotify} target="_blank"> 
+                  <img className="img-flui" src="./img/applemusics.png"></img>
+                </div>                  {playlist?.slice(0,5)?.map((ele, key) => (
+                
                   <div key={key} className="song_one mt-2">
                     <div className="song_no">
                       <p>{key + 1}.</p>
                     </div>
                     <div className="song_detail">
-                      <p className="song-name">{ele?.name}</p>
-                      <p className="artist">{ele?.artists[0]?.name}</p>
+                      <p className="song-name">{ele?.attributes?.name}</p>
+                      <p className="artist">{ele?.attributes?.artistName}</p>
                     </div>
                     <img
                       className="song_img"
-                      src={ele?.album?.images[1]?.url}
+                      src={ele?.attributes?.artwork?.url.replace("{w}x{h}bb.jpg", "/270x270bb-60.jpg")}
+
                     />
                   </div>
-                  </a>
+                 
                 ))}
               </div>
             </div>
@@ -371,10 +423,10 @@ const Instagramstory = (props) => {
             </span>
             ,
           </div>
-          {props.updatedata == 0 ? (
+          {props.updata == 0 ? (
             <>
               <div className="row cards Musicyoulikes insta">
-                {props?.filterdata?.slice(0, 3).map((ele, key) => (
+                {filterdata?.slice(0, 3).map((ele, key) => (
                   <div className="col-12 col-md-4" key={key}>
                     <div className="Musicyoulike_card_blue">
                       <img
@@ -410,8 +462,9 @@ const Instagramstory = (props) => {
             </>
           ) : (
             <>
+              {" "}
               <div className="row cards insta">
-                {props?.notfilterdata?.slice(0, 3).map((ele, key) => (
+                {nonfilterdata.slice(0, 3).map((ele, key) => (
                   <div className="col-12 col-md-4" key={key}>
                     <div className="Musicyoulike_card_blue">
                       <img
@@ -423,6 +476,10 @@ const Instagramstory = (props) => {
                           {ele?.businessName} <span>{ele?.price}</span>
                         </p>
                         <p className="vives">
+
+
+
+
                           Vibes :&nbsp;{" "}
                           <span className="gener-name">
                             {" "}
@@ -431,7 +488,7 @@ const Instagramstory = (props) => {
                           &nbsp;
                           <span className="gener-name">
                             {" "}
-                            {ele.MusicVibe2 ? ele.MusicVibe2 : "Pop"}
+                            {ele.MusicVibe3 ? ele.MusicVibe3 : "Pop"}
                           </span>
                         </p>
                       </div>
@@ -447,4 +504,4 @@ const Instagramstory = (props) => {
   );
 };
 
-export default Instagramstory;
+export default Appleresultbreakstory;

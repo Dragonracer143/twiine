@@ -5,19 +5,22 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArcElement } from "chart.js";
 import { Chart as ChartJS, Tooltip, Legend } from "chart.js";
-import CircularIndeterminate from "./Loader";
-import ResultBreakdownstory from "./Resultstory";
+import CircularIndeterminate from "../spotify/Loader";
+import Appleresultbreakstory from '../applemusic/Appleresultbreakstory'
 import { toPng } from "html-to-image";
 import { useCallback } from "react";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 
 ChartJS.register(ArcElement, Tooltip, Legend, ChartDataLabels);
-const ResultBreakdown = (props) => {
+const AppleResultBreak = (props) => {
   const refs = document.getElementById("id");
   const [playlist, setPlaylist] = useState();
   const [updata, setUpdata] = useState();
   const [instagram, setInstagram] = useState(false);
   let token = localStorage.getItem("token");
+  const [genernames, setGenernames] = useState([]);
+  const [genervalues, setGenervalues] = useState([])
+
   let navigate = useNavigate();
   /*This array stores the colors of various genres*/
   const colorArray = [
@@ -152,7 +155,7 @@ const ResultBreakdown = (props) => {
       color: "#030200",
     },
   ];
-  let generss = props?.genernames?.slice(0, 6);
+  let generss = genernames?.slice(0, 6);
 
   /*if genre color are not matched then it picks the color from below array*/
 
@@ -168,15 +171,15 @@ const ResultBreakdown = (props) => {
   }
   /* data variable for shows the genre name in pie chart */
   const data = {
-    labels: props?.genernames?.slice(0, 5),
+    labels: genernames?.slice(0, 5),
     type: "pie",
-    indexLabel: props?.genernames?.slice(0, 5),
+    indexLabel: genernames?.slice(0, 5),
     indexLabelPlacement: "inside",
     indexLabelFontSize: 15,
     indexLabelMaxWidth: 53,
     datasets: [
       {
-        data: props?.genervalues?.slice(0, 5),
+        data: genervalues?.slice(0,5),
         backgroundColor: colorss,
         borderColor: "#000",
         display: true,
@@ -204,7 +207,7 @@ const ResultBreakdown = (props) => {
             color: "white",
           },
         },
-        rotation: [0, 20, 19, 40, 77],
+        rotation: [0, 20, 19, 20, 77],
       },
     },
   };
@@ -220,97 +223,65 @@ const ResultBreakdown = (props) => {
     }
   });
 
-  useEffect(() => {
-    getGenerslist();
-  }, []);
-  /* This function is used for to get the gneres of user */
-  const getGenerslist = async (e) => {
-    const { data } = await axios
-      .get("https://api.spotify.com/v1/me/top/artists?offset=0&limit=10", {
+  let appletoken = localStorage.getItem("music-user_token");
+
+  const onGetdata = async (e) => {
+    axios
+      .get("https://api.music.apple.com/v1/me/recent/played/tracks", {
         headers: {
-          Authorization: `Bearer ${token}`,
+          "Access-Control-Allow-Origin": "https://twine-new.vercel.app/",
+          "Access-Control-Allow-Methods":
+            "GET, POST, PATCH, PUT, DELETE, OPTIONS",
+          Authorization:
+            "Bearer eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IllIS0xLSk5ZRDMifQ.eyJpYXQiOjE2NjUxNjg0MTIsImV4cCI6MTY4MDcyMDQxMiwiaXNzIjoiTllMVDdCVzg3UiJ9.qM3UV0c7KZiEXMVGkEWXgkEiEcP52WiMz_z71zMD5vnX6V1zOnZJl0jN9VH_4niJnzbYV_s9MhvWwmkC0h29bw",
+          "Music-User-Token": `${appletoken}`,
+          "Content-Type": "application/json",
         },
       })
+      .then((response) => {
+        let array = [];
+        response.data.data.forEach((element) => {
+          array.push(element.attributes.albumName);
+        });
+
+        setPlaylist(response.data.data);
+
+        let genernamesapple = [];
+        response.data.data.forEach((element) => {
+          genernamesapple.push(element.attributes.genreNames);
+        });
+        var newArr = [];
+        for (var i = 0; i < genernamesapple.length; i++) {
+          newArr = newArr.concat(genernamesapple[i]);
+        }
+        let counts = {};
+
+        for (let i = 0; i < newArr.length; i++) {
+          if (counts[newArr[i]]) {
+            counts[newArr[i]] += 1;
+          } else {
+            counts[newArr[i]] = 1;
+          }
+        }
+        let values = Object.values(counts);
+        values.sort(function(a, b){return b-a});
+        setGenervalues(values)
+        var keysSorted = Object.keys(counts).sort(function (a, b) {
+          return counts[b] - counts[a];
+        });
+        setGenernames(keysSorted);
+      })
       .catch((err) => {
-        console.log(err.response.status);
-        if (err?.response?.status == 401) {
-          localStorage.clear();
-          navigate("/");
-        }
+        console.log("eroor", err);
       });
-    let vall = [];
-    data.items.map((first) => {
-      first.genres.forEach((valdata) => {
-        vall.push(valdata);
-      });
-    });
-
-    let newarray = [];
-    let newVal = [];
-    for (let i in vall) {
-      let counter = 0;
-      for (let j in vall) {
-        if (!newVal.includes(vall[i]) && vall[i] === vall[j]) {
-          counter++;
-        }
-      }
-      newVal.push(vall[i]);
-      let counter2 = 0;
-      for (let k in newVal) {
-        if (newVal[k] === vall[i]) {
-          counter2++;
-        }
-      }
-      if (counter2 == 1) {
-        newarray.push(new Array(vall[i], counter));
-      }
-    }
-    function compareSecondColumn(a, b) {
-      if (a[1] === b[1]) {
-        return 0;
-      } else {
-        return b[1] < a[1] ? -1 : 1;
-      }
-    }
-    newarray.sort(compareSecondColumn);
-    let genername = [];
-
-    for (let i = 0; i < newarray.length; i++) {
-      const element = newarray[i][0];
-      genername.push(element);
-    }
-    let genervalue = [];
-    for (let i = 1; i < newarray.length; i++) {
-      const element = newarray[i][1];
-      genervalue.push(element);
-    }
-    props?.setGenernames(genername);
-    props?.setGenervalues(genervalue);
   };
 
   useEffect(() => {
     onGetdata();
   }, []);
-  /* get the top 5 songs of user */
-  const onGetdata = async (e) => {
-    const { data } = await axios
-      .get("https://api.spotify.com/v1/me/top/tracks?offset=0&limit=5", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .catch((err) => {
-        console.log(err.response.status);
-        if (err?.response?.status == 401) {
-          localStorage.clear();
-          navigate("/");
-        }
-      });
-    setPlaylist(data.items);
-  };
   /*Back to musicyoulike page */
   const goBack = () => {
-    let path = "/musicyoulike";
+    let path = "/likemusic";
     navigate(path);
   };
 
@@ -355,25 +326,23 @@ console.log("playlist", playlist)
             <div className="row results">
               <div className="col-12 col-md-6">
                 <div className="right_table">
-                  <div className="head-title">
-                    <p>Your top 5 songs right now</p>
-                    <img className="img-fluids" src="./img/Spotify.png"></img>
-                  </div>
-                  {playlist?.map((ele, key) => (
-                    <a href={ele?.external_urls?.spotify} target="_blank"> 
+                <div className="head-title">
+                  <p>Your top 5 songs right now</p>
+                  <img className="img-flui" src="./img/applemusics.png"></img>
+                </div>                    {playlist?.slice(0,5)?.map((ele, key) => (
+                    <a href={ele?.attributes?.url} target="_blank">
                     <div key={key} className="song_one mt-2">
                       <div className="song_no">
                         <p>{key + 1}.</p>
                       </div>
-                     
-                        <div className="song_detail">
-                          <p className="song-name">{ele?.name}</p>
-                          <p className="artist">{ele?.artists[0]?.name}</p>
-                        </div>
-                        <img
-                          className="song_img"
-                          src={ele?.album?.images[1]?.url}
-                        />
+                      <div className="song_detail">
+                        <p className="song-name">{ele?.attributes?.name}</p>
+                        <p className="artist">{ele?.attributes?.artistName}</p>
+                      </div>
+                      <img
+                        className="song_img"
+                        src={ele?.attributes?.artwork?.url.replace("{w}x{h}bb.jpg", "/270x270bb-60.jpg")}
+                      />
                     </div>
                     </a>
                   ))}
@@ -415,10 +384,10 @@ console.log("playlist", playlist)
           </div>
         ) : null}
 
-        <ResultBreakdownstory instagram={instagram} updata={updata} />
+        <Appleresultbreakstory instagram={instagram} updata={updata} />
       </div>
     </>
   );
 };
 
-export default ResultBreakdown;
+export default AppleResultBreak;

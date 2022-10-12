@@ -15,7 +15,10 @@ body {
   margin-left: 33%;
   margin-top: 3%;
 }
-
+a {
+  color: #000 !important;
+  text-decoration: underline;
+}
 button {
   font-family: "Inter";
   cursor: pointer;
@@ -2059,6 +2062,10 @@ ol.breadcrumb li a {
   height: 100%;
   padding: 23px 0px;
 }
+img.img-flui {
+	width: 69px;
+	height: 51px;
+}
 
 p.upvote.down img {
   filter: contrast(0.3);
@@ -3403,7 +3410,10 @@ img.genere-image {
   position: relative;
   color: #a28f74;
 }
-
+img.img-fluids {
+  width: 37px;
+  height: 40px;
+}
 /* .row.results .leftchart {
   background: #abc7f3;
   box-shadow: 0px 4px 50px rgba(0, 0, 0, 0.08);
@@ -3471,7 +3481,7 @@ p.artist {
 .ResultBreakdown .song_one .song_img {
   width: 68px;
   height: 68px;
-  border-radius: 17px;
+  /* border-radius: 17px; */
 }
 
 .ResultBreakdown .song_one .song_detail {
@@ -3639,7 +3649,16 @@ img.img-insta {
 .Instagramstory .song_one .song_img {
   width: 68px;
   height: 68px;
-  border-radius: 17px;
+  /* border-radius: 17px; */
+}
+.head-title{
+  display: flex;
+  justify-content: space-between;
+}
+
+img.img-fluids {
+  width: 47px;
+  height: 50px;
 }
 
 .Instagramstory .song_one .song_detail {
