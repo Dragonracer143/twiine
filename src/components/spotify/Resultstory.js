@@ -255,6 +255,9 @@ const ResultBreakdownstory = (props) => {
     getDataByGener();
   }, [genernames]);
  useEffect(()=>{
+
+
+  
   getNotbytLocation()
  },[genernames])
  const getNotbytLocation = async () => {
