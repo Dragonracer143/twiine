@@ -12,23 +12,34 @@ import ReplayIcon from "@mui/icons-material/Replay";
 import axios from "axios";
 // const baseUrl = "http://localhost:8000/";
 const Musicyoulike = (props) => {
-  Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_API_KEY);
-  const geolocation = useGeolocation();
   const [filterdata, setFilterData] = useState();
   const [showItem, setShowItem] = useState(3);
   const [startItem, setStartItem] = useState(0);
   const [notfilterdata, setNofilterdata] = useState();
-
   const refs = document.getElementById("id");
-
   const [story, setStory] = useState(false);
   const [updatedata, setUpdatedata] = useState();
   const [usergeners, setUsergeners] = useState([]);
   const [getmile, setGetmile] = useState("7859.3");
   let token = localStorage.getItem("token");
-  const lattitudeValue = geolocation.latitude;
-  const longitudeValue = geolocation.longitude;
+  const geolocation = useGeolocation();
+  const [lattitudeValue, setLattitudeValue] = useState("");
+  const [longitudeValue, setLongitudeValue] = useState("");
+
+  const [when, setWhen] = useState(false);
+
   const navigate = useNavigate();
+  console.log("geolocation", geolocation?.error?.code)
+
+  useEffect(() => {
+    if (geolocation?.latitude != null && geolocation?.longitude != null) {
+      setLattitudeValue(geolocation.latitude);
+      setLongitudeValue(geolocation.longitude);
+    } else if (geolocation?.error?.code) {
+      setLattitudeValue(null);
+      setLongitudeValue(null);
+    }
+  }, [geolocation])
 
   /*Go to Resultbreakdown page */
   const getGeners = () => {
@@ -36,7 +47,11 @@ const Musicyoulike = (props) => {
     navigate(path);
   };
   useEffect(() => {
-    getDataBytLocation();
+    if (lattitudeValue == null && longitudeValue == null) {
+      getDatawithoutlocation()
+    } else {
+      getDataBytLocation();
+    }
   }, [usergeners, getmile]);
   useEffect(() => {
     getDataByGener();
@@ -45,12 +60,12 @@ const Musicyoulike = (props) => {
     let datamile = localStorage.getItem("selectedMile");
     setGetmile(datamile);
   }, []);
-  useEffect(()=>{
-    getDatawithoutlocation()
-  },[usergeners, getmile])
+  // useEffect(()=>{
+  //   getDatawithoutlocation()
+  // },[usergeners, getmile])
 
 
- /* Function for get distance between to lattitude and longitude */
+  /* Function for get distance between to lattitude and longitude */
   const getDistanceFromCurrent = (cordinates) => {
     let dis = getDistance(
       {
@@ -64,79 +79,17 @@ const Musicyoulike = (props) => {
     return parseFloat(dis).toFixed(1);
   };
 
-const getDatawithoutlocation = async () =>{
-  const data = await axios   .get(
-    `${baseUrl}filterResturants?lat=37.229564&long=-120.047533
+  const getDatawithoutlocation = async () => {
+    const data = await axios.get(
+      `${baseUrl}filterResturants?lat=37.229564&long=-120.047533
     `,
 
-    {
-      headers: {
-        "Access-Control-Allow-Origin": "https://twine-new.vercel.app/",
-      },
-    }
-  )
-  .then((res) => {
-    const dupdata = res.data.data;
-
-    let dataArraydistance = dupdata.map((obj) => ({
-      ...obj,
-      distance: getDistanceFromCurrent(obj.location.coordinates),
-    }));
-    let test = [];
-    let dbmile = dataArraydistance?.map((ele) => {
-      return ele.distance;
-    });
-    const Filterbymiles = dataArraydistance.filter((ele) => {
-      const filterArray = ele.distance <= getmile;
-      return filterArray;
-    });
-    if (Filterbymiles ?.length!=0)
-    {
-    if (usergeners?.length != 0) {
-      /* get data by matching the geners*/
-      usergeners.forEach((element) => {
-        const findData = Filterbymiles.filter(
-          (x) =>
-            x.MusicVibe2 == element.toLowerCase() ||
-            x.MusicVibe3 == element.toLowerCase()
-        );
-        if (findData?.length != 0) {
-          test.push(...findData);
-        } else {
-          test.push(...Filterbymiles.reverse());
-        }
-        let dupChars = getUniqueListBy(test, "businessName");
-
-        setFilterData(test);
-      });
-    } else {
-      /* if a new user (does not have music list to identify genere, following data will be visible)*/
-      setFilterData(Filterbymiles.reverse());
-    }
-  }
-  else{
-    setFilterData(dupdata)
-  }
-
-  });
-
-
-}
-
-  /* get data by location */
-  const getDataBytLocation = async () => {
-    if(lattitudeValue==null){
-     return   getDatawithoutlocation()
-    } else{
-    const data = await axios   .get(
-        `${baseUrl}filterResturants?lat=${lattitudeValue}&long=${longitudeValue}`,
-
-        {
-          headers: {
-            "Access-Control-Allow-Origin": "https://twine-new.vercel.app/",
-          },
-        }
-      )
+      {
+        headers: {
+          "Access-Control-Allow-Origin": "https://twine-new.vercel.app/",
+        },
+      }
+    )
       .then((res) => {
         const dupdata = res.data.data;
 
@@ -152,36 +105,94 @@ const getDatawithoutlocation = async () =>{
           const filterArray = ele.distance <= getmile;
           return filterArray;
         });
-        if (Filterbymiles ?.length!=0)
-        {
-        if (usergeners?.length != 0) {
-          /* get data by matching the geners*/
-          usergeners.forEach((element) => {
-            const findData = Filterbymiles.filter(
-              (x) =>
-                x.MusicVibe2 == element.toLowerCase() ||
-                x.MusicVibe3 == element.toLowerCase()
-            );
-            if (findData?.length != 0) {
-              test.push(...findData);
-            } else {
-              test.push(...Filterbymiles.reverse());
-            }
-            let dupChars = getUniqueListBy(test, "businessName");
+        if (Filterbymiles?.length != 0) {
+          if (usergeners?.length != 0) {
+            /* get data by matching the geners*/
+            usergeners.forEach((element) => {
+              const findData = Filterbymiles.filter(
+                (x) =>
+                  x.MusicVibe2 == element.toLowerCase() ||
+                  x.MusicVibe3 == element.toLowerCase()
+              );
+              if (findData?.length != 0) {
+                test.push(...findData);
+              } else {
+                test.push(...Filterbymiles.reverse());
+              }
+              let dupChars = getUniqueListBy(test, "businessName");
 
-            setFilterData(test);
-          });
-        } else {
-          /* if a new user (does not have music list to identify genere, following data will be visible)*/
-          setFilterData(Filterbymiles.reverse());
+              setFilterData(test);
+            });
+          } else {
+            /* if a new user (does not have music list to identify genere, following data will be visible)*/
+            setFilterData(Filterbymiles.reverse());
+          }
         }
-      }
-      else{
-        setFilterData(dupdata)
-      }
+        else {
+          setFilterData(dupdata)
+        }
 
       });
-    }
+
+
+  }
+
+  /* get data by location */
+  const getDataBytLocation = async () => {
+
+    const data = await axios.get(
+      `${baseUrl}filterResturants?lat=${lattitudeValue}&long=${longitudeValue}`,
+
+      {
+        headers: {
+          "Access-Control-Allow-Origin": "https://twine-new.vercel.app/",
+        },
+      }
+    )
+      .then((res) => {
+        const dupdata = res.data.data;
+
+        let dataArraydistance = dupdata.map((obj) => ({
+          ...obj,
+          distance: getDistanceFromCurrent(obj.location.coordinates),
+        }));
+        let test = [];
+        let dbmile = dataArraydistance?.map((ele) => {
+          return ele.distance;
+        });
+        const Filterbymiles = dataArraydistance.filter((ele) => {
+          const filterArray = ele.distance <= getmile;
+          return filterArray;
+        });
+        if (Filterbymiles?.length != 0) {
+          if (usergeners?.length != 0) {
+            /* get data by matching the geners*/
+            usergeners.forEach((element) => {
+              const findData = Filterbymiles.filter(
+                (x) =>
+                  x.MusicVibe2 == element.toLowerCase() ||
+                  x.MusicVibe3 == element.toLowerCase()
+              );
+              if (findData?.length != 0) {
+                test.push(...findData);
+              } else {
+                test.push(...Filterbymiles.reverse());
+              }
+              let dupChars = getUniqueListBy(test, "businessName");
+
+              setFilterData(test);
+            });
+          } else {
+            /* if a new user (does not have music list to identify genere, following data will be visible)*/
+            setFilterData(Filterbymiles.reverse());
+          }
+        }
+        else {
+          setFilterData(dupdata)
+        }
+
+      });
+
 
   };
 
