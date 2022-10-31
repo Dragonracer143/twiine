@@ -254,8 +254,51 @@ const ResultBreakdownstory = (props) => {
   useEffect(() => {
     getDataByGener();
   }, [genernames]);
+ useEffect(()=>{
+  getNotbytLocation()
+ },[genernames])
+ const getNotbytLocation = async () => {
+  const data = await axios
+    .get(
+      `${baseUrl}filterResturants?lat=&long=lat=37.229564&long=-120.047533`,
 
+      {
+        headers: {
+          "Access-Control-Allow-Origin": "https://twine-new.vercel.app/",
+        },
+      }
+    )
+    .then((res) => {
+      const dupdata = res.data.data;
+      let test = [];
+      if (genernames?.length != 0) {
+        /* get data by matching the geners*/
+        genernames.forEach((element) => {
+          const findData = dupdata.filter(
+            (x) =>
+              x.MusicVibe2 == element.toLowerCase() ||
+              x.MusicVibe3 == element.toLowerCase()
+          );
+          if (findData?.length != 0) {
+            test.push(...findData);
+          } else {
+            test.push(...dupdata);
+          }
+          let dupChars = getUniqueListBy(test, "businessName");
+
+          setFilterData(test);
+        });
+      } else {
+        /* if a new user (does not have music list to identify genere, following data will be visible)*/
+        setFilterData(dupdata);
+      }
+    });
+};
   const getDataBytLocation = async () => {
+
+    if(lattitudeValue==null){
+      return   getNotbytLocation()
+     } else{
     const data = await axios
       .get(
         `${baseUrl}filterResturants?lat=${lattitudeValue}&long=${longitudeValue}`,
@@ -291,6 +334,7 @@ const ResultBreakdownstory = (props) => {
           setFilterData(dupdata);
         }
       });
+    }
   };
 
   const getDataByGener = () => {
