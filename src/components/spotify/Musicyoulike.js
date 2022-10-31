@@ -45,6 +45,9 @@ const Musicyoulike = (props) => {
     let datamile = localStorage.getItem("selectedMile");
     setGetmile(datamile);
   }, []);
+  useEffect(()=>{
+    getDatawithoutlocation()
+  },[usergeners, getmile])
 
 
  /* Function for get distance between to lattitude and longitude */
@@ -61,10 +64,71 @@ const Musicyoulike = (props) => {
     return parseFloat(dis).toFixed(1);
   };
 
+const getDatawithoutlocation = async () =>{
+  const data = await axios   .get(
+    `${baseUrl}filterResturants?lat=37.229564&long=-120.047533
+    `,
+
+    {
+      headers: {
+        "Access-Control-Allow-Origin": "https://twine-new.vercel.app/",
+      },
+    }
+  )
+  .then((res) => {
+    const dupdata = res.data.data;
+
+    let dataArraydistance = dupdata.map((obj) => ({
+      ...obj,
+      distance: getDistanceFromCurrent(obj.location.coordinates),
+    }));
+    let test = [];
+    let dbmile = dataArraydistance?.map((ele) => {
+      return ele.distance;
+    });
+    const Filterbymiles = dataArraydistance.filter((ele) => {
+      const filterArray = ele.distance <= getmile;
+      return filterArray;
+    });
+    if (Filterbymiles ?.length!=0)
+    {
+    if (usergeners?.length != 0) {
+      /* get data by matching the geners*/
+      usergeners.forEach((element) => {
+        const findData = Filterbymiles.filter(
+          (x) =>
+            x.MusicVibe2 == element.toLowerCase() ||
+            x.MusicVibe3 == element.toLowerCase()
+        );
+        if (findData?.length != 0) {
+          test.push(...findData);
+        } else {
+          test.push(...Filterbymiles.reverse());
+        }
+        let dupChars = getUniqueListBy(test, "businessName");
+
+        setFilterData(test);
+      });
+    } else {
+      /* if a new user (does not have music list to identify genere, following data will be visible)*/
+      setFilterData(Filterbymiles.reverse());
+    }
+  }
+  else{
+    setFilterData(dupdata)
+  }
+
+  });
+
+
+}
+
   /* get data by location */
   const getDataBytLocation = async () => {
-    const data = await axios
-      .get(
+    if(lattitudeValue==null){
+     return   getDatawithoutlocation()
+    } else{
+    const data = await axios   .get(
         `${baseUrl}filterResturants?lat=${lattitudeValue}&long=${longitudeValue}`,
 
         {
@@ -117,6 +181,8 @@ const Musicyoulike = (props) => {
       }
 
       });
+    }
+
   };
 
   /* get data without location matching genres names*/
