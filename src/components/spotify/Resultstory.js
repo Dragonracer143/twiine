@@ -169,13 +169,16 @@ const ResultBreakdownstory = (props) => {
     }
   }
   /* data variable for shows the genre name in pie chart */
+  const filtergener =['pop', 'jazz', 'rock', 'filmy', 'Hip hop']
+  const generSample = [6, 4, 14, 4, 8]
   const data = {
-    labels: genernames?.slice(0, 5),
-    indexLabel: genernames?.slice(0, 5),
+    labels: genernames.length <=0 ? filtergener.slice(0, 5) : genernames.slice(0, 5),
+    type: "pie",
+    indexLabel:  genernames.length <=0 ? filtergener.slice(0, 5) : genernames.slice(0, 5),
     indexLabelPlacement: "inside",
     datasets: [
       {
-        data: genervalues?.slice(0, 5),
+        data: genervalues == '' ? generSample : genervalues.slice(0, 5) ,
         backgroundColor: colorss,
         borderColor: "#000",
         display: true,
@@ -449,6 +452,28 @@ const ResultBreakdownstory = (props) => {
     setGenernames(genername);
     setGenervalues(genervalue);
   };
+  const [recent, setRecent] = useState([])
+  useEffect(()=>{
+    onGetrecent()
+    
+  },[])
+  const onGetrecent = async (e) => {
+    const { data } = await axios
+      .get("https://api.spotify.com/v1/me/player/recently-played?offset=0&limit=5", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+
+      .catch((err) => {
+        console.log(err.response.status);
+        if (err?.response?.status == 401) {
+          localStorage.clear();
+          navigate("/");
+        }
+      });
+    setRecent(data.items);
+  };
   return (
     <>
       <div className={props.instagram == true ? "display-insta" : "hide"}>
@@ -471,19 +496,19 @@ const ResultBreakdownstory = (props) => {
               <div className="head-title">
                   <p>Your top 5 songs right now</p>
               <img className="img-fluids" src="./img/Spotify.png"></img>
-              </div>                {playlist?.map((ele, key) => (
-                 <a href={ele?.external_urls?.spotify} target="_blank"> 
+              </div>                {recent?.map((ele, key) => (
+                 <a href={ele?.track?.external_urls?.spotify} target="_blank"> 
                   <div key={key} className="song_one mt-2">
                     <div className="song_no">
                       <p>{key + 1}.</p>
                     </div>
                     <div className="song_detail">
-                      <p className="song-name">{ele?.name}</p>
-                      <p className="artist">{ele?.artists[0]?.name}</p>
+                      <p className="song-name">{ele?.track?.name}</p>
+                      <p className="artist">{ele?.track?.artists[0]?.name}</p>
                     </div>
                     <img
                       className="song_img"
-                      src={ele?.album?.images[1]?.url}
+                      src={ele?.track?.album?.images[1]?.url}
                     />
                   </div>
                   </a>

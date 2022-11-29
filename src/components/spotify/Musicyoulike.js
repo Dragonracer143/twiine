@@ -29,7 +29,6 @@ const Musicyoulike = (props) => {
   const [when, setWhen] = useState(false);
 
   const navigate = useNavigate();
-  console.log("geolocation", geolocation?.error?.code)
 
   useEffect(() => {
     if (geolocation?.latitude != null && geolocation?.longitude != null) {
@@ -179,7 +178,6 @@ const Musicyoulike = (props) => {
                 test.push(...Filterbymiles.reverse());
               }
               let dupChars = getUniqueListBy(test, "businessName");
-
               setFilterData(test);
             });
           } else {
@@ -219,7 +217,7 @@ const Musicyoulike = (props) => {
               let dupChars = getUniqueListBy(test, "businessName");
               setNofilterdata(dupChars);
             } else {
-              /* if gnere are not matched its show the random data from database*/
+              /* if gnere are not match its show the random data from database*/
               test.push(...dupdata);
               setNofilterdata(test);
             }
@@ -319,7 +317,7 @@ const Musicyoulike = (props) => {
         console.log(err);
       });
   }, [refs]);
-
+ 
   return (
     <div className={story == true ? "download-image" : ""}>
       <div className="Musicyoulike">
@@ -363,16 +361,17 @@ const Musicyoulike = (props) => {
                       <p>Location : {ele?.city}</p>
                       <p>
                         Vibes :&nbsp;{" "}
+                        
                         <span className="gener-name">
                           {" "}
                           {ele?.MusicVibe3 ? ele?.MusicVibe3 : "Jazz"}{" "}
                         </span>{" "}
                         &nbsp;
                         <span className="gener-name">
-                          {ele?.MusicVibe2 ? ele?.MusicVibe2 : "Pop"}
+                          {ele?.MusicVibe2 ? ele?.MusicVibe2 : "Rock"}
                         </span>
                       </p>
-                    </div>
+                    </div>  
                     <button className="Moreinfo btn" type="button">
                       <a href={ele?.yelpURL} target="_blank">
                         see more info
@@ -441,11 +440,11 @@ const Musicyoulike = (props) => {
                         Vibes :&nbsp;{" "}
                         <span className="gener-name">
                           {" "}
-                          {ele.MusicVibe3 ? ele.MusicVibe3 : "Jazz"}{" "}
+                          {ele.MusicVibe3 ? ele.MusicVibe3 : usergeners}{" "}
                         </span>{" "}
                         &nbsp;
                         <span className="gener-name">
-                          {ele.MusicVibe2 ? ele.MusicVibe2 : "Pop"}
+                          {ele.MusicVibe2 ? ele.MusicVibe2 : usergeners}
                         </span>
                       </p>
                     </div>

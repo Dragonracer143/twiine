@@ -309,7 +309,6 @@ const AppleResultBreak = (props) => {
         console.log(err);
       });
   }, [refs]);
-console.log("playlist", playlist)
   return (
     <>
       <div className={instagram == true ? "download-image" : ""}>
