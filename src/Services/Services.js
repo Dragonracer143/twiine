@@ -74,7 +74,6 @@ export const customFilterDataApi = (objectForFilter) => {
     url:
       baseUrl +
       `customFilterData?cityName=${objectForFilter.city}&hungry=${objectForFilter.hungry}&vibe1=${objectForFilter.vibe1}&vibe2=${objectForFilter.vibe2}`,
-    //   url: baseUrl+`customFilterData?cityName=Los Angeles&hungry=yes&vibe1=Fun&vibe2=Energetic&foodtype=Fusion&budget=30&activity=Nightlife`,
     headers: {},
   };
 
