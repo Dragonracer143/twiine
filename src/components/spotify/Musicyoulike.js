@@ -110,6 +110,7 @@ const Musicyoulike = (props) => {
             usergeners.forEach((element) => {
               const findData = Filterbymiles.filter(
                 (x) =>
+                  x.MusicVibe1== element.toLowerCase() ||
                   x.MusicVibe2 == element.toLowerCase() ||
                   x.MusicVibe3 == element.toLowerCase()
               );
