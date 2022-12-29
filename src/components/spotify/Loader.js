@@ -6,5 +6,6 @@ export default function CircularIndeterminate() {
     <Box sx={{ display: "flex", justifyContent: "center", marginTop: "100px" }}>
       <CircularProgress color="success" />
     </Box>
+    
   );
 }
