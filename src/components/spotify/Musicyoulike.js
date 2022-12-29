@@ -20,7 +20,7 @@ const Musicyoulike = (props) => {
   const [story, setStory] = useState(false);
   const [updatedata, setUpdatedata] = useState();
   const [usergeners, setUsergeners] = useState([]);
-  const [getmile, setGetmile] = useState("7859.3");
+  const [getmile, setGetmile] = useState("");
   let token = localStorage.getItem("token");
   const geolocation = useGeolocation();
   const [lattitudeValue, setLattitudeValue] = useState("");
