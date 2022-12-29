@@ -187,7 +187,7 @@ const Musicyoulike = (props) => {
           }
         }
         else {
-          setFilterData(dupdata)
+          setFilterData(dupdata.reverse())
         }
 
       });
