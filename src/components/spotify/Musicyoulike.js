@@ -142,8 +142,7 @@ const Musicyoulike = (props) => {
 
         {
           headers: {
-            "Access-Control-Allow-Origin": "*",
-            
+            "Access-Control-Allow-Origin": "https://twine-new.vercel.app/",
           },
         }
       )
@@ -187,7 +186,7 @@ const Musicyoulike = (props) => {
     const data = axios
       .get(`${baseUrl}withoutfilter`, {
         headers: {
-          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Origin": "https://twine-new.vercel.app/",
         },
       })
       .then((res) => {
@@ -218,7 +217,7 @@ const Musicyoulike = (props) => {
     const data = axios
       .get(`${baseUrl}withoutfilter`, {
         headers: {
-          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Origin": "https://twine-new.vercel.app/",
         },
       })
       .then((res) => {
