@@ -157,7 +157,6 @@ const Musicyoulike = (props) => {
           const filterArray = ele.distance <= getmile;
           return filterArray;
         });
-        console.log("Filterbymiles", Filterbymiles)
         if (Filterbymiles.length) {
           const filterdata = Filterbymiles.filter(
             (x) =>
@@ -200,7 +199,6 @@ const Musicyoulike = (props) => {
               usergeners.slice(0,5).includes(x.MusicVibe2?.toLowerCase()) ||
               usergeners.slice(0,5).includes(x.MusicVibe3?.toLowerCase())
           );
-          console.log("data", data)
           if (data?.length) {
             setFilterData((prev) => {
               return data;
@@ -233,7 +231,6 @@ const Musicyoulike = (props) => {
               usergeners.slice(0,5).includes(x.MusicVibe2?.toLowerCase()) ||
               usergeners.slice(0,5).includes(x.MusicVibe3?.toLowerCase())
           );
-          console.log("filter", data)
           if (data?.length) {
 
             setNofilterdata((prev) => {
