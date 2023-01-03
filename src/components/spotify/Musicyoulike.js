@@ -15,7 +15,7 @@ const Musicyoulike = (props) => {
   const [filterdata, setFilterData] = useState();
   const [showItem, setShowItem] = useState(3);
   const [startItem, setStartItem] = useState(0);
-  const [notfilterdata, setNofilterdata] = useState();
+  const [notfilterdata, setNofilterdata] = useState([]);
   const refs = document.getElementById("id");
   const [story, setStory] = useState(false);
   const [updatedata, setUpdatedata] = useState();
@@ -38,7 +38,7 @@ const Musicyoulike = (props) => {
       setLattitudeValue(null);
       setLongitudeValue(null);
     }
-  }, [geolocation])
+  }, [geolocation]);
 
   /*Go to Resultbreakdown page */
   const getGeners = () => {
@@ -47,13 +47,15 @@ const Musicyoulike = (props) => {
   };
   useEffect(() => {
     if (lattitudeValue == null && longitudeValue == null) {
-      getDatawithoutlocation()
+      getgneredata();
     } else {
       getDataBytLocation();
     }
   }, [usergeners, getmile]);
   useEffect(() => {
-    getDataByGener();
+    if (usergeners) {
+      getDataByGener();
+    }
   }, [usergeners]);
   useEffect(() => {
     let datamile = localStorage.getItem("selectedMile");
@@ -62,7 +64,6 @@ const Musicyoulike = (props) => {
   // useEffect(()=>{
   //   getDatawithoutlocation()
   // },[usergeners, getmile])
-
 
   /* Function for get distance between to lattitude and longitude */
   const getDistanceFromCurrent = (cordinates) => {
@@ -79,16 +80,17 @@ const Musicyoulike = (props) => {
   };
 
   const getDatawithoutlocation = async () => {
-    const data = await axios.get(
-      `${baseUrl}filterResturants?lat=37.229564&long=-120.047533
+    const data = await axios
+      .get(
+        `${baseUrl}filterResturants?lat=37.229564&long=-120.047533
     `,
 
-      {
-        headers: {
-          "Access-Control-Allow-Origin": "https://twine-new.vercel.app/",
-        },
-      }
-    )
+        {
+          headers: {
+            "Access-Control-Allow-Origin": "https://twine-new.vercel.app/",
+          },
+        }
+      )
       .then((res) => {
         const dupdata = res.data.data;
 
@@ -126,28 +128,24 @@ const Musicyoulike = (props) => {
             /* if a new user (does not have music list to identify genere, following data will be visible)*/
             setFilterData(Filterbymiles.reverse());
           }
+        } else {
+          setFilterData(dupdata);
         }
-        else {
-          setFilterData(dupdata)
-        }
-
       });
-
-
-  }
+  };
 
   /* get data by location */
   const getDataBytLocation = async () => {
+    const data = await axios
+      .get(
+        `${baseUrl}filterResturants?lat=${lattitudeValue}&long=${longitudeValue}`,
 
-    const data = await axios.get(
-      `${baseUrl}filterResturants?lat=${lattitudeValue}&long=${longitudeValue}`,
-
-      {
-        headers: {
-          "Access-Control-Allow-Origin": "https://twine-new.vercel.app/",
-        },
-      }
-    )
+        {
+          headers: {
+            "Access-Control-Allow-Origin": "https://twine-new.vercel.app/",
+          },
+        }
+      )
       .then((res) => {
         const dupdata = res.data.data;
 
@@ -169,7 +167,7 @@ const Musicyoulike = (props) => {
             usergeners.forEach((element) => {
               const findData = Filterbymiles.filter(
                 (x) =>
-                  x.MusicVibe1== element.toLowerCase() ||
+                  x.MusicVibe1 == element.toLowerCase() ||
                   x.MusicVibe2 == element.toLowerCase() ||
                   x.MusicVibe3 == element.toLowerCase()
               );
@@ -185,15 +183,42 @@ const Musicyoulike = (props) => {
             /* if a new user (does not have music list to identify genere, following data will be visible)*/
             setFilterData(Filterbymiles.reverse());
           }
+        } else {
+          setFilterData(dupdata.reverse());
         }
-        else {
-          setFilterData(dupdata.reverse())
-        }
-
       });
-
-
   };
+  const getgneredata = () => {
+    const data = axios
+      .get(`${baseUrl}withoutfilter`, {
+        headers: {
+          "Access-Control-Allow-Origin": "https://twine-new.vercel.app/",
+        },
+      })
+      .then((res) => {
+        const dupdata = res.data;
+        let test = [];
+        /* condition for checking the user genre with Database genre */
+        if (usergeners.length) {
+          const data = dupdata.filter(
+            (x) =>
+              usergeners.includes(x.MusicVibe2?.toLowerCase()) &&
+              usergeners.includes(x.MusicVibe3?.toLowerCase())
+          );
+          if (data?.length) {
+            setFilterData((prev) => {
+              return data;
+            });
+          } else{
+            setFilterData(dupdata)
+          }
+        }
+        else{
+          setFilterData(dupdata)
+        }
+      });
+  };
+
 
   /* get data without location matching genres names*/
   const getDataByGener = () => {
@@ -207,28 +232,26 @@ const Musicyoulike = (props) => {
         const dupdata = res.data;
         let test = [];
         /* condition for checking the user genre with Database genre */
-        if (usergeners?.length > 0) {
-          usergeners.forEach((element) => {
-            const findData = dupdata.filter(
-              (x) => x.MusicVibe2 == element || x.MusicVibe3 == element
-            );
-            /*if user genre matches then goes to if condition otherwise it goes in else condition */
-            if (findData?.length != 0) {
-              test.push(...findData);
-              let dupChars = getUniqueListBy(test, "businessName");
-              setNofilterdata(dupChars);
-            } else {
-              /* if gnere are not match its show the random data from database*/
-              test.push(...dupdata);
-              setNofilterdata(test);
-            }
-          });
-          /*if user have new login in spotify and it has no gnere then this conditon run.*/
-        } else {
-          setNofilterdata(test);
+        if (usergeners.length) {
+          const data = dupdata.filter(
+            (x) =>
+              usergeners.includes(x.MusicVibe2?.toLowerCase()) &&
+              usergeners.includes(x.MusicVibe3?.toLowerCase())
+          );
+          if (data?.length) {
+            setNofilterdata((prev) => {
+              return data;
+            });
+          } else{
+            setNofilterdata(dupdata)
+          }
+        }
+        else{
+          setNofilterdata(dupdata)
         }
       });
   };
+
 
   /* function for not getting duplicate data*/
   function getUniqueListBy(arr, key) {
@@ -318,7 +341,7 @@ const Musicyoulike = (props) => {
         console.log(err);
       });
   }, [refs]);
- 
+
   return (
     <div className={story == true ? "download-image" : ""}>
       <div className="Musicyoulike">
@@ -362,7 +385,6 @@ const Musicyoulike = (props) => {
                       <p>Location : {ele?.city}</p>
                       <p>
                         Vibes :&nbsp;{" "}
-                        
                         <span className="gener-name">
                           {" "}
                           {ele?.MusicVibe3 ? ele?.MusicVibe3 : "Jazz"}{" "}
@@ -372,7 +394,7 @@ const Musicyoulike = (props) => {
                           {ele?.MusicVibe2 ? ele?.MusicVibe2 : "Rock"}
                         </span>
                       </p>
-                    </div>  
+                    </div>
                     <button className="Moreinfo btn" type="button">
                       <a href={ele?.yelpURL} target="_blank">
                         see more info

@@ -364,7 +364,6 @@ const ResultBreakdown = (props) => {
       });
     setRecent(data.items);
   };
-
  
   return (
     <>
