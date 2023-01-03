@@ -161,10 +161,9 @@ const Musicyoulike = (props) => {
         if (Filterbymiles.length) {
           const filterdata = Filterbymiles.filter(
             (x) =>
-              usergeners.slice(0,5).includes(x.MusicVibe2?.toLowerCase()) &&
+              usergeners.slice(0,5).includes(x.MusicVibe2?.toLowerCase()) ||
               usergeners.slice(0,5).includes(x.MusicVibe3?.toLowerCase())
           );
-          console.log("filter", filterdata)
           if (filterdata.length) {
             setFilterData(filterdata);
           } else {
@@ -173,7 +172,7 @@ const Musicyoulike = (props) => {
         } else {
           const filter = dupdata.filter(
             (x) =>
-              usergeners.slice(0,5).includes(x.MusicVibe2?.toLowerCase()) &&
+              usergeners.slice(0,5).includes(x.MusicVibe2?.toLowerCase()) ||
               usergeners.slice(0,5).includes(x.MusicVibe3?.toLowerCase())
           );
           if (filter.length) {
@@ -198,7 +197,7 @@ const Musicyoulike = (props) => {
         if (usergeners.length) {
           const data = dupdata.filter(
             (x) =>
-              usergeners.slice(0,5).includes(x.MusicVibe2?.toLowerCase()) &&
+              usergeners.slice(0,5).includes(x.MusicVibe2?.toLowerCase()) ||
               usergeners.slice(0,5).includes(x.MusicVibe3?.toLowerCase())
           );
           console.log("data", data)
@@ -231,7 +230,7 @@ const Musicyoulike = (props) => {
 
           const data = dupdata.filter(
             (x) =>
-              usergeners.slice(0,5).includes(x.MusicVibe2?.toLowerCase()) &&
+              usergeners.slice(0,5).includes(x.MusicVibe2?.toLowerCase()) ||
               usergeners.slice(0,5).includes(x.MusicVibe3?.toLowerCase())
           );
           console.log("filter", data)
