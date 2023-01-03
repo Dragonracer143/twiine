@@ -149,42 +149,37 @@ const Musicyoulike = (props) => {
       .then((res) => {
         const dupdata = res.data.data;
 
+
         let dataArraydistance = dupdata.map((obj) => ({
           ...obj,
           distance: getDistanceFromCurrent(obj.location.coordinates),
         }));
-        let test = [];
-        let dbmile = dataArraydistance?.map((ele) => {
-          return ele.distance;
-        });
         const Filterbymiles = dataArraydistance.filter((ele) => {
           const filterArray = ele.distance <= getmile;
           return filterArray;
         });
-        if (Filterbymiles?.length != 0) {
-          if (usergeners?.length != 0) {
-            /* get data by matching the geners*/
-            usergeners.forEach((element) => {
-              const findData = Filterbymiles.filter(
-                (x) =>
-                  x.MusicVibe1 == element.toLowerCase() ||
-                  x.MusicVibe2 == element.toLowerCase() ||
-                  x.MusicVibe3 == element.toLowerCase()
-              );
-              if (findData?.length != 0) {
-                test.push(...findData);
-              } else {
-                test.push(...Filterbymiles.reverse());
-              }
-              let dupChars = getUniqueListBy(test, "businessName");
-              setFilterData(test);
-            });
+        if (Filterbymiles.length) {
+          const filterdata = Filterbymiles.filter(
+            (x) =>
+              usergeners.includes(x.MusicVibe2?.toLowerCase()) &&
+              usergeners.includes(x.MusicVibe3?.toLowerCase())
+          );
+          if (filterdata.length) {
+            setFilterData(filterdata);
           } else {
-            /* if a new user (does not have music list to identify genere, following data will be visible)*/
-            setFilterData(Filterbymiles.reverse());
+            setFilterData(Filterbymiles);
           }
         } else {
-          setFilterData(dupdata.reverse());
+          const filter = dupdata.filter(
+            (x) =>
+              usergeners.includes(x.MusicVibe2?.toLowerCase()) &&
+              usergeners.includes(x.MusicVibe3?.toLowerCase())
+          );
+          if (filter.length) {
+            setFilterData(filter);
+          } else {
+            setFilterData(dupdata);
+          }
         }
       });
   };
@@ -209,16 +204,14 @@ const Musicyoulike = (props) => {
             setFilterData((prev) => {
               return data;
             });
-          } else{
-            setFilterData(dupdata)
+          } else {
+            setFilterData(dupdata);
           }
-        }
-        else{
-          setFilterData(dupdata)
+        } else {
+          setFilterData(dupdata);
         }
       });
   };
-
 
   /* get data without location matching genres names*/
   const getDataByGener = () => {
@@ -242,16 +235,14 @@ const Musicyoulike = (props) => {
             setNofilterdata((prev) => {
               return data;
             });
-          } else{
-            setNofilterdata(dupdata)
+          } else {
+            setNofilterdata(dupdata);
           }
-        }
-        else{
-          setNofilterdata(dupdata)
+        } else {
+          setNofilterdata(dupdata);
         }
       });
   };
-
 
   /* function for not getting duplicate data*/
   function getUniqueListBy(arr, key) {
@@ -377,11 +368,14 @@ const Musicyoulike = (props) => {
                       <p style={{ paddingTop: "1rem" }} className="businnes">
                         {ele?.businessName} <span>{ele?.price}</span>
                       </p>
+                     {lattitudeValue == null ?  "" :
                       <p>
+
                         Distance:{" "}
                         {getDistanceFromCurrent(ele?.location?.coordinates)}{" "}
                         miles
                       </p>
+                      }
                       <p>Location : {ele?.city}</p>
                       <p>
                         Vibes :&nbsp;{" "}

@@ -364,7 +364,6 @@ const Appleresultbreakstory = (props) => {
     return [...new Map(arr.map((item) => [item[key], item])).values()];
   }
 
-console.log("Applemusic", playlist)
   return (
     <>
       <div className={props.instagram == true ? "display-insta" : "hide"}>
