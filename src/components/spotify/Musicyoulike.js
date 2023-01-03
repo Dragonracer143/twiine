@@ -157,12 +157,14 @@ const Musicyoulike = (props) => {
           const filterArray = ele.distance <= getmile;
           return filterArray;
         });
+        console.log("Filterbymiles", Filterbymiles)
         if (Filterbymiles.length) {
           const filterdata = Filterbymiles.filter(
             (x) =>
-              usergeners.includes(x.MusicVibe2?.toLowerCase()) &&
-              usergeners.includes(x.MusicVibe3?.toLowerCase())
+              usergeners.slice(0,5).includes(x.MusicVibe2?.toLowerCase()) &&
+              usergeners.slice(0,5).includes(x.MusicVibe3?.toLowerCase())
           );
+          console.log("filter", filterdata)
           if (filterdata.length) {
             setFilterData(filterdata);
           } else {
@@ -171,8 +173,8 @@ const Musicyoulike = (props) => {
         } else {
           const filter = dupdata.filter(
             (x) =>
-              usergeners.includes(x.MusicVibe2?.toLowerCase()) &&
-              usergeners.includes(x.MusicVibe3?.toLowerCase())
+              usergeners.slice(0,5).includes(x.MusicVibe2?.toLowerCase()) &&
+              usergeners.slice(0,5).includes(x.MusicVibe3?.toLowerCase())
           );
           if (filter.length) {
             setFilterData(filter);
@@ -196,9 +198,10 @@ const Musicyoulike = (props) => {
         if (usergeners.length) {
           const data = dupdata.filter(
             (x) =>
-              usergeners.includes(x.MusicVibe2?.toLowerCase()) &&
-              usergeners.includes(x.MusicVibe3?.toLowerCase())
+              usergeners.slice(0,5).includes(x.MusicVibe2?.toLowerCase()) &&
+              usergeners.slice(0,5).includes(x.MusicVibe3?.toLowerCase())
           );
+          console.log("data", data)
           if (data?.length) {
             setFilterData((prev) => {
               return data;
@@ -228,9 +231,10 @@ const Musicyoulike = (props) => {
 
           const data = dupdata.filter(
             (x) =>
-              usergeners.includes(x.MusicVibe2?.toLowerCase()) &&
-              usergeners.includes(x.MusicVibe3?.toLowerCase())
+              usergeners.slice(0,5).includes(x.MusicVibe2?.toLowerCase()) &&
+              usergeners.slice(0,5).includes(x.MusicVibe3?.toLowerCase())
           );
+          console.log("filter", data)
           if (data?.length) {
 
             setNofilterdata((prev) => {
