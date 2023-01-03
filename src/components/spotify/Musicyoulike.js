@@ -53,7 +53,7 @@ const Musicyoulike = (props) => {
     }
   }, [usergeners, getmile]);
   useEffect(() => {
-    if (usergeners) {
+    if (usergeners.length) {
       getDataByGener();
     }
   }, [usergeners]);
@@ -149,7 +149,6 @@ const Musicyoulike = (props) => {
       .then((res) => {
         const dupdata = res.data.data;
 
-
         let dataArraydistance = dupdata.map((obj) => ({
           ...obj,
           distance: getDistanceFromCurrent(obj.location.coordinates),
@@ -223,22 +222,28 @@ const Musicyoulike = (props) => {
       })
       .then((res) => {
         const dupdata = res.data;
-        let test = [];
+
         /* condition for checking the user genre with Database genre */
         if (usergeners.length) {
+
           const data = dupdata.filter(
             (x) =>
               usergeners.includes(x.MusicVibe2?.toLowerCase()) &&
               usergeners.includes(x.MusicVibe3?.toLowerCase())
           );
           if (data?.length) {
+
             setNofilterdata((prev) => {
               return data;
             });
           } else {
+  
+
             setNofilterdata(dupdata);
           }
         } else {
+
+
           setNofilterdata(dupdata);
         }
       });
@@ -368,14 +373,15 @@ const Musicyoulike = (props) => {
                       <p style={{ paddingTop: "1rem" }} className="businnes">
                         {ele?.businessName} <span>{ele?.price}</span>
                       </p>
-                     {lattitudeValue == null ?  "" :
-                      <p>
-
-                        Distance:{" "}
-                        {getDistanceFromCurrent(ele?.location?.coordinates)}{" "}
-                        miles
-                      </p>
-                      }
+                      {lattitudeValue == null ? (
+                        ""
+                      ) : (
+                        <p>
+                          Distance:{" "}
+                          {getDistanceFromCurrent(ele?.location?.coordinates)}{" "}
+                          miles
+                        </p>
+                      )}
                       <p>Location : {ele?.city}</p>
                       <p>
                         Vibes :&nbsp;{" "}
