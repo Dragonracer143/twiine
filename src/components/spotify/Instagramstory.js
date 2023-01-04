@@ -169,16 +169,22 @@ const Instagramstory = (props) => {
 
   /* data variable for shows the genre name in pie chart */
 
-  const filtergener =['pop', 'jazz', 'rock', 'filmy', 'Hip hop']
-  const generSample = [6, 4, 14, 4, 8]
+  const filtergener = ["pop", "jazz", "rock", "filmy", "Hip hop"];
+  const generSample = [6, 4, 14, 4, 8];
   const data = {
-    labels: genernames?.length <=0 ? filtergener.slice(0, 5) : genernames?.slice(0, 5),
+    labels:
+      genernames?.length <= 0
+        ? filtergener.slice(0, 5)
+        : genernames?.slice(0, 5),
     type: "pie",
-    indexLabel:  genernames?.length <=0 ? filtergener?.slice(0, 5) : genernames?.slice(0, 5),
+    indexLabel:
+      genernames?.length <= 0
+        ? filtergener?.slice(0, 5)
+        : genernames?.slice(0, 5),
     indexLabelPlacement: "inside",
     datasets: [
       {
-        data: genervalues == '' ? generSample : genervalues?.slice(0, 5) ,
+        data: genervalues == "" ? generSample : genervalues?.slice(0, 5),
         backgroundColor: colorss,
         borderColor: "#000",
         display: true,
@@ -316,18 +322,20 @@ const Instagramstory = (props) => {
 
     return dis;
   };
-  const [recent, setRecent] = useState([])
-  useEffect(()=>{
-    onGetrecent()
-    
-  },[])
+  const [recent, setRecent] = useState([]);
+  useEffect(() => {
+    onGetrecent();
+  }, []);
   const onGetrecent = async (e) => {
     const { data } = await axios
-      .get("https://api.spotify.com/v1/me/player/recently-played?offset=0&limit=5", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+      .get(
+        "https://api.spotify.com/v1/me/player/recently-played?offset=0&limit=5",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
 
       .catch((err) => {
         console.log(err.response.status);
@@ -363,20 +371,20 @@ const Instagramstory = (props) => {
                   <img className="img-fluids" src="./img/Spotify.png"></img>
                 </div>{" "}
                 {recent?.map((ele, key) => (
-                   <a href={ele?.track?.external_urls?.spotify} target="_blank"> 
-                  <div key={key} className="song_one mt-2">
-                    <div className="song_no">
-                      <p>{key + 1}.</p>
+                  <a href={ele?.track?.external_urls?.spotify} target="_blank">
+                    <div key={key} className="song_one mt-2">
+                      <div className="song_no">
+                        <p>{key + 1}.</p>
+                      </div>
+                      <div className="song_detail">
+                        <p className="song-name">{ele?.track?.name}</p>
+                        <p className="artist">{ele?.track?.artists[0]?.name}</p>
+                      </div>
+                      <img
+                        className="song_img"
+                        src={ele?.track?.album?.images[1]?.url}
+                      />
                     </div>
-                    <div className="song_detail">
-                      <p className="song-name">{ele?.track?.name}</p>
-                      <p className="artist">{ele?.track?.artists[0]?.name}</p>
-                    </div>
-                    <img
-                      className="song_img"
-                      src={ele?.track?.album?.images[1]?.url}
-                    />
-                  </div>
                   </a>
                 ))}
               </div>
@@ -397,76 +405,39 @@ const Instagramstory = (props) => {
             </span>
             ,
           </div>
-          {props.updatedata == 0 ? (
-            <>
-              <div className="row cards Musicyoulikes insta">
-                {props?.filterdata?.slice(0, 3).map((ele, key) => (
-                  <div className="col-12 col-md-4" key={key}>
-                    <div className="Musicyoulike_card_blue">
-                      <img
-                        className="img"
-                        src={ele?.image1 ? ele?.image3 : ele?.image4}
-                      />
-                      <div className="card_content">
-                        <p style={{ paddingTop: "1rem" }} className="businnes">
-                          {ele?.businessName} <span>{ele?.price}</span>
-                        </p>
-                        <p>
-                          Distance:{" "}
-                          {getDistanceFromCurrent(ele?.location?.coordinates)}{" "}
-                          miles
-                        </p>
-                        <p>Location : {ele?.city}</p>
-                        <p>
-                          Vibes :&nbsp;{" "}
-                          <span className="gener-name">
-                            {" "}
-                            {ele.MusicVibe3 ? ele.MusicVibe3 : "Jazz"}{" "}
-                          </span>{" "}
-                          &nbsp;
-                          <span className="gener-name">
-                            {ele.MusicVibe2 ? ele.MusicVibe2 : "Pop"}
-                          </span>
-                        </p>
-                      </div>
-                    </div>
+          <div className="row cards Musicyoulikes insta">
+            {props.filterdata.data.slice(0, 3).map((ele, key) => (
+              <div className="col-12 col-md-4" key={key}>
+                <div className="Musicyoulike_card_blue">
+                  <img
+                    className="img"
+                    src={ele?.image1 ? ele?.image3 : ele?.image4}
+                  />
+                  <div className="card_content">
+                    <p style={{ paddingTop: "1rem" }} className="businnes">
+                      {ele?.businessName} <span>{ele?.price}</span>
+                    </p>
+                    <p>
+                      Distance:{" "}
+                      {getDistanceFromCurrent(ele?.location?.coordinates)} miles
+                    </p>
+                    <p>Location : {ele?.city}</p>
+                    <p>
+                      Vibes :&nbsp;{" "}
+                      <span className="gener-name">
+                        {" "}
+                        {ele.MusicVibe3 ? ele.MusicVibe3 : "Jazz"}{" "}
+                      </span>{" "}
+                      &nbsp;
+                      <span className="gener-name">
+                        {ele.MusicVibe2 ? ele.MusicVibe2 : "Pop"}
+                      </span>
+                    </p>
                   </div>
-                ))}
+                </div>
               </div>
-            </>
-          ) : (
-            <>
-              <div className="row cards insta">
-                {props?.notfilterdata?.slice(0, 3).map((ele, key) => (
-                  <div className="col-12 col-md-4" key={key}>
-                    <div className="Musicyoulike_card_blue">
-                      <img
-                        className="img"
-                        src={ele?.image1 ? ele?.image3 : ele?.image4}
-                      />
-                      <div className="card_content">
-                        <p style={{ paddingTop: "1rem" }} className="businnes">
-                          {ele?.businessName} <span>{ele?.price}</span>
-                        </p>
-                        <p className="vives">
-                          Vibes :&nbsp;{" "}
-                          <span className="gener-name">
-                            {" "}
-                            {ele.MusicVibe3 ? ele.MusicVibe3 : "Jazz"}
-                          </span>{" "}
-                          &nbsp;
-                          <span className="gener-name">
-                            {" "}
-                            {ele.MusicVibe2 ? ele.MusicVibe2 : "Pop"}
-                          </span>
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                ))}{" "}
-              </div>{" "}
-            </>
-          )}
+            ))}
+          </div>
         </div>
       </div>
     </>

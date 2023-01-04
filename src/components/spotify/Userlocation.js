@@ -12,20 +12,16 @@ const Userlocation = (props) => {
   const navigate = useNavigate();
 
   /*  get data by current Location */
-  const yesDataByLocation = () => {
-    let path = `/Selectmiles`;
+  const setDataByLoc = (e,value) => {
+    e.preventDefault();
     props.setRandomdata("0");
-
-    localStorage.setItem("filterstate", "0");
-
-    navigate(path);
+    localStorage.setItem("filterstate",value);
+    if(value){
+      return navigate(`/Selectmiles`);
+    }
+    return navigate(`/musicyoulike`);    
   };
-  /* get data by generes Location */
-  const noDataByGener = () => {
-    let path = `/musicyoulike`;
-    navigate(path);
-    localStorage.setItem("filterstate", "1");
-  };
+
 
   return (
     <>
@@ -42,12 +38,12 @@ const Userlocation = (props) => {
           </div>
 
           <div className="yes_btn">
-            <button className="btn" type="button" onClick={yesDataByLocation}>
+            <button className="btn" type="button" onClick={(e)=>setDataByLoc(e,true)}>
               yes, please!
             </button>
           </div>
           <div className="no_btn">
-            <button className="btn" type="button" onClick={noDataByGener}>
+            <button className="btn" type="button" onClick={(e)=>setDataByLoc(e,false)}>
               no thanks
             </button>
           </div>

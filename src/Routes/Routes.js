@@ -20,13 +20,13 @@ import Applemuicyoulike from "../components/applemusic/Applemusicyoulike";
 import Appleselectmile from "../components/applemusic/Appleselectmile";
 import Appleinsta from "../components/applemusic/Appleinsta";
 import AppleResultBreak from "../components/applemusic/Appleresultbreak";
-
+import ResultBreakdownstory from "../components/spotify/Resultstory";
 const Routesdata = () => {
   const [rest, setRest] = useState([]);
   const [genernames, setGenernames] = useState([]);
   const [genervalues, setGenervalues] = useState([]);
   const [randomdata, setRandomdata] = useState("");
-
+  const [propsData, setPropsData] = useState([]);
   return (
     <Router>
       <Routes>
@@ -54,6 +54,8 @@ const Routesdata = () => {
               rest={rest}
               setRest={setRest}
               randomdata={randomdata}
+              propsData={propsData}
+              setPropsData={setPropsData}
             />
           }
         />
@@ -61,12 +63,17 @@ const Routesdata = () => {
           path="/Resultbreakdown"
           element={
             <ResultBreakdown
+              propsData={propsData}
               genernames={genernames}
               genervalues={genervalues}
               setGenernames={setGenernames}
               setGenervalues={setGenervalues}
             />
           }
+        />
+        <Route
+          path="/ResultBreakdownstory"
+          element={<ResultBreakdownstory propsData={propsData} />}
         />
         <Route
           path="/instagramstory"
@@ -80,6 +87,7 @@ const Routesdata = () => {
             />
           }
         />
+
         <Route
           path="/selectmiles"
           element={<Selectmiles setRandomdata={setRandomdata} />}
@@ -102,7 +110,7 @@ const Routesdata = () => {
             />
           }
         />
-            <Route
+        <Route
           path="/Appleresult"
           element={
             <AppleResultBreak

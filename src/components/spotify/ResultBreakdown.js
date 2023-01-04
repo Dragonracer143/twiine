@@ -13,6 +13,7 @@ import ChartDataLabels from "chartjs-plugin-datalabels";
 
 ChartJS.register(ArcElement, Tooltip, Legend, ChartDataLabels);
 const ResultBreakdown = (props) => {
+
   const refs = document.getElementById("id");
   const [playlist, setPlaylist] = useState();
   const [updata, setUpdata] = useState();
@@ -443,7 +444,7 @@ const ResultBreakdown = (props) => {
           </div>
         ) : null}
 
-        <ResultBreakdownstory instagram={instagram} updata={updata} />
+        <ResultBreakdownstory update={props.propsData} instagram={instagram} updata={updata} />
       </div>
     </>
   );
