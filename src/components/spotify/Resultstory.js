@@ -14,6 +14,7 @@ import ChartDataLabels from "chartjs-plugin-datalabels";
 ChartJS.register(ArcElement, Tooltip, Legend, ChartDataLabels);
 
 const ResultBreakdownstory = (props) => {
+
   const [genernames, setGenernames] = useState([]);
   const [genervalues, setGenervalues] = useState([]);
   const [filterdata, setFilterData] = useState([]);
@@ -211,171 +212,10 @@ const ResultBreakdownstory = (props) => {
       },
     },
   };
-  const [playlist, setPlaylist] = useState();
 
 
 
-  useEffect(() => {
-    onGetdata();
-  }, []);
-  /* get the top 5 songs of user */
-  const onGetdata = async (e) => {
-    const { data } = await axios
-      .get("https://api.spotify.com/v1/me/top/tracks?offset=0&limit=5", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .catch((err) => {
-        console.log(err.response.status);
-        if (err?.response?.status == 401) {
-          localStorage.clear();
-          navigate("/");
-        }
-      });
-    setPlaylist(data.items);
-  };
-  const lattitudeValue = geolocation.latitude;
-  const longitudeValue = geolocation.longitude;
-  
-  const getDistanceFromCurrent = (cordinates) => {
-    let dis = getDistance(
-      {
-        latitude: JSON.stringify(lattitudeValue),
-        longitude: JSON.stringify(longitudeValue),
-      },
-      { latitude: cordinates[1], longitude: cordinates[0] }
-    );
-    dis = (parseFloat(dis) / 1000 / 1.609).toFixed(1);
 
-    return dis;
-  };
-
-  useEffect(() => {
-    getDataBytLocation();
-  }, [genernames]);
-  useEffect(() => {
-    getDataByGener();
-  }, [genernames]);
- useEffect(()=>{
-  getNotbytLocation()
- },[genernames])
- const getNotbytLocation = async () => {
-  const data = await axios
-    .get(
-      `${baseUrl}filterResturants?lat=&long=lat=37.229564&long=-120.047533`,
-
-      {
-        headers: {
-          "Access-Control-Allow-Origin": "https://twine-new.vercel.app/",
-        },
-      }
-    )
-    .then((res) => {
-      const dupdata = res.data.data;
-      let test = [];
-      if (genernames?.length != 0) {
-        /* get data by matching the geners*/
-        genernames.forEach((element) => {
-          const findData = dupdata.filter(
-            (x) =>
-              x.MusicVibe2 == element.toLowerCase() ||
-              x.MusicVibe3 == element.toLowerCase()
-          );
-          if (findData?.length != 0) {
-            test.push(...findData);
-          } else {
-            test.push(...dupdata);
-          }
-          let dupChars = getUniqueListBy(test, "businessName");
-
-          setFilterData(test);
-        });
-      } else {
-        /* if a new user (does not have music list to identify genere, following data will be visible)*/
-        setFilterData(dupdata);
-      }
-    });
-};
-  const getDataBytLocation = async () => {
-
-    if(lattitudeValue==null){
-      return   getNotbytLocation()
-     } else{
-    const data = await axios
-      .get(
-        `${baseUrl}filterResturants?lat=${lattitudeValue}&long=${longitudeValue}`,
-
-        {
-          headers: {
-            "Access-Control-Allow-Origin": "https://twine-new.vercel.app/",
-          },
-        }
-      )
-      .then((res) => {
-        const dupdata = res.data.data;
-        let test = [];
-        if (genernames?.length != 0) {
-          /* get data by matching the geners*/
-          genernames.forEach((element) => {
-            const findData = dupdata.filter(
-              (x) =>
-                x.MusicVibe2 == element.toLowerCase() ||
-                x.MusicVibe3 == element.toLowerCase()
-            );
-            if (findData?.length != 0) {
-              test.push(...findData);
-            } else {
-              test.push(...dupdata);
-            }
-            let dupChars = getUniqueListBy(test, "businessName");
-
-            setFilterData(test);
-          });
-        } else {
-          /* if a new user (does not have music list to identify genere, following data will be visible)*/
-          setFilterData(dupdata);
-        }
-      });
-    }
-  };
-
-  const getDataByGener = () => {
-    const data = axios
-      .get(`${baseUrl}withoutfilter`, {
-        headers: {
-          "Access-Control-Allow-Origin": "https://twine-new.vercel.app/",
-        },
-      })
-
-      .then((res) => {
-        const dupdata = res.data;
-        let test = [];
-        if (genernames?.length > 0) {
-          genernames.forEach((element) => {
-            const findData = dupdata.filter(
-              (x) => x.MusicVibe2 == element || x.MusicVibe3 == element
-            );
-            if (findData?.length != 0) {
-              test.push(...findData);
-              let dupChars = getUniqueListBy(test, "businessName");
-              setNonfilterdata(dupChars);
-            } else {
-              test.push(...dupdata);
-              setNonfilterdata(test);
-            }
-          });
-        } else {
-          test.push(...dupdata);
-          setNonfilterdata(test);
-        }
-      });
-  };
-
-  /* function for not getting duplicate data*/
-  function getUniqueListBy(arr, key) {
-    return [...new Map(arr.map((item) => [item[key], item])).values()];
-  }
   useEffect(() => {
     getGenerslist();
   }, []);
@@ -528,10 +368,8 @@ const ResultBreakdownstory = (props) => {
             </span>
             ,
           </div>
-          {props.updata == 0 ? (
-            <>
-              <div className="row cards Musicyoulikes insta">
-                {filterdata?.slice(0, 3).map((ele, key) => (
+          <div className="row cards Musicyoulikes insta">
+                {props?.update?.slice(0, 3).map((ele, key) => (
                   <div className="col-12 col-md-4" key={key}>
                     <div className="Musicyoulike_card_blue">
                       <img
@@ -542,11 +380,7 @@ const ResultBreakdownstory = (props) => {
                         <p style={{ paddingTop: "1rem" }} className="businnes">
                           {ele?.businessName} <span>{ele?.price}</span>
                         </p>
-                        <p>
-                          Distance:{" "}
-                          {getDistanceFromCurrent(ele?.location?.coordinates)}{" "}
-                          miles
-                        </p>
+                       
                         <p>Location : {ele?.city}</p>
                         <p>
                           Vibes :&nbsp;{" "}
@@ -564,45 +398,6 @@ const ResultBreakdownstory = (props) => {
                   </div>
                 ))}
               </div>
-            </>
-          ) : (
-            <>
-              {" "}
-              <div className="row cards insta">
-                {nonfilterdata.slice(0, 3).map((ele, key) => (
-                  <div className="col-12 col-md-4" key={key}>
-                    <div className="Musicyoulike_card_blue">
-                      <img
-                        className="img"
-                        src={ele?.image1 ? ele?.image3 : ele?.image4}
-                      />
-                      <div className="card_content">
-                        <p style={{ paddingTop: "1rem" }} className="businnes">
-                          {ele?.businessName} <span>{ele?.price}</span>
-                        </p>
-                        <p className="vives">
-
-
-
-
-                          Vibes :&nbsp;{" "}
-                          <span className="gener-name">
-                            {" "}
-                            {ele.MusicVibe3 ? ele.MusicVibe3 : "Jazz"}
-                          </span>{" "}
-                          &nbsp;
-                          <span className="gener-name">
-                            {" "}
-                            {ele.MusicVibe3 ? ele.MusicVibe3 : "Pop"}
-                          </span>
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                ))}{" "}
-              </div>{" "}
-            </>
-          )}
         </div>
       </div>
     </>

@@ -12,65 +12,57 @@ import ReplayIcon from "@mui/icons-material/Replay";
 import axios from "axios";
 // const baseUrl = "http://localhost:8000/";
 const Musicyoulike = (props) => {
-  const [filterdata, setFilterData] = useState();
+  const [filterdata, setFilterData] = useState({ status: false, data: [] });
+  const [userGeners, setGenerData] = useState({ status: false, data: [] });
+  const [location, setLocation] = useState({
+    status: false,
+    latitude: "",
+    longitude: "",
+  });
   const [showItem, setShowItem] = useState(3);
   const [startItem, setStartItem] = useState(0);
-  const [notfilterdata, setNofilterdata] = useState([]);
   const refs = document.getElementById("id");
   const [story, setStory] = useState(false);
-  const [updatedata, setUpdatedata] = useState();
-  const [usergeners, setUsergeners] = useState([]);
-  const [getmile, setGetmile] = useState("");
-  let token = localStorage.getItem("token");
-  const geolocation = useGeolocation();
-  const [lattitudeValue, setLattitudeValue] = useState("");
-  const [longitudeValue, setLongitudeValue] = useState("");
 
-  const [when, setWhen] = useState(false);
+  const geolocation = useGeolocation();
 
   const navigate = useNavigate();
+  let token = localStorage.getItem("token");
+  let datamile = localStorage.getItem("selectedMile");
+  useEffect(() => {
+    if (!userGeners.status) {
+      getGenerslist();
+    }
+  }, []);
 
   useEffect(() => {
-    if (geolocation?.latitude != null && geolocation?.longitude != null) {
-      setLattitudeValue(geolocation.latitude);
-      setLongitudeValue(geolocation.longitude);
-    } else if (geolocation?.error?.code) {
-      setLattitudeValue(null);
-      setLongitudeValue(null);
+    if (userGeners.status && !location.status) {
+      if (geolocation?.latitude && geolocation?.longitude) {
+        setLocation({
+          status: true,
+          latitude: geolocation.latitude,
+          longitude: geolocation.longitude,
+        });
+        getDataByLocation(geolocation?.latitude, geolocation?.longitude);
+      } else {
+        setLocation({ status: true, latitude: "", longitude: "" });
+        getgneredata();
+      }
     }
-  }, [geolocation]);
+  }, [userGeners]);
+
 
   /*Go to Resultbreakdown page */
   const getGeners = () => {
     let path = "/Resultbreakdown";
+
     navigate(path);
   };
-  useEffect(() => {
-    if (lattitudeValue == null && longitudeValue == null) {
-      getgneredata();
-    } else {
-      getDataBytLocation();
-    }
-  }, [usergeners, getmile]);
-  useEffect(() => {
-    if (usergeners.length) {
-      getDataByGener();
-    }
-  }, [usergeners]);
-  useEffect(() => {
-    let datamile = localStorage.getItem("selectedMile");
-    setGetmile(datamile);
-  }, []);
-  // useEffect(()=>{
-  //   getDatawithoutlocation()
-  // },[usergeners, getmile])
-
-  /* Function for get distance between to lattitude and longitude */
   const getDistanceFromCurrent = (cordinates) => {
     let dis = getDistance(
       {
-        latitude: JSON.stringify(lattitudeValue),
-        longitude: JSON.stringify(longitudeValue),
+        latitude: JSON.stringify(location.latitude),
+        longitude: JSON.stringify(location.longitude),
       },
       { latitude: cordinates[1], longitude: cordinates[0] }
     );
@@ -79,66 +71,11 @@ const Musicyoulike = (props) => {
     return parseFloat(dis).toFixed(1);
   };
 
-  const getDatawithoutlocation = async () => {
-    const data = await axios
-      .get(
-        `${baseUrl}filterResturants?lat=37.229564&long=-120.047533
-    `,
-
-        {
-          headers: {
-            "Access-Control-Allow-Origin": "https://twine-new.vercel.app/",
-          },
-        }
-      )
-      .then((res) => {
-        const dupdata = res.data.data;
-
-        let dataArraydistance = dupdata.map((obj) => ({
-          ...obj,
-          distance: getDistanceFromCurrent(obj.location.coordinates),
-        }));
-        let test = [];
-        let dbmile = dataArraydistance?.map((ele) => {
-          return ele.distance;
-        });
-        const Filterbymiles = dataArraydistance.filter((ele) => {
-          const filterArray = ele.distance <= getmile;
-          return filterArray;
-        });
-        if (Filterbymiles?.length != 0) {
-          if (usergeners?.length != 0) {
-            /* get data by matching the geners*/
-            usergeners.forEach((element) => {
-              const findData = Filterbymiles.filter(
-                (x) =>
-                  x.MusicVibe2 == element.toLowerCase() ||
-                  x.MusicVibe3 == element.toLowerCase()
-              );
-              if (findData?.length != 0) {
-                test.push(...findData);
-              } else {
-                test.push(...Filterbymiles.reverse());
-              }
-              let dupChars = getUniqueListBy(test, "businessName");
-
-              setFilterData(test);
-            });
-          } else {
-            /* if a new user (does not have music list to identify genere, following data will be visible)*/
-            setFilterData(Filterbymiles.reverse());
-          }
-        } else {
-          setFilterData(dupdata);
-        }
-      });
-  };
-
   /* get data by location */
-  const getDataBytLocation = async () => {
+  const getDataByLocation = async (latitude, longitude) => {
     const data = await axios
       .get(
-        `${baseUrl}filterResturants?lat=${lattitudeValue}&long=${longitudeValue}`,
+        `${baseUrl}filterResturants?lat=${latitude}&long=${longitude}`,
 
         {
           headers: {
@@ -148,38 +85,39 @@ const Musicyoulike = (props) => {
       )
       .then((res) => {
         const dupdata = res.data.data;
-
         let dataArraydistance = dupdata.map((obj) => ({
           ...obj,
           distance: getDistanceFromCurrent(obj.location.coordinates),
         }));
-        const Filterbymiles = dataArraydistance.filter((ele) => {
-          const filterArray = ele.distance <= getmile;
-          return filterArray;
-        });
-        if (Filterbymiles.length) {
-          const filterdata = Filterbymiles.filter(
-            (x) =>
-              usergeners.slice(0,5).includes(x.MusicVibe2?.toLowerCase()) ||
-              usergeners.slice(0,5).includes(x.MusicVibe3?.toLowerCase())
-          );
-          if (filterdata.length) {
-            setFilterData(filterdata);
-          } else {
-            setFilterData(Filterbymiles);
-          }
-        } else {
-          const filter = dupdata.filter(
-            (x) =>
-              usergeners.slice(0,5).includes(x.MusicVibe2?.toLowerCase()) ||
-              usergeners.slice(0,5).includes(x.MusicVibe3?.toLowerCase())
-          );
-          if (filter.length) {
-            setFilterData(filter);
-          } else {
-            setFilterData(dupdata);
-          }
+        let filterDataa = [];
+        if (datamile) {
+          filterDataa = dataArraydistance.filter((ele) => {
+            const filterArray = ele.distance <= datamile;
+            return filterArray;
+          });
         }
+
+        if (filterDataa.length) {
+          filterDataa = filterDataa.filter(
+            (x) =>
+              userGeners.data
+                .slice(0, 5)
+                .includes(x.MusicVibe2?.toLowerCase()) ||
+              userGeners.data.slice(0, 5).includes(x.MusicVibe3?.toLowerCase())
+          );
+        } else {
+          filterDataa = dataArraydistance.filter(
+            (x) =>
+              userGeners.data
+                .slice(0, 5)
+                .includes(x.MusicVibe2?.toLowerCase()) ||
+              userGeners.data.slice(0, 5).includes(x.MusicVibe3?.toLowerCase())
+          );
+        }
+
+        if (filterDataa.length)
+          return setFilterData({ status: true, data: filterDataa });
+        return setFilterData({ status: true, data: dataArraydistance });
       });
   };
   const getgneredata = () => {
@@ -191,73 +129,20 @@ const Musicyoulike = (props) => {
       })
       .then((res) => {
         const dupdata = res.data;
-        let test = [];
         /* condition for checking the user genre with Database genre */
-        if (usergeners.length) {
-          const data = dupdata.filter(
-            (x) =>
-              usergeners.slice(0,5).includes(x.MusicVibe2?.toLowerCase()) ||
-              usergeners.slice(0,5).includes(x.MusicVibe3?.toLowerCase())
-          );
-          if (data?.length) {
-            setFilterData((prev) => {
-              return data;
-            });
-          } else {
-            setFilterData(dupdata);
-          }
-        } else {
-          setFilterData(dupdata);
+        const data = dupdata.filter(
+          (x) =>
+            userGeners.data.slice(0, 5).includes(x.MusicVibe2?.toLowerCase()) ||
+            userGeners.data.slice(0, 5).includes(x.MusicVibe3?.toLowerCase())
+        );
+
+        if (data?.length) {
+          return setFilterData({ status: true, data });
         }
+        return setFilterData({ status: true, data: dupdata });
       });
   };
 
-  /* get data without location matching genres names*/
-  const getDataByGener = () => {
-    const data = axios
-      .get(`${baseUrl}withoutfilter`, {
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-        },
-      })
-      .then((res) => {
-        const dupdata = res.data;
-
-        /* condition for checking the user genre with Database genre */
-        if (usergeners.length) {
-
-          const data = dupdata.filter(
-            (x) =>
-              usergeners.slice(0,5).includes(x.MusicVibe2?.toLowerCase()) ||
-              usergeners.slice(0,5).includes(x.MusicVibe3?.toLowerCase())
-          );
-          if (data?.length) {
-
-            setNofilterdata((prev) => {
-              return data;
-            });
-          } else {
-  
-
-            setNofilterdata(dupdata);
-          }
-        } else {
-
-
-          setNofilterdata(dupdata);
-        }
-      });
-  };
-
-  /* function for not getting duplicate data*/
-  function getUniqueListBy(arr, key) {
-    return [...new Map(arr.map((item) => [item[key], item])).values()];
-  }
-
-  useEffect(() => {
-    getGenerslist();
-  }, []);
-  /* This function is used for to get the gneres of user */
   const getGenerslist = async (e) => {
     const { data } = await axios
       .get("https://api.spotify.com/v1/me/top/artists?offset=0&limit=10", {
@@ -266,8 +151,7 @@ const Musicyoulike = (props) => {
         },
       })
       .catch((err) => {
-        console.log(err.response.status);
-        if (err?.response?.status == 401) {
+        if (err?.response?.status === 401) {
           localStorage.clear();
           navigate("/");
         }
@@ -299,18 +183,8 @@ const Musicyoulike = (props) => {
       const element = genereArray[i][0];
       genername.push(element);
     }
-    setUsergeners(genername);
+    setGenerData({ status: true, data: genername });
   };
-  /* useEffect for to get (updatedata) state value. if value is 0 it renders the data by location otherwise it render data by generes*/
-  useEffect(() => {
-    const localDatafilter = localStorage.getItem("unfilterstate");
-    const Datafilter = JSON.parse(localStorage.getItem("filterstate"));
-    if (localDatafilter) {
-      setUpdatedata(localDatafilter);
-    } else {
-      setUpdatedata(Datafilter);
-    }
-  });
 
   /* Click function for (share on social media ) button.first run this function then it checks the story state wheather it's true or false, if state is true then onButtonClick function run.*/
   const getStories = () => {
@@ -358,55 +232,58 @@ const Musicyoulike = (props) => {
         </div>
       </div>
 
-      {updatedata == 0 ? (
-        <>
-          {filterdata?.length > 0 ? (
-            <div className="row cards Musicyoulikes">
-              {filterdata?.slice(startItem, showItem).map((ele, key) => (
-                <div className="col-12 col-md-4" key={key}>
-                  <div className="Musicyoulike_card_blue">
-                    <img
-                      className="img"
-                      src={ele?.image1 ? ele?.image1 : ele?.image2}
-                    />
-                    <div className="card_content">
-                      <p style={{ paddingTop: "1rem" }} className="businnes">
-                        {ele?.businessName} <span>{ele?.price}</span>
-                      </p>
-                      {lattitudeValue == null ? (
-                        ""
-                      ) : (
-                        <p>
-                          Distance:{" "}
-                          {getDistanceFromCurrent(ele?.location?.coordinates)}{" "}
-                          miles
-                        </p>
-                      )}
-                      <p>Location : {ele?.city}</p>
+      {/* {localDatafilter? ( */}
+      <>
+        {filterdata.data.length ? (
+          <div className="row cards Musicyoulikes">
+            {filterdata.data?.slice(startItem, showItem).map((ele, key) => (
+              <div className="col-12 col-md-4" key={key}>
+                <div className="Musicyoulike_card_blue">
+                  <img
+                    className="img"
+                    src={ele?.image1 ? ele?.image1 : ele?.image2}
+                  />
+                  <div className="card_content">
+                    <p style={{ paddingTop: "1rem" }} className="businnes">
+                      {ele?.businessName} <span>{ele?.price}</span>
+                    </p>
+                    {!location.latitude ? (
+                      ""
+                    ) : (
                       <p>
-                        Vibes :&nbsp;{" "}
-                        <span className="gener-name">
-                          {" "}
-                          {ele?.MusicVibe3 ? ele?.MusicVibe3 : "Jazz"}{" "}
-                        </span>{" "}
-                        &nbsp;
-                        <span className="gener-name">
-                          {ele?.MusicVibe2 ? ele?.MusicVibe2 : "Rock"}
-                        </span>
+                        Distance:{" "}
+                        {getDistanceFromCurrent(ele?.location?.coordinates)}{" "}
+                        miles
                       </p>
-                    </div>
-                    <button className="Moreinfo btn" type="button">
-                      <a href={ele?.yelpURL} target="_blank">
-                        see more info
-                        <img
-                          className="right-arrow"
-                          src="./img/right-arrow.png"
-                        />
-                      </a>
-                    </button>
+                    )}
+                    <p>Location : {ele?.city}</p>
+                    <p>
+                      Vibes :&nbsp;{" "}
+                      <span className="gener-name">
+                        {" "}
+                        {ele?.MusicVibe3 ? ele?.MusicVibe3 : "Jazz"}{" "}
+                      </span>{" "}
+                      &nbsp;
+                      <span className="gener-name">
+                        {ele?.MusicVibe2 ? ele?.MusicVibe2 : "Rock"}
+                      </span>
+                    </p>
                   </div>
+                  <button className="Moreinfo btn" type="button">
+                    <a href={ele?.yelpURL} target="_blank">
+                      see more info
+                      <img
+                        className="right-arrow"
+                        src="./img/right-arrow.png"
+                      />
+                    </a>
+                  </button>
                 </div>
-              ))}
+              </div>
+            ))}
+            {filterdata.data.length <= 3 ? (
+              ""
+            ) : (
               <div className="results_three_btn">
                 <button
                   className="btn"
@@ -419,107 +296,32 @@ const Musicyoulike = (props) => {
                   <ReplayIcon /> Show 3 more results
                 </button>
               </div>
-              <div className="share_buttons">
-                <button className="btn" type="button" onClick={getGeners}>
-                  <img className="genere-image" src="./img/31.png" />
-                  See your genre Breakdown
-                </button>
-                <button className="btn " type="button" onClick={getStories}>
-                  <img className="genere-image" src="./img/share.png" />
-                  Share on social media
-                </button>
-                <a
-                  className="btn "
-                  type="button"
-                  href="https://forms.gle/gfVL5MjSPxDUTHsw7"
-                  target="_blank"
-                >
-                  <img className="genere-image" src="./img/rocket.png" />
-                  Subscribe for product updates
-                </a>
-              </div>
+            )}
+            <div className="share_buttons">
+              <button className="btn" type="button" onClick={getGeners}>
+                <img className="genere-image" src="./img/31.png" />
+                See your genre Breakdown
+              </button>
+              <button className="btn " type="button" onClick={getStories}>
+                <img className="genere-image" src="./img/share.png" />
+                Share on social media
+              </button>
+              <a
+                className="btn "
+                type="button"
+                href="https://forms.gle/gfVL5MjSPxDUTHsw7"
+                target="_blank"
+              >
+                <img className="genere-image" src="./img/rocket.png" />
+                Subscribe for product updates
+              </a>
             </div>
-          ) : (
-            <CircularIndeterminate />
-          )}
-        </>
-      ) : (
-        <>
-          {notfilterdata?.length > 0 ? (
-            <div className="row cards Musicyoulikes">
-              {notfilterdata?.slice(startItem, showItem).map((ele, key) => (
-                <div className="col-12 col-md-4" key={key}>
-                  <div className="Musicyoulike_card_blue">
-                    <img
-                      className="img"
-                      src={ele?.image1 ? ele?.image3 : ele?.image4}
-                    />
-                    <div className="card_content">
-                      <p style={{ paddingTop: "1rem" }} className="businnes">
-                        {ele?.businessName} <span>{ele?.price}</span>
-                      </p>
-                      <p>Location : {ele?.city}</p>
-                      <p>
-                        Vibes :&nbsp;{" "}
-                        <span className="gener-name">
-                          {" "}
-                          {ele.MusicVibe3 ? ele.MusicVibe3 : usergeners}{" "}
-                        </span>{" "}
-                        &nbsp;
-                        <span className="gener-name">
-                          {ele.MusicVibe2 ? ele.MusicVibe2 : usergeners}
-                        </span>
-                      </p>
-                    </div>
-                    <button className="Moreinfo btn" type="button">
-                      <a href={ele?.yelpURL} target="_blank">
-                        see more info
-                        <img
-                          className="right-arrow"
-                          src="./img/right-arrow.png"
-                        />
-                      </a>
-                    </button>
-                  </div>
-                </div>
-              ))}
-              <div className="results_three_btn">
-                <button
-                  className="btn"
-                  type="button"
-                  onClick={(e) => {
-                    setShowItem(showItem + 3);
-                    setStartItem(startItem + 3);
-                  }}
-                >
-                  <ReplayIcon /> Show 3 more results
-                </button>
-              </div>
-              <div className="share_buttons">
-                <button className="btn" type="button" onClick={getGeners}>
-                  <img className="genere-image" src="./img/31.png" />
-                  See your genre Breakdown
-                </button>
-                <button className="btn " type="button" onClick={getStories}>
-                  <img className="genere-image" src="./img/share.png" />
-                  Share on social media
-                </button>
-                <a
-                  className="btn "
-                  type="button"
-                  href="https://forms.gle/gfVL5MjSPxDUTHsw7"
-                  target="_blank"
-                >
-                  <img className="genere-image" src="./img/rocket.png" />
-                  Subscribe for product updates
-                </a>
-              </div>
-            </div>
-          ) : (
-            <CircularIndeterminate />
-          )}
-        </>
-      )}
+          </div>
+        ) : (
+          <CircularIndeterminate />
+        )}
+      </>
+      {/* ) */}
 
       {story == true ? (
         <div className="download ">
@@ -530,8 +332,6 @@ const Musicyoulike = (props) => {
         rest={props.rest}
         story={story}
         filterdata={filterdata}
-        notfilterdata={notfilterdata}
-        updatedata={updatedata}
       />
     </div>
   );
