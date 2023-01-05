@@ -4040,3 +4040,6 @@ div#appleid-signin {
 .react-apple-signin-auth-btn-dar svg {
   height: 40px !important;
 }
+.notfound{
+  font-size: 20px;
+}
