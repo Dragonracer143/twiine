@@ -10,6 +10,7 @@ import { getDistance } from "geolib";
 import { baseUrl } from "../../Services/Config";
 // const baseUrl = "http://localhost:8000/";
 import ChartDataLabels from "chartjs-plugin-datalabels";
+import axiosApiInstance from "../../Services/spotifyService";
 
 ChartJS.register(ArcElement, Tooltip, Legend, ChartDataLabels);
 
@@ -221,7 +222,7 @@ const ResultBreakdownstory = (props) => {
   }, []);
 
   const getGenerslist = async (e) => {
-    const { data } = await axios
+    const { data } = await axiosApiInstance
       .get("https://api.spotify.com/v1/me/top/artists?offset=0&limit=10", {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -295,7 +296,7 @@ const ResultBreakdownstory = (props) => {
     
   },[])
   const onGetrecent = async (e) => {
-    const { data } = await axios
+    const { data } = await axiosApiInstance
       .get("https://api.spotify.com/v1/me/player/recently-played?offset=0&limit=5", {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -304,10 +305,7 @@ const ResultBreakdownstory = (props) => {
 
       .catch((err) => {
         console.log(err.response.status);
-        if (err?.response?.status == 401) {
-          localStorage.clear();
-          navigate("/");
-        }
+       
       });
     setRecent(data.items);
   };

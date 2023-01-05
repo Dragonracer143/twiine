@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Dashboard from "../components/admin/Dashboard";
 import ListingForm from "../components/admin/ListingForm";
@@ -21,6 +21,51 @@ import Appleselectmile from "../components/applemusic/Appleselectmile";
 import Appleinsta from "../components/applemusic/Appleinsta";
 import AppleResultBreak from "../components/applemusic/Appleresultbreak";
 import ResultBreakdownstory from "../components/spotify/Resultstory";
+import { useLocation, useNavigate } from "react-router-dom";
+import {
+  SPOTIFY_REFRESH_TOKEN,
+  REDIRECT_URI,
+  CLIENT_ID,
+  SECRET_ID,
+} from "../Services/Config";
+import axios from "axios";
+
+const LoginCallback = (props) => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  var code = location.search.split("=")[1];
+
+  useEffect(() => {
+    if (code) {
+      getAuthDetail(code);
+    }
+  }, []);
+
+  const getAuthDetail = async (code) => {
+    const response = await axios({
+      method: "post",
+      url: SPOTIFY_REFRESH_TOKEN,
+      data: new URLSearchParams({
+        grant_type: "authorization_code",
+        code: code,
+        redirect_uri: REDIRECT_URI,
+      }).toString(),
+      headers: {
+        "content-type": "application/x-www-form-urlencoded",
+        Authorization: `Basic ${btoa(`${CLIENT_ID}:${SECRET_ID}`)}`,
+      },
+    });
+
+    if (response.status === 200) {
+      localStorage.setItem("token", response.data.access_token);
+      localStorage.setItem("refresh_token", response.data.refresh_token);
+      return navigate("/");
+    }
+  };
+
+  return <></>;
+};
+
 const Routesdata = () => {
   const [rest, setRest] = useState([]);
   const [genernames, setGenernames] = useState([]);
@@ -40,6 +85,7 @@ const Routesdata = () => {
         <Route path="/dashboard/edit/:id" element={<EditComponent />} />
         <Route path="/waitlist" element={<Waitlist />} />
         <Route path="/waiting-list" element={<Waitinglisttable />} />
+        <Route path="/login-callback" element={<LoginCallback />} />
         {/* end admin routes */}
 
         <Route path="/" element={<Musiclogin />} />

@@ -10,8 +10,12 @@ import Instagramstory from "./Instagramstory";
 import { baseUrl } from "../../Services/Config";
 import ReplayIcon from "@mui/icons-material/Replay";
 import axios from "axios";
+import axiosApiInstance from "../../Services/spotifyService";
 // const baseUrl = "http://localhost:8000/";
 const Musicyoulike = (props) => {
+
+
+
   const [filterdata, setFilterData] = useState({ status: false, data: [] });
   const [userGeners, setGenerData] = useState({ status: false, data: [] });
   const [location, setLocation] = useState({
@@ -144,17 +148,14 @@ const Musicyoulike = (props) => {
   };
 
   const getGenerslist = async (e) => {
-    const { data } = await axios
+    const { data } = await axiosApiInstance
       .get("https://api.spotify.com/v1/me/top/artists?offset=0&limit=10", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
       .catch((err) => {
-        if (err?.response?.status === 401) {
-          localStorage.clear();
-          navigate("/");
-        }
+
       });
     let vall = [];
     data.items.map((first) => {
