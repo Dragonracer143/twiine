@@ -230,10 +230,7 @@ const ResultBreakdownstory = (props) => {
       })
       .catch((err) => {
         console.log(err.response.status);
-        if (err?.response?.status == 401) {
-          localStorage.clear();
-          navigate("/");
-        }
+    
       });
     let vall = [];
     data.items.map((first) => {
