@@ -21,6 +21,8 @@ import Appleselectmile from "../components/applemusic/Appleselectmile";
 import Appleinsta from "../components/applemusic/Appleinsta";
 import AppleResultBreak from "../components/applemusic/Appleresultbreak";
 import ResultBreakdownstory from "../components/spotify/Resultstory";
+import Notfound from "../Notfound/Notfound";
+import PrivateRoute from "./Privateroutes";
 import { useLocation, useNavigate } from "react-router-dom";
 import {
   SPOTIFY_REFRESH_TOKEN,
@@ -89,6 +91,8 @@ const Routesdata = () => {
         {/* end admin routes */}
 
         <Route path="/" element={<Musiclogin />} />
+<Route path="/" element={<PrivateRoute/>}>
+
         <Route
           path="/userlocation"
           element={<Userlocation setRandomdata={setRandomdata} />}
@@ -138,6 +142,7 @@ const Routesdata = () => {
           path="/selectmiles"
           element={<Selectmiles setRandomdata={setRandomdata} />}
         />
+        </Route>
         <Route
           path="/userlocations"
           element={<Userlocations setRandomdata={setRandomdata} />}
@@ -167,6 +172,8 @@ const Routesdata = () => {
             />
           }
         />
+        {/* Not found */}
+         <Route path="*" element={<Notfound/>}/>
         {/* <Route path="/appleinstastory" element={<Appleinsta />} /> */}
       </Routes>
     </Router>
