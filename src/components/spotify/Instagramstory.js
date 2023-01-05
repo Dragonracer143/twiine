@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import useGeolocation from "react-hook-geolocation";
 import { getDistance } from "geolib";
 import ChartDataLabels from "chartjs-plugin-datalabels";
-
+import axiosApiInstance from "../../Services/spotifyService";
 ChartJS.register(ArcElement, Tooltip, Legend, ChartDataLabels);
 
 const Instagramstory = (props) => {
@@ -223,18 +223,14 @@ const Instagramstory = (props) => {
   }, []);
   /* This function is used for to get the gneres of user */
   const getGenerslist = async (e) => {
-    const { data } = await axios
+    const { data } = await axiosApiInstance
       .get("https://api.spotify.com/v1/me/top/artists?offset=0&limit=10", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
       .catch((err) => {
-        console.log(err.response.status);
-        if (err?.response?.status == 401) {
-          localStorage.clear();
-          navigate("/");
-        }
+        console.log(err.response.status)
       });
     let vall = [];
     data.items.map((first) => {
@@ -292,7 +288,7 @@ const Instagramstory = (props) => {
   }, []);
   /* get the top 5 songs of user */
   const onGetdata = async (e) => {
-    const { data } = await axios
+    const { data } = await axiosApiInstance
       .get("https://api.spotify.com/v1/me/top/tracks?offset=0&limit=5", {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -300,10 +296,6 @@ const Instagramstory = (props) => {
       })
       .catch((err) => {
         console.log(err.response.status);
-        if (err?.response?.status == 401) {
-          localStorage.clear();
-          navigate("/");
-        }
       });
     setPlaylist(data.items);
   };
@@ -327,7 +319,7 @@ const Instagramstory = (props) => {
     onGetrecent();
   }, []);
   const onGetrecent = async (e) => {
-    const { data } = await axios
+    const { data } = await axiosApiInstance
       .get(
         "https://api.spotify.com/v1/me/player/recently-played?offset=0&limit=5",
         {
@@ -339,10 +331,7 @@ const Instagramstory = (props) => {
 
       .catch((err) => {
         console.log(err.response.status);
-        if (err?.response?.status == 401) {
-          localStorage.clear();
-          navigate("/");
-        }
+
       });
     setRecent(data.items);
   };
